@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BTC vs Kalshi 15-Min Radar</title>
+<style>
+:root{--bg:#0b0f17;--card:#141b29;--tx:#e8edf5;--mu:#8795ab;--g:#22c55e;--r:#ef4444;--a:#f7931a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px system-ui,sans-serif;padding:14px;max-width:760px;margin:auto}
+h1{font-size:18px;margin:0 0 2px}.sub{color:var(--mu);font-size:12px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:var(--card);border-radius:12px;padding:12px}
+.full{grid-column:1/-1}.l{color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.v{font-size:24px;font-weight:700;margin-top:2px}.s{font-size:12px;color:var(--mu);margin-top:2px}
+.g{color:var(--g)}.r{color:var(--r)}canvas{width:100%;height:190px;display:block}
+.bar{height:14px;border-radius:7px;background:var(--r);overflow:hidden;margin-top:8px}.bar>div{height:100%;background:var(--g);width:50%;transition:width .3s}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-weight:700;font-size:13px}
+.note{color:var(--mu);font-size:11px;margin-top:12px;line-height:1.5}
+</style></head><body>
+<h1>₿ BTC vs Kalshi 15-Min Radar</h1>
+<div class="sub" id="status">Connecting…</div>
+<div class="grid">
+ <div class="card"><div class="l">BTC-USD (Coinbase)</div><div class="v" id="px">—</div><div class="s" id="chg">—</div></div>
+ <div class="card"><div class="l">Time left in window</div><div class="v" id="tl">—</div><div class="s" id="src">—</div></div>
+ <div class="card"><div class="l">Strike (price to beat)</div><div class="v" id="strike">—</div><div class="s" id="dist">—</div></div>
+ <div class="card"><div class="l">Kalshi "Up/Yes" price</div><div class="v" id="kal">—</div><div class="s" id="kbook">—</div></div>
+ <div class="card full"><canvas id="c" width="720" height="190"></canvas></div>
+ <div class="card full"><div class="l">Real-time taker flow (last 60s)</div>
+  <div class="s"><span class="g" id="bv">0</span> BTC bought &nbsp;|&nbsp; <span class="r" id="sv">0</span> BTC sold &nbsp;|&nbsp; <span id="imb">—</span></div>
+  <div class="bar"><div id="ib"></div></div></div>
+ <div class="card"><div class="l">Model P(finish above strike)</div><div class="v" id="mp">—</div><div class="s" id="mom">—</div></div>
+ <div class="card"><div class="l">Edge vs Kalshi</div><div class="v" id="edge">—</div><div class="s" id="sig">—</div></div>
+</div>
+<div class="note">Inputs: live Coinbase trades (taker buys vs sells), price distance to strike, realized 5-min volatility, time remaining, 1-min momentum. Model = normal approximation nudged by order flow. For fun only — not financial advice; it will be wrong often.</div>
+<script>
+const $=id=>document.getElementById(id);
+let price=null,trades=[],hist=[],strike=null,close=null,kalshi=null,kSrc=false,open24=null;
+const fmt=n=>n==null?'—':'$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const cdf=x=>{const t=1/(1+.2316419*Math.abs(x)),d=.3989423*Math.exp(-x*x/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p};
+
+function connect(){
+ let ws;try{ws=new WebSocket('wss://ws-feed.exchange.coinbase.com')}catch(e){$('status').textContent='Blocked: this viewer won\'t allow live connections. Open in Safari/Chrome from a hosted link or desktop.';return}
+ ws.onopen=()=>{ws.send(JSON.stringify({type:'subscribe',product_ids:['BTC-USD'],channels:['matches','ticker']}));$('status').textContent='Live: Coinbase connected'};
+ ws.onmessage=e=>{const m=JSON.parse(e.data);
+  if(m.type==='ticker'&&m.open_24h)open24=+m.open_24h;
+  if(m.type==='match'||m.type==='last_match'){
+   price=+m.price;const sz=+m.size,now=Date.now();
+   // maker side "sell" => taker bought
+   trades.push({t:now,sz,buy:m.side==='sell'});
+   if(m.type==='match')hist.push({t:now,p:price});
+  }};
+ ws.onclose=()=>{$('status').textContent='Reconnecting…';setTimeout(connect,2000)};
+ ws.onerror=()=>{$('status').textContent='Feed error — is this opened from a downloaded file / your browser?'};
+}
+async function getKalshi(){
+ try{
+  const r=await fetch('https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=10');
+  const j=await r.json();const ms=(j.markets||[]).sort((a,b)=>new Date(a.close_time)-new Date(b.close_time));
+  if(!ms.length)throw 0;const m=ms[0];
+  close=new Date(m.close_time).getTime();strike=m.floor_strike??strike;
+  const bid=m.yes_bid,ask=m.yes_ask,last=m.last_price;
+  kalshi=(bid&&ask)?(bid+ask)/2:last;kSrc=true;
+  $('kbook').textContent=`bid ${bid}¢ · ask ${ask}¢ · ${m.ticker}`;
+ }catch(e){kSrc=false;kalshi=null;$('kbook').textContent='Kalshi blocked/unavailable — using simulated window'}
+}
+function localWindow(){
+ const now=Date.now(),w=15*60000,s=Math.floor(now/w)*w;close=s+w;
+ const h=hist.find(x=>x.t>=s);if(h&&strike==null||(h&&!kSrc))strike=h.p;
+}
+function vol(){ // per-second stdev from last 5 min, 1s buckets
+ const now=Date.now(),b={};hist.filter(x=>x.t>now-300000).forEach(x=>b[Math.floor(x.t/1000)]=x.p);
+ const k=Object.keys(b).sort(),rs=[];for(let i=1;i<k.length;i++)rs.push(Math.log(b[k[i]]/b[k[i-1]])/Math.sqrt(k[i]-k[i-1]));
+ if(rs.length<10)return 0.00004;const mu=rs.reduce((a,b)=>a+b,0)/rs.length;return Math.sqrt(rs.reduce((a,b)=>a+(b-mu)**2,0)/rs.length)||0.00004}
+function update(){
+ const now=Date.now();trades=trades.filter(t=>t.t>now-60000);hist=hist.filter(h=>h.t>now-1200000);
+ if(price==null)return;
+ if(!kSrc)localWindow();
+ const left=Math.max(0,(close-now)/1000);
+ $('px').textContent=fmt(price);
+ if(open24){const c=(price/open24-1)*100;$('chg').innerHTML=`<span class="${c>=0?'g':'r'}">${c>=0?'+':''}${c.toFixed(2)}%</span> 24h`}
+ $('tl').textContent=`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,'0')}`;
+ $('src').textContent=kSrc?'Kalshi market close':'Simulated 15-min window';
+ if(strike!=null){$('strike').textContent=fmt(strike);const d=price-strike;$('dist').innerHTML=`<span class="${d>=0?'g':'r'}">${d>=0?'+':''}${d.toFixed(2)}</span> from strike`}
+ const bv=trades.filter(t=>t.buy).reduce((a,t)=>a+t.sz,0),sv=trades.filter(t=>!t.buy).reduce((a,t)=>a+t.sz,0),tot=bv+sv;
+ const imb=tot?(bv-sv)/tot:0;
+ $('bv').textContent=bv.toFixed(3);$('sv').textContent=sv.toFixed(3);
+ $('imb').innerHTML=`<b class="${imb>=0?'g':'r'}">${imb>=0?'Buy':'Sell'} pressure ${(Math.abs(imb)*100).toFixed(0)}%</b>`;
+ $('ib').style.width=(50+imb*50)+'%';
+ const p1=hist.find(h=>h.t>=now-60000),mom=p1?(price/p1.p-1)*100:0;
+ $('mom').textContent=`1-min momentum ${mom>=0?'+':''}${mom.toFixed(3)}%`;
+ if(strike!=null){
+  const s=vol()*price,sd=s*Math.sqrt(Math.max(left,1));
+  const d=price-strike+imb*sd*0.25; // order-flow nudge
+  const p=left<=0?(price>=strike?1:0):cdf(d/sd);
+  $('mp').textContent=(p*100).toFixed(1)+'%';
+  $('mp').className='v '+(p>=.5?'g':'r');
+  if(kalshi!=null){
+   const e=p*100-kalshi;$('edge').innerHTML=`<span class="${e>=0?'g':'r'}">${e>=0?'+':''}${e.toFixed(1)} pts</span>`;
+   $('sig').innerHTML=Math.abs(e)<5?'<span class="pill" style="background:#334">No clear edge</span>':e>0?'<span class="pill" style="background:var(--g);color:#000">Model says YES cheap</span>':'<span class="pill" style="background:var(--r)">Model says NO cheap</span>';
+   $('kal').textContent=kalshi.toFixed(0)+'¢'
+  }else{$('kal').textContent='—';$('edge').textContent='—';$('sig').textContent='Needs Kalshi data'}
+ }
+ draw();
+}
+function draw(){
+ const c=$('c'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);
+ const pts=hist.filter(h=>h.t>Date.now()-900000);if(pts.length<2)return;
+ const ps=pts.map(p=>p.p).concat(strike?[strike]:[]),mn=Math.min(...ps),mx=Math.max(...ps),pad=(mx-mn)*.1||1;
+ const y=v=>H-8-(v-(mn-pad))/(mx-mn+2*pad)*(H-16),t0=Date.now()-900000,X=t=>(t-t0)/900000*W;
+ if(strike){x.strokeStyle='#f7931a';x.setLineDash([6,5]);x.beginPath();x.moveTo(0,y(strike));x.lineTo(W,y(strike));x.stroke();x.setLineDash([]);x.fillStyle='#f7931a';x.font='12px sans-serif';x.fillText('strike',4,y(strike)-4)}
+ x.strokeStyle=price>=(strike??0)?'#22c55e':'#ef4444';x.lineWidth=2;x.beginPath();
+ pts.forEach((p,i)=>i?x.lineTo(X(p.t),y(p.p)):x.moveTo(X(p.t),y(p.p)));x.stroke();
+}
+try{connect()}catch(e){}getKalshi();setInterval(getKalshi,5000);setInterval(update,500);
+</script></body></html>
