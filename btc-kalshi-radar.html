@@ -21,20 +21,17 @@ input{flex:1;min-width:0;background:#0b0f17;color:var(--tx);border:1px solid #2a
  <div class="card"><div class="l">BTC-USD (Coinbase)</div><div class="v" id="px">—</div><div class="s" id="chg">—</div></div>
  <div class="card"><div class="l">Time left in window</div><div class="v" id="tl">—</div><div class="s" id="src">—</div></div>
  <div class="card"><div class="l">Strike (price to beat)</div><div class="v" id="strike">—</div><div class="s" id="dist">—</div></div>
- <div class="card"><div class="l">Kalshi "Up/Yes" price</div><div class="v" id="kal">—</div><div class="s" id="kbook">—</div></div>
-<div class="card full"><div class="l">Enter from Kalshi app (makes the edge real)</div>
+ <div class="card"><div class="l">Model P(finish above strike)</div><div class="v" id="mp">—</div><div class="s" id="mom">—</div></div>
+<div class="card full"><div class="l">Enter from Kalshi app </div>
   <div style="display:flex;gap:8px;margin-top:8px">
-   <input id="mS" type="number" inputmode="decimal" placeholder="Strike $" oninput="setManual()">
-   <input id="mK" type="number" inputmode="decimal" placeholder="Up price ¢" oninput="setManual()">
-  </div><div class="s" id="mnote">Strike = "price to beat". Clears itself when the 15-min window ends.</div></div>
+   <input id="mS" type="number" inputmode="decimal" placeholder="Strike (price to beat) $" oninput="setManual()">
+  </div><div class="s" id="mnote">Type the "target" from the Kalshi app. Clears itself when the 15-min window ends.</div></div>
  <div class="card full"><canvas id="c" width="720" height="190"></canvas></div>
  <div class="card full"><div class="l">Real-time taker flow (last 60s)</div>
   <div class="s"><span class="g" id="bv">0</span> BTC bought &nbsp;|&nbsp; <span class="r" id="sv">0</span> BTC sold &nbsp;|&nbsp; <span id="imb">—</span></div>
   <div class="bar"><div id="ib"></div></div></div>
- <div class="card"><div class="l">Model P(finish above strike)</div><div class="v" id="mp">—</div><div class="s" id="mom">—</div></div>
- <div class="card"><div class="l">Edge vs Kalshi</div><div class="v" id="edge">—</div><div class="s" id="sig">—</div></div>
 </div>
-<div class="note">Inputs: live Coinbase trades (taker buys vs sells), price distance to strike, realized 5-min volatility, time remaining, 1-min momentum. Model = normal approximation nudged by order flow. For fun only — not financial advice; it will be wrong often.</div>
+<div class="note">Inputs: price distance to your strike, live Coinbase trades (taker buys vs sells), realized 5-min volatility, time remaining, 1-min momentum. Model = normal approximation nudged by order flow. For fun only — not financial advice; it will be wrong often.</div>
 <script>
 const $=id=>document.getElementById(id);
 let manual={s:null,k:null,win:null},lastT=Date.now(),price=null,trades=[],hist=[],strike=null,close=null,kalshi=null,kSrc=false,open24=null;
@@ -55,21 +52,10 @@ function connect(){
  ws.onclose=()=>{$('status').textContent='Reconnecting…';setTimeout(connect,2000)};
  ws.onerror=()=>{$('status').textContent='Feed error — is this opened from a downloaded file / your browser?'};
 }
-async function getKalshi(){
- try{
-  const r=await fetch('https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=10');
-  const j=await r.json();const ms=(j.markets||[]).sort((a,b)=>new Date(a.close_time)-new Date(b.close_time));
-  if(!ms.length)throw 0;const m=ms[0];
-  close=new Date(m.close_time).getTime();strike=m.floor_strike??strike;
-  const bid=m.yes_bid,ask=m.yes_ask,last=m.last_price;
-  kalshi=(bid&&ask)?(bid+ask)/2:last;kSrc=true;
-  $('kbook').textContent=`bid ${bid}¢ · ask ${ask}¢ · ${m.ticker}`;
- }catch(e){kSrc=false;kalshi=null;$('kbook').textContent='Kalshi blocked/unavailable — using simulated window'}
-}
 const W15=15*60000,curWin=()=>Math.floor(Date.now()/W15)*W15;
 function setManual(){
- const sv=parseFloat($('mS').value),kv=parseFloat($('mK').value);
- manual={s:isNaN(sv)?null:sv,k:isNaN(kv)?null:kv,win:curWin()};
+ const sv=parseFloat($('mS').value);
+ manual={s:isNaN(sv)?null:sv,k:null,win:curWin()};
 }
 function localWindow(){
  const st=curWin();close=st+W15;
@@ -84,9 +70,9 @@ function vol(){ // per-second stdev from last 5 min, 1s buckets
 function update(){
  const now=Date.now();trades=trades.filter(t=>t.t>now-60000);hist=hist.filter(h=>h.t>now-1200000);
  if(price==null)return;
- if(manual.win!=null&&manual.win!==curWin()){manual={s:null,k:null,win:null};$('mS').value='';$('mK').value=''}
+ if(manual.win!=null&&manual.win!==curWin()){manual={s:null,k:null,win:null};$('mS').value=''}
  if(!kSrc)localWindow();
- const useS=manual.s!=null?manual.s:strike, useK=manual.k!=null?manual.k:kalshi;
+ const useS=manual.s!=null?manual.s:strike, useK=null;
  const left=Math.max(0,(close-now)/1000);
  const gap=now-lastT>15000;
  $('status').textContent=gap?'⚠ No trades for '+Math.round((now-lastT)/1000)+'s — feed stalled or tab was asleep. Numbers may be stale.':'Live: Coinbase connected';
@@ -103,7 +89,7 @@ function update(){
  $('mom').textContent=`1-min momentum ${mom>=0?'+':''}${mom.toFixed(3)}%`;
  if(useS==null){
   $('strike').textContent='—';$('dist').textContent='Strike unknown: type it in below';
-  $('mp').textContent='—';$('mp').className='v';$('edge').textContent='—';$('sig').textContent='Enter strike from Kalshi';
+  $('mp').textContent='—';$('mp').className='v';
  }else{
   $('strike').textContent=fmt(useS);
   const d0=price-useS;$('dist').innerHTML=`<span class="${d0>=0?'g':'r'}">${d0>=0?'+':''}${d0.toFixed(2)}</span> from strike`+(manual.s!=null?' · manual':(kSrc?' · Kalshi':' · simulated'));
@@ -113,11 +99,6 @@ function update(){
   const p=left<=0?(price>=useS?1:0):cdf(d/sd);
   $('mp').textContent=(p*100).toFixed(1)+'%';
   $('mp').className='v '+(p>=.5?'g':'r');
-  if(useK!=null){
-   const e=p*100-useK;$('edge').innerHTML=`<span class="${e>=0?'g':'r'}">${e>=0?'+':''}${e.toFixed(1)} pts</span>`;
-   $('sig').innerHTML=Math.abs(e)<5?'<span class="pill" style="background:#334">No clear edge</span>':e>0?'<span class="pill" style="background:var(--g);color:#000">Model: Up cheap</span>':'<span class="pill" style="background:var(--r)">Model: Down cheap</span>';
-   $('kal').textContent=useK.toFixed(0)+'¢';
-  }else{$('kal').textContent='—';$('edge').textContent='—';$('sig').textContent='Enter Up price below'}
  }
  draw(useS);
 }
@@ -130,5 +111,5 @@ function draw(strike){
  x.strokeStyle=price>=(strike??0)?'#22c55e':'#ef4444';x.lineWidth=2;x.beginPath();
  pts.forEach((p,i)=>i?x.lineTo(X(p.t),y(p.p)):x.moveTo(X(p.t),y(p.p)));x.stroke();
 }
-try{connect()}catch(e){}getKalshi();setInterval(getKalshi,5000);setInterval(update,500);
+try{connect()}catch(e){}setInterval(update,500);
 </script></body></html>
