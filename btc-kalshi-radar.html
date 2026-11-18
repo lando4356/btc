@@ -30,7 +30,8 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <div class="card full"><div class="l">Real-time taker flow, all exchanges (last <span id="fw">5</span>s)</div>
   <div class="fwb"><button id="b5" onclick="setFW(5)">5s</button><button id="b15" onclick="setFW(15)">15s</button><button id="b50" onclick="setFW(50)">50s</button></div>
   <div class="s" style="margin-top:8px"><span class="g" id="bv">0</span> BTC bought &nbsp;|&nbsp; <span class="r" id="sv">0</span> BTC sold &nbsp;|&nbsp; <span id="imb">—</span></div>
-  <div class="bar"><div id="ib"></div></div></div>
+  <div class="bar"><div id="ib"></div></div>
+  <div class="s" id="exf" style="margin-top:8px;line-height:1.6"></div></div>
  <div class="card full"><div class="l">Track record (saved on this phone)</div>
   <div class="s" id="trk" style="margin-top:6px;line-height:1.6">Logs the model's call once per window (when you've entered the strike and ≤5 min remain), then scores it.</div>
   <button class="clr" style="margin-top:8px" onclick="clearLog()">Clear log</button></div>
@@ -55,7 +56,7 @@ function saveLog(){try{localStorage.setItem('btcLog',JSON.stringify(LOG.slice(-3
 // ---------- feeds ----------
 function addTrade(name,price,sz,buy,isTrade){
  const now=Date.now();lastT=now;ex[name]={p:price,t:now};
- if(isTrade)trades.push({t:now,sz,buy});
+ if(isTrade)trades.push({t:now,sz,buy,ex:name});
  const c=composite();if(c!=null&&now-lastPush>200){hist.push({t:now,p:c});lastPush=now}
 }
 function composite(){const now=Date.now(),v=Object.values(ex).filter(e=>now-e.t<30000).map(e=>e.p);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null}
@@ -146,6 +147,8 @@ function update(){
  $('bv').textContent=bv.toFixed(3);$('sv').textContent=sv.toFixed(3);
  $('imb').innerHTML=(bv+sv)?`<b class="${imbD>=0?'g':'r'}">${imbD>=0?'Buy':'Sell'} pressure ${(Math.abs(imbD)*100).toFixed(0)}%</b>`:'<b>No trades</b>';
  $('ib').style.width=(50+imbD*50)+'%';
+ const pw=hist.find(h=>h.t>=now-FW),mv=pw?price-pw.p:0;
+ $('exf').innerHTML=['Coinbase','Kraken','Bitstamp','Gemini'].map(n=>{const a=wd.filter(t=>t.ex===n);return `${n}: <span class="g">${sum(a,true).toFixed(2)}</span> bought / <span class="r">${sum(a,false).toFixed(2)}</span> sold`}).join('<br>')+`<br>Price over this window: <b class="${mv>=0?'g':'r'}">${mv>=0?'+':'-'}$${Math.abs(mv).toFixed(2)}</b>`;
  const p1=hist.find(h=>h.t>=now-60000),mom=p1?(price/p1.p-1)*100:0;
  $('mom').textContent=`1-min momentum ${mom>=0?'+':''}${mom.toFixed(3)}%`;
  let p=null;
