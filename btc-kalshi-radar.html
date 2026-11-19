@@ -14,6 +14,7 @@ h1{font-size:18px;margin:0 0 2px}.sub{color:var(--mu);font-size:12px;margin-bott
 input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:10px;font-size:16px;margin-top:8px}
 .fwb{margin-top:6px}.fwb button,.clr{background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:4px 12px;margin-right:6px;font-size:13px}
 .fwb button.on{background:#2a3550}
+.pos button{background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:6px 14px;margin-right:6px;font-size:13px}.pos button.on{background:#2a3550}
 .note{color:var(--mu);font-size:11px;margin-top:12px;line-height:1.5}
 </style></head><body>
 <h1>₿ BTC vs Kalshi 15-Min Radar</h1>
@@ -26,6 +27,9 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <div class="card full"><div class="l">Enter from Kalshi app</div>
   <input id="mS" type="number" inputmode="decimal" placeholder="Strike (price to beat) $" oninput="setManual()">
   <div class="s">Type the "target" from the Kalshi app. Clears itself when the 15-min window ends.</div></div>
+ <div class="card full"><div class="l">Signal (rough guide, not advice)</div>
+  <div class="v" id="sig">—</div><div class="s" id="sig2" style="line-height:1.5">—</div>
+  <div class="pos" style="margin-top:10px"><span class="s">My position: </span><button id="p0" onclick="setPos(null)">None</button><button id="pu" onclick="setPos('up')">Up</button><button id="pd" onclick="setPos('down')">Down</button></div></div>
  <div class="card full"><canvas id="c" width="720" height="190"></canvas></div>
  <div class="card full"><div class="l">Real-time taker flow, all exchanges (last <span id="fw">5</span>s)</div>
   <div class="fwb"><button id="b5" onclick="setFW(5)">5s</button><button id="b15" onclick="setFW(15)">15s</button><button id="b50" onclick="setFW(50)">50s</button></div>
@@ -43,6 +47,8 @@ const W15=15*60000;let curWin=()=>Math.floor(Date.now()/W15)*W15;
 let FW=5000,manual={s:null,win:null},lastT=Date.now(),open24=null,close=0,strike=null;
 let ex={},trades=[],hist=[],back=[],candleVol=null,live=new Set(),lastPush=0;
 let LOG=[];try{LOG=JSON.parse(localStorage.getItem('btcLog')||'[]')}catch(e){}
+let pos=null,posWin=null;
+function setPos(v){pos=v;posWin=curWin();['p0','pu','pd'].forEach(id=>$(id).classList.toggle('on',(id==='p0'&&!v)||(id==='pu'&&v==='up')||(id==='pd'&&v==='down')))}
 let pending=null,loggedWin=null,lastAvg=null,lastAvgT=0;
 const fmt=n=>n==null?'—':'$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 // Student-t (4 dof) CDF, rescaled so the std-dev matches: fatter tails than a normal
@@ -127,6 +133,29 @@ function track(now,useS,p,left,price,avg){
  $('trk').innerHTML=`<b>${hit}/${n}</b> windows called on the right side · Brier ${br.toFixed(3)} (0.250 = coin flip, lower is better)<br>${rows}`+(pending?`<br>Now: logged ${(pending.p*100).toFixed(0)}% Up`:'');
 }
 
+function signalUI(p,left,useS,gap){
+ const set=(h,c,t)=>{$('sig').textContent=h;$('sig').style.color=c;$('sig2').innerHTML=t};
+ const mu='var(--mu)';
+ if(posWin!=null&&posWin!==curWin())setPos(null);
+ if(useS==null||p==null)return set('—',mu,'Enter the strike to get a signal.');
+ if(gap)return set('WAIT',mu,'Data feed stalled. Numbers may be stale.');
+ const pu=Math.round(p*100);
+ // sell / exit side, if you told it your position
+ if(pos){
+  const ps=pos==='up'?p:1-p,pc=Math.round(ps*100);
+  if(left<30)return set('HOLD',mu,`Under 30s left. Model has your ${pos==='up'?'Up':'Down'} at ${pc}%.`);
+  if(ps<0.4)return set('CONSIDER EXITING','var(--r)',`Model now gives your ${pos==='up'?'Up':'Down'} only ${pc}%. If Kalshi still pays near your cost, selling cuts the loss. Compare the sell price in the app.`);
+  if(ps>=0.9)return set('HOLDING LOOKS OK','var(--g)',`Model gives your side ${pc}%. If Kalshi's sell price is already ~95¢+, locking it in vs. riding to $1 is your call.`);
+  return set('HOLD',mu,`Model gives your side ${pc}%. No exit signal.`);
+ }
+ if(left<30)return set('TOO LATE',mu,'Under 30s left. Prices and settlement differences dominate.');
+ if(left>420)return set('WAIT',mu,`Early in the window (${Math.floor(left/60)} min left) is where the model is weakest. Check again with 7 min or less.`);
+ const M=8; // margin for fees + model error
+ const maxUp=Math.min(90,Math.floor(p*100-M)),maxDn=Math.min(90,Math.floor((1-p)*100-M));
+ if(p>=0.7&&maxUp>=40)return set('LEAN UP','var(--g)',`Model: ${pu}% Up. Only buy Up if Kalshi's price is <b>${maxUp}¢ or less</b>. Above that you're paying more than the model thinks it's worth.`);
+ if(p<=0.3&&maxDn>=40)return set('LEAN DOWN','var(--r)',`Model: ${100-pu}% Down. Only buy Down if Kalshi's price is <b>${maxDn}¢ or less</b>. Above that you're overpaying vs. the model.`);
+ return set('NO TRADE',mu,`Model is ${pu}% Up, too close to 50/50 to show an edge.`);
+}
 // ---------- main loop ----------
 function update(){
  const now=Date.now();trades=trades.filter(t=>t.t>now-60000);hist=hist.filter(h=>h.t>now-1200000);
@@ -163,6 +192,7 @@ function update(){
   p=left<=0?(price>=useS?1:0):tcdf4(d/sd);
   $('mp').textContent=(p*100).toFixed(1)+'%';$('mp').className='v '+(p>=.5?'g':'r');
  }
+ signalUI(p,left,useS,now-lastT>15000);
  track(now,useS,p==null?.5:p,left,price,avg);
   draw(useS);
 }
@@ -175,5 +205,5 @@ function draw(strike){
  x.strokeStyle=pts[pts.length-1].p>=(strike??0)?'#22c55e':'#ef4444';x.lineWidth=2;x.beginPath();
  pts.forEach((p,i)=>i?x.lineTo(X(p.t),y(p.p)):x.moveTo(X(p.t),y(p.p)));x.stroke();
 }
-setFW(5);try{startFeeds()}catch(e){}backfill();setInterval(update,500);
+setFW(5);setPos(null);try{startFeeds()}catch(e){}backfill();setInterval(update,500);
 </script></body></html>
