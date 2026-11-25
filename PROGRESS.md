@@ -32,6 +32,7 @@ Find out honestly whether any strategy beats Kalshi's BTC 15-minute markets afte
 | All-in bets wiped the real account | Harness | stake cap (`stakeUsd`, `maxStakePct`) + dead-end line above |
 | Retried hold-to-85 / flip gate after they lost | Harness | Dead ends list (this file) |
 | Same failure run after run | Loop | 🛑 ESCALATE when one check fails two runs in a row |
+| Radar paper account stopped trading for good (v47.1) | Harness | a losing rule was "benched" and a benched rule never traded again, so it could never recover. v47.3: benched only blocks real money; the card says why paper isn't trading |
 | Keys could leak into the repo | Harness | `.gitignore` wall + no login code in the paper bot |
 
 ## Next
