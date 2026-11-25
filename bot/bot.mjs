@@ -85,13 +85,14 @@ function recordTrade(tr) {
   fs.appendFileSync(TRADES_FILE, [new Date(tr.closedAt).toISOString(), tr.ticker, tr.side, tr.contracts, tr.entry, tr.exit, tr.reason, tr.pnl].join(',') + '\n');
 }
 
-let last = null, lastErr = '', pendingSettle = null, finderNote = 'not run yet';
+let last = null, lastErr = '', pendingSettle = null, finderNote = 'not run yet', windowsRecorded = 0;
 
 // Every 6 hours, search the recorded data for new patterns (see finder.mjs).
 function runFinder() {
   try {
     const r = findPatterns(loadTicks(DATA));
     cfg.patterns = r.promoted.map(p => p.key);
+    windowsRecorded = r.windows;
     fs.writeFileSync(path.join(DATA, 'patterns.json'), JSON.stringify({ createdAt: new Date().toISOString(), windows: r.windows,
       patterns: r.promoted.map(p => ({ key: p.key, testTrades: p.test.n, testEdgeCents: +p.test.mean.toFixed(2) })) }, null, 1));
     finderNote = `${new Date().toLocaleTimeString()}: ${r.windows} windows searched, ${cfg.patterns.length} pattern(s) passed the held-back test`;
@@ -162,8 +163,13 @@ ${cfg.patterns.map(k => { const st = s.patternStats?.[k]; const dropped = st && 
 }
 
 http.createServer((req, res) => {
-  if (req.url === '/api') { res.setHeader('content-type', 'application/json'); return res.end(JSON.stringify({ scoreboard: scoreboard(s), state: s, last })); }
-  res.setHeader('content-type', 'text/html; charset=utf-8'); res.end(page());
+  if (req.url === '/api') {
+    res.setHeader('content-type', 'application/json');
+    return res.end(JSON.stringify({ scoreboard: scoreboard(s), state: s, last, patterns: cfg.patterns, finderNote, log, windowsRecorded }));
+  }
+  res.setHeader('content-type', 'text/html; charset=utf-8');
+  if (req.url === '/simple') return res.end(page());
+  res.end(fs.readFileSync(path.join(DIR, 'dashboard.html')));
 }).listen(PORT, () => {
   note(`Paper bot running (no real money). Open http://localhost:${PORT}`);
   runFinder();
