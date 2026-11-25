@@ -1,6 +1,13 @@
 KALSHI REAL-MONEY BOT — setup on your MacBook
 ==============================================
 
+WHAT CHANGED IN v47.2 (Kalshi live price on the Mac)
+- The bot now gets Kalshi's live prices WITH your API key (it used to ask without it), and retries when Kalshi
+  says "too many requests". Before, that made prices drop out.
+- It no longer sends the page the window that just closed (that made the page say "Kalshi offline" at rollovers).
+- It asks Kalshi at most once every 0.8s for prices, however often the page asks.
+- The Terminal now prints "Kalshi live prices: connected" or the exact problem (at most once a minute).
+
 KALSHI PRICE NOT SHOWING? (v47.1)
 The box now says why, e.g. "Kalshi offline (relay not set up: tap details)". Tap "details" for the full reason.
 - On the Mac: open http://localhost:8787 (from the bot), not a saved file. The page uses the bot's own relay.

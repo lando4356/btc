@@ -126,11 +126,27 @@ async function balanceDollars() {
   if (c == null || Number.isNaN(c)) throw new Error("could not read balance: " + JSON.stringify(b).slice(0, 200));
   return c / 100;
 }
+// v47.2: market data now goes through your API key (signed requests, with Kalshi's "too many requests" retry),
+// falling back to the public endpoint only if that fails. Before, these were unsigned with no retry, so a rate limit
+// looked like "no market" and the page lost Kalshi's price.
+async function kget(p) {
+  try { return await kalshi("GET", p); }
+  catch (e) {
+    if (e.status && e.status !== 401 && e.status !== 403) throw e;      // a real Kalshi error: report it
+    const r = await fetch(API + p, { headers: { Accept: "application/json" } }); // key problem: try the public route
+    if (!r.ok) { const er = new Error(`Kalshi GET ${p.split("?")[0]} -> ${r.status}`); er.status = r.status; throw er; }
+    return r.json();
+  }
+}
 async function openMarket() {
-  const r = await fetch(`${API}/markets?series_ticker=${SERIES}&status=open&limit=10`, { headers: { Accept: "application/json" } });
-  const j = await r.json();
-  const ms = (j.markets || []).sort((a, b) => new Date(a.close_time) - new Date(b.close_time));
-  return ms[0] || null;
+  const now = Date.now();
+  const pick = (list) => (list || []).filter((m) => Date.parse(m.close_time) > now).sort((a, b) => Date.parse(a.close_time) - Date.parse(b.close_time))[0];
+  let m = pick((await kget(`/markets?series_ticker=${SERIES}&status=open&limit=10`)).markets);
+  if (!m) { // right at :00/:15/:30/:45 the "open" list can be empty for a moment: look it up by close time instead
+    const t = Math.floor(now / 1000);
+    m = pick((await kget(`/markets?series_ticker=${SERIES}&min_close_ts=${t}&max_close_ts=${t + 1800}&limit=10`)).markets);
+  }
+  return m || null;
 }
 function quote(m) {
   return {
@@ -144,8 +160,7 @@ function quote(m) {
 // Kalshi's book lists bids only: YES bids and NO bids. Buying YES costs (100 - best NO bid); buying NO costs (100 - best YES bid).
 async function liveQuote(ticker) {
   try {
-    const r = await fetch(`${API}/markets/${ticker}/orderbook?depth=5`, { headers: { Accept: "application/json" } });
-    const j = await r.json();
+    const j = await kget(`/markets/${ticker}/orderbook?depth=5`);
     const fp = j.orderbook_fp, ob = j.orderbook;
     const best = (rows, dollars) => { if (!Array.isArray(rows) || !rows.length) return null; let m = null; for (const x of rows) { const c = dollars ? Math.round(Number(x[0]) * 100) : Number(x[0]); if (Number(x[1]) > 0 && (m == null || c > m)) m = c; } return m; };
     let yb = null, nb = null;
@@ -338,21 +353,41 @@ function send(res, code, obj, type = "application/json") {
   res.writeHead(code, { "Content-Type": type, "Cache-Control": "no-store" });
   res.end(typeof obj === "string" ? obj : JSON.stringify(obj));
 }
+// v47.2: the page asks every second; the relay keeps the market for 5s and the order book for 0.8s, and shares one
+// Kalshi request between overlapping asks, so it never hammers Kalshi. Problems are printed in this Terminal.
+let relayMk = { m: null, t: 0 }, relayOb = { tk: null, L: null, t: 0 }, relayBusy = null, relayErrT = 0;
+status.relay = "starting";
+async function relayFetch() {
+  const now = Date.now();
+  if (!relayMk.m || now - relayMk.t > 5000 || Date.parse(relayMk.m.close_time) <= now) relayMk = { m: await openMarket(), t: now };
+  const m = relayMk.m ? { ...relayMk.m } : null;
+  if (!m) return { error: "no open KXBTC15M market right now (between windows?)" };
+  if (relayOb.tk !== m.ticker || now - relayOb.t > 800) relayOb = { tk: m.ticker, L: await liveQuote(m.ticker), t: now };
+  const L = relayOb.L; // replace the lagging summary prices with the live order book
+  if (L) { for (const [k, v] of [["yes_bid", L.yesBid], ["yes_ask", L.yesAsk], ["no_bid", L.noBid], ["no_ask", L.noAsk]]) { delete m[k]; m[k + "_dollars"] = v == null ? null : (v / 100).toFixed(4); } m.price_source = "order book"; }
+  else m.price_source = "market summary";
+  return m;
+}
 async function relayK(res) {
   try {
-    const m = await openMarket();
-    if (m) { const L = await liveQuote(m.ticker); // replace the lagging summary prices with the live order book
-      if (L) { for (const [k, v] of [["yes_bid", L.yesBid], ["yes_ask", L.yesAsk], ["no_bid", L.noBid], ["no_ask", L.noAsk]]) { delete m[k]; m[k + "_dollars"] = v == null ? null : (v / 100).toFixed(4); } m.price_source = "order book"; } }
-    send(res, 200, m || { error: "no open market" });
+    relayBusy ??= relayFetch().finally(() => { relayBusy = null; });
+    const m = await relayBusy;
+    if (m.error) throw new Error(m.error);
+    if (status.relay !== "ok") console.log(`Kalshi live prices: connected (${m.ticker}, from the ${m.price_source})`);
+    status.relay = "ok";
+    send(res, 200, m);
+  } catch (e) {
+    const msg = String(e.message || e);
+    status.relay = msg;
+    if (Date.now() - relayErrT > 60e3) { relayErrT = Date.now(); console.log(`Kalshi live prices problem: ${msg}`); }
+    send(res, 502, { error: msg });
   }
-  catch (e) { send(res, 502, { error: String(e) }); }
 }
 // v45: Kalshi's official result for a finished window, so the page's scorecard grades against the real outcome
 async function relayResult(res, ticker) {
   if (!/^KXBTC15M-[A-Z0-9-]+$/.test(ticker || "")) return send(res, 400, { error: "bad ticker" });
   try {
-    const r = await fetch(`${API}/markets/${ticker}`, { headers: { Accept: "application/json" } });
-    const j = await r.json();
+    const j = await kget(`/markets/${ticker}`);
     send(res, 200, { ticker, result: j.market?.result || null, status: j.market?.status || null });
   } catch (e) { send(res, 502, { error: String(e) }); }
 }
@@ -375,7 +410,7 @@ function startServer() {
     if (req.method === "GET" && u.pathname === "/pm") return relayPM(res);
     if (req.method === "GET" && u.pathname === "/kr") return relayResult(res, u.searchParams.get("ticker"));
     if (req.method === "GET" && u.pathname === "/bot/status")
-      return send(res, 200, { on: true, kill: fs.existsSync(STOP_FILE), stopped: state.stopped, balance: status.balance, last: status.last, lastSell: status.lastSell, open: state.open, lastErr: status.lastErr, limits: LIMITS, rules: RULES });
+      return send(res, 200, { on: true, relay: status.relay, kill: fs.existsSync(STOP_FILE), stopped: state.stopped, balance: status.balance, last: status.last, lastSell: status.lastSell, open: state.open, lastErr: status.lastErr, limits: LIMITS, rules: RULES });
     if (req.method === "POST" && u.pathname === "/bot/test") {
       if (req.headers.origin !== ORIGIN || !(req.headers["content-type"] || "").startsWith("application/json")) return send(res, 403, { ok: false, why: "forbidden" });
       for await (const _ of req) {}
