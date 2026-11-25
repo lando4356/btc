@@ -32,11 +32,12 @@ Find out honestly whether any strategy beats Kalshi's BTC 15-minute markets afte
 | All-in bets wiped the real account | Harness | stake cap (`stakeUsd`, `maxStakePct`) + dead-end line above |
 | Retried hold-to-85 / flip gate after they lost | Harness | Dead ends list (this file) |
 | Same failure run after run | Loop | 🛑 ESCALATE when one check fails two runs in a row |
+| Run #4 still on stale prices (3.9% change): Kalshi renamed the order book field to `orderbook_fp`, bot silently fell back to list prices | Loop | "Live prices" check caught it; bot reads `orderbook_fp`. Never trust a run without the check |
 | Radar paper account stopped trading for good (v47.1) | Harness | a losing rule was "benched" and a benched rule never traded again, so it could never recover. v47.3: benched only blocks real money; the card says why paper isn't trading |
 | Keys could leak into the repo | Harness | `.gitignore` wall + no login code in the paper bot |
 
 ## Next
-1. Run the paper bot on live order-book prices; let evidence checks grade it.
+1. Run the paper bot on live order-book prices (fixed Nov 25: `orderbook_fp`); let evidence checks grade it. Run #4's 34 trades are NOT valid.
 2. If takeoff/dip still win over 100+ trades: add settlement-price (CF Benchmarks) reconstruction.
 3. Then the real-money bot (v47.2 on the Mac) with real money OFF for a week.
 

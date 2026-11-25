@@ -71,7 +71,8 @@ async function currentMarket() {
   // The market LIST only refreshes its prices about every 30 seconds. Trading off it makes Kalshi look
   // "slow" when it isn't, and paper trades fill at prices that are already gone. Use the live order book.
   try {
-    const ob = (await getJSON(`${KALSHI}/markets/${m.ticker}/orderbook`)).orderbook || {};
+    const obj = await getJSON(`${KALSHI}/markets/${m.ticker}/orderbook`);
+    const ob = obj.orderbook_fp || obj.orderbook || {};   // Kalshi now answers with orderbook_fp (dollar strings); run #4 silently fell back to stale list prices
     const lv = (c, d) => (c || (d || []).map(([p, q]) => [Math.round(parseFloat(p) * 100), +q])).filter(x => x[1] > 0).map(x => +x[0]);
     const yes = lv(ob.yes, ob.yes_dollars), no = lv(ob.no, ob.no_dollars);
     if (yes.length && no.length) {
