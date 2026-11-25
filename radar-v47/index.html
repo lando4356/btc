@@ -39,7 +39,7 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
 </div></div>
 <div id="full" hidden>
-<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.4</span></h1>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.5</span></h1>
 <div class="sub" id="status">Connecting…</div>
 <div class="grid">
  <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
@@ -1025,6 +1025,16 @@ function paTick(now,left,Kf,useS,avg,pm){
   if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
    paAdd('lottery',c.side,c.cnt,c.ask,won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100),won?'won':'lost');PA.lotN++;if(won)PA.lotW++;PA.lotPnl=(PA.lotPnl||0)+c.cnt*(won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100))/100;paSave()}
   else paSave()}
+ // v47.5: cash the lottery ticket instead of always riding it to the end.
+ // Once it's worth 3x what it cost (and 20c+), it follows the top: sells if it falls 20% (5c+) off its high.
+ // In the last minute it locks in anything worth 2x+.
+ if(PA.cur&&PA.cur.win===curWin()&&Kf){const c=PA.cur,bid=c.side==='up'?K.yb:K.nb;
+  if(bid!=null){c.peak=Math.max(c.peak||0,bid);
+   const armed=c.peak>=Math.max(3*c.ask,20);
+   const why=armed&&bid<=c.peak-Math.max(5,Math.round(c.peak*0.2))?`cashed: came off its ${c.peak}¢ top`
+     :left<=60&&bid>=2*c.ask?'cashed: last minute, locked the gain':'';
+   if(why){const pc=bid-c.ask-kfee(c.ask/100)-kfee(bid/100);PA.cur=null;PA.lotSold=c.win;
+    paAdd('lottery',c.side,c.cnt,c.ask,pc,why);PA.lotN++;if(pc>0)PA.lotW++;PA.lotPnl=(PA.lotPnl||0)+c.cnt*pc/100;paSave()}}}
  // hold-to-the-end mode: buy one side at 50 cents or less and let the window settle (a win roughly doubles the stake or better, a loss loses it all)
  if(PA.hcur&&PA.hcur.win!==curWin()){const c=PA.hcur;PA.hcur=null;
   if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
@@ -1038,7 +1048,7 @@ function paTick(now,left,Kf,useS,avg,pm){
    if(edge>=(PA.minEdge||0.03)&&(!best||edge>best.edge))best={sd,ask,edge}}
   if(best){PA.hcur={win:curWin(),side:best.sd,ask:best.ask,cnt:paCount(best.ask),s:useS};paSave()}}
  // buy the daily lottery ticket: a cheap contract (3-8 cents), NOT picked for edge
- if(Kf&&useS!=null&&paOpen()&&!PA.cur&&left>=480&&left<=840){
+ if(Kf&&useS!=null&&paOpen()&&!PA.cur&&PA.lotSold!==curWin()&&left>=480&&left<=840){
   for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;
    if(ask!=null&&ask>=3&&ask<=8){const cnt=Math.floor(Math.min(3,PA.bank*0.10)/(ask/100));
     if(cnt>=1){PA.cur={win:curWin(),side:sd,ask,cnt,s:useS};PA.lotToday=(PA.lotToday||0)+1;paSave()}break}}}
@@ -1047,7 +1057,7 @@ function paTick(now,left,Kf,useS,avg,pm){
  const st=PA.bank>=PA.goal?' 🎉 GOAL REACHED':PA.bank<=PA.floor?' 🛑 FLOOR HIT (stopped)':'';
  el.innerHTML=`$${PA.bank.toFixed(2)}${st}`;el.style.color=PA.bank>=PA.start?'var(--g)':'var(--r)';
  const last=PA.log.slice(-4).reverse().map(x=>`${x.k==='lottery'?'🎟':'•'} ${x.s} x${x.c} @ ${x.e}¢: ${x.p>=0?'+':''}$${x.p.toFixed(2)}`).join('<br>');
- $('pa2').innerHTML=`<div style="height:8px;background:#2a3550;border-radius:4px;margin:4px 0"><div style="height:8px;width:${pct}%;background:var(--g);border-radius:4px"></div></div>Started $${PA.start} · goal $${PA.goal} · stops at $${PA.floor}. ${PA.n} trades, ${PA.w} won. Mode: ${PA.mode==='hold'?'hold to the end':'scalp'}${PA.mode==='hold'?` · hold bets ${PA.hW||0}/${PA.hN||0} won, net ${(PA.hPnl||0)>=0?'+':'-'}$${Math.abs(PA.hPnl||0).toFixed(2)}${PA.hcur?' · open: '+PA.hcur.side+' @ '+PA.hcur.ask+'¢':''}`:''}. Lottery tickets (one per window, no daily limit): ${PA.lotW}/${PA.lotN} won, net ${(PA.lotPnl||0)>=0?'+':'-'}$${Math.abs(PA.lotPnl||0).toFixed(2)}${PA.cur?` · one open now (${PA.cur.side} @ ${PA.cur.ask}¢)`:''}.<br>`+(last||'No trades yet.')+'<br>'+(SH.length?`Early sells vs holding to the end (${SH.length} sells): sold for ${SH.reduce((q,x)=>q+x.a,0).toFixed(0)}¢ total, holding would have made ${SH.reduce((q,x)=>q+x.h,0).toFixed(0)}¢ per contract.`:'Early sells vs holding to the end: collecting…')+'<br><span style="opacity:.8">Fake money. It follows the same paper trades as the box and bets the share of the account you pick ('+Math.round((PA.frac||0.25)*100)+'%) each time'+(paFracNow()<(PA.frac||0.25)?', now '+Math.round(paFracNow()*100)+'% because the account has doubled':'')+'.</span>';
+ $('pa2').innerHTML=`<div style="height:8px;background:#2a3550;border-radius:4px;margin:4px 0"><div style="height:8px;width:${pct}%;background:var(--g);border-radius:4px"></div></div>Started $${PA.start} · goal $${PA.goal} · stops at $${PA.floor}. ${PA.n} trades, ${PA.w} won. Mode: ${PA.mode==='hold'?'hold to the end':'scalp'}${PA.mode==='hold'?` · hold bets ${PA.hW||0}/${PA.hN||0} won, net ${(PA.hPnl||0)>=0?'+':'-'}$${Math.abs(PA.hPnl||0).toFixed(2)}${PA.hcur?' · open: '+PA.hcur.side+' @ '+PA.hcur.ask+'¢':''}`:''}. Lottery tickets (one per window, no daily limit): ${PA.lotW}/${PA.lotN} won, net ${(PA.lotPnl||0)>=0?'+':'-'}$${Math.abs(PA.lotPnl||0).toFixed(2)}${PA.cur?` · one open now (${PA.cur.side} @ ${PA.cur.ask}¢${PA.cur.peak?', high '+PA.cur.peak+'¢':''}; cashes once it's 3x and comes off the top)`:''}.<br>`+(last||'No trades yet.')+'<br>'+(SH.length?`Early sells vs holding to the end (${SH.length} sells): sold for ${SH.reduce((q,x)=>q+x.a,0).toFixed(0)}¢ total, holding would have made ${SH.reduce((q,x)=>q+x.h,0).toFixed(0)}¢ per contract.`:'Early sells vs holding to the end: collecting…')+'<br><span style="opacity:.8">Fake money. It follows the same paper trades as the box and bets the share of the account you pick ('+Math.round((PA.frac||0.25)*100)+'%) each time'+(paFracNow()<(PA.frac||0.25)?', now '+Math.round(paFracNow()*100)+'% because the account has doubled':'')+'.</span>';
 }
 let SH=[],SHp=[];try{SH=JSON.parse(localStorage.getItem('btcSH')||'[]')}catch(e){}
 function shSave(){try{localStorage.setItem('btcSH',JSON.stringify(SH.slice(-300)))}catch(e){}}
