@@ -116,7 +116,7 @@ export function escalateMarkdown(repeat) {
   if (!repeat.length) return '';
   return `## 🛑 ESCALATE: same failure two runs in a row\n\n` +
     `Failed again: **${repeat.join(', ')}**. Don't keep tweaking strategy settings, fix the layer that owns it ` +
-    `(data, fills or code) and log the lesson in PROGRESS.md. The owner decides what happens next.\n`;
+    `(data, fills or code) and log the lesson in PROGRESS.md. The owner decides what happens next.\n\n`;
 }
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
