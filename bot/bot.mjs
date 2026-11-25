@@ -46,16 +46,24 @@ async function getJSON(url) {
 }
 
 async function currentMarket() {
-  const j = await getJSON(`${KALSHI}/markets?series_ticker=KXBTC15M&status=open&limit=10`);
   const now = Date.now();
-  const m = (j.markets || [])
-    .filter(m => Date.parse(m.close_time) > now)
+  const pick = list => (list || [])
+    .filter(m => Date.parse(m.close_time) > now && (!m.open_time || Date.parse(m.open_time) <= now + 5000))
     .sort((a, b) => Date.parse(a.close_time) - Date.parse(b.close_time))[0];
-  if (!m) throw new Error('no open KXBTC15M market');
+  let m = null;
+  try { m = pick((await getJSON(`${KALSHI}/markets?series_ticker=KXBTC15M&status=open&limit=20`)).markets); } catch {}
+  // right as a window rolls over, the "open" list can be empty for a moment: look it up by close time instead
+  if (!m) {
+    const t = Math.floor(now / 1000);
+    m = pick((await getJSON(`${KALSHI}/markets?series_ticker=KXBTC15M&min_close_ts=${t}&max_close_ts=${t + 1800}&limit=20`)).markets);
+  }
+  if (!m) throw new Error('no open KXBTC15M market (between windows?)');
+  const strike = +(m.floor_strike ?? m.cap_strike);
+  if (!Number.isFinite(strike) || !strike) throw new Error(`strike not posted yet for ${m.ticker}`);
   return {
     ticker: m.ticker,
     closeTs: Date.parse(m.close_time),
-    strike: +(m.floor_strike ?? m.cap_strike),
+    strike,
     yesBid: cents(m.yes_bid, m.yes_bid_dollars), yesAsk: cents(m.yes_ask, m.yes_ask_dollars),
     noBid: cents(m.no_bid, m.no_bid_dollars), noAsk: cents(m.no_ask, m.no_ask_dollars),
   };
@@ -104,6 +112,7 @@ function recordTrade(tr) {
   fs.appendFileSync(TRADES_FILE, [new Date(tr.closedAt).toISOString(), tr.ticker, tr.side, tr.contracts, tr.entry, tr.exit, tr.reason, tr.pnl].join(',') + '\n');
 }
 
+let lastStatus = 0;
 let last = null, lastErr = '', pendingSettle = null, finderNote = 'not run yet', windowsRecorded = 0;
 
 // Every 6 hours, search the recorded data for new patterns (see finder.mjs).
@@ -142,7 +151,13 @@ async function loop() {
     const before = s.trades.length;
     for (const e of onTick(s, tick, cfg)) note(e);
     for (const tr of s.trades.slice(before)) recordTrade(tr);
+    if (lastErr) note(`data back (${lastErr.slice(0, 60)} cleared)`);
     last = tick; lastErr = '';
+    if (Date.now() - lastStatus >= 60_000) {   // one status line a minute so the log shows it's alive
+      lastStatus = Date.now();
+      const sb = scoreboard(s), gap = tick.btc - tick.strike, secs = Math.round((tick.closeTs - tick.t) / 1000);
+      note(`status · ${tick.ticker} ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} left · BTC ${gap >= 0 ? '+' : ''}${gap.toFixed(0)} vs strike · Up ${tick.yesAsk}¢ Down ${tick.noAsk}¢ · paper $${sb.bankroll} · ${sb.trades} trades${s.pos ? ` · holding ${s.pos.side === 'no' ? 'Down' : 'Up'} @ ${s.pos.entry}¢` : ''}`);
+    }
     save();
   } catch (e) {
     if (String(e.message) !== lastErr) note(`data error: ${e.message}`);
