@@ -16,7 +16,21 @@ const DIR = path.dirname(fileURLToPath(import.meta.url));
 // status: pass | warn | fail.  A "fail" means: don't trust these results at all.
 export function runChecks(state, ticks) {
   const out = [];
-  const add = (name, status, detail) => out.push({ name, status, detail });
+  const EXPECT = {
+    'Live prices': 'prices change on 8%+ of seconds',
+    'Data coverage': '80%+ of seconds recorded, 5 or fewer gaps',
+    'Fills were real': 'the buy price still there 1-2s later on 85%+ of buys',
+    'Believable win rate': 'under 80% (real edges here are small)',
+    'Both halves profitable': 'profit in both the first and second half of trades',
+    'Enough trades': '100+ trades',
+  };
+  const LOOK = {
+    'Live prices': 'bot/bot.mjs currentMarket(): is it reading /orderbook? (list prices refresh ~every 28s)',
+    'Data coverage': 'the run log for data errors; Kalshi/Coinbase blocking or rate limits',
+    'Fills were real': 'bot/v32.mjs entries: buying moves that are already gone; add a delay or a resting order',
+    'Both halves profitable': 'trades by rule in RESULTS.md: which rule loses in which half',
+  };
+  const add = (name, status, detail) => out.push({ name, status, detail, expected: EXPECT[name], look: status !== 'pass' ? LOOK[name] : undefined });
   const trades = state.trades || [];
 
   // 1. Are Kalshi prices live? Real order-book prices change on a good share of seconds.
@@ -81,7 +95,8 @@ export function runChecks(state, ticks) {
 
 export function checksMarkdown(r) {
   const icon = { pass: '✅', warn: '⚠️', fail: '❌' };
-  return `## 🔍 Evidence checks: ${r.verdict}\n\n${r.checks.map(c => `- ${icon[c.status]} **${c.name}:** ${c.detail}`).join('\n')}\n`;
+  const lines = r.checks.map(c => `- ${icon[c.status]} **${c.name}**\n  - expected: ${c.expected}\n  - saw: ${c.detail}${c.look ? `\n  - look at: ${c.look}` : ''}`);
+  return `## 🔍 Evidence checks: ${r.verdict}\n\n${lines.join('\n')}\n`;
 }
 
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);

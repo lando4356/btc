@@ -1,2 +1,9 @@
 bot/data/
 bot/test/fake/
+# secrets: never commit (see AGENTS.md "Walls")
+.env
+.env.*
+*.pem
+*.key
+config.json
+kalshi-key*
