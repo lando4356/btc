@@ -1,0 +1,12 @@
+// Cloudflare "Workers" deploy for the radar page (Cloudflare runs `npx wrangler deploy` on every merge to main).
+// Publishes ONLY the radar-v47 folder. Never point this at mac-bot/ (the Mac bot folder holds the Kalshi key on the Mac).
+{
+  "name": "btc",
+  "main": "radar-v47/_worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./radar-v47",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}
