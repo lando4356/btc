@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BTC 15m · Paper Desk</title>
+<style>
+  :root{--bg:#efece4;--card:#fbfaf7;--line:#e3dfd5;--ink:#1d1d1b;--dim:#8b877d;--red:#b4532a;--red2:#d9744a;--blue:#3a6fd8;--blue2:#7aa2ec;--green:#2f8f5b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:14px -apple-system,system-ui,sans-serif;padding:14px;max-width:1180px;margin:0 auto}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .lbl{font:600 10px ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:0 1px 0 #fff inset}
+  .row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1 1 300px}
+  .chip{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:2px 9px;font:600 10px ui-monospace,Menlo,monospace;color:var(--dim);background:#fff}
+  .chip.live{color:var(--blue);background:#e9f0fd;border-color:#d3e0fa}
+  .chip.red{color:var(--red);background:#fbece5;border-color:#f3d6c8}
+  .chip.green{color:var(--green);background:#e6f4ec;border-color:#cfe8da}
+  .serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+  .big{font-size:44px;letter-spacing:-.02em;line-height:1.05}
+  header{display:flex;align-items:center;gap:12px;padding:12px 16px}
+  header .logo{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:16px}
+  header h1{font-size:16px;letter-spacing:.01em}
+  header .sp{flex:1}
+  .kv{display:flex;justify-content:space-between;padding:3px 0;font:12px ui-monospace,Menlo,monospace}
+  .kv b{font-weight:600}
+  .split{display:grid;grid-template-columns:170px 1fr;gap:14px}
+  @media(max-width:640px){.split{grid-template-columns:1fr}.big{font-size:36px}}
+  .minis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+  .minis div{font:600 12px ui-monospace,Menlo,monospace}.minis small{display:block;color:var(--dim);font-weight:400;font-size:9px;margin-top:2px}
+  svg text{font-family:ui-monospace,Menlo,monospace}
+  .verdict{font:700 12px ui-monospace,Menlo,monospace;padding:6px 10px;border-radius:8px;display:inline-block;margin-top:10px}
+  .log{font:11px ui-monospace,Menlo,monospace;color:var(--dim);white-space:pre-wrap;max-height:160px;overflow:auto}
+  footer{display:flex;gap:16px;flex-wrap:wrap;font:10px ui-monospace,Menlo,monospace;color:var(--dim);padding:4px 6px 20px}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--blue);margin-right:5px}
+  .updn{display:flex;gap:8px}.updn>div{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fff;min-width:74px}
+  .updn .p{font:700 18px ui-monospace,Menlo,monospace}
+  .pat{font:12px ui-monospace,Menlo,monospace;padding:4px 0;border-top:1px dashed var(--line)}
+</style>
+</head>
+<body>
+
+<div class="card" style="padding:0"><header>
+  <div class="logo">◔</div>
+  <div><div class="lbl">Bounce rule → pattern finder → one paper trade per window</div><h1>BTC 15m · PAPER DESK</h1></div>
+  <div class="sp"></div>
+  <span class="chip live" id="live">● CONNECTING</span>
+  <span class="chip" id="round">—</span>
+  <span class="mono" id="clock" style="font-weight:600">--:--:-- UTC</span>
+</header></div>
+
+<div class="row">
+  <div class="card" style="flex:2 1 420px">
+    <div class="lbl">Total P&amp;L · <span class="chip">BTC UP/DOWN · 15M</span> <span class="chip red">PAPER · FAKE MONEY</span></div>
+    <div class="serif big" id="pnl" style="margin-top:8px">$0.00</div>
+    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+      <span class="chip" id="cTrades">0 trades</span><span class="chip live" id="cWin">0% WR</span>
+      <span class="chip" id="cBe">break-even 0%</span><span class="chip" id="cBank">bank $30</span>
+    </div>
+    <div id="verdict" class="verdict">NOT PROVEN</div>
+    <div class="minis" id="minis"></div>
+  </div>
+  <div class="card" style="flex:1 1 300px">
+    <div class="lbl" style="display:flex;justify-content:space-between"><span>★ Best trades</span><span id="bestN"></span></div>
+    <div id="best" style="margin-top:8px"></div>
+    <svg id="equity" viewBox="0 0 300 90" style="width:100%;height:90px;margin-top:8px"></svg>
+  </div>
+</div>
+
+<div class="card">
+  <div class="lbl" style="display:flex;justify-content:space-between"><span style="color:var(--ink)">• Outcome lattice · every trade, one ball</span><span>loss ← breakeven → profit</span></div>
+  <div class="split" style="margin-top:10px">
+    <div>
+      <div class="kv"><span>BALLS DROPPED</span><b id="lN">0</b></div>
+      <div class="kv"><span>LANDED GREEN</span><b id="lG" style="color:var(--blue)">0%</b></div>
+      <div class="kv"><span>EV / TRADE</span><b id="lEv">$0.00</b></div>
+      <div class="kv"><span>BREAK-EVEN</span><b id="lBe">0%</b></div>
+      <div class="lbl" style="margin-top:14px;line-height:1.5">Law of large numbers:<br>an edge only shows<br>after many trades.</div>
+    </div>
+    <svg id="lattice" viewBox="0 0 700 220" style="width:100%;height:220px"></svg>
+  </div>
+</div>
+
+<div class="card">
+  <div class="lbl" style="display:flex;justify-content:space-between"><span style="color:var(--ink)">• Pattern finder · conditions graph</span><span id="fNote"></span></div>
+  <div class="split" style="margin-top:10px;grid-template-columns:1fr 200px">
+    <svg id="graph" viewBox="0 0 640 260" style="width:100%;height:260px"></svg>
+    <div>
+      <div class="kv"><span>P(UP) · BOOK</span><b id="gUp" style="color:var(--blue)">—</b></div>
+      <div class="kv"><span>P(DOWN) · BOOK</span><b id="gDn" style="color:var(--red)">—</b></div>
+      <div class="kv"><span>PATTERNS LIVE</span><b id="gLive">0</b></div>
+      <div class="kv"><span>DROPPED</span><b id="gDrop">0</b></div>
+      <div class="lbl" style="margin-top:10px">Signal now</div>
+      <div class="mono" id="signal" style="font-size:12px;margin-top:4px">—</div>
+      <div id="pats" style="margin-top:10px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <b style="font-size:16px">BTC 15m Pulse</b><span class="chip live">● LIVE</span><span class="chip" id="tkr">—</span>
+    <span class="sp" style="flex:1"></span><span class="mono" id="cd" style="font-size:18px;font-weight:600">--:--</span>
+  </div>
+  <div style="display:flex;gap:22px;align-items:flex-end;margin-top:12px;flex-wrap:wrap">
+    <div><div class="lbl">Price to beat</div><div class="mono" id="strike" style="font-size:20px;font-weight:600">—</div></div>
+    <div><div class="lbl">Current price</div><div class="mono" id="price" style="font-size:20px;font-weight:600">—</div><span class="chip" id="gap">—</span></div>
+    <div class="sp" style="flex:1"></div>
+    <div class="updn"><div><div class="lbl" style="color:var(--blue)">▲ Up</div><div class="p" id="up" style="color:var(--blue)">—</div></div>
+      <div><div class="lbl" style="color:var(--red)">▼ Down</div><div class="p" id="dn" style="color:var(--red)">—</div></div></div>
+  </div>
+  <svg id="pulse" viewBox="0 0 900 200" style="width:100%;height:200px;margin-top:10px"></svg>
+  <div class="row" style="margin-top:6px">
+    <div class="mono" style="font-size:12px">ORDER · <span id="ord">none</span></div>
+    <div class="mono" style="font-size:12px">HOLDING · <span id="pos">none</span></div>
+  </div>
+</div>
+
+<div class="card"><div class="lbl">Log</div><div class="log" id="log" style="margin-top:6px"></div></div>
+
+<footer>
+  <span><span class="dot"></span>BOT ONLINE · PAPER ONLY</span><span>DATA · KALSHI KXBTC15M + COINBASE</span>
+  <span>ENTRIES · RESTING LIMIT (NO FEE) / LEARNED (TAKER)</span><span id="fWin">—</span>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const money = v => (v < 0 ? '-$' : '$') + Math.abs(v).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const sgn = v => (v >= 0 ? '+' : '') + v;
+const C = { red: '#b4532a', red2: '#d9744a', blue: '#3a6fd8', blue2: '#7aa2ec', dim: '#8b877d', line: '#e3dfd5', ink: '#1d1d1b' };
+
+function lattice(trades) {
+  const svg = $('lattice'), W = 700, H = 220;
+  const edges = [-Infinity, -2, -1, -0.5, 0, 0.5, 1, 2, 4, Infinity];
+  const labels = ['≤-2', '-2', '-1', '-.5', '0', '+.5', '+1', '+2', '+4'];
+  const bins = new Array(labels.length).fill(0);
+  for (const t of trades) for (let i = 0; i < labels.length; i++) if (t.pnl > edges[i] && t.pnl <= edges[i + 1]) { bins[i]++; break; }
+  const max = Math.max(1, ...bins), bw = W / labels.length;
+  let s = '';
+  // pegs
+  for (let r = 0; r < 6; r++) for (let c = 0; c <= r; c++) s += `<circle cx="${W / 2 + (c - r / 2) * 46}" cy="${18 + r * 16}" r="2" fill="${C.dim}" opacity=".5"/>`;
+  s += `<line x1="${bw * 4}" y1="10" x2="${bw * 4}" y2="${H - 20}" stroke="${C.ink}" stroke-dasharray="3 3" opacity=".5"/>`;
+  s += `<text x="${bw * 4 + 4}" y="20" font-size="10" fill="${C.ink}">BREAKEVEN</text>`;
+  bins.forEach((n, i) => {
+    const h = (n / max) * 100, x = i * bw + 8, y = H - 22 - h, loss = i < 4;
+    s += `<rect x="${x}" y="${y}" width="${bw - 16}" height="${h}" rx="3" fill="${loss ? (i < 2 ? C.red : C.red2) : (i > 5 ? C.blue : C.blue2)}"/>`;
+    s += `<text x="${x + (bw - 16) / 2}" y="${H - 6}" font-size="10" text-anchor="middle" fill="${C.dim}">${labels[i]}</text>`;
+    if (n) s += `<text x="${x + (bw - 16) / 2}" y="${y - 4}" font-size="10" text-anchor="middle" fill="${C.ink}">${n}</text>`;
+  });
+  // last balls
+  trades.slice(-12).forEach((t, k) => {
+    let i = labels.length - 1; for (let j = 0; j < labels.length; j++) if (t.pnl > edges[j] && t.pnl <= edges[j + 1]) { i = j; break; }
+    s += `<circle cx="${i * bw + bw / 2 + ((k % 3) - 1) * 9}" cy="${118 + (k % 4) * 6}" r="4" fill="${t.pnl > 0 ? C.blue : C.red}" opacity=".85"/>`;
+  });
+  if (!trades.length) s += `<text x="${W / 2}" y="${H / 2 + 30}" text-anchor="middle" font-size="12" fill="${C.dim}">no balls dropped yet: waiting for the first paper trade</text>`;
+  svg.innerHTML = s;
+}
+
+function graph(patterns, stats, sig) {
+  const svg = $('graph'), W = 640, H = 260;
+  const conds = new Map();
+  patterns.forEach(k => {
+    const [side, rest] = k.split(' | ');
+    rest.split(' + ').forEach(c => { const e = conds.get(c) || { up: 0, dn: 0 }; side === 'Up' ? e.up++ : e.dn++; conds.set(c, e); });
+  });
+  let s = '';
+  const hubs = [{ x: 150, y: 120, label: 'BEAR_CLUSTER', fill: C.red, r: 20 }, { x: 330, y: 190, label: 'HUB_PRIME', fill: C.ink, r: 22 }, { x: 500, y: 100, label: 'BULL_CLUSTER', fill: C.blue, r: 18 }];
+  // median path
+  s += `<path d="M30 140 C 150 120, 250 170, 330 160 S 480 100, 610 110" fill="none" stroke="${C.red}" stroke-width="2" stroke-dasharray="6 4" opacity=".7"/>`;
+  const list = [...conds];
+  if (!list.length) {
+    // idle: faint constellation
+    for (let i = 0; i < 40; i++) { const a = i * 2.4, r = 30 + (i * 37) % 90, h = hubs[i % 3];
+      s += `<line x1="${h.x}" y1="${h.y}" x2="${h.x + Math.cos(a) * r}" y2="${h.y + Math.sin(a) * r * .7}" stroke="${C.line}"/><circle cx="${h.x + Math.cos(a) * r}" cy="${h.y + Math.sin(a) * r * .7}" r="2.5" fill="${C.dim}" opacity=".4"/>`; }
+    s += `<text x="${W / 2}" y="${H - 12}" text-anchor="middle" font-size="11" fill="${C.dim}">no patterns have passed the held-back test yet</text>`;
+  }
+  list.forEach(([c, e], i) => {
+    const h = e.dn > e.up ? hubs[0] : e.up > e.dn ? hubs[2] : hubs[1];
+    const a = i * 2.399 + 0.5, r = 55 + (i * 29) % 70;
+    const x = Math.max(14, Math.min(W - 14, h.x + Math.cos(a) * r)), y = Math.max(14, Math.min(H - 14, h.y + Math.sin(a) * r * .75));
+    const col = e.dn > e.up ? C.red : e.up > e.dn ? C.blue : C.dim;
+    s += `<line x1="${h.x}" y1="${h.y}" x2="${x}" y2="${y}" stroke="${col}" opacity=".35"/>`;
+    s += `<circle cx="${x}" cy="${y}" r="${4 + Math.min(6, e.up + e.dn)}" fill="${col}" opacity=".8"/>`;
+    s += `<text x="${x + 8}" y="${y + 3}" font-size="8.5" fill="${C.dim}">${c.replace(/BTC |price /g, '')}</text>`;
+  });
+  hubs.forEach(h => { s += `<circle cx="${h.x}" cy="${h.y}" r="${h.r}" fill="${h.fill}"/><rect x="${h.x - 40}" y="${h.y + h.r + 4}" width="80" height="14" rx="3" fill="#fff" stroke="${C.line}"/><text x="${h.x}" y="${h.y + h.r + 14}" font-size="8" text-anchor="middle" fill="${C.ink}">${h.label}</text>`; });
+  svg.innerHTML = s;
+}
+
+function pulse(hist, tick, pos, ord) {
+  const svg = $('pulse'), W = 900, H = 200, L = 60, R = 820;
+  if (!tick) { svg.innerHTML = ''; return; }
+  const open = tick.closeTs - 900_000;
+  const pts = hist.filter(h => h.t >= open);
+  const vals = pts.map(p => p.btc).concat([tick.strike]);
+  let lo = Math.min(...vals), hi = Math.max(...vals); const pad = Math.max(20, (hi - lo) * .15); lo -= pad; hi += pad;
+  const X = t => L + (t - open) / 900_000 * (R - L), Y = v => 12 + (hi - v) / (hi - lo) * (H - 40);
+  let s = '';
+  for (let k = 0; k <= 4; k++) { const v = lo + (hi - lo) * k / 4; s += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${C.line}"/><text x="${R + 6}" y="${Y(v) + 3}" font-size="10" fill="${C.dim}">$${v.toFixed(0)}</text>`; }
+  for (let m = 0; m <= 15; m += 3) s += `<text x="${X(open + m * 60_000)}" y="${H - 6}" font-size="10" text-anchor="middle" fill="${C.dim}">${new Date(open + m * 60_000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</text>`;
+  // enter-zone (12 to 3 min left)
+  s += `<rect x="${X(open + 180_000)}" y="12" width="${X(open + 720_000) - X(open + 180_000)}" height="${H - 40}" fill="${C.blue}" opacity=".04"/>`;
+  s += `<line x1="${L}" x2="${R}" y1="${Y(tick.strike)}" y2="${Y(tick.strike)}" stroke="${C.ink}" stroke-dasharray="5 4"/>`;
+  s += `<rect x="${R - 62}" y="${Y(tick.strike) - 9}" width="58" height="17" rx="3" fill="${C.ink}"/><text x="${R - 33}" y="${Y(tick.strike) + 3}" font-size="9.5" fill="#fff" text-anchor="middle">TARGET</text>`;
+  if (pts.length > 1) {
+    s += `<path d="${pts.map((p, i) => (i ? 'L' : 'M') + X(p.t).toFixed(1) + ' ' + Y(p.btc).toFixed(1)).join(' ')}" fill="none" stroke="${C.ink}" stroke-width="2"/>`;
+    const p = pts[pts.length - 1]; s += `<circle cx="${X(p.t)}" cy="${Y(p.btc)}" r="4.5" fill="${p.btc >= tick.strike ? C.blue : C.red}"/>`;
+  }
+  const mark = (t, label, col) => { const p = pts.find(q => q.t >= t) || pts[pts.length - 1]; if (!p) return '';
+    return `<circle cx="${X(p.t)}" cy="${Y(p.btc)}" r="6" fill="#fff" stroke="${col}" stroke-width="2"/><rect x="${X(p.t) - 46}" y="${Y(p.btc) - 28}" width="92" height="16" rx="8" fill="#fff" stroke="${col}"/><text x="${X(p.t)}" y="${Y(p.btc) - 17}" font-size="9" text-anchor="middle" fill="${col}">${label}</text>`; };
+  if (ord && ord.ticker === tick.ticker) s += mark(ord.t, `BID ${ord.side === 'no' ? 'DOWN' : 'UP'} ${ord.price}¢`, C.dim);
+  if (pos && pos.ticker === tick.ticker) s += mark(pos.t, `${pos.side === 'no' ? 'DOWN' : 'UP'} @ ${pos.entry}¢`, pos.side === 'no' ? C.red : C.blue);
+  svg.innerHTML = s;
+}
+
+function equity(trades) {
+  const svg = $('equity'); let eq = 0; const pts = [0, ...trades.map(t => (eq += t.pnl))];
+  if (pts.length < 2) { svg.innerHTML = `<text x="150" y="50" text-anchor="middle" font-size="10" fill="${C.dim}">equity curve appears after trades</text>`; return; }
+  const lo = Math.min(...pts), hi = Math.max(...pts, lo + 1);
+  const X = i => i / (pts.length - 1) * 300, Y = v => 80 - (v - lo) / (hi - lo) * 70;
+  const d = pts.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
+  const col = eq >= 0 ? C.blue : C.red;
+  svg.innerHTML = `<path d="${d} L300 90 L0 90Z" fill="${col}" opacity=".08"/><path d="${d}" fill="none" stroke="${col}" stroke-width="2"/><line x1="0" x2="300" y1="${Y(0)}" y2="${Y(0)}" stroke="${C.line}" stroke-dasharray="3 3"/>`;
+}
+
+async function tick() {
+  let j;
+  try { j = await (await fetch('/api', { cache: 'no-store' })).json(); $('live').textContent = '● LIVE · PAPER'; }
+  catch { $('live').textContent = '● OFFLINE'; return; }
+  const sb = j.scoreboard, st = j.state, t = j.last, trades = st.trades || [];
+  $('pnl').textContent = money(sb.pnl); $('pnl').style.color = sb.pnl < 0 ? C.red : C.ink;
+  $('cTrades').textContent = `${sb.trades} trades`; $('cWin').textContent = `${sb.winRate}% WR`;
+  $('cBe').textContent = `break-even ${sb.breakEvenPct}%`; $('cBank').textContent = `bank ${money(sb.bankroll)}`;
+  const v = $('verdict'); v.textContent = sb.verdict;
+  v.style.background = sb.verdict.startsWith('EDGE') ? '#e6f4ec' : sb.verdict.startsWith('NO') ? '#fbece5' : '#f6f0dc';
+  v.style.color = sb.verdict.startsWith('EDGE') ? C.blue : sb.verdict.startsWith('NO') ? C.red : '#8a6d1d';
+  $('minis').innerHTML = trades.slice(-4).reverse().map(x => `<div style="color:${x.pnl > 0 ? C.blue : C.red}">${x.pnl > 0 ? '+' : ''}${money(x.pnl)}<small>${new Date(x.closedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · ${x.side.toUpperCase()}</small></div>`).join('') || '<div style="color:#8b877d;font-weight:400">no closed trades yet</div>';
+  const best = [...trades].sort((a, b) => b.pnl - a.pnl)[0];
+  $('bestN').textContent = trades.length ? `${trades.filter(x => x.win).length} / ${trades.length} won` : '';
+  $('best').innerHTML = best && best.pnl > 0
+    ? `<div class="serif" style="font-size:34px">×${(best.exit / best.entry).toFixed(2)}</div><div class="mono" style="font-size:11px;color:#8b877d">${best.side.toUpperCase()} · ENTRY ${best.entry}¢ → ${best.exit}¢ · <b style="color:${C.blue}">+${money(best.pnl)}</b></div>`
+    : '<div class="mono" style="font-size:12px;color:#8b877d">no winning trade yet</div>';
+  equity(trades);
+  const n = trades.length, w = trades.filter(x => x.win).length;
+  $('lN').textContent = n; $('lG').textContent = (n ? (w / n * 100).toFixed(1) : 0) + '%';
+  $('lEv').textContent = money(n ? sb.pnl / n : 0); $('lBe').textContent = sb.breakEvenPct + '%';
+  lattice(trades);
+  const pats = j.patterns || [], ps = st.patternStats || {};
+  const dropped = pats.filter(k => ps[k] && ps[k].n >= 30 && ps[k].pnl < 0);
+  graph(pats, ps, st.lastSignal);
+  $('fNote').textContent = j.finderNote || '';
+  $('gLive').textContent = pats.length - dropped.length; $('gDrop').textContent = dropped.length;
+  $('signal').textContent = st.lastSignal || (st.order ? 'order resting' : st.pos ? 'holding position' : '—');
+  $('pats').innerHTML = pats.slice(0, 5).map(k => `<div class="pat">${dropped.includes(k) ? '🚫 ' : ''}${k}${ps[k] ? ` · ${ps[k].n} · ${money(ps[k].pnl)}` : ''}</div>`).join('');
+  if (t) {
+    const secs = Math.max(0, Math.round((t.closeTs - Date.now()) / 1000));
+    $('cd').textContent = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+    $('tkr').textContent = t.ticker; $('round').textContent = 'WINDOW ' + t.ticker.split('-').slice(1).join('-');
+    $('strike').textContent = '$' + t.strike.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    $('price').textContent = '$' + t.btc.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const gap = t.btc - t.strike; $('gap').textContent = `${gap >= 0 ? '▲ +' : '▼ -'}$${Math.abs(gap).toFixed(2)}`;
+    $('gap').className = 'chip ' + (gap >= 0 ? 'live' : 'red');
+    $('up').textContent = t.yesAsk + '¢'; $('dn').textContent = t.noAsk + '¢';
+    const mid = (t.yesBid + t.yesAsk) / 2;
+    $('gUp').textContent = (mid / 100).toFixed(2); $('gDn').textContent = (1 - mid / 100).toFixed(2);
+  }
+  pulse(st.hist || [], t, st.pos, st.order);
+  $('ord').textContent = st.order ? `${st.order.side === 'no' ? 'DOWN' : 'UP'} ${st.order.contracts} @ ${st.order.price}¢` : 'none';
+  $('pos').textContent = st.pos ? `${st.pos.side === 'no' ? 'DOWN' : 'UP'} ${st.pos.contracts} @ ${st.pos.entry}¢${st.pos.pattern ? ' · learned' : ''}` : 'none';
+  $('log').textContent = (j.log || []).join('\n');
+  $('fWin').textContent = `WINDOWS RECORDED · ${j.windowsRecorded ?? '—'}`;
+}
+setInterval(() => { $('clock').textContent = new Date().toISOString().slice(11, 19) + ' UTC'; }, 1000);
+tick(); setInterval(tick, 2000);
+</script>
+</body>
+</html>

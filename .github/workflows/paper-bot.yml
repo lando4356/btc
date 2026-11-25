@@ -1,0 +1,43 @@
+# Runs the PAPER bot on GitHub's computers (no real money, no Kalshi login).
+# Every 6 hours it runs for ~5h45m, then saves its trades and a results page back to the repo,
+# so the test keeps going while your Mac is off. Results: bot/RESULTS.md
+name: Paper bot
+
+on:
+  schedule:
+    - cron: "7 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-bot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run paper bot for 5h45m
+        env:
+          DATA_DIR: bot/live
+        run: |
+          mkdir -p bot/live
+          timeout 345m node bot/bot.mjs || true
+      - name: Write results page
+        env:
+          DATA_DIR: bot/live
+        run: node bot/summary.mjs
+      - name: Save results to the repo
+        run: |
+          git config user.name "paper-bot"
+          git config user.email "paper-bot@users.noreply.github.com"
+          git add bot/live bot/RESULTS.md
+          git commit -m "Paper bot results $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
