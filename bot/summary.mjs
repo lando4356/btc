@@ -21,7 +21,7 @@ const repeat = fs.existsSync(DATA) ? recordAndEscalate(path.join(DATA, 'check-hi
 const byHour = {};
 for (const t of s.trades) { const h = +new Date(t.openedAt).toLocaleString('en-US', { timeZone: 'America/Chicago', hour: 'numeric', hour12: false }) % 24; byHour[h] ??= { n: 0, w: 0, pnl: 0 }; byHour[h].n++; byHour[h].w += t.win ? 1 : 0; byHour[h].pnl += t.pnl; }
 const hourName = h => `${h % 12 || 12} ${h < 12 ? 'am' : 'pm'}`;
-const name = k => k === 'rocket' ? '🚀 Takeoffs' : k === 'dip' ? 'Dip buys' : k === 'bounce' ? 'Bounce rule' : `Learned: ${k.replace(/\|/g, '·')}`;
+const name = k => k === 'rocket' ? '🚀 Takeoffs' : k === 'rocketBig' ? '🚀💰 Big takeoffs (2-3x bet, $100+ jump)' : k === 'dip' ? 'Dip buys' : k === 'bounce' ? 'Bounce rule' : `Learned: ${k.replace(/\|/g, '·')}`;
 const md = `# 📄 Paper bot results (fake money)
 
 _Updated ${new Date().toUTCString()}_

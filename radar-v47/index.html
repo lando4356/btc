@@ -1073,7 +1073,7 @@ if(AT&&AT.win!==curWin()&&AT.sellAt==null)AT.stale=true;
 function saveAT(){try{localStorage.setItem('btcAT',JSON.stringify(AT));localStorage.setItem('btcAuto',JSON.stringify(autoLog.slice(-300)))}catch(e){}}
 function closeAT(exitPx,how){
  const pnl=Math.round((exitPx-AT.entry-kfee(AT.entry/100)-(how==='sold'?kfee(exitPx/100):0))*10)/10;
- autoLog.push({side:AT.side,kind:AT.kind||'?',entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win});
+ autoLog.push({side:AT.side,kind:AT.kind||'?',big:AT.big||0,entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win});
  try{if(paOpen()&&PA.mode!=='hold')paAdd(AT.kind||'?',AT.side,AT.cnt||1,AT.entry,pnl,how)}catch(e){}
  if(how==='sold'&&AT.s!=null)SHp.push({win:AT.win,side:AT.side,entry:AT.entry,s:AT.s,actual:pnl});
  lastRes1={side:AT.side,entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win};
@@ -1333,7 +1333,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  // auto buy: the setup has to hold for 2 seconds
  if(!good)goodSince=0;else if(!goodSince)goodSince=now;
  if(good&&now-goodSince>=2000&&(paOpen()||BOT.on)&&flipGate(setup.side,now)&&!paBrake(now)){
-  AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:paCount(setup.ask),tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
+  AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:Math.min(paCount(setup.ask)*(setup.kind==='rocket'&&setup.move>=200?3:setup.kind==='rocket'&&setup.move>=100?2:1),Math.max(1,Math.floor(PA.bank*0.4/(setup.ask/100)))),big:setup.kind==='rocket'&&setup.move>=100?(setup.move>=200?3:2):0,tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
   if(setup.kind==='flip'){AT.strike=useS;AT.tgt=Math.ceil(setup.ask+12+kfee(setup.ask/100)*2);AT.stop=Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}
   if(PA.hold85!==false)AT.tgt=Math.min(98,Math.max(85,setup.ask+4)); // hold until the contract is worth 85 cents or the window settles
   setPos(AT.side);entry=setup.ask;try{$('entryP').value=setup.ask}catch(e){}saveAT();

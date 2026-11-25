@@ -69,7 +69,7 @@ export function v32Setup(s, tick, cfg = V32) {
       if (a1 >= 15 && a1 <= 85 && a1 - b1 <= 3) {
         const fair = (side === 'yes' ? P : 1 - P) * 100, edge = fair - a1 - kfee(a1 / 100);
         if (edge >= 5 && (!setup || edge > setup.edge))
-          setup = { side, ask: a1, edge, kind: 'rocket', why: `BTC ${dir > 0 ? '+' : '-'}$${Math.abs(m10).toFixed(0)} in 10s, Kalshi lagging` };
+          setup = { side, ask: a1, edge, kind: 'rocket', move: Math.abs(m10), why: `BTC ${dir > 0 ? '+' : '-'}$${Math.abs(m10).toFixed(0)} in 10s, Kalshi lagging` };
       }
     }
   }
@@ -88,7 +88,7 @@ export function v32Exit(s, tick, cfg = V32) {
   const P = s.v32?.p, mine = P == null ? null : (pos.side === 'yes' ? P : 1 - P);
   const stop = pos.stop, hard = pos.entry - Math.max(8, (pos.entry - stop) * 2.5);
   const hold = bid <= stop && mine != null && mine >= 0.55 && left > 60 && bid > hard;   // trend-aware stop
-  if (pos.kind === 'rocket' && cfg.rocketRide !== false) {
+  if ((pos.kind === 'rocket' || pos.kind === 'rocketBig') && cfg.rocketRide !== false) {
     // v47.5 "let it ride": no selling on tiny wins. Trail the top only after a real gain.
     if (bid > pos.peak) pos.peak = bid;
     if (bid >= 95) return 'profit (nothing left to squeeze)';
@@ -102,7 +102,7 @@ export function v32Exit(s, tick, cfg = V32) {
     if (bid <= stop && !hold) return 'cut (stop)';
     if (left <= 45 && !(mine != null && mine >= 0.8)) return bid > be ? 'profit (last 45s)' : 'cut (last 45s)';
     if (age > 180 && bid <= be + 2) return 'stale (3 min, never took off)';
-  } else if (pos.kind === 'rocket') {
+  } else if (pos.kind === 'rocket' || pos.kind === 'rocketBig') {
     if (bid > pos.peak) pos.peak = bid;
     const p4 = at(s.hist, now - 4000), d = pos.side === 'yes' ? 1 : -1, stall = p4 ? (tick.btc - p4.btc) * d < 0 : false;
     if (bid >= 95) return 'profit (nothing left to squeeze)';
