@@ -1,6 +1,20 @@
 KALSHI REAL-MONEY BOT — setup on your MacBook
 ==============================================
 
+KALSHI PRICE NOT SHOWING? (v47.1)
+The box now says why, e.g. "Kalshi offline (relay not set up: tap details)". Tap "details" for the full reason.
+- On the Mac: open http://localhost:8787 (from the bot), not a saved file. The page uses the bot's own relay.
+- On your phone (pages.dev): Cloudflare has to serve the relay too. In your Cloudflare Pages project, upload
+  ONLY the "cloudflare-upload" folder from this zip (it has index.html + _worker.js). Nothing else.
+  !! NEVER upload the Mac bot folder to Cloudflare: it contains your Kalshi key (kalshi-key.pem). !!
+- "relay not set up": the site sent back a web page instead of prices, so _worker.js isn't deployed. Re-upload
+  the cloudflare-upload folder.
+- "Kalshi refused the relay": Cloudflare reached Kalshi but Kalshi said no (for example 403). Use the Mac
+  page (http://localhost:8787) instead; the bot asks Kalshi from your own internet connection.
+- "relay unreachable": the URL in the details box is wrong or the site is down. If a saved URL keeps
+  failing, the page now switches to its own relay by itself.
+- Right at :00/:15/:30/:45 it can drop out for a few seconds while Kalshi opens the next window. Normal.
+
 WHAT CHANGED IN v47 (learns from order flow and the chart, but only what proves itself)
 - At 10, 5, 2 and 1 minute left the scorecard now also saves 9 signals: trade flow (60s and 5s), order book,
   futures lead, options flow, the chart brain, 1-minute momentum, big trades and the flip learner.

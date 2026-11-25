@@ -39,7 +39,7 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
 </div></div>
 <div id="full" hidden>
-<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47</span></h1>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.1</span></h1>
 <div class="sub" id="status">Connecting…</div>
 <div class="grid">
  <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
@@ -184,14 +184,28 @@ async function backfill(){
  }catch(e){}
 }
 
+// v47.1: says exactly why Kalshi isn't connected, and switches to this page's own relay if a saved URL keeps failing
+let kFails=0,kWhy='';
 async function pollK(){
- const u=$('relay').value.trim();if(!u)return;
+ const u=$('relay').value.trim();
+ if(!u){kWhy='no relay URL';$('kst').textContent='Kalshi not connected: no relay URL. Open the page from the bot (http://localhost:8787) or your pages.dev site, or paste a relay URL.';return}
+ let why='';
  try{
-  const r=await fetch(u,{cache:'no-store'});const m=await r.json();if(!m||!m.ticker)throw 0;
+  const r=await fetch(u,{cache:'no-store'});const txt=await r.text();let m=null;try{m=JSON.parse(txt)}catch(e){}
+  if(!m)why=/<html|<!doctype/i.test(txt)?'the relay sent back a web page instead of Kalshi data, so /k isn\'t set up there (see README: Cloudflare)':`the relay answered ${r.status} with no data`;
+  else if(m.error)why='the relay reached Kalshi but got: '+String(m.error).slice(0,120);
+  else if(!m.ticker)why='the relay answered but sent no market';
+  if(why)throw new Error(why);
   const g=f=>{let v=null;if(m[f]!=null)v=+m[f];else{const d=m[f+'_dollars'];if(d!=null)v=+d*100}return v==null||isNaN(v)?null:Math.round(v*10)/10};
   K={strike:+m.floor_strike,close:Date.parse(m.close_time),yb:g('yes_bid'),ya:g('yes_ask'),nb:g('no_bid'),na:g('no_ask'),tk:m.ticker};Kt=Date.now();
   try{localStorage.setItem('btcRelay',u)}catch(e){}
- }catch(e){K=null;$('kst').textContent='Relay not responding (check the URL).'}
+  kFails=0;kWhy='';
+ }catch(e){
+  why=e&&e.message&&!/^Failed to fetch|NetworkError|Load failed/i.test(e.message)?e.message:`couldn't reach ${u} (offline, wrong URL, or the relay is down)`;
+  kFails++;const own=location.origin+'/k';
+  if(kFails>=3&&u!==own&&/^(localhost|127\.0\.0\.1)$|\.(workers|pages)\.dev$/.test(location.hostname)){$('relay').value=own;why+=` · switched to this page's own relay (${own})`;kFails=0}
+  K=null;kWhy=why;$('kst').textContent='Kalshi not connected: '+why;
+ }
 }
 try{$('relay').value=localStorage.getItem('btcRelay')||''}catch(e){}
 if(!$('relay').value&&(/(workers|pages)\.dev$/.test(location.hostname)||/^(localhost|127\.0\.0\.1)$/.test(location.hostname)))$('relay').value=location.origin+'/k';
@@ -1218,7 +1232,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  $('ol').textContent=`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,'0')} left`;
  $('obar').style.width=Math.min(100,(1-left/900)*100)+'%';
  const nf=Object.values(ex).filter(e=>now-e.t<30000).length;
- $('os').textContent=`${nf} price feed${nf===1?'':'s'} · ${Kf?'Kalshi live':'Kalshi offline, using estimate'} · ${armed?'🔔 alerts on, screen awake':'tap box for alerts'}`;
+ $('os').textContent=`${nf} price feed${nf===1?'':'s'} · ${Kf?'Kalshi live':'Kalshi offline'+(kWhy?` (${/web page/.test(kWhy)?'relay not set up':/reached Kalshi/.test(kWhy)?'Kalshi refused the relay':/couldn't reach/.test(kWhy)?'relay unreachable':/no relay/.test(kWhy)?'no relay URL':'relay problem'}: tap details)`:K?' (its data is for a different window or is stale)':'')+', using estimate'} · ${armed?'🔔 alerts on, screen awake':'tap box for alerts'}`;
  if(p==null||useS==null){box.className='ob wt';$('oa').textContent='•';$('oc').textContent='…';$('of').textContent=price==null?'Getting BTC price':'Finding the price to beat';$('ot').textContent='';return}
  if(now-lastT>15000){box.className='ob wt';$('oa').textContent='•';$('oc').textContent='WAIT';$('of').textContent='Data stalled';$('ot').textContent='Feeds paused (tab asleep?). Give it a few seconds.';return}
  // 1) the model (already has: distance to strike, volatility, 60s settle average, trade flow, futures lead, options flow)
