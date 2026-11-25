@@ -111,9 +111,20 @@ export function v32Exit(s, tick, cfg = V32) {
     if (bid <= stop && !hold) return 'cut (stop)';
     if (age > 90) return bid > pos.entry ? 'profit (90s)' : 'stale (90s)';
   } else {
-    if (bid >= pos.tgt) return 'profit (target)';
+    // dip buys ride too: hitting the target no longer sells. It starts following the top and sells when the
+    // price gives back 30% of the gain (4c+), or right away if BTC turns hard / the model says it will drop.
+    if (bid > (pos.peak || 0)) pos.peak = bid;
+    if (bid >= 95) return 'profit (nothing left to squeeze)';
+    if (pos.peak >= pos.tgt && bid <= pos.peak - Math.max(4, Math.round((pos.peak - pos.entry) * 0.3)))
+      return bid > be ? `profit (rode to ${pos.peak}c, came off the top)` : 'cut (came off the top)';
+    if (pos.peak >= pos.tgt && bid > be) {
+      const p10 = at(s.hist, now - 10000), m10 = p10 ? (tick.btc - p10.btc) * (pos.side === 'yes' ? 1 : -1) : 0;
+      if (p10 && -m10 >= 2 * vol(s.hist, now) * tick.btc * Math.sqrt(10)) return 'profit (BTC turned hard, sold before the drop)';
+      if (mine != null && mine * 100 < bid - 8) return 'profit (model says it will drop back)';
+    }
     if (bid <= stop && !hold) return 'cut (stop)';
-    if (age > 120) return bid > pos.entry ? 'profit (2 min)' : 'stale (2 min)';
+    if (left <= 45 && pos.peak >= pos.tgt && !(mine != null && mine >= 0.8)) return bid > be ? 'profit (last 45s)' : 'cut (last 45s)';
+    if (age > 120 && pos.peak < pos.tgt) return bid > pos.entry ? 'profit (2 min)' : 'stale (2 min)';
   }
   return null;
 }

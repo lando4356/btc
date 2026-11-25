@@ -1373,9 +1373,16 @@ function oneBox(now,left,Kf,price,useS,p,avg){
    else if(age>180&&bid<=be+2)why='stale';                    // never took off
   }
   else if(bid!=null){
-   if(bid>=tgt)why='profit';
+   // v47.5: dip buys ride too. Hitting the target starts following the top instead of selling on the spot.
+   if(AT.sellAt==null&&bid>AT.peak){AT.peak=bid;saveAT()}
+   const be=AT.entry+kfee(AT.entry/100)*2,hit=AT.peak>=tgt,give=Math.max(4,Math.round((AT.peak-AT.entry)*0.3));
+   const turned=()=>{const q=hist.find(h=>h.t>=now-10000),m=q?(price-q.p)*(AT.side==='up'?1:-1):0;return q&&-m>=2*vol()*price*Math.sqrt(10)};
+   if(bid>=95)why='profit';
+   else if(hit&&bid<=AT.peak-give)why=bid>be?'profit':'cut';            // came off the top
+   else if(hit&&bid>be&&(turned()||(mine!=null&&mine*100<bid-8)))why='profit'; // it thinks the price will drop: sell now
    else if(bid<=stop&&!AT.hold)why='cut';
-   else if(PA.hold85===false&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
+   else if(hit&&left<=45&&mine<0.8)why=bid>be?'profit':'cut';
+   else if(!hit&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
   }
   if(AT.sellAt==null&&why&&left>1){AT.sellAt=now;AT.sellPx=bid;AT.why=why;saveAT();if(armed){beep(1100);setTimeout(()=>beep(880),200);setTimeout(()=>beep(1100),400)}}
   if(AT.sellAt!=null&&AT.real&&!AT.realSold&&BOT.on)botSell(AT);
