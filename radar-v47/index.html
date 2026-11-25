@@ -39,7 +39,7 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
 </div></div>
 <div id="full" hidden>
-<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.3</span></h1>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.4</span></h1>
 <div class="sub" id="status">Connecting…</div>
 <div class="grid">
  <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
@@ -955,11 +955,22 @@ function flipGate(side,now){
  const fw=fwPct&&now-fwPct.t<3000?fwPct:null,fl=flNow&&now-flNow.t<3000?flNow:null;
  return !!(fw&&fl&&fw.tp>=70&&fl.pl*100>=70&&fw.side===side&&(fl.dir>0?'up':'down')===side);
 }
+// v47.4 brakes: stop new bets for the day after losing 10% (Chicago day), and sit out 30 min after 3 losses in a row.
+// Applies to paper AND real-money box trades. Selling an open bet is never blocked.
+function paBrake(now){
+ const day=new Date(now).toLocaleDateString('en-US',{timeZone:'America/Chicago'});
+ if(!PA.day||PA.day.key!==day){PA.day={key:day,start:PA.bank};paSave()}
+ if(PA.bank<PA.day.start*0.9)return `down 10% today ($${PA.day.start.toFixed(2)} → $${PA.bank.toFixed(2)}), done until tomorrow`;
+ const L=autoLog.slice(-3);
+ if(L.length===3&&L.every(x=>x.pnl<0)&&now-L[2].t<30*60000)return `3 losses in a row, back in ${Math.ceil((30*60000-(now-L[2].t))/60000)} min`;
+ return '';
+}
 // v47.3: says exactly why the paper account isn't taking trades
 function paWhyNot(now){const w=[];
  if(PA.bank<=PA.floor)w.push(`balance $${PA.bank.toFixed(2)} is at/under the $${PA.floor} stop (tap Reset paper account)`);
  if(PA.bank>=PA.goal)w.push(`hit the $${PA.goal} goal, so it stopped (tap Reset paper account)`);
  if(!window.KfNow)w.push('no live Kalshi prices (see the Kalshi box for why)');
+ {const b=paBrake(now);if(b)w.push('brakes: '+b)}
  if(PA.gate)w.push('flip gate is ON and blocks almost everything (uncheck "Only trade when BOTH flip readings")');
  return w.join(' · ')}
 function paMode(v){PA.mode=v;paSave()}
@@ -976,7 +987,7 @@ function botTick(now,left,Kf,useS,pm){
  if(!BOT.on||!Kf||useS==null||pm==null||left<240||left>540||BOT.sent[curWin()])return;
  let best=null;
  for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;if(ask==null||ask<20||ask>50)continue;
-  if(!flipGate(sd,now))continue; // follows the flip-gate checkbox on the paper card (was forced on, which blocked almost every hold bet)
+  if(!flipGate(sd,now)||paBrake(now))continue; // follows the flip-gate checkbox on the paper card (was forced on, which blocked almost every hold bet)
   const ps=sd==='up'?pm:1-pm,edge=ps-ask/100-kfee(ask/100)/100;if(edge>=0.08&&(!best||edge>best.edge))best={sd,ask,edge}}
  if(best)botBet(best.sd,best.ask,+best.edge.toFixed(4));
 }
@@ -1023,7 +1034,7 @@ function paTick(now,left,Kf,useS,avg,pm){
  if(PA.mode==='hold'&&Kf&&useS!=null&&pm!=null&&paOpen()&&!PA.hcur&&left>=240&&left<=540){
   let best=null;
   for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;if(ask==null||ask<20||ask>50)continue;
-   if(!flipGate(sd,now))continue;const ps=sd==='up'?pm:1-pm,edge=ps-ask/100-kfee(ask/100)/100;
+   if(!flipGate(sd,now)||paBrake(now))continue;const ps=sd==='up'?pm:1-pm,edge=ps-ask/100-kfee(ask/100)/100;
    if(edge>=(PA.minEdge||0.03)&&(!best||edge>best.edge))best={sd,ask,edge}}
   if(best){PA.hcur={win:curWin(),side:best.sd,ask:best.ask,cnt:paCount(best.ask),s:useS};paSave()}}
  // buy the daily lottery ticket: a cheap contract (3-8 cents), NOT picked for edge
@@ -1311,7 +1322,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  const good=!!setup;if(good&&!lastGood&&armed){beep(880);setTimeout(()=>beep(1100),200)}lastGood=good;
  // auto buy: the setup has to hold for 2 seconds
  if(!good)goodSince=0;else if(!goodSince)goodSince=now;
- if(good&&now-goodSince>=2000&&(paOpen()||BOT.on)&&flipGate(setup.side,now)){
+ if(good&&now-goodSince>=2000&&(paOpen()||BOT.on)&&flipGate(setup.side,now)&&!paBrake(now)){
   AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:paCount(setup.ask),tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
   if(setup.kind==='flip'){AT.strike=useS;AT.tgt=Math.ceil(setup.ask+12+kfee(setup.ask/100)*2);AT.stop=Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}
   if(PA.hold85!==false)AT.tgt=Math.min(98,Math.max(85,setup.ask+4)); // hold until the contract is worth 85 cents or the window settles
