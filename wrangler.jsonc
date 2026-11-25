@@ -4,6 +4,7 @@
   "name": "btc",
   "main": "radar-v47/_worker.js",
   "compatibility_date": "2026-11-01",
+  "workers_dev": true,          // give it a free btc.<name>.workers.dev address
   "assets": {
     "directory": "./radar-v47",
     "binding": "ASSETS",
