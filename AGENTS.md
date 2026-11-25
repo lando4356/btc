@@ -28,6 +28,8 @@ done_when:    a check that FAILS before the change and PASSES after it
 | Live run data | `bot/live/` |
 | Old/invalid runs and why | `bot/archive/` |
 | The radar page that "was winning" | `radar-v32/` |
+| Current radar page (v47.3) + Cloudflare relay | `radar-v47/` (upload `index.html` + `_worker.js` only) |
+| Owner's REAL-money Mac bot (runs only on his Mac, never in Actions) | `mac-bot/` (no key or config.json in the repo, ever) |
 | Brain backup from Nov 22 + analysis | `backups/` |
 | GitHub Action | `.github/workflows/paper-bot.yml` |
 
