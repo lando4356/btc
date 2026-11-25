@@ -3,6 +3,17 @@
 Owner: lando4356. Project: BTC vs Kalshi 15-minute markets (KXBTC15M). Owner works mostly from an iPhone.
 Read `PROGRESS.md` before changing anything: it lists what was tried and must not be repeated.
 
+## Contract (fill this in for every task before touching code)
+
+```
+goal:         one sentence
+inputs:       which files / data / screenshots
+output:       a pull request the owner can merge from his phone
+constraints:  paper only; no secrets; don't change files outside the task
+done_when:    a check that FAILS before the change and PASSES after it
+              (e.g. bot/checks.mjs on bot/archive/run1-stale-quotes must stay ❌)
+```
+
 ## Map
 
 | What | Where |
@@ -28,6 +39,17 @@ A strategy is only considered working when ALL of these hold on the paper bot:
 3. Profitable after Kalshi fees in BOTH halves of the trades.
 4. Then: a week of the real-money bot with real money OFF, matching the paper results.
 Anything less is "not proven", however good it looks.
+
+## Tools (few and narrow)
+
+| Tool | Command | Allowed |
+|---|---|---|
+| Run the paper bot | `node bot/bot.mjs` | yes (paper only) |
+| Grade a run | `node bot/checks.mjs` (`DATA_DIR=...`) | yes |
+| Backtest | `node bot/backtest.mjs --sweep` | yes |
+| Find patterns | `node bot/finder.mjs` | yes |
+| Fake data for tests | `node bot/test/fake-data.mjs 200 /tmp/x [--plant]` | yes |
+| Real-money trading | (not in this repo) | **no** |
 
 ## Walls (not wishes)
 
