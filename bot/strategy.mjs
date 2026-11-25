@@ -11,6 +11,8 @@
 // market's ask trades THROUGH our price (ask < our bid), which is stricter than real
 // life on purpose, so paper results are not flattered.
 
+import { features, patternKeys } from './features.mjs';
+
 export const DEFAULTS = {
   // when we are allowed to enter (seconds left in the 15-minute window)
   enterMaxSecsLeft: 12 * 60,   // not in the first 3 minutes
@@ -35,6 +37,9 @@ export const DEFAULTS = {
   maxStakePct: 0.10,           // never more than 10% of bankroll
   enableDownRule: true,
   enableUpRule: true,
+  // patterns the finder promoted (finder.mjs). Bought at the ask, held to the end, same as tested.
+  patterns: [],
+  dropAfterTrades: 30,         // a learned pattern that is losing after 30 paper trades is dropped
 };
 
 // Kalshi taker fee: ceil(0.07 * C * P * (1-P)) dollars. Returns cents.
@@ -51,6 +56,7 @@ export function newState(cfg = DEFAULTS) {
     order: null,         // resting paper order
     pos: null,           // open paper position
     trades: [],          // closed trades
+    patternStats: {},    // learned pattern -> { n, pnl } in live paper trading
     lastSignal: '',
   };
 }
@@ -76,13 +82,17 @@ function sideQuotes(tick, side) {
 function closePos(s, tick, exitCents, reason, fee) {
   const p = s.pos;
   const gross = (exitCents - p.entry) * p.contracts;      // cents
-  const pnl = (gross - fee) / 100;                        // dollars (entry fee is 0, maker)
+  const pnl = (gross - fee - (p.entryFee || 0)) / 100;    // dollars (bounce entries are maker: no fee)
   s.bankroll += p.contracts * exitCents / 100 - fee / 100;
   s.trades.push({
     ticker: p.ticker, side: p.side === 'no' ? 'Down' : 'Up', contracts: p.contracts,
     entry: p.entry, exit: exitCents, reason, pnl: +pnl.toFixed(2),
-    win: pnl > 0, openedAt: p.t, closedAt: tick.t,
+    win: pnl > 0, openedAt: p.t, closedAt: tick.t, rule: p.pattern || 'bounce',
   });
+  if (p.pattern) {
+    const st = (s.patternStats ??= {})[p.pattern] ??= { n: 0, pnl: 0 };
+    st.n++; st.pnl = +(st.pnl + pnl).toFixed(2);
+  }
   s.pos = null;
   return s.trades[s.trades.length - 1];
 }
@@ -114,7 +124,7 @@ export function onTick(s, tick, cfg = DEFAULTS) {
   const secsLeft = (tick.closeTs - tick.t) / 1000;
 
   // ---- manage open position ----
-  if (s.pos && s.pos.ticker === tick.ticker) {
+  if (s.pos && s.pos.ticker === tick.ticker && !s.pos.holdToEnd) {
     const q = sideQuotes(tick, s.pos.side);
     if (Number.isFinite(q.bid)) {
       s.pos.peak = Math.max(s.pos.peak, q.bid);
@@ -152,6 +162,27 @@ export function onTick(s, tick, cfg = DEFAULTS) {
   if (s.pos || s.order || w.traded) return ev;
   if (secsLeft > cfg.enterMaxSecsLeft) { s.lastSignal = 'too early in window'; return ev; }
   if (secsLeft < cfg.enterMinSecsLeft) { s.lastSignal = 'too late in window'; return ev; }
+
+  // learned patterns first: they were tested as "buy at the ask, hold to the end"
+  if (cfg.patterns?.length) {
+    const f = features(s.hist, tick);
+    if (f) for (const side of ['yes', 'no']) {
+      const ask = side === 'yes' ? tick.yesAsk : tick.noAsk;
+      if (!(ask >= 3 && ask <= 97)) continue;
+      const live = cfg.patterns.filter(k => { const st = s.patternStats?.[k]; return !(st && st.n >= cfg.dropAfterTrades && st.pnl < 0); });
+      const hit = patternKeys(f, side, ask).find(k => live.includes(k));
+      if (!hit) continue;
+      const stake = Math.min(cfg.stakeUsd, s.bankroll * cfg.maxStakePct);
+      const contracts = Math.floor(stake * 100 / ask);
+      if (contracts < 1) { s.lastSignal = 'bankroll too small'; return ev; }
+      const entryFee = takerFeeCents(contracts, ask);
+      s.pos = { ticker: tick.ticker, side, contracts, entry: ask, peak: ask, t: tick.t, holdToEnd: true, pattern: hit, entryFee };
+      s.bankroll -= (contracts * ask + entryFee) / 100;
+      w.traded = true;
+      ev.push(`BUY ${side === 'no' ? 'Down' : 'Up'} ${contracts} @ ${ask}c (learned: ${hit})`);
+      return ev;
+    }
+  }
 
   const gap = tick.btc - w.strike;
   const past = valueAt(s.hist, tick.t - cfg.trendLookbackSecs * 1000);

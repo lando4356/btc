@@ -11,6 +11,25 @@ find out whether one rule actually wins before any real money goes near it.
 - **Up on a dip:** the mirror image, in a 30-minute climb.
 - Only between 12 and 3 minutes left in the window, one trade per window.
 
+## It finds its own patterns too (finder.mjs)
+
+Every 6 hours the bot searches everything it has recorded for patterns: about 2,000
+combinations of time left, BTC vs strike, 30-minute move, 3-minute move and contract price,
+for Up and Down. It can't fool itself, because:
+
+1. It searches only the **older 70%** of the data.
+2. The 25 best-looking patterns are tested **once** on the **newest 30%**, which it never searched.
+3. Only patterns that still win there, **after Kalshi's fee**, over 30+ trades, get traded (on paper).
+4. A learned pattern that is losing after 30 live paper trades is **dropped automatically** (🚫 on the page).
+
+Run it by hand any time: `node bot/finder.mjs`. It prints each pattern as ✅ KEEP or ❌ luck.
+It needs real data first: expect nothing useful until ~1,000 windows (about 10 days of running).
+
+**Tested on fake data:** on fairly priced data it promoted 0 of 2,074 patterns. With a hidden
+10¢ edge planted in, it found it (24 patterns, all variations of that edge). On brand-new fake
+data the learned patterns made money where the edge still existed, and where it didn't,
+they lost a little and 11 of them were dropped automatically.
+
 ## Why it's built this way
 
 - **Resting limit orders:** Kalshi charges no fee on these (maker orders) for KXBTC15M.

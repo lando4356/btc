@@ -13,6 +13,8 @@ import path from 'node:path';
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { DEFAULTS, newState, onTick, settle, scoreboard } from './strategy.mjs';
+import { findPatterns } from './finder.mjs';
+import { loadTicks } from './backtest.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const DATA = process.env.DATA_DIR || path.join(DIR, 'data');
@@ -83,7 +85,19 @@ function recordTrade(tr) {
   fs.appendFileSync(TRADES_FILE, [new Date(tr.closedAt).toISOString(), tr.ticker, tr.side, tr.contracts, tr.entry, tr.exit, tr.reason, tr.pnl].join(',') + '\n');
 }
 
-let last = null, lastErr = '', pendingSettle = null;
+let last = null, lastErr = '', pendingSettle = null, finderNote = 'not run yet';
+
+// Every 6 hours, search the recorded data for new patterns (see finder.mjs).
+function runFinder() {
+  try {
+    const r = findPatterns(loadTicks(DATA));
+    cfg.patterns = r.promoted.map(p => p.key);
+    fs.writeFileSync(path.join(DATA, 'patterns.json'), JSON.stringify({ createdAt: new Date().toISOString(), windows: r.windows,
+      patterns: r.promoted.map(p => ({ key: p.key, testTrades: p.test.n, testEdgeCents: +p.test.mean.toFixed(2) })) }, null, 1));
+    finderNote = `${new Date().toLocaleTimeString()}: ${r.windows} windows searched, ${cfg.patterns.length} pattern(s) passed the held-back test`;
+    note(`pattern finder: ${finderNote}`);
+  } catch (e) { finderNote = `error: ${e.message}`; }
+}
 
 async function loop() {
   try {
@@ -132,7 +146,7 @@ function page() {
 .box{background:#14171c;border:1px solid #252a31;border-radius:12px;padding:14px;margin-bottom:12px}
 h1{font-size:17px;margin:0 0 4px}.dim{color:#7d8794;font-size:13px}.big{font-size:22px;font-weight:600}
 table{width:100%;border-collapse:collapse;font-size:13px}td{padding:4px 2px;border-top:1px solid #252a31}</style></head><body>
-<div class="box"><h1>📄 PAPER ONLY — fake money</h1><div class="dim">Rule: in a trend, wait for a bounce against it, rest a cheap limit bid (no fee), hold.</div></div>
+<div class="box"><h1>📄 PAPER ONLY — fake money</h1><div class="dim">Your bounce rule, plus any patterns the finder proved on data it hadn't seen.</div></div>
 <div class="box"><div class="big" style="color:${color}">${sb.verdict}</div>
 <div>Paper $${sb.bankroll} · P&amp;L $${sb.pnl} · ${sb.wins}/${sb.trades} won (${sb.winRate}%) · break-even ${sb.breakEvenPct}%</div></div>
 <div class="box"><div class="dim">${t ? t.ticker : 'waiting for data'} · ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} left</div>
@@ -140,6 +154,9 @@ table{width:100%;border-collapse:collapse;font-size:13px}td{padding:4px 2px;bord
 <div>Up ${t?.yesBid}/${t?.yesAsk}¢ · Down ${t?.noBid}/${t?.noAsk}¢</div>
 <div style="margin-top:6px">Signal: ${s.lastSignal || '-'}</div><div>Order: ${ord}</div><div>Holding: ${pos}</div>
 ${lastErr ? `<div style="color:#ef4444">data error: ${lastErr}</div>` : ''}</div>
+<div class="box"><b>🔎 Patterns it found</b><div class="dim">${finderNote}</div>
+${cfg.patterns.map(k => { const st = s.patternStats?.[k]; const dropped = st && st.n >= cfg.dropAfterTrades && st.pnl < 0;
+  return `<div style="font-size:13px;margin-top:4px">${dropped ? '🚫' : '•'} ${k}${st ? ` — paper ${st.n} trades, $${st.pnl}` : ''}</div>`; }).join('') || '<div class="dim">none yet: needs more recorded data</div>'}</div>
 <div class="box"><b>Last trades</b><table>${rows || '<tr><td class="dim">none yet</td></tr>'}</table></div>
 <div class="box"><b>Log</b><div class="dim" style="white-space:pre-wrap">${log.join('\n')}</div></div></body></html>`;
 }
@@ -149,5 +166,7 @@ http.createServer((req, res) => {
   res.setHeader('content-type', 'text/html; charset=utf-8'); res.end(page());
 }).listen(PORT, () => {
   note(`Paper bot running (no real money). Open http://localhost:${PORT}`);
+  runFinder();
+  setInterval(runFinder, 6 * 3600_000);
   loop();
 });

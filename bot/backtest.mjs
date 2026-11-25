@@ -15,11 +15,12 @@ import { DEFAULTS, newState, onTick, settle, scoreboard } from './strategy.mjs';
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const dataDir = process.argv.find(a => a.startsWith('--data='))?.slice(7) || path.join(DIR, 'data');
 
-function loadTicks() {
-  const files = fs.readdirSync(dataDir).filter(f => /^ticks-.*\.csv$/.test(f)).sort();
+export function loadTicks(dir = dataDir) {
+  if (!fs.existsSync(dir)) return [];
+  const files = fs.readdirSync(dir).filter(f => /^ticks-.*\.csv$/.test(f)).sort();
   const ticks = [];
   for (const f of files) {
-    const lines = fs.readFileSync(path.join(dataDir, f), 'utf8').trim().split('\n').slice(1);
+    const lines = fs.readFileSync(path.join(dir, f), 'utf8').trim().split('\n').slice(1);
     for (const l of lines) {
       const [t, ticker, closeTs, strike, btc, yesBid, yesAsk, noBid, noAsk] = l.split(',');
       ticks.push({ t: +t, ticker, closeTs: +closeTs, strike: +strike, btc: +btc,
