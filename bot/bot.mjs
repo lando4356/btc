@@ -60,13 +60,26 @@ async function currentMarket() {
   if (!m) throw new Error('no open KXBTC15M market (between windows?)');
   const strike = +(m.floor_strike ?? m.cap_strike);
   if (!Number.isFinite(strike) || !strike) throw new Error(`strike not posted yet for ${m.ticker}`);
-  return {
+  const out = {
     ticker: m.ticker,
     closeTs: Date.parse(m.close_time),
     strike,
     yesBid: cents(m.yes_bid, m.yes_bid_dollars), yesAsk: cents(m.yes_ask, m.yes_ask_dollars),
     noBid: cents(m.no_bid, m.no_bid_dollars), noAsk: cents(m.no_ask, m.no_ask_dollars),
+    src: 'list',
   };
+  // The market LIST only refreshes its prices about every 30 seconds. Trading off it makes Kalshi look
+  // "slow" when it isn't, and paper trades fill at prices that are already gone. Use the live order book.
+  try {
+    const ob = (await getJSON(`${KALSHI}/markets/${m.ticker}/orderbook`)).orderbook || {};
+    const lv = (c, d) => (c || (d || []).map(([p, q]) => [Math.round(parseFloat(p) * 100), +q])).filter(x => x[1] > 0).map(x => +x[0]);
+    const yes = lv(ob.yes, ob.yes_dollars), no = lv(ob.no, ob.no_dollars);
+    if (yes.length && no.length) {
+      const yb = Math.max(...yes), nb = Math.max(...no);
+      Object.assign(out, { yesBid: yb, noBid: nb, yesAsk: 100 - nb, noAsk: 100 - yb, src: 'book' });
+    }
+  } catch {}
+  return out;
 }
 
 async function btcPrice() {
@@ -112,7 +125,7 @@ function recordTrade(tr) {
   fs.appendFileSync(TRADES_FILE, [new Date(tr.closedAt).toISOString(), tr.ticker, tr.side, tr.contracts, tr.entry, tr.exit, tr.reason, tr.pnl].join(',') + '\n');
 }
 
-let lastStatus = 0;
+let lastStatus = 0, quoteChanges = 0, quoteTicks = 0, lastQuote = '', bookTicks = 0;
 let last = null, lastErr = '', pendingSettle = null, finderNote = 'not run yet', windowsRecorded = 0;
 
 // Every 6 hours, search the recorded data for new patterns (see finder.mjs).
@@ -147,6 +160,8 @@ async function loop() {
       }
     }
 
+    const q = `${tick.ticker}${tick.yesBid}/${tick.yesAsk}`;
+    quoteTicks++; if (q !== lastQuote) quoteChanges++; lastQuote = q; if (tick.src === 'book') bookTicks++;
     recordTick(tick);
     const before = s.trades.length;
     for (const e of onTick(s, tick, cfg)) note(e);
@@ -156,7 +171,7 @@ async function loop() {
     if (Date.now() - lastStatus >= 60_000) {   // one status line a minute so the log shows it's alive
       lastStatus = Date.now();
       const sb = scoreboard(s), gap = tick.btc - tick.strike, secs = Math.round((tick.closeTs - tick.t) / 1000);
-      note(`status · ${tick.ticker} ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} left · BTC ${gap >= 0 ? '+' : ''}${gap.toFixed(0)} vs strike · Up ${tick.yesAsk}¢ Down ${tick.noAsk}¢ · paper $${sb.bankroll} · ${sb.trades} trades${s.pos ? ` · holding ${s.pos.side === 'no' ? 'Down' : 'Up'} @ ${s.pos.entry}¢` : ''}`);
+      note(`status · ${tick.ticker} ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} left · BTC ${gap >= 0 ? '+' : ''}${gap.toFixed(0)} vs strike · Up ${tick.yesAsk}¢ Down ${tick.noAsk}¢ · paper $${sb.bankroll} · ${sb.trades} trades · quotes ${tick.src} (changed on ${quoteTicks ? Math.round(quoteChanges / quoteTicks * 100) : 0}% of seconds)${s.pos ? ` · holding ${s.pos.side === 'no' ? 'Down' : 'Up'} @ ${s.pos.entry}¢` : ''}`);
     }
     save();
   } catch (e) {
