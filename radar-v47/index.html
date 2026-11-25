@@ -1359,13 +1359,18 @@ function oneBox(now,left,Kf,price,useS,p,avg){
   }
   else if(bid!=null&&AT.kind==='rocket'){
    if(AT.sellAt==null&&bid>AT.peak){AT.peak=bid;saveAT()}
-   const be=AT.entry+kfee(AT.entry/100)*2,trail=AT.peak-4;
-   const p4=hist.find(h=>h.t>=now-4000),d=AT.side==='up'?1:-1,stall=p4?(price-p4.p)*d<0:false;
+   const be=AT.entry+kfee(AT.entry/100)*2;
+   // v47.5 "let it ride": a takeoff no longer sells on a 2c win or a 4-second pause. It trails the top only after +8c,
+   // giving back up to 30% of the gain (6c+) before selling. Dead trades (never took off in 3 min) still get out.
+   const ride=Math.max(6,Math.round((AT.peak-AT.entry)*0.3));
    if(bid>=95)why='profit';                                   // nothing left to squeeze
-   else if(PA.hold85===false&&AT.peak>=be+4&&bid<=trail)why=bid>be?'profit':'cut'; // came off the top
-   else if(PA.hold85===false&&stall&&bid>=be+2)why='profit';                     // BTC stopped running, bank it
+   else if(AT.peak>=be+8&&bid<=AT.peak-ride)why=bid>be?'profit':'cut'; // came off the top after a real run
+   // "it thinks the price will drop": BTC turned hard against us, or the model now values our side 8c+ under the bid
+   else if(bid>be&&(()=>{const q=hist.find(h=>h.t>=now-10000),m=q?(price-q.p)*(AT.side==='up'?1:-1):0;return q&&-m>=2*vol()*price*Math.sqrt(10)})())why='profit';
+   else if(bid>be&&mine!=null&&mine*100<bid-8)why='profit';
    else if(bid<=stop&&!AT.hold)why='cut';
-   else if(PA.hold85===false&&age>90)why=bid>AT.entry?'profit':'stale';
+   else if(left<=45&&mine<0.8)why=bid>be?'profit':'cut';      // last 45s: hold to the end only if 80%+ likely
+   else if(age>180&&bid<=be+2)why='stale';                    // never took off
   }
   else if(bid!=null){
    if(bid>=tgt)why='profit';

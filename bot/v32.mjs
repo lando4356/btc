@@ -12,7 +12,7 @@ const kfee = x => 0.07 * x * (1 - x) * 100;                 // cents per contrac
 const tcdf4 = z => { const t = z * Math.SQRT2, q = 1 + t * t / 4, x = t / Math.sqrt(q); return .5 + .375 * x * (1 - (t * t / q) / 12); };
 const at = (hist, t) => hist.find(h => h.t >= t);           // first point at or after t
 
-export const V32 = { enable: true, RD: 6, RT: 6, RS: 6, holdSecs: 2, cooldownSecs: 15 };
+export const V32 = { enable: true, RD: 6, RT: 6, RS: 6, rocketRide: true, holdSecs: 2, cooldownSecs: 15 };
 
 function vol(hist, now) {
   const b = {};
@@ -88,7 +88,21 @@ export function v32Exit(s, tick, cfg = V32) {
   const P = s.v32?.p, mine = P == null ? null : (pos.side === 'yes' ? P : 1 - P);
   const stop = pos.stop, hard = pos.entry - Math.max(8, (pos.entry - stop) * 2.5);
   const hold = bid <= stop && mine != null && mine >= 0.55 && left > 60 && bid > hard;   // trend-aware stop
-  if (pos.kind === 'rocket') {
+  if (pos.kind === 'rocket' && cfg.rocketRide !== false) {
+    // v47.5 "let it ride": no selling on tiny wins. Trail the top only after a real gain.
+    if (bid > pos.peak) pos.peak = bid;
+    if (bid >= 95) return 'profit (nothing left to squeeze)';
+    if (pos.peak >= be + 8 && bid <= pos.peak - Math.max(6, Math.round((pos.peak - pos.entry) * 0.3)))
+      return bid > be ? `profit (rode to ${pos.peak}c, came off the top)` : 'cut (came off the top)';
+    // "it thinks the price will drop": BTC turned hard against us (a takeoff the other way), or the model now
+    // values our side well under what Kalshi pays for it -> sell now while the bid is still good.
+    const p10 = at(s.hist, now - 10000), m10 = p10 ? (tick.btc - p10.btc) * (pos.side === 'yes' ? 1 : -1) : 0;
+    if (p10 && -m10 >= 2 * vol(s.hist, now) * tick.btc * Math.sqrt(10) && bid > be) return 'profit (BTC turned hard, sold before the drop)';
+    if (mine != null && mine * 100 < bid - 8 && bid > be) return 'profit (model says it will drop back)';
+    if (bid <= stop && !hold) return 'cut (stop)';
+    if (left <= 45 && !(mine != null && mine >= 0.8)) return bid > be ? 'profit (last 45s)' : 'cut (last 45s)';
+    if (age > 180 && bid <= be + 2) return 'stale (3 min, never took off)';
+  } else if (pos.kind === 'rocket') {
     if (bid > pos.peak) pos.peak = bid;
     const p4 = at(s.hist, now - 4000), d = pos.side === 'yes' ? 1 : -1, stall = p4 ? (tick.btc - p4.btc) * d < 0 : false;
     if (bid >= 95) return 'profit (nothing left to squeeze)';
