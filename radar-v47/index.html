@@ -39,7 +39,7 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
 </div></div>
 <div id="full" hidden>
-<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.4</span></h1>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.5</span></h1>
 <div class="sub" id="status">Connecting…</div>
 <div class="grid">
  <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
@@ -1025,6 +1025,16 @@ function paTick(now,left,Kf,useS,avg,pm){
   if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
    paAdd('lottery',c.side,c.cnt,c.ask,won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100),won?'won':'lost');PA.lotN++;if(won)PA.lotW++;PA.lotPnl=(PA.lotPnl||0)+c.cnt*(won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100))/100;paSave()}
   else paSave()}
+ // v47.5: cash the lottery ticket instead of always riding it to the end.
+ // Once it's worth 3x what it cost (and 20c+), it follows the top: sells if it falls 20% (5c+) off its high.
+ // In the last minute it locks in anything worth 2x+.
+ if(PA.cur&&PA.cur.win===curWin()&&Kf){const c=PA.cur,bid=c.side==='up'?K.yb:K.nb;
+  if(bid!=null){c.peak=Math.max(c.peak||0,bid);
+   const armed=c.peak>=Math.max(3*c.ask,20);
+   const why=armed&&bid<=c.peak-Math.max(5,Math.round(c.peak*0.2))?`cashed: came off its ${c.peak}¢ top`
+     :left<=60&&bid>=2*c.ask?'cashed: last minute, locked the gain':'';
+   if(why){const pc=bid-c.ask-kfee(c.ask/100)-kfee(bid/100);PA.cur=null;PA.lotSold=c.win;
+    paAdd('lottery',c.side,c.cnt,c.ask,pc,why);PA.lotN++;if(pc>0)PA.lotW++;PA.lotPnl=(PA.lotPnl||0)+c.cnt*pc/100;paSave()}}}
  // hold-to-the-end mode: buy one side at 50 cents or less and let the window settle (a win roughly doubles the stake or better, a loss loses it all)
  if(PA.hcur&&PA.hcur.win!==curWin()){const c=PA.hcur;PA.hcur=null;
   if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
@@ -1038,7 +1048,7 @@ function paTick(now,left,Kf,useS,avg,pm){
    if(edge>=(PA.minEdge||0.03)&&(!best||edge>best.edge))best={sd,ask,edge}}
   if(best){PA.hcur={win:curWin(),side:best.sd,ask:best.ask,cnt:paCount(best.ask),s:useS};paSave()}}
  // buy the daily lottery ticket: a cheap contract (3-8 cents), NOT picked for edge
- if(Kf&&useS!=null&&paOpen()&&!PA.cur&&left>=480&&left<=840){
+ if(Kf&&useS!=null&&paOpen()&&!PA.cur&&PA.lotSold!==curWin()&&left>=480&&left<=840){
   for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;
    if(ask!=null&&ask>=3&&ask<=8){const cnt=Math.floor(Math.min(3,PA.bank*0.10)/(ask/100));
     if(cnt>=1){PA.cur={win:curWin(),side:sd,ask,cnt,s:useS};PA.lotToday=(PA.lotToday||0)+1;paSave()}break}}}
@@ -1047,7 +1057,7 @@ function paTick(now,left,Kf,useS,avg,pm){
  const st=PA.bank>=PA.goal?' 🎉 GOAL REACHED':PA.bank<=PA.floor?' 🛑 FLOOR HIT (stopped)':'';
  el.innerHTML=`$${PA.bank.toFixed(2)}${st}`;el.style.color=PA.bank>=PA.start?'var(--g)':'var(--r)';
  const last=PA.log.slice(-4).reverse().map(x=>`${x.k==='lottery'?'🎟':'•'} ${x.s} x${x.c} @ ${x.e}¢: ${x.p>=0?'+':''}$${x.p.toFixed(2)}`).join('<br>');
- $('pa2').innerHTML=`<div style="height:8px;background:#2a3550;border-radius:4px;margin:4px 0"><div style="height:8px;width:${pct}%;background:var(--g);border-radius:4px"></div></div>Started $${PA.start} · goal $${PA.goal} · stops at $${PA.floor}. ${PA.n} trades, ${PA.w} won. Mode: ${PA.mode==='hold'?'hold to the end':'scalp'}${PA.mode==='hold'?` · hold bets ${PA.hW||0}/${PA.hN||0} won, net ${(PA.hPnl||0)>=0?'+':'-'}$${Math.abs(PA.hPnl||0).toFixed(2)}${PA.hcur?' · open: '+PA.hcur.side+' @ '+PA.hcur.ask+'¢':''}`:''}. Lottery tickets (one per window, no daily limit): ${PA.lotW}/${PA.lotN} won, net ${(PA.lotPnl||0)>=0?'+':'-'}$${Math.abs(PA.lotPnl||0).toFixed(2)}${PA.cur?` · one open now (${PA.cur.side} @ ${PA.cur.ask}¢)`:''}.<br>`+(last||'No trades yet.')+'<br>'+(SH.length?`Early sells vs holding to the end (${SH.length} sells): sold for ${SH.reduce((q,x)=>q+x.a,0).toFixed(0)}¢ total, holding would have made ${SH.reduce((q,x)=>q+x.h,0).toFixed(0)}¢ per contract.`:'Early sells vs holding to the end: collecting…')+'<br><span style="opacity:.8">Fake money. It follows the same paper trades as the box and bets the share of the account you pick ('+Math.round((PA.frac||0.25)*100)+'%) each time'+(paFracNow()<(PA.frac||0.25)?', now '+Math.round(paFracNow()*100)+'% because the account has doubled':'')+'.</span>';
+ $('pa2').innerHTML=`<div style="height:8px;background:#2a3550;border-radius:4px;margin:4px 0"><div style="height:8px;width:${pct}%;background:var(--g);border-radius:4px"></div></div>Started $${PA.start} · goal $${PA.goal} · stops at $${PA.floor}. ${PA.n} trades, ${PA.w} won. Mode: ${PA.mode==='hold'?'hold to the end':'scalp'}${PA.mode==='hold'?` · hold bets ${PA.hW||0}/${PA.hN||0} won, net ${(PA.hPnl||0)>=0?'+':'-'}$${Math.abs(PA.hPnl||0).toFixed(2)}${PA.hcur?' · open: '+PA.hcur.side+' @ '+PA.hcur.ask+'¢':''}`:''}. Lottery tickets (one per window, no daily limit): ${PA.lotW}/${PA.lotN} won, net ${(PA.lotPnl||0)>=0?'+':'-'}$${Math.abs(PA.lotPnl||0).toFixed(2)}${PA.cur?` · one open now (${PA.cur.side} @ ${PA.cur.ask}¢${PA.cur.peak?', high '+PA.cur.peak+'¢':''}; cashes once it's 3x and comes off the top)`:''}.<br>`+(last||'No trades yet.')+'<br>'+(SH.length?`Early sells vs holding to the end (${SH.length} sells): sold for ${SH.reduce((q,x)=>q+x.a,0).toFixed(0)}¢ total, holding would have made ${SH.reduce((q,x)=>q+x.h,0).toFixed(0)}¢ per contract.`:'Early sells vs holding to the end: collecting…')+'<br><span style="opacity:.8">Fake money. It follows the same paper trades as the box and bets the share of the account you pick ('+Math.round((PA.frac||0.25)*100)+'%) each time'+(paFracNow()<(PA.frac||0.25)?', now '+Math.round(paFracNow()*100)+'% because the account has doubled':'')+'.</span>';
 }
 let SH=[],SHp=[];try{SH=JSON.parse(localStorage.getItem('btcSH')||'[]')}catch(e){}
 function shSave(){try{localStorage.setItem('btcSH',JSON.stringify(SH.slice(-300)))}catch(e){}}
@@ -1063,7 +1073,7 @@ if(AT&&AT.win!==curWin()&&AT.sellAt==null)AT.stale=true;
 function saveAT(){try{localStorage.setItem('btcAT',JSON.stringify(AT));localStorage.setItem('btcAuto',JSON.stringify(autoLog.slice(-300)))}catch(e){}}
 function closeAT(exitPx,how){
  const pnl=Math.round((exitPx-AT.entry-kfee(AT.entry/100)-(how==='sold'?kfee(exitPx/100):0))*10)/10;
- autoLog.push({side:AT.side,kind:AT.kind||'?',entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win});
+ autoLog.push({side:AT.side,kind:AT.kind||'?',big:AT.big||0,entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win});
  try{if(paOpen()&&PA.mode!=='hold')paAdd(AT.kind||'?',AT.side,AT.cnt||1,AT.entry,pnl,how)}catch(e){}
  if(how==='sold'&&AT.s!=null)SHp.push({win:AT.win,side:AT.side,entry:AT.entry,s:AT.s,actual:pnl});
  lastRes1={side:AT.side,entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win};
@@ -1323,7 +1333,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  // auto buy: the setup has to hold for 2 seconds
  if(!good)goodSince=0;else if(!goodSince)goodSince=now;
  if(good&&now-goodSince>=2000&&(paOpen()||BOT.on)&&flipGate(setup.side,now)&&!paBrake(now)){
-  AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:paCount(setup.ask),tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
+  AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:Math.min(paCount(setup.ask)*(setup.kind==='rocket'&&setup.move>=200?3:setup.kind==='rocket'&&setup.move>=100?2:1),Math.max(1,Math.floor(PA.bank*0.4/(setup.ask/100)))),big:setup.kind==='rocket'&&setup.move>=100?(setup.move>=200?3:2):0,tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
   if(setup.kind==='flip'){AT.strike=useS;AT.tgt=Math.ceil(setup.ask+12+kfee(setup.ask/100)*2);AT.stop=Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}
   if(PA.hold85!==false)AT.tgt=Math.min(98,Math.max(85,setup.ask+4)); // hold until the contract is worth 85 cents or the window settles
   setPos(AT.side);entry=setup.ask;try{$('entryP').value=setup.ask}catch(e){}saveAT();
@@ -1349,18 +1359,30 @@ function oneBox(now,left,Kf,price,useS,p,avg){
   }
   else if(bid!=null&&AT.kind==='rocket'){
    if(AT.sellAt==null&&bid>AT.peak){AT.peak=bid;saveAT()}
-   const be=AT.entry+kfee(AT.entry/100)*2,trail=AT.peak-4;
-   const p4=hist.find(h=>h.t>=now-4000),d=AT.side==='up'?1:-1,stall=p4?(price-p4.p)*d<0:false;
+   const be=AT.entry+kfee(AT.entry/100)*2;
+   // v47.5 "let it ride": a takeoff no longer sells on a 2c win or a 4-second pause. It trails the top only after +8c,
+   // giving back up to 30% of the gain (6c+) before selling. Dead trades (never took off in 3 min) still get out.
+   const ride=Math.max(6,Math.round((AT.peak-AT.entry)*0.3));
    if(bid>=95)why='profit';                                   // nothing left to squeeze
-   else if(PA.hold85===false&&AT.peak>=be+4&&bid<=trail)why=bid>be?'profit':'cut'; // came off the top
-   else if(PA.hold85===false&&stall&&bid>=be+2)why='profit';                     // BTC stopped running, bank it
+   else if(AT.peak>=be+8&&bid<=AT.peak-ride)why=bid>be?'profit':'cut'; // came off the top after a real run
+   // "it thinks the price will drop": BTC turned hard against us, or the model now values our side 8c+ under the bid
+   else if(bid>be&&(()=>{const q=hist.find(h=>h.t>=now-10000),m=q?(price-q.p)*(AT.side==='up'?1:-1):0;return q&&-m>=2*vol()*price*Math.sqrt(10)})())why='profit';
+   else if(bid>be&&mine!=null&&mine*100<bid-8)why='profit';
    else if(bid<=stop&&!AT.hold)why='cut';
-   else if(PA.hold85===false&&age>90)why=bid>AT.entry?'profit':'stale';
+   else if(left<=45&&mine<0.8)why=bid>be?'profit':'cut';      // last 45s: hold to the end only if 80%+ likely
+   else if(age>180&&bid<=be+2)why='stale';                    // never took off
   }
   else if(bid!=null){
-   if(bid>=tgt)why='profit';
+   // v47.5: dip buys ride too. Hitting the target starts following the top instead of selling on the spot.
+   if(AT.sellAt==null&&bid>AT.peak){AT.peak=bid;saveAT()}
+   const be=AT.entry+kfee(AT.entry/100)*2,hit=AT.peak>=tgt,give=Math.max(4,Math.round((AT.peak-AT.entry)*0.3));
+   const turned=()=>{const q=hist.find(h=>h.t>=now-10000),m=q?(price-q.p)*(AT.side==='up'?1:-1):0;return q&&-m>=2*vol()*price*Math.sqrt(10)};
+   if(bid>=95)why='profit';
+   else if(hit&&bid<=AT.peak-give)why=bid>be?'profit':'cut';            // came off the top
+   else if(hit&&bid>be&&(turned()||(mine!=null&&mine*100<bid-8)))why='profit'; // it thinks the price will drop: sell now
    else if(bid<=stop&&!AT.hold)why='cut';
-   else if(PA.hold85===false&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
+   else if(hit&&left<=45&&mine<0.8)why=bid>be?'profit':'cut';
+   else if(!hit&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
   }
   if(AT.sellAt==null&&why&&left>1){AT.sellAt=now;AT.sellPx=bid;AT.why=why;saveAT();if(armed){beep(1100);setTimeout(()=>beep(880),200);setTimeout(()=>beep(1100),400)}}
   if(AT.sellAt!=null&&AT.real&&!AT.realSold&&BOT.on)botSell(AT);

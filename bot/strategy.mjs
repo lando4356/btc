@@ -192,11 +192,13 @@ export function onTick(s, tick, cfg = DEFAULTS) {
   if (brake) { if (!s.pos && !s.order) s.lastSignal = brake; return ev; }
   // radar v32 takeoff / dip: buy at the ask, sell early (several per window allowed, like the page)
   if (v32 && !s.pos && !s.order) {
-    const stake = Math.min(cfg.stakeUsd, s.bankroll * cfg.maxStakePct);
+    // big jump before Kalshi moves: bet 2x on a $100+ 10s move, 3x on $200+ (tracked as its own rule so we can see if it pays)
+    const big = v32.kind === 'rocket' ? (v32.move >= 200 ? 3 : v32.move >= 100 ? 2 : 1) : 1;
+    const stake = Math.min(cfg.stakeUsd * big, s.bankroll * cfg.maxStakePct * big, s.bankroll * 0.3);
     const contracts = Math.floor(stake * 100 / v32.ask);
     if (contracts >= 1) {
       const entryFee = takerFeeCents(contracts, v32.ask);
-      s.pos = { ticker: tick.ticker, side: v32.side, contracts, entry: v32.ask, peak: v32.ask, t: tick.t, kind: v32.kind, entryFee, ...v32Targets(v32, cfg.v32 || V32) };
+      s.pos = { ticker: tick.ticker, side: v32.side, contracts, entry: v32.ask, peak: v32.ask, t: tick.t, kind: big > 1 ? 'rocketBig' : v32.kind, entryFee, ...v32Targets(v32, cfg.v32 || V32) };
       s.bankroll -= (contracts * v32.ask + entryFee) / 100;
       ev.push(`BUY ${v32.side === 'no' ? 'Down' : 'Up'} ${contracts} @ ${v32.ask}c (${v32.kind === 'rocket' ? '🚀 takeoff' : 'dip'}: ${v32.why})`);
       return ev;
