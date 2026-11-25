@@ -22,6 +22,18 @@ Find out honestly whether any strategy beats Kalshi's BTC 15-minute markets afte
 - Lottery tickets: no edge, pure long shots.
 - "Bots that made $X" posts on X: none had verifiable results (ads, referral links, own-token promos).
 
+## Failures → where the lesson was filed (fix the class, not the output)
+
+| Failure | Layer | Lesson became |
+|---|---|---|
+| Fake 16-for-16 wins from stale list prices | Loop | "Live prices" check in `bot/checks.mjs` (run 1 must stay ❌) |
+| Bot crashed at every 15-min window switch | Harness | rollover fallback in `bot/bot.mjs` + "Data coverage" check |
+| Paper fills at prices that weren't really there | Loop | "Fills were real" check |
+| All-in bets wiped the real account | Harness | stake cap (`stakeUsd`, `maxStakePct`) + dead-end line above |
+| Retried hold-to-85 / flip gate after they lost | Harness | Dead ends list (this file) |
+| Same failure run after run | Loop | 🛑 ESCALATE when one check fails two runs in a row |
+| Keys could leak into the repo | Harness | `.gitignore` wall + no login code in the paper bot |
+
 ## Next
 1. Run the paper bot on live order-book prices; let evidence checks grade it.
 2. If takeoff/dip still win over 100+ trades: add settlement-price (CF Benchmarks) reconstruction.

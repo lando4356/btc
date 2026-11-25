@@ -58,3 +58,22 @@ Anything less is "not proven", however good it looks.
 - **Never trust Kalshi's market-list prices** for trading decisions. Use `/markets/{ticker}/orderbook` (or WebSocket).
 - Changes go through a pull request; the owner merges from his phone.
 - Real-money changes are the owner's call, after the "done when" list is met.
+
+## Gates (priced by how hard it is to undo)
+
+| Change | Undo cost | Gate |
+|---|---|---|
+| Docs, PROGRESS.md, dashboard look | free | PR, owner merges |
+| Paper strategy settings | cheap (paper) | PR + evidence checks must not get worse |
+| Evidence checks themselves | risky: could hide problems | PR + run 1 archive must still fail ❌ |
+| Anything with real money | **can't undo** | owner only, after "Done when", never from GitHub |
+
+## Who grades
+
+The code that trades never grades itself. `bot/checks.mjs` grades from the raw tick data,
+a separate Claude chat reviews PRs, and the owner decides anything with real money.
+
+## Shape: one loop, no graph (on purpose)
+
+run paper bot → write results → evidence checks → (same failure twice → ESCALATE to owner).
+Don't split this into multiple agents until traces show a step that actually needs its own worker.

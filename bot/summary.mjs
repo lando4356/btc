@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { scoreboard } from './strategy.mjs';
-import { runChecks, checksMarkdown } from './checks.mjs';
+import { runChecks, checksMarkdown, recordAndEscalate, escalateMarkdown } from './checks.mjs';
 import { loadTicks } from './backtest.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -17,12 +17,13 @@ let pats = [];
 try { pats = JSON.parse(fs.readFileSync(path.join(DATA, 'patterns.json'), 'utf8')).patterns || []; } catch {}
 const ticks = fs.existsSync(DATA) ? fs.readdirSync(DATA).filter(f => f.startsWith('ticks-')).length : 0;
 const evidence = runChecks(s, loadTicks(DATA));
+const repeat = fs.existsSync(DATA) ? recordAndEscalate(path.join(DATA, 'check-history.json'), evidence) : [];
 const name = k => k === 'rocket' ? '🚀 Takeoffs' : k === 'dip' ? 'Dip buys' : k === 'bounce' ? 'Bounce rule' : `Learned: ${k.replace(/\|/g, '·')}`;
 const md = `# 📄 Paper bot results (fake money)
 
 _Updated ${new Date().toUTCString()}_
 
-${checksMarkdown(evidence)}
+${escalateMarkdown(repeat)}${checksMarkdown(evidence)}
 
 ## ${sb.verdict}
 

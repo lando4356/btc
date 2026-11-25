@@ -99,6 +99,26 @@ export function checksMarkdown(r) {
   return `## 🔍 Evidence checks: ${r.verdict}\n\n${lines.join('\n')}\n`;
 }
 
+// Loop exit: the same failure two runs in a row means stop tweaking and get a human.
+// history = [{at, fails:[names]}...] (oldest first), saved in bot/live/check-history.json.
+export function recordAndEscalate(histFile, r) {
+  let h = [];
+  try { h = JSON.parse(fs.readFileSync(histFile, 'utf8')); } catch {}
+  const fails = r.checks.filter(c => c.status === 'fail').map(c => c.name);
+  const prev = h.length ? h[h.length - 1].fails : [];
+  const repeat = fails.filter(f => prev.includes(f));
+  h.push({ at: new Date().toISOString(), fails });
+  try { fs.writeFileSync(histFile, JSON.stringify(h.slice(-20), null, 1)); } catch {}
+  return repeat;
+}
+
+export function escalateMarkdown(repeat) {
+  if (!repeat.length) return '';
+  return `## 🛑 ESCALATE: same failure two runs in a row\n\n` +
+    `Failed again: **${repeat.join(', ')}**. Don't keep tweaking strategy settings, fix the layer that owns it ` +
+    `(data, fills or code) and log the lesson in PROGRESS.md. The owner decides what happens next.\n`;
+}
+
 const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
 if (isMain) {
   const DATA = process.env.DATA_DIR || path.join(DIR, 'data');
