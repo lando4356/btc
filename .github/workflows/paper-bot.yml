@@ -41,3 +41,8 @@ jobs:
           git add bot/live bot/RESULTS.md
           git commit -m "Paper bot results $(date -u +%Y-%m-%dT%H:%MZ)" || exit 0
           for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+      # The loop: grade the evidence. If a check fails, this run shows a red X (and GitHub emails you).
+      - name: Evidence checks
+        env:
+          DATA_DIR: bot/live
+        run: node bot/checks.mjs

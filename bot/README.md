@@ -29,6 +29,13 @@ mostly stays out). With a hidden mispricing it bought the dips and took profits 
 - **Up on a dip:** the mirror image, in a 30-minute climb.
 - Only between 12 and 3 minutes left in the window, one trade per window.
 
+## It checks its own evidence (checks.mjs)
+
+After every run the bot grades its results before reporting them, at the top of `RESULTS.md`:
+live prices (not stale), data coverage, whether paper fills could really have happened,
+a too-good-to-be-true win rate, both halves profitable, and enough trades. If a check fails,
+the GitHub run shows a red ❌. Run 1 (takeoffs 16/16 on 30-second-old prices) fails it.
+
 ## It finds its own patterns too (finder.mjs)
 
 Every 6 hours the bot searches everything it has recorded for patterns: about 2,000
