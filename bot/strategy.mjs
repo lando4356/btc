@@ -41,6 +41,10 @@ export const DEFAULTS = {
   // patterns the finder promoted (finder.mjs). Bought at the ask, held to the end, same as tested.
   patterns: [],
   v32: V32,                    // the radar v32 takeoff + dip rules with early sells (v32.mjs)
+ // session limits: the brakes that would have saved the real $30
+  dailyLossPct: 0.10,          // down 10% since the day started (Chicago time) -> no new bets until tomorrow
+  lossStreak: 3,               // 3 losses in a row ->
+  streakPauseSecs: 1800,       // ...sit out 30 minutes
   dropAfterTrades: 30,         // a learned pattern that is losing after 30 paper trades is dropped
 };
 
@@ -98,6 +102,20 @@ function closePos(s, tick, exitCents, reason, fee) {
   }
   s.pos = null;
   return s.trades[s.trades.length - 1];
+}
+
+// Returns a reason string if new bets are blocked right now, else ''.
+export function riskStop(s, tick, cfg = DEFAULTS) {
+  const day = new Date(tick.t).toLocaleDateString('en-US', { timeZone: 'America/Chicago' });
+  if (!s.day || s.day.key !== day) s.day = { key: day, start: s.bankroll + (s.pos ? s.pos.contracts * s.pos.entry / 100 : 0) };
+  if (cfg.dailyLossPct && s.bankroll < s.day.start * (1 - cfg.dailyLossPct) && !s.pos)
+    return `daily stop: down ${Math.round(cfg.dailyLossPct * 100)}% today, done until tomorrow`;
+  if (cfg.lossStreak) {
+    const last = s.trades.slice(-cfg.lossStreak);
+    if (last.length === cfg.lossStreak && last.every(t => !t.win) && tick.t - last[last.length - 1].closedAt < cfg.streakPauseSecs * 1000)
+      return `${cfg.lossStreak} losses in a row: pausing ${Math.round(cfg.streakPauseSecs / 60)} min`;
+  }
+  return '';
 }
 
 // Settle a position when its window has closed. yesWon: true/false.
@@ -170,6 +188,8 @@ export function onTick(s, tick, cfg = DEFAULTS) {
 
   // ---- look for a new entry ----
   s.lastSignal = '';
+  const brake = riskStop(s, tick, cfg);
+  if (brake) { if (!s.pos && !s.order) s.lastSignal = brake; return ev; }
   // radar v32 takeoff / dip: buy at the ask, sell early (several per window allowed, like the page)
   if (v32 && !s.pos && !s.order) {
     const stake = Math.min(cfg.stakeUsd, s.bankroll * cfg.maxStakePct);
