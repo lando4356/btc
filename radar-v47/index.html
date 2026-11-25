@@ -22,14 +22,14 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
 .ob.up{border-color:var(--g);box-shadow:0 0 60px -20px var(--g)}.ob.dn{border-color:var(--r);box-shadow:0 0 60px -20px var(--r)}
 .oa{font-size:80px;line-height:1;height:80px}.oc{font-size:62px;font-weight:800;letter-spacing:-1px;margin-top:4px}
 .up .oa,.up .oc{color:var(--g)}.dn .oa,.dn .oc{color:var(--r)}.wt .oa,.wt .oc{color:var(--mu)}
-.of{font-size:20px;font-weight:600;margin-top:4px}.ot{font-size:16px;margin-top:16px;min-height:20px;line-height:1.4}
+.of{font-size:20px;font-weight:600;margin-top:4px}.okp{font-size:17px;font-weight:600;margin-top:10px;min-height:22px}.okp .u{color:#22c55e}.okp .d{color:#ef4444}.okp .m{color:#8795ab;font-weight:400;font-size:14px}.ot{font-size:16px;margin-top:16px;min-height:20px;line-height:1.4}
 .obr{height:6px;background:#2a3550;border-radius:3px;margin-top:20px;overflow:hidden}.obr i{display:block;height:100%;width:0;background:var(--mu);transition:width .5s linear}
 .ol{font-size:14px;color:var(--mu);margin-top:8px;font-variant-numeric:tabular-nums}.os{font-size:11px;color:#4b5563;margin-top:12px}
 .od{background:none;border:0;color:#4b5563;font-size:12px;margin-top:10px;text-decoration:underline}
 </style></head><body>
 <div id="one"><div class="ob wt" id="ob1" onclick="armBox(event)">
  <div class="oa" id="oa">•</div><div class="oc" id="oc">…</div>
- <div class="of" id="of">Getting data</div><div class="ot" id="ot"></div>
+ <div class="of" id="of">Getting data</div><div class="okp" id="okp"></div><div class="ot" id="ot"></div>
  <div class="obr"><i id="obar"></i></div><div class="ol" id="ol">--:-- left</div>
  <div class="ol" id="orec" style="margin-top:4px"></div>
  <div class="ol" id="lrn" style="margin-top:6px"></div>
@@ -39,7 +39,7 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
  <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
 </div></div>
 <div id="full" hidden>
-<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.2</span></h1>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v47.3</span></h1>
 <div class="sub" id="status">Connecting…</div>
 <div class="grid">
  <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
@@ -1219,6 +1219,9 @@ function scRender(){
 function scCopy(){const t=JSON.stringify({v:47,weights:SCW,stack:ST,score:SC});try{navigator.clipboard.writeText(t).then(()=>alert('Scorecard copied ('+SC.length+' windows). Paste it to Claude to analyze.'),()=>prompt('Copy this:',t))}catch(e){prompt('Copy this:',t)}}
 function oneBox(now,left,Kf,price,useS,p,avg){
  const box=$('ob1'),cw=curWin();
+ // v47.3: Kalshi's live prices right in the box (buy price for each side)
+ {const kp=$('okp');if(kp){const fm=v=>v==null?'—':Math.round(v)+'¢';
+  kp.innerHTML=Kf?`Kalshi: <span class="u">Up ${fm(K.ya)}</span> · <span class="d">Down ${fm(K.na)}</span>`:'<span class="m">Kalshi price: not connected</span>'}}
  // a trade still open when its window ended settles at Kalshi's payout: 100¢ if right, 0¢ if wrong
  if(AT&&(AT.win!==cw||AT.stale)){
   const fin=AT.stale?null:(onePrevAvg&&Math.abs(onePrevAvg.t-(AT.win+W15))<30000?onePrevAvg.v:null);

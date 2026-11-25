@@ -1,6 +1,11 @@
 KALSHI REAL-MONEY BOT — setup on your MacBook
 ==============================================
 
+WHAT CHANGED IN v47.3
+- Kalshi's live prices now show right in the main box, under the % line: "Kalshi: Up 47¢ · Down 55¢"
+  (what it costs to buy each side right now). Before, they were only under "details".
+- For your phone: upload the cloudflare-upload folder to Cloudflare Pages again so pages.dev gets this.
+
 WHAT CHANGED IN v47.2 (Kalshi live price on the Mac)
 - The bot now gets Kalshi's live prices WITH your API key (it used to ask without it), and retries when Kalshi
   says "too many requests". Before, that made prices drop out.
