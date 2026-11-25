@@ -1278,7 +1278,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  // ---------- swing finder: only buy a dip the model thinks went too far, once BTC turns back ----------
  // rule (dip / target / stop) comes from the scalp lab: its best rule once it has 10+ fake trades in profit
  const best=SR.filter(r=>r.n>=10&&r.pnl>0).sort((x,y)=>y.pnl/y.n-x.pnl/x.n)[0];
- const RD=best?best.D:6,RT=best?best.T:6,RS=best?best.S:6;
+ const RD=Math.min(best?best.D:6,4),RT=best?best.T:6,RS=best?best.S:6; // v47.6 looser: dips of 4c+ count (was 6c)
  let setup=null;const ais=aiStats();
  const V45_OFF={flip:true,ai:true}; // v45: flip trades lost on paper (4/8, -63c) and the flip learner is overconfident; the AI isn't proven. Off.
  const aiOn=ais.ready&&!benched('ai');
@@ -1301,17 +1301,17 @@ function oneBox(now,left,Kf,price,useS,p,avg){
    const hi=Math.max(...skH.map(x=>x[key])),dip=hi-a1;          // how far this side just dropped (last ~20s)
    const fair=(sd==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100); // model thinks it's worth more than the ask
    const turn=(sd==='up'?mv:-mv)>=th;                            // BTC already moving back this side's way
-   if(dip>=RD&&edge>=5&&turn&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,dip,edge,kind:'dip',benched:benched('dip')};
+   if(dip>=RD&&edge>=3&&turn&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,dip,edge,kind:'dip',benched:benched('dip')};
   }
   // takeoff: BTC ripping one way (big 10s move, still going, buyers/sellers piling in) and Kalshi hasn't caught up
   const p10=hist.find(h=>h.t>=now-10000),p3=hist.find(h=>h.t>=now-3000);
   if(p10&&p3){
    const m10=price-p10.p,m3=price-p3.p,sd10=vol()*price*Math.sqrt(10),dir=Math.sign(m10);
-   if(dir&&Math.abs(m10)>=2*sd10&&m3*dir>=0&&imbW(now,5000)*dir>=0.2){
+   if(dir&&Math.abs(m10)>=1.5*sd10&&m3*dir>=0&&imbW(now,5000)*dir>=0.1){ // v47.6 looser: 1.5x normal move, lighter buyer/seller tilt
     const sd=dir>0?'up':'down',a1=sd==='up'?K.ya:K.na,b1=sd==='up'?K.yb:K.nb;
     if(a1!=null&&b1!=null&&a1>=15&&a1<=85&&a1-b1<=3){
      const fair=(sd==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100);
-     if(edge>=5&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,edge,kind:'rocket',move:Math.abs(m10),benched:benched('rocket')};
+     if(edge>=3&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,edge,kind:'rocket',move:Math.abs(m10),benched:benched('rocket')};
     }
    }
   }
