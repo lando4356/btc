@@ -22,9 +22,9 @@ export function loadTicks(dir = dataDir) {
   for (const f of files) {
     const lines = fs.readFileSync(path.join(dir, f), 'utf8').trim().split('\n').slice(1);
     for (const l of lines) {
-      const [t, ticker, closeTs, strike, btc, yesBid, yesAsk, noBid, noAsk] = l.split(',');
+      const [t, ticker, closeTs, strike, btc, yesBid, yesAsk, noBid, noAsk, imb5, imb60] = l.split(',');
       ticks.push({ t: +t, ticker, closeTs: +closeTs, strike: +strike, btc: +btc,
-        yesBid: +yesBid, yesAsk: +yesAsk, noBid: +noBid, noAsk: +noAsk });
+        yesBid: +yesBid, yesAsk: +yesAsk, noBid: +noBid, noAsk: +noAsk, imb5: +(imb5 || 0), imb60: +(imb60 || 0) });
     }
   }
   return ticks.sort((a, b) => a.t - b.t);

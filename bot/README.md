@@ -3,7 +3,25 @@
 **Paper only.** It never logs in to Kalshi and cannot spend real money. Its job is to
 find out whether one rule actually wins before any real money goes near it.
 
-## The rule (from Landan's manual trades)
+## Main rules: radar v32 takeoffs + dip buys (bot/v32.mjs)
+
+The page that was winning (`radar-v32/`, Nov 20-22 paper: takeoffs 9/9 +159¢, dip buys 10/13 +111¢),
+ported with the same numbers and the **early-sell exits** it used then:
+
+- **🚀 Takeoff:** BTC moves 2+ "normal 10-second moves" one way, is still going over the last 3s,
+  trade flow agrees (20%+ buy or sell pressure), and Kalshi's price is 5¢+ behind the model. Buys at the ask.
+  Sells when the contract comes 4¢ off its top, when BTC stalls (if in profit), at 95¢+, at the stop, or after 90s.
+- **Dip buy:** one side's price just dropped 6¢+ in ~20s, BTC is already turning back its way, and
+  the model says it's worth 5¢+ more than the ask. Target +6¢ (plus fees), stop -6¢ (held if the model
+  still gives it 55%+), sells after 2 minutes.
+- Setups must hold for 2 seconds; several trades per window are allowed, like the page.
+- Differences from the page: one BTC feed (Coinbase) instead of four, and a simpler model (no settle
+  average, futures or options flow). The tuning "scalp lab" isn't ported; the page's 6/6/6 defaults are used.
+
+**Tested on fake data:** on fairly priced data it made 3 trades in 200 hours (no edge to find, so it
+mostly stays out). With a hidden mispricing it bought the dips and took profits early: 267 of 344 won.
+
+## Also: the bounce rule (from Landan's manual trades)
 
 - **Down on a bounce:** BTC has fallen $80+ over the last 30 minutes, then bounces up
   $25+ off its 3-minute low. That bounce makes Down cheap. If Down is 30¢ or less, the bot

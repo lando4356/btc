@@ -12,6 +12,7 @@
 // life on purpose, so paper results are not flattered.
 
 import { features, patternKeys } from './features.mjs';
+import { V32, v32Setup, v32Exit, v32Targets } from './v32.mjs';
 
 export const DEFAULTS = {
   // when we are allowed to enter (seconds left in the 15-minute window)
@@ -39,6 +40,7 @@ export const DEFAULTS = {
   enableUpRule: true,
   // patterns the finder promoted (finder.mjs). Bought at the ask, held to the end, same as tested.
   patterns: [],
+  v32: V32,                    // the radar v32 takeoff + dip rules with early sells (v32.mjs)
   dropAfterTrades: 30,         // a learned pattern that is losing after 30 paper trades is dropped
 };
 
@@ -87,8 +89,9 @@ function closePos(s, tick, exitCents, reason, fee) {
   s.trades.push({
     ticker: p.ticker, side: p.side === 'no' ? 'Down' : 'Up', contracts: p.contracts,
     entry: p.entry, exit: exitCents, reason, pnl: +pnl.toFixed(2),
-    win: pnl > 0, openedAt: p.t, closedAt: tick.t, rule: p.pattern || 'bounce',
+    win: pnl > 0, openedAt: p.t, closedAt: tick.t, rule: p.pattern || p.kind || 'bounce',
   });
+  if (s.v32) s.v32.lastClose = tick.t;
   if (p.pattern) {
     const st = (s.patternStats ??= {})[p.pattern] ??= { n: 0, pnl: 0 };
     st.n++; st.pnl = +(st.pnl + pnl).toFixed(2);
@@ -121,10 +124,18 @@ export function onTick(s, tick, cfg = DEFAULTS) {
   if (s.hist.length && tick.t - s.hist[s.hist.length - 1].t > 60_000) s.hist = [];
   s.hist.push({ t: tick.t, btc: tick.btc });
   while (s.hist.length && s.hist[0].t < tick.t - (cfg.trendLookbackSecs + 120) * 1000) s.hist.shift();
+  const v32 = v32Setup(s, tick, cfg.v32 || V32);   // runs every tick so its short-term memory stays current
   const secsLeft = (tick.closeTs - tick.t) / 1000;
 
   // ---- manage open position ----
-  if (s.pos && s.pos.ticker === tick.ticker && !s.pos.holdToEnd) {
+  if (s.pos && s.pos.ticker === tick.ticker && s.pos.kind) {
+    const why = v32Exit(s, tick, cfg.v32 || V32);
+    if (why) {
+      const bid = s.pos.side === 'yes' ? tick.yesBid : tick.noBid;
+      const t = closePos(s, tick, bid, why, takerFeeCents(s.pos.contracts, bid));
+      ev.push(`SELL ${t.side} ${t.contracts} @ ${t.exit}c — ${why} — pnl $${t.pnl}`);
+    }
+  } else if (s.pos && s.pos.ticker === tick.ticker && !s.pos.holdToEnd) {
     const q = sideQuotes(tick, s.pos.side);
     if (Number.isFinite(q.bid)) {
       s.pos.peak = Math.max(s.pos.peak, q.bid);
@@ -159,6 +170,19 @@ export function onTick(s, tick, cfg = DEFAULTS) {
 
   // ---- look for a new entry ----
   s.lastSignal = '';
+  // radar v32 takeoff / dip: buy at the ask, sell early (several per window allowed, like the page)
+  if (v32 && !s.pos && !s.order) {
+    const stake = Math.min(cfg.stakeUsd, s.bankroll * cfg.maxStakePct);
+    const contracts = Math.floor(stake * 100 / v32.ask);
+    if (contracts >= 1) {
+      const entryFee = takerFeeCents(contracts, v32.ask);
+      s.pos = { ticker: tick.ticker, side: v32.side, contracts, entry: v32.ask, peak: v32.ask, t: tick.t, kind: v32.kind, entryFee, ...v32Targets(v32, cfg.v32 || V32) };
+      s.bankroll -= (contracts * v32.ask + entryFee) / 100;
+      ev.push(`BUY ${v32.side === 'no' ? 'Down' : 'Up'} ${contracts} @ ${v32.ask}c (${v32.kind === 'rocket' ? '🚀 takeoff' : 'dip'}: ${v32.why})`);
+      return ev;
+    }
+  }
+
   if (s.pos || s.order || w.traded) return ev;
   if (secsLeft > cfg.enterMaxSecsLeft) { s.lastSignal = 'too early in window'; return ev; }
   if (secsLeft < cfg.enterMinSecsLeft) { s.lastSignal = 'too late in window'; return ev; }

@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BTC vs Kalshi 15-Min Radar</title>
+<style>
+:root{--bg:#0b0f17;--card:#141b29;--tx:#e8edf5;--mu:#8795ab;--g:#22c55e;--r:#ef4444}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px system-ui,sans-serif;padding:14px;max-width:760px;margin:auto}
+h1{font-size:18px;margin:0 0 2px}.sub{color:var(--mu);font-size:12px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:var(--card);border-radius:12px;padding:12px}
+.full{grid-column:1/-1}.l{color:var(--mu);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+.v{font-size:24px;font-weight:700;margin-top:2px}.s{font-size:12px;color:var(--mu);margin-top:2px}
+.g{color:var(--g)}.r{color:var(--r)}canvas{width:100%;height:190px;display:block}
+.bar{height:14px;border-radius:7px;background:var(--r);overflow:hidden;margin-top:8px}.bar>div{height:100%;background:var(--g);width:50%;transition:width .3s}
+input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:10px;font-size:16px;margin-top:8px}
+.fwb{margin-top:6px}.fwb button,.clr{background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:4px 12px;margin-right:6px;font-size:13px}
+.fwb button.on{background:#2a3550}
+.pos button{background:#0b0f17;color:var(--tx);border:1px solid #2a3550;border-radius:8px;padding:6px 14px;margin-right:6px;font-size:13px}.pos button.on{background:#2a3550}
+.note{color:var(--mu);font-size:11px;margin-top:12px;line-height:1.5}
+
+#one{min-height:86vh;display:flex;align-items:center;justify-content:center}
+.ob{width:100%;max-width:380px;background:var(--card);border:2px solid #2a3550;border-radius:28px;padding:34px 24px 22px;text-align:center;transition:border-color .4s,box-shadow .4s}
+.ob.up{border-color:var(--g);box-shadow:0 0 60px -20px var(--g)}.ob.dn{border-color:var(--r);box-shadow:0 0 60px -20px var(--r)}
+.oa{font-size:80px;line-height:1;height:80px}.oc{font-size:62px;font-weight:800;letter-spacing:-1px;margin-top:4px}
+.up .oa,.up .oc{color:var(--g)}.dn .oa,.dn .oc{color:var(--r)}.wt .oa,.wt .oc{color:var(--mu)}
+.of{font-size:20px;font-weight:600;margin-top:4px}.ot{font-size:16px;margin-top:16px;min-height:20px;line-height:1.4}
+.obr{height:6px;background:#2a3550;border-radius:3px;margin-top:20px;overflow:hidden}.obr i{display:block;height:100%;width:0;background:var(--mu);transition:width .5s linear}
+.ol{font-size:14px;color:var(--mu);margin-top:8px;font-variant-numeric:tabular-nums}.os{font-size:11px;color:#4b5563;margin-top:12px}
+.od{background:none;border:0;color:#4b5563;font-size:12px;margin-top:10px;text-decoration:underline}
+</style></head><body>
+<div id="one"><div class="ob wt" id="ob1" onclick="armBox(event)">
+ <div class="oa" id="oa">•</div><div class="oc" id="oc">…</div>
+ <div class="of" id="of">Getting data</div><div class="ot" id="ot"></div>
+ <div class="obr"><i id="obar"></i></div><div class="ol" id="ol">--:-- left</div>
+ <div class="ol" id="orec" style="margin-top:4px"></div>
+ <div class="ol" id="lrn" style="margin-top:6px"></div>
+ <div style="margin-top:6px"><button class="clr" onclick="brainCopy()">Copy brain (backup)</button> <button class="clr" onclick="brainPaste()">Paste brain (restore)</button></div>
+ <div class="os" id="os">connecting</div>
+ <button class="od" id="oundo" style="display:none;margin-right:14px" onclick="event.stopPropagation();undoAuto()">I didn't buy</button><button class="od" onclick="event.stopPropagation();var f=document.getElementById('full');f.hidden=!f.hidden">details</button>
+</div></div>
+<div id="full" hidden>
+<h1>₿ BTC vs Kalshi 15-Min Radar <span style="font-size:12px;color:#8aa">v32</span></h1>
+<div class="sub" id="status">Connecting…</div>
+<div class="grid">
+ <div class="card full"><div class="l">📐 Chart study guide (what it knows + how each pattern did the last 3 days)</div><div class="s" id="guide" style="line-height:1.55;margin-top:6px">Studying…</div></div>
+ <div class="card full" style="border:1px solid #f7931a"><div class="l">Decision (one call, steady)</div>
+  <div class="v" id="dec" style="font-size:34px">—</div><div class="s" id="dec2" style="line-height:1.55">—</div>
+  <div class="s" id="dec3" style="margin-top:6px"></div></div>
+ <div class="card"><div class="l">BTC composite (all feeds)</div><div class="v" id="px">—</div><div class="s" id="chg">—</div></div>
+ <div class="card"><div class="l">Time left in window</div><div class="v" id="tl">—</div><div class="s" id="src">—</div></div>
+ <div class="card"><div class="l">Strike (price to beat)</div><div class="v" id="strike">—</div><div class="s" id="dist">—</div></div>
+ <div class="card"><div class="l">Model P(finish above strike)</div><div class="v" id="mp">—</div><div class="s" id="mom">—</div></div>
+ <div class="card full"><div class="l">Enter from Kalshi app</div>
+  <input id="mS" type="number" inputmode="decimal" placeholder="Strike (price to beat) $" oninput="setManual()">
+  <div class="s">Type the "target" from the Kalshi app. Clears itself when the 15-min window ends.</div></div>
+ <div class="card full"><div class="l">Kalshi live prices (optional relay)</div>
+  <input id="relay" type="url" placeholder="Paste your relay URL (workers.dev)">
+  <div class="s" id="kst" style="margin-top:6px">Not connected. Without it, strike is typed by hand and signals can't use Kalshi's price.</div>
+  <div class="s" id="kpx" style="margin-top:4px;line-height:1.6"></div></div>
+ <div class="card full"><div class="l">Signal (rough guide, not advice)</div>
+  <div class="v" id="sig">—</div><div class="s" id="sig2" style="line-height:1.5">—</div>
+  <div class="pos" style="margin-top:10px"><span class="s">My position: </span><button id="p0" onclick="setPos(null)">None</button><button id="pu" onclick="setPos('up')">Up</button><button id="pd" onclick="setPos('down')">Down</button></div>
+  <input id="entryP" type="number" inputmode="decimal" placeholder="Price you paid (¢), if holding" oninput="setEntry()"></div>
+ <div class="card full"><div class="l">Scalp lab (fake-money test of scalping rules on live Kalshi prices)</div>
+  <div class="v" id="sc">—</div><div class="s" id="sc2" style="line-height:1.6">—</div></div>
+ <div class="card full"><div class="l">Options flow (Deribit big trades) and what it has done to price</div>
+  <div class="v" id="op">—</div><div class="s" id="op2" style="line-height:1.5">—</div>
+  <div class="s" id="opst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Paper account: fake $30 trying to reach $500 (picks its own bet sizes, re-bets profits)</div>
+  <div class="v" id="pa">—</div><div class="s" id="pa2" style="line-height:1.5">—</div>
+  <div style="margin-top:6px"><label style="display:block;margin-bottom:6px"><input type="checkbox" id="pah85" onchange="PA.hold85=this.checked;paSave()"> Hold every bet until it is worth 85¢+ (no cashing out for cents)</label><button class="clr" style="margin-bottom:8px" onclick="paFewer()">⚡ Fewer, bigger bets (preset: hold to the end, 25%, flip gate on, needs an 8¢ edge)</button><br><label style="display:block;margin-bottom:6px"><input type="checkbox" id="pasafe" onchange="PA.safe=this.checked;paSave()"> Drop to 25% bets once the account doubles (protects the win)</label><label style="display:block;margin-bottom:6px"><input type="checkbox" id="pagate" onchange="paGate(this.checked)"> Only trade when BOTH flip readings are 70%+ (and point the same way as the trade)</label><div id="pagst" class="s" style="margin-bottom:6px"></div>Mode: <select id="pamode" onchange="paMode(this.value)" style="background:#141b29;color:#e8edf5;border:1px solid #2a3550;border-radius:8px;padding:4px"><option value="scalp">Scalp (small wins)</option><option value="hold">Hold to the end (double or nothing)</option></select><br>Bet size per trade: <select id="pafrac" onchange="paFrac(this.value)" style="background:#141b29;color:#e8edf5;border:1px solid #2a3550;border-radius:8px;padding:4px"><option value="0.1">10% of account</option><option value="0.25">25% (big)</option><option value="0.5">50% (huge)</option><option value="1">100% (all-in)</option></select> <button class="clr" onclick="if(confirm('Reset the paper account to $30?'))paReset()">Reset paper account</button></div></div>
+ <div class="card full"><div class="l">Polymarket 15-min BTC vs Kalshi: who follows the real price closer? (read-only comparison)</div>
+  <div class="v" id="pm">—</div><div class="s" id="pm2" style="line-height:1.5">—</div>
+  <div class="s" id="pmst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Order book: resting orders near the price (Coinbase)</div>
+  <div class="v" id="ob">—</div><div class="s" id="ob2" style="line-height:1.5">—</div>
+  <div class="s" id="obst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Flow check: is the buying or selling being absorbed?</div>
+  <div class="v" id="ab">—</div><div class="s" id="ab2" style="line-height:1.5">—</div>
+  <div class="s" id="abst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Kalshi lag alert (exchanges moved, Kalshi hasn't yet)</div>
+  <div class="v" id="lag">—</div><div class="s" id="lag2" style="line-height:1.5">—</div>
+  <div class="s" id="lagst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Flip watch (price about to cross the strike?)</div>
+  <div class="v" id="flip">—</div><div class="s" id="flip2" style="line-height:1.5">—</div>
+  <div class="s" id="flipst" style="margin-top:6px"></div></div>
+ <div class="card full"><div class="l">Flip learner (teaches itself from what it sees)</div>
+  <div class="v" id="fl">—</div><div class="s" id="fl2" style="line-height:1.5">—</div>
+  <div class="s" id="fl3" style="margin-top:6px;line-height:1.5"></div>
+  <button class="clr" style="margin-top:8px" onclick="clearModel()">Reset learner</button> <button class="clr" style="margin-top:8px" onclick="if(confirm('Wipe the AI brain?'))resetAI()">Reset AI</button></div>
+ <div class="card full"><canvas id="c" width="720" height="190"></canvas></div>
+ <div class="card full"><div class="l">Real-time taker flow, all exchanges (last <span id="fw">5</span>s)</div>
+  <div class="fwb"><button id="b5" onclick="setFW(5)">5s</button><button id="b15" onclick="setFW(15)">15s</button><button id="b50" onclick="setFW(50)">50s</button></div>
+  <div class="s" style="margin-top:8px"><span class="g" id="bv">0</span> BTC bought &nbsp;|&nbsp; <span class="r" id="sv">0</span> BTC sold &nbsp;|&nbsp; <span id="imb">—</span></div>
+  <div class="bar"><div id="ib"></div></div>
+  <div class="s" id="exf" style="margin-top:8px;line-height:1.6"></div></div>
+ <div class="card full"><div class="l">Track record (saved on this phone)</div>
+  <div class="s" id="trk" style="margin-top:6px;line-height:1.6">Logs the model's call once per window (when you've entered the strike and ≤5 min remain), then scores it.</div>
+  <button class="clr" style="margin-top:8px" onclick="clearLog()">Clear log</button></div>
+</div>
+<div class="note">Feeds: Coinbase, Kraken, Bitstamp, Gemini. Composite = average of fresh prices; the 60s average approximates how these markets settle (confirm in Kalshi's rules). Model: fat-tailed (Student-t) distribution, volatility from recent trades and the last 30 one-minute candles, plus a small order-flow nudge. For fun only, not financial advice; it will be wrong often.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const W15=15*60000;let curWin=()=>Math.floor(Date.now()/W15)*W15;
+let FW=5000,manual={s:null,win:null},lastT=Date.now(),open24=null,close=0,strike=null;
+let ex={},trades=[],hist=[],back=[],candleVol=null,live=new Set(),lastPush=0;
+let LOG=[];try{LOG=JSON.parse(localStorage.getItem('btcLog')||'[]')}catch(e){}
+let K=null,Kt=0,Kauto=false,entry=null;
+let pos=null,posWin=null;
+function setEntry(){const v=parseFloat($('entryP').value);entry=isNaN(v)?null:v}
+function setPos(v){pos=v;posWin=curWin();if(!v){entry=null;try{$('entryP').value=''}catch(e){}}['p0','pu','pd'].forEach(id=>$(id).classList.toggle('on',(id==='p0'&&!v)||(id==='pu'&&v==='up')||(id==='pd'&&v==='down')))}
+let pending=null,loggedWin=null,lastAvg=null,lastAvgT=0;
+const fmt=n=>n==null?'—':'$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+// Student-t (4 dof) CDF, rescaled so the std-dev matches: fatter tails than a normal
+function tcdf4(z){const t=z*Math.SQRT2,q=1+t*t/4,x=t/Math.sqrt(q);return .5+.375*x*(1-(t*t/q)/12)}
+
+function setFW(n){FW=n*1000;$('fw').textContent=n;[5,15,50].forEach(k=>$('b'+k).classList.toggle('on',k===n))}
+function setManual(){const v=parseFloat($('mS').value);manual={s:isNaN(v)?null:v,win:curWin()}}
+function clearLog(){LOG=[];try{localStorage.removeItem('btcLog')}catch(e){}}
+function saveLog(){try{localStorage.setItem('btcLog',JSON.stringify(LOG.slice(-300)))}catch(e){}}
+
+// ---------- feeds ----------
+function addTrade(name,price,sz,buy,isTrade){
+ const now=Date.now();lastT=now;ex[name]={p:price,t:now};
+ if(isTrade){szs.push(sz);if(szs.length>400)szs.shift()}if(isTrade)trades.push({t:now,sz,buy,ex:name});
+ const c=composite();if(c!=null&&now-lastPush>200){hist.push({t:now,p:c});lastPush=now}
+}
+function composite(){const now=Date.now(),v=Object.values(ex).filter(e=>now-e.t<30000).map(e=>e.p);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null}
+function feed(name,url,sub,onmsg){
+ let ws;try{ws=new WebSocket(url)}catch(e){return}
+ ws.onopen=()=>{live.add(name);if(sub)ws.send(JSON.stringify(sub))};
+ ws.onmessage=e=>{try{onmsg(JSON.parse(e.data))}catch(x){}};
+ ws.onclose=()=>{live.delete(name);delete ex[name];setTimeout(()=>feed(name,url,sub,onmsg),3000)};
+ ws.onerror=()=>{try{ws.close()}catch(e){}};
+}
+function startFeeds(){
+ feed('Coinbase','wss://ws-feed.exchange.coinbase.com',{type:'subscribe',product_ids:['BTC-USD'],channels:['matches','ticker']},m=>{
+  if(m.type==='ticker'&&m.open_24h)open24=+m.open_24h;
+  if(m.type==='match')addTrade('Coinbase',+m.price,+m.size,m.side==='sell',true); // maker sold => taker bought
+  else if(m.type==='last_match')addTrade('Coinbase',+m.price,0,false,false)});
+ feed('Kraken','wss://ws.kraken.com/v2',{method:'subscribe',params:{channel:'trade',symbol:['BTC/USD']}},m=>{
+  if(m.channel!=='trade'||!m.data)return;
+  m.data.forEach(d=>addTrade('Kraken',+d.price,+d.qty,d.side==='buy',m.type==='update'))});
+ feed('Bitstamp','wss://ws.bitstamp.net',{event:'bts:subscribe',data:{channel:'live_trades_btcusd'}},m=>{
+  if(m.event!=='trade')return;const d=typeof m.data==='string'?JSON.parse(m.data):m.data;
+  addTrade('Bitstamp',+d.price,+d.amount,+d.type===0,true)});
+ feed('Gemini','wss://api.gemini.com/v1/marketdata/btcusd?trades=true&bids=false&offers=false&heartbeat=false',null,m=>{
+  if(m.type!=='update'||!m.events)return;
+  m.events.forEach(e=>{if(e.type==='trade')addTrade('Gemini',+e.price,+e.amount,e.makerSide==='ask',true)})});
+}
+let perp=[],perpOk=false;
+function perpFeed(){
+ let ws;try{ws=new WebSocket('wss://ws.okx.com:8443/ws/v5/public')}catch(e){return}
+ ws.onopen=()=>ws.send(JSON.stringify({op:'subscribe',args:[{channel:'trades',instId:'BTC-USDT-SWAP'}]}));
+ ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m.data&&m.arg&&m.arg.channel==='trades'){perpOk=true;m.data.forEach(d=>perp.push({t:Date.now(),p:+d.px}));if(perp.length>3000)perp.splice(0,1000)}}catch(x){}};
+ ws.onclose=()=>{perpOk=false;setTimeout(perpFeed,5000)};ws.onerror=()=>{try{ws.close()}catch(e){}};
+}
+// futures lead: how far the perp has moved vs spot over the last 10s (dollars). Futures often move first.
+function perpLead(now,price){
+ if(!perpOk||!perp.length||now-perp[perp.length-1].t>10000)return null;
+ const a=perp.find(x=>x.t>=now-10000),b=hist.find(h=>h.t>=now-10000);
+ if(!a||!b)return null;
+ return (perp[perp.length-1].p/a.p-price/b.p)*price;
+}
+// Kalshi settles on the AVERAGE of the final 60 index prices, so model that average, not the spot price
+function settleStats(now,close,left,price,sig){
+ const r=Math.min(left,60);let known=0;
+ if(left<60){const a=new Array(60).fill(null);
+  hist.forEach(h=>{const s=Math.floor((h.t-(close-60000))/1000);if(s>=0&&s<60)a[s]=h.p});
+  let c=null;for(let i=0;i<60;i++){if(a[i]!=null)c=a[i];else a[i]=c}
+  const el=Math.floor(60-r);for(let i=0;i<el;i++)known+=(a[i]!=null?a[i]:price);}
+ const m=(known+r*price)/60;
+ const v=sig*sig*(Math.max(left-60,0)*(r/60)**2+r*r*r/10800);
+ return {m,sd:Math.sqrt(Math.max(v,1e-9))};
+}
+async function backfill(){
+ try{
+  const r=await fetch('https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=60');
+  const k=(await r.json()).slice(0,30).reverse();
+  back=k.map(c=>({t:Math.min(Date.now(),(c[0]+60)*1000),p:c[4]}));
+  const cl=k.map(c=>c[4]),rs=[];for(let i=1;i<cl.length;i++)rs.push(Math.log(cl[i]/cl[i-1]));
+  const mu=rs.reduce((a,b)=>a+b,0)/rs.length;candleVol=Math.sqrt(rs.reduce((a,b)=>a+(b-mu)**2,0)/rs.length)/Math.sqrt(60);
+ }catch(e){}
+}
+
+async function pollK(){
+ const u=$('relay').value.trim();if(!u)return;
+ try{
+  const r=await fetch(u,{cache:'no-store'});const m=await r.json();if(!m||!m.ticker)throw 0;
+  const g=f=>{let v=null;if(m[f]!=null)v=+m[f];else{const d=m[f+'_dollars'];if(d!=null)v=+d*100}return v==null||isNaN(v)?null:Math.round(v*10)/10};
+  K={strike:+m.floor_strike,close:Date.parse(m.close_time),yb:g('yes_bid'),ya:g('yes_ask'),nb:g('no_bid'),na:g('no_ask'),tk:m.ticker};Kt=Date.now();
+  try{localStorage.setItem('btcRelay',u)}catch(e){}
+ }catch(e){K=null;$('kst').textContent='Relay not responding (check the URL).'}
+}
+try{$('relay').value=localStorage.getItem('btcRelay')||''}catch(e){}
+if(!$('relay').value&&/(workers|pages)\.dev$/.test(location.hostname))$('relay').value=location.origin+'/k';
+// ---------- math ----------
+function avg60(now){
+ const a=new Array(60).fill(null);
+ hist.forEach(h=>{const s=Math.floor((now-h.t)/1000);if(s>=0&&s<60)a[s]=h.p});
+ let carry=null;const before=[...hist].reverse().find(h=>now-h.t>=60000);carry=before?before.p:(hist[0]?hist[0].p:null);
+ for(let i=59;i>=0;i--){if(a[i]==null)a[i]=carry;else carry=a[i]}
+ const v=a.filter(x=>x!=null);return v.length?v.reduce((x,y)=>x+y,0)/v.length:null;
+}
+function vol(){
+ const now=Date.now(),b={};hist.filter(x=>x.t>now-300000).forEach(x=>b[Math.floor(x.t/1000)]=x.p);
+ const k=Object.keys(b).sort(),rs=[];for(let i=1;i<k.length;i++)rs.push(Math.log(b[k[i]]/b[k[i-1]])/Math.sqrt(k[i]-k[i-1]));
+ let own=0;if(rs.length>=10){const mu=rs.reduce((a,b)=>a+b,0)/rs.length;own=Math.sqrt(rs.reduce((a,b)=>a+(b-mu)**2,0)/rs.length)}
+ return Math.max(own,candleVol||0,0.00002); // take the larger: avoids overconfidence
+}
+const sum=(arr,buy)=>arr.filter(t=>t.buy===buy).reduce((a,t)=>a+t.sz,0);
+
+// ---------- track record ----------
+function track(now,useS,p,left,price,avg){
+ const cw=curWin();
+ if(pending&&pending.win!==cw){
+  const endT=pending.win+W15;
+  if(lastAvg!=null&&Math.abs(lastAvgT-endT)<30000){pending.final=lastAvg;pending.up=lastAvg>pending.strike?1:0;LOG.push(pending);saveLog()}
+  pending=null;
+ }
+ if(!pending&&loggedWin!==cw&&(manual.s!=null&&manual.win===cw||Kauto)&&left<=300&&left>30&&now-lastT<10000){
+  pending={win:cw,strike:useS,p:+p.toFixed(4),left:Math.round(left),price:Math.round(price)};loggedWin=cw;
+ }
+ lastAvg=avg;lastAvgT=now;
+ const n=LOG.length;
+ if(!n){$('trk').innerHTML='No scored windows yet. Enter the strike each window and leave the page open through the end.'+(pending?'<br>Current window logged: model said '+(pending.p*100).toFixed(0)+'% Up.':'');return}
+ const hit=LOG.filter(e=>(e.p>=.5)===(e.up===1)).length,br=LOG.reduce((a,e)=>a+(e.p-e.up)**2,0)/n;
+ const rows=LOG.slice(-5).reverse().map(e=>`${new Date(e.win).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}: said ${(e.p*100).toFixed(0)}% Up → ${e.up?'Up':'Down'} ${((e.p>=.5)===(e.up===1))?'✓':'✗'}`).join('<br>');
+ $('trk').innerHTML=`<b>${hit}/${n}</b> windows called on the right side · Brier ${br.toFixed(3)} (0.250 = coin flip, lower is better)<br>${rows}`+(pending?`<br>Now: logged ${(pending.p*100).toFixed(0)}% Up`:'');
+}
+
+const kfee=x=>0.07*x*(1-x)*100; // approx Kalshi fee in cents per contract (1-lots round up, so real cost is a bit higher)
+function signalUI(p,left,useS,gap,Kf){
+ const set=(h,c,t)=>{lastSig={h,c,t};$('sig').textContent=h;$('sig').style.color=c;$('sig2').innerHTML=t};
+ const mu='var(--mu)';
+ if(posWin!=null&&posWin!==curWin())setPos(null);
+ if(useS==null||p==null)return set('—',mu,'Enter the strike (or connect the relay) to get a signal.');
+ if(gap)return set('WAIT',mu,'Data feed stalled. Numbers may be stale.');
+ const pU=p*100,pD=100-pU,pu=Math.round(pU);
+ const cost=(Kf&&K.ya!=null&&K.yb!=null)?`<br>Round trip costs about ${(K.ya-K.yb+2*kfee(K.ya/100)).toFixed(0)}¢ (spread + fees). Price has to move more than that just to break even.`:'';
+ if(pos){
+  const nm=pos==='up'?'Up':'Down',ps=pos==='up'?p:1-p,pc=Math.round(ps*100),fairS=ps*100;
+  if(left<30)return set('HOLD',mu,`Under 30s left. Model has your ${nm} at ${pc}%.`);
+  const bid=Kf?(pos==='up'?K.yb:K.nb):null;
+  if(bid!=null){
+   const en=entry,fe=en!=null?2*kfee(en/100):0;
+   if(en!=null&&bid>=en+fe+3)return set('SELL NOW (take profit)','var(--g)',`Bid ${bid}¢ vs your ${en}¢ cost: about +${(bid-en-fe).toFixed(0)}¢ per contract after fees.`);
+   if(bid>=fairS-2&&(en==null||bid>en))return set('SELL (market pays full model value)','var(--g)',`Bid ${bid}¢ is at the model's value for your ${nm} (${pc}%). Little left to gain by holding.`);
+   if(ps<0.35||(en!=null&&bid<=en-8))return set('EXIT: cut the loss','var(--r)',`Model gives your ${nm} ${pc}% and the bid is ${bid}¢${en!=null?` vs ${en}¢ paid`:''}.`);
+   return set('HOLD',mu,`Your ${nm}: model ${pc}%, bid ${bid}¢`+(en!=null?`, paid ${en}¢. Profit target ${Math.ceil(en+fe+3)}¢.`:'. Enter the price you paid for a profit target.')+cost);
+  }
+  if(ps<0.4)return set('CONSIDER EXITING','var(--r)',`Model now gives your ${nm} only ${pc}%.`);
+  if(ps>=0.9)return set('HOLDING LOOKS OK','var(--g)',`Model gives your side ${pc}%.`);
+  return set('HOLD',mu,`Model gives your side ${pc}%. No exit signal.`);
+ }
+ if(left<60)return set('TOO LATE',mu,'Under 60s left. At these prices a win pays only a few cents and one loss wipes out many wins.');
+ if(left>420)return set('WAIT',mu,`Early in the window (${Math.floor(left/60)} min left) is where the model is weakest. Check again with 7 min or less.`);
+ if(Kf&&K.ya!=null&&K.na!=null){
+  const eU=pU-K.ya-kfee(K.ya/100),eD=pD-K.na-kfee(K.na/100);
+  if(eU>=8&&K.ya>=15&&K.ya<=80)return set('BUY UP','var(--g)',`Model ${pu}% vs Kalshi ask ${K.ya}¢: edge about ${eU.toFixed(0)}¢ after fees.<br>If right you make about +${(100-K.ya-kfee(K.ya/100)).toFixed(0)}¢ per contract, if wrong you lose ${K.ya}¢.`+cost);
+  if(eD>=8&&K.na>=15&&K.na<=80)return set('BUY DOWN','var(--r)',`Model ${100-pu}% Down vs Kalshi ask ${K.na}¢: edge about ${eD.toFixed(0)}¢ after fees.<br>If right you make about +${(100-K.na-kfee(K.na/100)).toFixed(0)}¢ per contract, if wrong you lose ${K.na}¢.`+cost);
+  const hi=(eU>=8&&K.ya>80)||(eD>=8&&K.na>80);return set('NO TRADE',mu,hi?`The model likes one side, but it costs over 80¢. A win pays under 20¢ and a loss costs 80¢+, so the page skips it.`:`Up edge ${eU.toFixed(0)}¢, Down edge ${eD.toFixed(0)}¢ (need 8¢ or more).`+cost);
+ }
+ const M=8,maxUp=Math.min(90,Math.floor(pU-M)),maxDn=Math.min(90,Math.floor(pD-M));
+ if(p>=0.7&&maxUp>=40)return set('LEAN UP','var(--g)',`Model: ${pu}% Up. Only buy Up if Kalshi's price is <b>${maxUp}¢ or less</b>.`);
+ if(p<=0.3&&maxDn>=40)return set('LEAN DOWN','var(--r)',`Model: ${100-pu}% Down. Only buy Down if Kalshi's price is <b>${maxDn}¢ or less</b>.`);
+ return set('NO TRADE',mu,`Model is ${pu}% Up, too close to 50/50 to show an edge.`);
+}
+let FL=[];try{FL=JSON.parse(localStorage.getItem('btcFlip')||'[]')}catch(e){}
+let fpend=null,fLast=0;
+function imbW(now,ms){const w=trades.filter(t=>t.t>now-ms),b=sum(w,true),s=sum(w,false);return (b+s)?(b-s)/(b+s):0}
+function flipWatch(price,useS,left,now,Kf){
+ const set=(h,c,t)=>{$('flip').textContent=h;$('flip').style.color=c;$('flip2').innerHTML=t};
+ const mu='var(--mu)';
+ if(fpend){
+  const seen=hist.filter(h=>h.t>=fpend.t);
+  const crossed=fpend.side==='up'?seen.some(h=>h.p>=fpend.strike):seen.some(h=>h.p<=fpend.strike);
+  if(crossed||now-fpend.t>120000||fpend.win!==curWin()){FL.push({t:fpend.t,side:fpend.side,hit:crossed?1:0});try{localStorage.setItem('btcFlip',JSON.stringify(FL.slice(-200)))}catch(e){}fpend=null}
+ }
+ const n=FL.length,hh=FL.filter(x=>x.hit).length;
+ $('flipst').textContent=n?`Alert record: price crossed the strike within 2 min after ${hh} of ${n} alerts. (Crossing is not the same as profit; check the price you'd get.)`:'No alerts scored yet. Each alert is checked 2 minutes later.';
+ if(useS==null)return set('—',mu,'Enter the strike (or connect the relay).');
+ if(left<45)return set('TOO LATE',mu,'Under 45s left.');
+ const sdv=vol()*price*Math.sqrt(Math.max(left,1)),d0=price-useS,z=Math.abs(d0)/sdv;
+ const touch=Math.min(1,2*(1-tcdf4(z))),tp=Math.round(touch*100);
+ const side=d0<0?'up':'down',dir=side==='up'?1:-1;
+ fwPct={tp,side,t:now};
+ const p10=hist.find(x=>x.t>=now-10000),p45=hist.find(x=>x.t>=now-45000);
+ const m10=p10?price-p10.p:0,m45=p45?price-p45.p:0,th=price*0.00002;
+ const a=m10*dir>th&&m45*dir<=th*2; // short move toward the strike after drifting away or flat
+ const b=imbW(now,5000)*dir>0.2&&imbW(now,50000)*dir<0.1; // fast flow turning toward strike while the longer flow lags
+ const c=touch>=0.4;
+ const nm=side==='up'?'Up':'Down',gap=Math.abs(d0).toFixed(0);
+ const why=`Price is $${gap} ${side==='up'?'below':'above'} the strike. Chance it touches the strike again before the end: ${tp}%.<br>Momentum turning toward strike: ${a?'<b>yes</b>':'no'} · Flow turning: ${b?'<b>yes</b>':'no'}`;
+ if(c&&(a||b)){
+  const ask=Kf?(side==='up'?K.ya:K.na):null;
+  fwNow={side,t:now};
+  if(!fpend&&now-fLast>90000){fpend={t:now,side,strike:useS,win:curWin()};fLast=now}
+  return set('FLIP WATCH: '+nm.toUpperCase(),side==='up'?'var(--g)':'var(--r)',why+(ask!=null?`<br>${nm} is the cheap side now, asking ${ask}¢.`:`<br>${nm} should be the cheap side right now.`)+'<br>This is a heads-up, not a guarantee. Price can turn back.');
+ }
+ if(c)return set('CLOSE TO STRIKE',mu,why+'<br>No turn yet.');
+ return set('FAR FROM STRIKE',mu,why);
+}
+// ---------- flip learner (online logistic regression) ----------
+const NF=9,HZ=120000,MINN=150;
+const W0=[0,3,0,0,0,0,0,0,0]; // starting belief: trust the plain touch-chance formula
+let szs=[],MW=W0.slice(),MN=0,RES=[],PEND=[],lastS=0;
+try{const m=JSON.parse(localStorage.getItem('btcModel')||'null');if(m&&m.w&&m.w.length===NF){MW=m.w;MN=m.n||0}RES=JSON.parse(localStorage.getItem('btcRes')||'[]')}catch(e){}
+function saveModel(){try{localStorage.setItem('btcModel',JSON.stringify({w:MW,n:MN}));localStorage.setItem('btcRes',JSON.stringify(RES.slice(-300)))}catch(e){}}
+function clearModel(){MW=W0.slice();MN=0;RES=[];PEND=[];try{localStorage.removeItem('btcModel');localStorage.removeItem('btcRes')}catch(e){}}
+const sgm=z=>1/(1+Math.exp(-z)),dotp=(w,x)=>w.reduce((a,b,i)=>a+b*x[i],0),clp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function feats(price,useS,left,now){
+ const d0=price-useS,dir=d0<0?1:-1,h=Math.min(left,HZ/1000);
+ const sdh=vol()*price*Math.sqrt(Math.max(h,1));
+ const pb=clp(2*(1-tcdf4(Math.abs(d0)/sdh)),0.001,0.999); // plain-formula chance of touching the strike within the horizon
+ const p10=hist.find(x=>x.t>=now-10000),p45=hist.find(x=>x.t>=now-45000),u=price*0.0001;
+ const m10=p10?(price-p10.p)*dir/u:0,m45=p45?(price-p45.p)*dir/u:0;
+ const med=szs.length>20?[...szs].sort((a,b)=>a-b)[Math.floor(szs.length/2)]:0.05,thr=Math.max(5*med,0.2);
+ const w30=trades.filter(t=>t.t>now-30000),tot=w30.reduce((a,t)=>a+t.sz,0)||1;
+ const big=w30.filter(t=>t.sz>=thr).reduce((a,t)=>a+(t.buy?1:-1)*t.sz,0)*dir;
+ const x=[1,clp(Math.log(pb/(1-pb)),-5,5)/3,clp(Math.abs(d0)/sdh,0,4)/2,left/900,clp(m10,-3,3)/3,clp(m45,-3,3)/3,imbW(now,5000)*dir,imbW(now,50000)*dir,clp(big/tot,-1,1)];
+ return{x,pb,dir,h};
+}
+function learner(price,useS,left,now,gap){
+ const set=(h,c,t,t3)=>{$('fl').textContent=h;$('fl').style.color=c;$('fl2').innerHTML=t;if(t3!=null)$('fl3').innerHTML=t3};
+ const mu='var(--mu)';
+ // 1) score samples whose 2-minute outcome is now known, then learn from them
+ for(let i=PEND.length-1;i>=0;i--){
+  const q=PEND[i],qh=(q.h||HZ/1000)*1000;if(now-q.t<qh)continue;
+  const seen=hist.filter(h=>h.t>=q.t&&h.t<=q.t+qh);
+  if(seen.length>=Math.min(20,Math.max(5,qh/3000))){
+   const y=(q.dir>0?seen.some(h=>h.p>=q.strike):seen.some(h=>h.p<=q.strike))?1:0;
+   RES.push({pl:q.pl,pb:q.pb,y});
+   const g=sgm(dotp(MW,q.x))-y;for(let k=0;k<NF;k++)MW[k]-=0.03*(g*q.x[k]+0.01*(MW[k]-W0[k]));
+   MN++;saveModel();
+  }
+  PEND.splice(i,1);
+ }
+ const R=RES.slice(-200),n=R.length;
+ let st='No scored samples yet. It needs the page open with a strike entered (or the relay).';
+ if(n){
+  const bl=R.reduce((a,r)=>a+(r.pl-r.y)**2,0)/n,bb=R.reduce((a,r)=>a+(r.pb-r.y)**2,0)/n,br=R.reduce((a,r)=>a+r.y,0)/n;
+  const hi=R.filter(r=>r.pl>=0.6),hit=hi.length?hi.filter(r=>r.y).length/hi.length:null;
+  st=`Scored ${n} samples. Flips happened ${(br*100).toFixed(0)}% of the time.<br>Learned error ${bl.toFixed(3)} vs plain formula ${bb.toFixed(3)} (lower is better; ${(br*(1-br)).toFixed(3)} = guessing the average).<br>`+(hi.length?`When it said 60%+: ${hi.length} times, flip followed ${(hit*100).toFixed(0)}%.`:'It hasn\'t said 60%+ yet.');
+  R.beats=bl<bb;
+ }
+ if(useS==null)return set('—',mu,'Enter the strike (or connect the relay).',st);
+ if(gap)return set('WAIT',mu,'Data feed stalled.',st);
+ if(left<30)return set('TOO LATE',mu,'Under 30s left.',st);
+ const f=feats(price,useS,left,now),pl=sgm(dotp(MW,f.x));
+ // 2) take a sample every 5s. Its question is "does price cross before min(2 min, the end of THIS window)?"
+ //    so it also learns the last 2 minutes, where time is running out, instead of only ever looking 2 minutes ahead
+ if(now-lastS>=5000&&left>=35&&Math.abs(price-useS)>0){
+  lastS=now;PEND.push({t:now,x:f.x,pl,pb:f.pb,dir:f.dir,strike:useS,h:f.h});if(PEND.length>60)PEND.shift();
+ }
+ const nm=f.dir>0?'UP':'DOWN',side=f.dir>0?'below':'above';
+ const line=`Price is $${Math.abs(price-useS).toFixed(0)} ${side} the strike.<br>Learned chance it crosses ${f.h>=HZ/1000?'within 2 min':'before this window ends ('+Math.round(f.h)+'s left)'}: <b>${(pl*100).toFixed(0)}%</b> (plain formula: ${(f.pb*100).toFixed(0)}%)`;
+ const R2=RES.slice(-200),brr=R2.reduce((a,r)=>a+r.y,0)/(R2.length||1),beats=n>=MINN&&(R2.reduce((a,r)=>a+(r.pl-r.y)**2,0)/n<Math.min(R2.reduce((a,r)=>a+(r.pb-r.y)**2,0)/n,brr*(1-brr)));
+ flNow={dir:f.dir,pl,ok:n>=MINN&&beats,t:now};
+ if(n<MINN)return set('LEARNING '+n+'/'+MINN,mu,line+'<br>Not enough scored samples to trust. Leave the page open.',st);
+ if(!beats)return set('NOT PROVEN YET',mu,line+'<br>So far the learning hasn\'t beaten both the plain formula and simply guessing the average flip rate. Don\'t trust it yet.',st);
+ if(pl>=0.6)return set('BIG FLIP LIKELY: '+nm,f.dir>0?'var(--g)':'var(--r)',line+'<br>Check the cheap side\'s price before buying, and remember spread and fees.',st);
+ return set('NO BIG FLIP SIGNAL',mu,line,st);
+}
+
+
+
+
+// ---------- Decision card ----------
+let lastSig=null,abDirNow={d:0,t:0},decSeen={},decShown=null,snap=null,lastRes=null;
+function decisionUI(now,left,Kf,price,avg,useS){
+ const set=(h,c,t,t3)=>{$('dec').textContent=h;$('dec').style.color=c;$('dec2').innerHTML=t;$('dec3').innerHTML=t3||''};
+ const mu='var(--mu)',g='var(--g)',r='var(--r)';
+ if(!lastSig)return set('—',mu,'Waiting for data.');
+ // keep following a trade to the very end, then show how it finished
+ if(pos){snap={pos,win:posWin,s:useS,avg,price,entry,t:now}}
+ else if(snap&&curWin()===snap.win)snap=null;
+ else if(snap){const w=snap.s!=null&&snap.avg!=null?(snap.pos==='up'?snap.avg>snap.s:snap.avg<snap.s):null;lastRes={w,pos:snap.pos,s:snap.s,avg:snap.avg,t:now};snap=null}
+ if(!pos&&lastRes&&now-lastRes.t<180000){
+  const nm=lastRes.pos==='up'?'Up':'Down';
+  if(lastRes.w==null)return set('WINDOW ENDED',mu,`Check Kalshi for how your ${nm} settled.`,'');
+  return set(lastRes.w?'LAST TRADE: WIN (estimated)':'LAST TRADE: LOSS (estimated)',lastRes.w?g:r,`Your ${nm}: final 60s average ${fmt(lastRes.avg)} vs strike ${fmt(lastRes.s)}. Kalshi's own number decides, so check the app.`,'');
+ }
+ if(pos&&useS!=null&&price!=null){
+  const nm=pos==='up'?'Up':'Down',d=price-useS,da=avg!=null?avg-useS:null;
+  const win=pos==='up'?d>0:d<0,winA=da==null?null:(pos==='up'?da>0:da<0);
+  const bid=Kf?(pos==='up'?K.yb:K.nb):null;
+  const live=`BTC now ${fmt(price)} (${d>=0?'+':'-'}$${Math.abs(d).toFixed(0)} vs strike)`+(da!=null?` · 60s average ${fmt(avg)} (${da>=0?'+':'-'}$${Math.abs(da).toFixed(0)})`:'')+(bid!=null?` · Kalshi would pay ${bid}¢ now`+(entry!=null?` (you paid ${entry}¢)`:''):'');
+  if(left<=60){
+   return set(left<=0?'WINDOW CLOSING':(win&&winA!==false?`${nm}: WINNING NOW`:(!win&&winA===false?`${nm}: LOSING NOW`:`${nm}: TOO CLOSE`)),win&&winA!==false?g:(!win&&winA===false?r:mu),`Final minute, ${Math.max(0,Math.floor(left))}s left. Kalshi settles on the average of the last 60 seconds, so the average matters more than the price right now.`,live);
+  }
+  if(lastSig.h.indexOf('SELL')===0||lastSig.h.indexOf('EXIT')===0||lastSig.h.indexOf('HOLD')===0||lastSig.h.indexOf('CONSIDER')===0)return set(lastSig.h.replace(' (take profit)','').replace(' (market pays full model value)',''),lastSig.c,lastSig.t,live);
+ }
+ const h=lastSig.h,isBuy=h==='BUY UP'||h==='BUY DOWN';
+ const up=h==='BUY UP';
+ if(isBuy){
+  if(!decSeen[h])decSeen[h]=now;
+  const opp=up?'BUY DOWN':'BUY UP';delete decSeen[opp];
+  const steady=now-decSeen[h]>=3000;
+  const locked=decShown&&decShown.h===opp&&now-decShown.t<30000;
+  if(!steady)return set('WAIT',mu,'A buy signal just appeared. Waiting 3 seconds to see if it holds.','');
+  if(locked)return set('WAIT',mu,`The call just switched from ${opp.replace('BUY ','')}. Waiting 30 seconds for it to settle before trusting the new side.`,'');
+  if(!decShown||decShown.h!==h)decShown={h,t:now};else decShown.t=now;
+  const lim=up?K.ya:K.na,fl=abDirNow&&now-abDirNow.t<5000?abDirNow.d:0,want=up?1:-1;
+  const fx=fl===0?'Flow check: no clear read.':(fl===want?'Flow check: <b>agrees</b> with this side.':'Flow check: <b>disagrees</b>. Be careful.');
+  return set(h,up?g:r,lastSig.t,(lim!=null?`Don't pay more than <b>${lim}¢</b> per contract. `:'')+fx);
+ }
+ decSeen={};
+ if(h==='TOO LATE'&&useS!=null&&price!=null){const d=price-useS;return set('TOO LATE TO BUY',mu,lastSig.t,`BTC now ${fmt(price)} (${d>=0?'+':'-'}$${Math.abs(d).toFixed(0)} vs strike)`+(avg!=null?` · 60s average ${fmt(avg)}`:'')+(Kf?` · Kalshi Up ${K.ya}¢ / Down ${K.na}¢`:''))}
+ if(decShown&&(now-decShown.t>15000))decShown=null;
+ if(h.indexOf('SELL')===0||h.indexOf('EXIT')===0||h.indexOf('CONSIDER EXITING')===0)return set(h.replace(' (take profit)','').replace(' (market pays full model value)',''),lastSig.c,lastSig.t,'');
+ if(h==='HOLD'||h.indexOf('HOLD')===0)return set('HOLD',mu,lastSig.t,'');
+ if(left>420&&Kf){const w=left-420;return set('WAIT',mu,`Buy calls start with 7 minutes left (in ${Math.floor(w/60)}:${String(Math.floor(w%60)).padStart(2,'0')}). Earlier than that the model is too unreliable.`,'')}
+ return set(h==='NO TRADE'?'NO TRADE':h,mu,lastSig.t,'');
+}
+// ---------- Scalp lab (paper) ----------
+const SR=[];[4,6,8].forEach(D=>[4,6,8].forEach(T=>[4,6].forEach(S=>SR.push({D,T,S,n:0,pnl:0,w:0,o:{y:null,n:null},cd:{y:0,n:0}}))));
+let skH=[],skInit=false;
+function scalpLab(now,Kf,left){
+ if(!skInit){skInit=true;try{const m=JSON.parse(localStorage.getItem('btcScalp')||'null');if(m)SR.forEach((r,i)=>{if(m[i]){r.n=m[i].n;r.pnl=m[i].pnl;r.w=m[i].w}})}catch(e){}}
+ const mu='var(--mu)';
+ if(Kf&&K.ya!=null&&K.yb!=null&&K.na!=null&&K.nb!=null){
+  if(!skH.length||now-skH[skH.length-1].t>=900)skH.push({t:now,y:K.ya,n:K.na});skH=skH.filter(x=>x.t>now-22000);
+  const q={y:{a:K.ya,b:K.yb},n:{a:K.na,b:K.nb}};
+  SR.forEach(r=>['y','n'].forEach(sd=>{
+   const {a,b}=q[sd],o=r.o[sd];
+   if(o){
+    const age=(now-o.t)/1000;let ex=null;
+    if(b-o.p>=r.T)ex=b;else if(o.p-b>=r.S)ex=b;else if(age>90||left<20)ex=b;
+    if(ex!=null){const net=ex-o.p-kfee(o.p/100)-kfee(ex/100);r.n++;r.pnl+=net;if(net>0)r.w++;r.o[sd]=null;r.cd[sd]=now+10000;
+     try{localStorage.setItem('btcScalp',JSON.stringify(SR.map(x=>({n:x.n,pnl:x.pnl,w:x.w}))))}catch(e){}}
+   }else if(left>45&&now>r.cd[sd]&&a>=15&&a<=85&&a-b<=3){
+    const hi=Math.max(...skH.map(x=>x[sd]));
+    if(hi-a>=r.D)r.o[sd]={p:a,t:now};
+   }
+  }));
+ }
+ const tot=SR.reduce((x,r)=>x+r.n,0);
+ const ranked=SR.filter(r=>r.n>=5).sort((x,y)=>y.pnl/y.n-x.pnl/x.n).slice(0,4);
+ $('sc').textContent=tot?`${tot} fake scalps so far`:'COLLECTING';
+ $('sc2').innerHTML=(ranked.length?ranked.map(r=>`Buy after a ${r.D}¢ dip, sell +${r.T}¢ or stop -${r.S}¢: ${r.n} trades, ${(r.pnl/r.n>=0?'+':'')}${(r.pnl/r.n).toFixed(1)}¢ per trade after fees, won ${Math.round(r.w/r.n*100)}%`).join('<br>'):'Needs the Kalshi relay connected. It tries 18 dip-buying rules on both sides, pretending to buy at the ask and sell at the bid, and counts fees.')+'<br><b>Not a signal.</b> No rule counts as proven until it has 100+ trades and stays above about +1¢ per trade after fees. Most will be negative, and that is the expected result.';
+}
+// ---------- Absorption / flow check ----------
+let abRes=[],abPend=null,abLast=0;try{abRes=JSON.parse(localStorage.getItem('btcAbs')||'[]')}catch(e){}
+function absWatch(price,now){
+ const set=(h,c,t)=>{$('ab').textContent=h;$('ab').style.color=c;$('ab2').innerHTML=t};
+ const mu='var(--mu)',g='var(--g)',r='var(--r)';
+ // score pending call after 90s
+ if(abPend&&now>=abPend.at){
+  const mv=(price-abPend.p0)*abPend.dir,sd=vol()*abPend.p0*Math.sqrt(90);
+  abRes.push({ok:mv>0.15*sd,mv:Math.round((price-abPend.p0)*100)/100});abRes=abRes.slice(-300);
+  try{localStorage.setItem('btcAbs',JSON.stringify(abRes))}catch(e){}abPend=null;
+ }
+ const n=abRes.length,hit=abRes.filter(x=>x.ok).length;
+ $('abst').textContent=n?`Track record: price went the called way over the next 90s on ${hit} of ${n} calls (${Math.round(hit/n*100)}%). Above about 55% on 100+ calls would mean it's useful; near 50% means it's noise.`:'No calls scored yet. Each call is checked 90 seconds later.';
+ const w=trades.filter(t=>t.t>now-30000),b=sum(w,true),sl=sum(w,false),V=b+sl;
+ const p30=hist.find(h=>h.t>=now-30000);
+ if(!p30||V<0.3){set('QUIET',mu,`Only ${V.toFixed(2)} BTC traded in the last 30s. Not enough to read.`);return}
+ const imb=(b-sl)/V,d=price-p30.p,sd30=Math.max(vol()*price*Math.sqrt(30),0.01),z=d/sd30;
+ const heavy=Math.abs(imb)>=0.35;
+ const txt=`Last 30s: ${b.toFixed(2)} BTC bought, ${sl.toFixed(2)} sold (${imb>=0?'buy':'sell'} ${(Math.abs(imb)*100).toFixed(0)}%). Price ${d>=0?'+':'-'}$${Math.abs(d).toFixed(0)}.`;
+ let dir=0,h,c,why;
+ if(heavy&&imb<0&&z>-0.3){dir=1;h='SELLS ABSORBED: BIAS UP';c=g;why='Lots of selling but price is holding, so buyers are soaking it up. That often comes before a move up.'}
+ else if(heavy&&imb>0&&z<0.3){dir=-1;h='BUYS ABSORBED: BIAS DOWN';c=r;why='Lots of buying but price is not rising, so sellers are soaking it up. That often comes before a move down.'}
+ else if(heavy&&imb<0&&z<=-0.8){h='SELLS PUSHING PRICE DOWN';c=r;why='Selling is moving price, which is not absorption. This is the move already happening, usually priced into Kalshi.'}
+ else if(heavy&&imb>0&&z>=0.8){h='BUYS PUSHING PRICE UP';c=g;why='Buying is moving price, which is not absorption. This is the move already happening, usually priced into Kalshi.'}
+ else{h='NO CLEAR READ';c=mu;why='Flow is balanced or matches the price move.'}
+ abDirNow={d:dir||(h.indexOf('PUSHING PRICE DOWN')>=0?-1:h.indexOf('PUSHING PRICE UP')>=0?1:0),t:now};
+ if(dir&&!abPend&&now-abLast>60000){abPend={at:now+90000,p0:price,dir};abLast=now}
+ set(h,c,txt+'<br>'+why+(dir?'<br>This is a hint, not a trade signal. Kalshi may already have it in the price.':''));
+}
+
+// ---------- order book depth (Coinbase level 2) ----------
+const BK={b:new Map(),a:new Map(),ok:false};let obPend=null,obRes=[],obLast=0;try{obRes=JSON.parse(localStorage.getItem('btcOB')||'[]')}catch(e){}
+function bookFeed(){
+ let ws;try{ws=new WebSocket('wss://ws-feed.exchange.coinbase.com')}catch(e){return}
+ ws.onopen=()=>ws.send(JSON.stringify({type:'subscribe',product_ids:['BTC-USD'],channels:['level2_batch']}));
+ ws.onmessage=e=>{try{const m=JSON.parse(e.data);
+  if(m.type==='snapshot'){BK.b.clear();BK.a.clear();m.bids.forEach(x=>BK.b.set(+x[0],+x[1]));m.asks.forEach(x=>BK.a.set(+x[0],+x[1]));BK.ok=true}
+  else if(m.type==='l2update'){m.changes.forEach(c=>{const mp=c[0]==='buy'?BK.b:BK.a,px=+c[1],sz=+c[2];if(sz===0)mp.delete(px);else mp.set(px,sz)})}}catch(x){}};
+ ws.onclose=()=>{BK.ok=false;setTimeout(bookFeed,4000)};ws.onerror=()=>{try{ws.close()}catch(e){}};
+}
+function obImb(price){
+ if(!BK.ok)return null;const band=price*0.001;let b=0,a=0;
+ BK.b.forEach((z,px)=>{if(px>=price-band)b+=z});BK.a.forEach((z,px)=>{if(px<=price+band)a+=z});
+ return (b+a)>0?{imb:(b-a)/(b+a),b,a}:null;
+}
+function obWatch(price,now){
+ const mu='var(--mu)',g='var(--g)',r='var(--r)',set=(h,c,t)=>{$('ob').textContent=h;$('ob').style.color=c;$('ob2').innerHTML=t};
+ if(obPend&&now>=obPend.at){const mv=(price-obPend.p0)*obPend.dir,sd=vol()*obPend.p0*Math.sqrt(60);
+  obRes.push({ok:mv>0.15*sd});obRes=obRes.slice(-300);try{localStorage.setItem('btcOB',JSON.stringify(obRes))}catch(e){}obPend=null}
+ const n=obRes.length,hit=obRes.filter(x=>x.ok).length;
+ $('obst').textContent=n?`Track record: price went the leaning way over the next 60s on ${hit} of ${n} calls (${Math.round(hit/n*100)}%). Needs 100+ calls above about 55% to count as useful; this is shown only, it does not change the model yet.`:'Track record: no calls yet.';
+ const o=obImb(price);
+ if(!o){set('NO BOOK DATA',mu,'Waiting for Coinbase order book.');return}
+ const t=`Within 0.1% of price: ${o.b.toFixed(1)} BTC waiting to buy, ${o.a.toFixed(1)} BTC waiting to sell (${o.imb>=0?'buy':'sell'} side ${(Math.abs(o.imb)*100).toFixed(0)}% heavier).`;
+ let dir=0,h='BALANCED',c=mu,w='Roughly equal waiting orders on both sides.';
+ if(o.imb>=0.4){dir=1;h='BUY SIDE HEAVY: LEANS UP';c=g;w='More orders waiting under the price than above it. Selling has to chew through less on the way up.'}
+ else if(o.imb<=-0.4){dir=-1;h='SELL SIDE HEAVY: LEANS DOWN';c=r;w='More orders waiting above the price than below it.'}
+ if(dir&&!obPend&&now-obLast>60000){obPend={at:now+60000,p0:price,dir};obLast=now}
+ set(h,c,t+'<br>'+w+(dir?'<br>A lean, not a trade signal. Resting orders can be pulled in a blink.':''));
+}
+
+// ---------- options flow (Deribit) + learns how much it moves price ----------
+let OPT=[],optOk=false,optSamp=[],optPend=[],optAdj=0,optLast=0;try{optSamp=JSON.parse(localStorage.getItem('btcOpt')||'[]')}catch(e){}
+function optFeed(){
+ let ws;try{ws=new WebSocket('wss://www.deribit.com/ws/api/v2')}catch(e){return}
+ ws.onopen=()=>ws.send(JSON.stringify({jsonrpc:'2.0',id:1,method:'public/subscribe',params:{channels:['trades.option.BTC.100ms']}}));
+ ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m.result)optOk=true;
+  if(m.params&&Array.isArray(m.params.data)){optOk=true;m.params.data.forEach(d=>{
+   const cp=String(d.instrument_name).slice(-1),sg=(d.direction==='buy'?1:-1)*(cp==='C'?1:-1),u=d.amount*d.index_price;
+   if(u>0)OPT.push({t:Date.now(),s:sg*u,u});if(OPT.length>5000)OPT.splice(0,2000)})}}catch(x){}};
+ ws.onclose=()=>{optOk=false;setTimeout(optFeed,5000)};ws.onerror=()=>{try{ws.close()}catch(e){}};
+}
+function optWatch(price,now){
+ const mu='var(--mu)',g='var(--g)',r='var(--r)',set=(h,c,t)=>{$('op').textContent=h;$('op').style.color=c;$('op2').innerHTML=t};
+ const w=OPT.filter(o=>now-o.t<60000),x=w.reduce((a,o)=>a+o.s,0)/1e6,big=w.filter(o=>o.u>=100000).length;
+ const sd60=Math.max(vol()*price*Math.sqrt(60),0.01);
+ optPend=optPend.filter(q=>{if(now<q.at)return true;optSamp.push([Math.round(q.x*1000)/1000,Math.max(-5,Math.min(5,(price-q.p0)/q.sd))]);return false});
+ optSamp=optSamp.slice(-400);
+ if(optOk&&now-optLast>=30000){optLast=now;optPend.push({at:now+60000,p0:price,x,sd:sd60});try{localStorage.setItem('btcOpt',JSON.stringify(optSamp))}catch(e){}}
+ const n=optSamp.length;let sxx=0,sxy=0,syy=0;optSamp.forEach(q=>{sxx+=q[0]*q[0];sxy+=q[0]*q[1];syy+=q[1]*q[1]});
+ const beta=sxx>0?sxy/sxx:0,corr=(sxx>0&&syy>0)?sxy/Math.sqrt(sxx*syy):0,useful=n>=100&&corr>=0.1;
+ optAdj=useful?Math.max(-0.1,Math.min(0.1,beta*x)):0;
+ $('opst').innerHTML=n<20?`Learning: ${n} samples so far (needs 100+). It checks, every 30s, how much price moved in the next minute after the options flow.`:
+  `Learned from ${n} samples: each $1M of net bullish options flow was followed by about ${beta>=0?'+':'-'}$${Math.abs(beta*sd60).toFixed(0)} over the next minute (correlation ${corr.toFixed(2)}). `+(useful?'It passes the check, so it adds a small nudge to the model.':'Not proven yet (needs 100+ samples and correlation above 0.10), so it does NOT change the model.');
+ if(!optOk){set('NO OPTIONS FEED',mu,'Not connected to Deribit (it may be blocked where you are).');return}
+ const t=`Last 60s: ${w.length} option trades, ${big} of them $100k+. Net ${x>=0?'bullish':'bearish'} flow $${(Math.abs(x)).toFixed(2)}M (calls bought or puts sold counts bullish).`;
+ if(Math.abs(x)<0.5)set('QUIET',mu,t);
+ else set(x>0?'BULLISH OPTIONS FLOW':'BEARISH OPTIONS FLOW',x>0?g:r,t);
+}
+// ---------- Kalshi lag alert ----------
+let pH=[],kH=[],lagPend=null,lagRes=[];try{lagRes=JSON.parse(localStorage.getItem('btcLag')||'[]')}catch(e){}
+function lagWatch(p,left,now,Kf){
+ const set=(h,c,t)=>{$('lag').textContent=h;$('lag').style.color=c;$('lag2').innerHTML=t};
+ const mu='var(--mu)';
+ const hit=lagRes.filter(r=>r.ok).length,n=lagRes.length;
+ $('lagst').textContent=n?`Track record: Kalshi caught up in the following 15s on ${hit} of ${n} alerts (${Math.round(hit/n*100)}%).`:'No alerts scored yet. Each alert is checked 15 seconds later.';
+ if(!Kf||p==null||K.ya==null||K.yb==null){set('NEEDS KALSHI LIVE PRICES',mu,'Needs the Kalshi relay connected and a strike.');return}
+ const km=(K.yb+K.ya)/2,pc=p*100;
+ pH.push({t:now,v:pc});pH=pH.filter(x=>x.t>now-12000);
+ if(!kH.length||kH[kH.length-1].v!==km||now-kH[kH.length-1].t>2000)kH.push({t:now,v:km});kH=kH.filter(x=>x.t>now-12000);
+ if(lagPend&&now>=lagPend.at){
+  const moved=(km-lagPend.k0)*lagPend.dir,need=Math.abs(lagPend.gap)/2;
+  lagRes.push({ok:moved>=need});lagRes=lagRes.slice(-200);try{localStorage.setItem('btcLag',JSON.stringify(lagRes))}catch(e){}lagPend=null;
+ }
+ const a=pH.find(x=>x.t>=now-6000),b=kH.find(x=>x.t>=now-6000);
+ if(!a||!b||left<25||left>840){set('WATCHING',mu,`Model says ${pc.toFixed(0)}% Up, Kalshi middle price is ${km.toFixed(0)}¢. Waiting for the exchanges to move first.`);return}
+ const dm=pc-a.v,dk=km-b.v,gap=pc-km;
+ const lead=Math.abs(dm)>=3&&Math.sign(dm)===Math.sign(gap)&&Math.abs(gap)>=4&&Math.abs(dk)<Math.abs(dm)*0.4&&(dm*dk>=0||Math.abs(dk)<1);
+ if(lead){
+  const up=dm>0,dir=up?1:-1;
+  if(!lagPend)lagPend={at:now+15000,k0:km,dir,gap};
+  return set(up?'LAG: UP IS MOVING':'LAG: DOWN IS MOVING',up?'var(--g)':'var(--r)',`Exchanges moved the model ${dm>0?'+':''}${dm.toFixed(1)}¢ in 6s, Kalshi only ${dk>0?'+':''}${dk.toFixed(1)}¢. Model ${pc.toFixed(0)}% vs Kalshi ${km.toFixed(0)}¢ (gap ${Math.abs(gap).toFixed(0)}¢).<br>${up?'Up':'Down'} may still be cheap. Kalshi can reprice within a second, so check the price you'd actually pay. Fees still apply.`);
+ }
+ set('NO LAG RIGHT NOW',mu,`Model ${pc.toFixed(0)}% Up vs Kalshi ${km.toFixed(0)}¢. Model moved ${dm>=0?'+':''}${dm.toFixed(1)}¢ and Kalshi ${dk>=0?'+':''}${dk.toFixed(1)}¢ in the last 6s.`);
+}
+// ---------- 🧠 AI swing predictor: a small neural net that learns, on this phone, which chart shapes come before a tradeable swing ----------
+// Every 2s it snapshots the chart for each side. 60s later it checks: did that side's bid reach entry+6¢+fees before dropping 6¢?
+// It learns from every answer. It only gets to call trades after its own out-of-sample picks beat the normal win rate.
+const AIT=6,AIS=6,AIH=60,NI=27,NH=12,AITH=0.6;
+let kHist=[],aiPend=[],aiLast=0,aiNow=null,aiWhy='starting up';
+// three brains with different memories: fast adapts to right now, slow remembers more. The one that's been most accurate lately gets the most say.
+const BR=[{nm:'fast',lr:0.08},{nm:'steady',lr:0.03},{nm:'long-memory',lr:0.01}];
+function newNet(seed,lr){let sd=seed;const r=()=>{sd=(sd*16807)%2147483647;return (sd/2147483647-.5)*0.5};
+ return {W1:Array.from({length:NH},()=>Array.from({length:NI},r)),b1:Array(NH).fill(0),W2:Array.from({length:NH},r),b2:-0.5,lr,loss:0.69}}
+let AI=(()=>{try{const a=JSON.parse(localStorage.getItem('btcAI')||'null');if(a&&a.v===3){a.v=4;a.oos=[];return a}if(a&&a.v===4)return a}catch(e){}
+ return {v:4,nets:BR.map((b,i)=>newNet(7+i*101,b.lr)),n:0,oos:[]}})();
+function saveAI(){try{AI.oos=AI.oos.slice(-800);localStorage.setItem('btcAI',JSON.stringify(AI))}catch(e){}}
+function resetAI(){localStorage.removeItem('btcAI');location.reload()}
+function netFwd(N,x){const h=N.W1.map((w,j)=>Math.tanh(w.reduce((a,v,i)=>a+v*x[i],N.b1[j])));return {h,p:sgm(h.reduce((a,v,j)=>a+v*N.W2[j],N.b2))}}
+function aiWts(){const w=AI.nets.map(N=>Math.exp(-25*N.loss)),t=w.reduce((a,b)=>a+b,0);return w.map(v=>v/t)}
+function aiFwd(x){const w=aiWts();return {p:AI.nets.reduce((a,N,i)=>a+w[i]*netFwd(N,x).p,0)}}
+function aiLearn(x,y){
+ AI.nets.forEach(N=>{
+  const {h,p}=netFwd(N,x),g=p-y,lr=N.lr,l2=1e-4;
+  N.loss=0.98*N.loss+0.02*-(y?Math.log(Math.max(p,1e-4)):Math.log(Math.max(1-p,1e-4)));
+  for(let j=0;j<NH;j++){const gh=g*N.W2[j]*(1-h[j]*h[j]);N.W2[j]-=lr*(g*h[j]+l2*N.W2[j]);
+   for(let i=0;i<NI;i++)N.W1[j][i]-=lr*(gh*x[i]+l2*N.W1[j][i]);N.b1[j]-=lr*gh}
+  N.b2-=lr*g;
+ });
+ AI.n++;
+}
+function aiFeat(sd,now,left,price,useS){
+ const d=sd==='up'?1:-1,a=sd==='up'?K.ya:K.na,sig=vol()*price;
+ const ret=s=>{const q=hist.find(h=>h.t>=now-s*1000);return q?clp((price-q.p)/(sig*Math.sqrt(s))*d,-4,4)/2:0};
+ const ka=s=>{const q=kHist.find(k=>k.t>=now-s*1000);return q?clp((a-(sd==='up'?q.ya:q.na))/10,-3,3):0};
+ const k60=kHist.filter(k=>k.t>=now-60000).map(k=>sd==='up'?k.ya:k.na),mn=Math.min(...k60,a),mx=Math.max(...k60,a);
+ const o=obImb(price),pl=perpLead(now,price),fair=(sd==='up'?(oneP??.5):1-(oneP??.5))*100;
+ // chart reading: support/resistance, breakouts, trend, stretch, RSI, acceleration, calm vs wild
+ const h5=hist.filter(h=>h.t>=now-300000).map(h=>h.p),old=hist.filter(h=>h.t>=now-300000&&h.t<now-10000).map(h=>h.p);
+ const hi=Math.max(...h5,price),lo=Math.min(...h5,price),ohi=old.length?Math.max(...old):hi,olo=old.length?Math.min(...old):lo,s5=sig*Math.sqrt(300);
+ const h2=hist.filter(h=>h.t>=now-120000);let slope=0,zs=0;
+ if(h2.length>20){const n=h2.length,mt=h2.reduce((q,h)=>q+h.t,0)/n,mp=h2.reduce((q,h)=>q+h.p,0)/n;
+  let sxy=0,sxx=0,v=0;h2.forEach(h=>{sxy+=(h.t-mt)*(h.p-mp);sxx+=(h.t-mt)**2;v+=(h.p-mp)**2});
+  slope=sxx?clp(sxy/sxx*120000/(sig*Math.sqrt(120))*d,-4,4)/2:0;const sdv=Math.sqrt(v/n)||sig;zs=clp((price-mp)/sdv*d,-3,3)/1.5}
+ const s60={};hist.filter(h=>h.t>=now-60000).forEach(h=>s60[Math.floor(h.t/1000)]=h.p);const ks=Object.keys(s60).sort();let up=0,dn=0;
+ for(let i=1;i<ks.length;i++){const m=s60[ks[i]]-s60[ks[i-1]];if(m>0)up+=m;else dn-=m}
+ const rsi=up+dn>0?((up/(up+dn))*2-1)*d:0;
+ const brk=price>=ohi&&ohi>olo?1:price<=olo&&ohi>olo?-1:0;
+ const regime=candleVol?clp(vol()/candleVol-1,-1,2):0;
+ return [1,ret(3),ret(10),ret(30),ret(60),ret(180),ka(5),ka(15),ka(30),ka(60),mx>mn?(a-mn)/(mx-mn)*2-1:0,
+  clp((price-useS)/(sig*Math.sqrt(Math.max(left,1)))*d,-4,4)/2,left/450-1,imbW(now,5000)*d,imbW(now,30000)*d,
+  (o?o.imb:0)*d,pl==null?0:clp(pl/(sig*3)*d,-1,1),clp((fair-a)/20,-2,2),
+  hi>lo?((price-lo)/(hi-lo)*2-1)*d:0,clp((hi-price)/s5,0,3)/1.5,clp((price-lo)/s5,0,3)/1.5,brk*d,slope,zs,rsi,regime,
+  (cp=>cp==null?0:clp((cp-0.5)*4,-2,2))(chartP(sd,price))];
+}
+function aiStats(){
+ const R=AI.oos,n=R.length;if(!n)return {n:0};
+ const base=R.reduce((a,r)=>a+r.y,0)/n,bl=Math.max(.01,Math.min(.99,base));
+ const ll=-R.reduce((a,r)=>a+(r.y?Math.log(Math.max(r.p,1e-4)):Math.log(Math.max(1-r.p,1e-4))),0)/n;
+ const bll=-(bl*Math.log(bl)+(1-bl)*Math.log(1-bl));
+ const pk=R.filter(r=>r.p>=AITH),pr=pk.length?pk.reduce((a,r)=>a+r.y,0)/pk.length:0;
+ const ready=n>=400&&pk.length>=30&&pr>=Math.max(0.55,base+0.1)&&ll<bll;
+ return {n,base,pk:pk.length,pr,ready,ll,bll};
+}
+function aiTick(now,left,Kf,price,useS){
+ if(Kf){const l=kHist[kHist.length-1];if(!l||now-l.t>=900)kHist.push({t:now,ya:K.ya,yb:K.yb,na:K.na,nb:K.nb,w:curWin()});kHist=kHist.filter(k=>k.t>now-200000)}
+ // score finished snapshots, then learn from them
+ let learned=false;
+ aiPend=aiPend.filter(q=>{
+  if(now-q.t<AIH*1000&&q.w===curWin())return true;
+  const seq=kHist.filter(k=>k.t>q.t&&k.t<=q.t+AIH*1000&&k.w===q.w);if(seq.length<20)return false;
+  let y=0;for(const k of seq){const bd=q.sd==='up'?k.yb:k.nb;if(bd==null)continue;if(bd>=q.tgt){y=1;break}if(bd<=q.stop)break}
+  AI.oos.push({p:+q.p0.toFixed(3),y});aiLearn(q.x,y);learned=true;return false;
+ });
+ if(learned)saveAI();
+ aiNow=null;
+ if(!Kf){aiWhy='Kalshi prices not coming in';return}
+ if(useS==null){aiWhy='no price to beat yet';return}
+ if(now-lastT>10000){aiWhy='BTC feed paused';return}
+ if(K.ya==null||K.na==null||K.yb==null||K.nb==null){aiWhy='Kalshi has no bid/ask on one side';return}
+ if(left<=AIH+10){aiWhy='last minute of the window (resumes next window)';}
+ const out={t:now};
+ for(const sd of ['up','down']){
+  const a=sd==='up'?K.ya:K.na,b=sd==='up'?K.yb:K.nb;
+  if(a<10||a>90){aiWhy=`prices too lopsided (${sd} ${a}¢)`;continue}if(a-b>3){aiWhy=`spread too wide (${sd} ${b}/${a}¢)`;continue}
+  const x=aiFeat(sd,now,left,price,useS);out[sd]={p:aiFwd(x).p,ask:a};
+  if(now-aiLast>=2000&&left>AIH+10)aiPend.push({t:now,sd,x,p0:out[sd].p,w:curWin(),tgt:Math.ceil(a+AIT+kfee(a/100)*2),stop:Math.floor(a-AIS)});
+ }
+ if(now-aiLast>=2000)aiLast=now;
+ if(aiPend.length>200)aiPend=aiPend.slice(-200);
+ aiNow=out;
+}
+// ---------- 📚 chart brain: studies the last 3 days of BTC 1-minute candles ----------
+// Learns which chart shapes come right before BTC breaks hard one way within 3 minutes.
+// Tested on the newest ~14 hours it did NOT train on, so the score is honest. Re-studies every 6 hours.
+const CNH=14;
+const CNAMES=['bias','1-min move','3-min move','5-min move','15-min move','spot in 1h range','room to 1h high/low ahead','cushion behind','15-min trend','stretch from 30-min avg','RSI','volume vs normal','candle body','wick against','calm vs wild','time of day (sin)','time of day (cos)',
+ '30-min move','EMA 9/21 gap','fresh EMA cross','MACD histogram','MACD turning','Bollinger %B','Bollinger squeeze','VWAP distance','ATR','stochastic','engulfing candle','hammer / shooting star','doji','3 soldiers / 3 crows','higher highs & lows','double top / bottom','times level was tested','volume spike','OBV flow','RSI divergence','next $500 level',
+ 'market structure','break of structure','change of character','room to next S/R zone','strength of zone ahead','cushion to zone behind','strength of zone behind','trendline','triangle / wedge','flag','head & shoulders','liquidity sweep','fair value gap','fib pullback','breakout retest','room to prev-day high/low','today\'s open',
+ '5-min trend','15-min trend','all timeframes agree','ADX trend strength','ADX direction','Ichimoku cloud','Heikin-Ashi streak','distance from volume POC','value area breakout','daily VWAP distance','order block','MACD divergence'];
+const CNI=CNAMES.length;
+function ema(C,i,n){const st=Math.max(0,i-3*n),k=2/(n+1);let e=C[st].c;for(let j=st+1;j<=i;j++)e=C[j].c*k+e*(1-k);return e}
+function rsiAt(C,i,n){let u=0,dn=0;for(let j=i-n+1;j<=i;j++){const m=C[j].c-C[j-1].c;if(m>0)u+=m;else dn-=m}return u+dn>0?u/(u+dn):.5}
+
+// ---------- 📐 price action: how day traders read a chart ----------
+// Pivots = the swing highs and lows traders mark (a bar higher/lower than the 3 bars each side, confirmed 3 bars later).
+// Every pattern below is built from those pivots, exactly like marking up a chart by hand.
+const PAT=[
+ {k:'struct',n:'Market structure',b:{1:'uptrend (higher highs + higher lows)'},r:{'-1':'downtrend (lower highs + lower lows)'},w:'Two rising swing highs and two rising swing lows = uptrend. Falling = downtrend. Trade with it.'},
+ {k:'bos',n:'Break of structure',b:{1:'break of structure up'},r:{'-1':'break of structure down'},w:'Price closes past the last swing high in an uptrend (or low in a downtrend): trend continuing.'},
+ {k:'choch',n:'Change of character',b:{1:'change of character → bullish'},r:{'-1':'change of character → bearish'},w:'First break against the trend: in a downtrend, a close above the last swing high. Early reversal sign.'},
+ {k:'tl',n:'Trendline',b:{1:'bounce off rising trendline',2:'breakout above falling trendline'},r:{'-1':'rejected at falling trendline','-2':'break below rising trendline'},w:'Line through the last two swing lows (or highs). Bounces continue the trend, breaks often flip it.'},
+ {k:'tri',n:'Triangles & wedges',b:{1:'ascending triangle',2:'falling wedge'},r:{'-1':'descending triangle','-2':'rising wedge'},w:'Flat top + rising lows = ascending (bullish). Falling highs + flat bottom = descending (bearish). Wedges usually break against their slope.'},
+ {k:'flag',n:'Flags',b:{1:'bull flag'},r:{'-1':'bear flag'},w:'A sharp move (the pole) then a tight pause drifting back (the flag). Usually breaks out in the pole direction.'},
+ {k:'hs',n:'Head & shoulders',b:{1:'inverse head & shoulders (confirmed)',0.5:'inverse head & shoulders forming'},r:{'-1':'head & shoulders (confirmed)','-0.5':'head & shoulders forming'},w:'Three swing highs, middle one highest, outer two about equal. Close under the neckline = bearish. Upside-down version = bullish.'},
+ {k:'dbl',n:'Double top / bottom',b:{1:'double bottom'},r:{'-1':'double top'},w:'Price tests the same high (or low) twice and fails. Often reverses.'},
+ {k:'sweep',n:'Liquidity sweep',b:{1:'swept the lows (stop hunt) → up'},r:{'-1':'swept the highs (stop hunt) → down'},w:'Wick pokes past a swing low/high, grabbing stops, then closes back inside. Often snaps the other way.'},
+ {k:'fvg',n:'Fair value gap',b:{1:'sitting on a bullish gap (support)'},r:{'-1':'under a bearish gap (resistance)'},w:'3-candle imbalance where price jumped and left a gap. Price tends to react when it comes back to it.'},
+ {k:'fib',n:'Fibonacci pullback',b:{1:'pulled back to 50–62% fib in an up leg'},r:{'-1':'bounced to 50–62% fib in a down leg'},w:'Measuring the last swing, the 50–61.8% retracement ("golden pocket") is where pullbacks often end.'},
+ {k:'retest',n:'Breakout retest',b:{1:'retesting broken resistance as support'},r:{'-1':'retesting broken support as resistance'},w:'Old resistance, once broken, becomes support (and the reverse). The retest is the classic entry.'},
+ {k:'mtf',n:'Multi-timeframe',b:{1:'1m, 5m and 15m all trending up'},r:{'-1':'1m, 5m and 15m all trending down'},w:'Pros check the bigger timeframes first. When the 1, 5 and 15-minute trends all agree, moves follow through more often.'},
+ {k:'ob',n:'Order block',b:{1:'back at a bullish order block'},r:{'-1':'back at a bearish order block'},w:'The last opposite candle before a big push is where big orders sat. When price returns there, it often reacts the same way again.'},
+ {k:'vp',n:'Volume profile',b:{1:'broke above the value area'},r:{'-1':'broke below the value area'},w:'Where most volume traded in the last 4 hours (POC and the 70% value area). Leaving the value area tends to run; inside it tends to chop back to the POC.'},
+ {k:'cloud',n:'Ichimoku cloud',b:{1:'above the Ichimoku cloud'},r:{'-1':'below the Ichimoku cloud'},w:'Above the cloud = bullish backdrop, below = bearish, inside = undecided.'},
+ {k:'mdiv',n:'MACD divergence',b:{1:'bullish MACD divergence'},r:{'-1':'bearish MACD divergence'},w:'Price makes a new high but MACD momentum doesn\'t (or the reverse at lows): the move is running out of gas.'},
+ {k:'vwapd',n:'Daily VWAP',b:{1:'above daily VWAP'},r:{'-1':'below daily VWAP'},w:'The average price everyone paid today, weighted by volume. Institutions treat it as fair value; above is bullish, below bearish.'},
+ {k:'open',n:'Daily open',b:{1:'above today\'s open'},r:{'-1':'below today\'s open'},w:'Above the day\'s open, buyers are in control for the day; below it, sellers are.'},
+];
+const PKEYS=['struct','bos','choch','tl','tri','flag','hs','sweep','fvg','fib','retest','mtf','ob','vp','cloud','mdiv','vwapd','open'];
+function pivots(C){
+ const n=C.length,PH=new Uint8Array(n),PL=new Uint8Array(n),day=new Map();
+ for(let j=3;j<n-3;j++){let h=true,l=true;for(let m=1;m<=3;m++){if(!(C[j].h>=C[j-m].h&&C[j].h>C[j+m].h))h=false;if(!(C[j].l<=C[j-m].l&&C[j].l<C[j+m].l))l=false}PH[j]=h;PL[j]=l}
+ for(const k of C){const ds=Math.floor(k.t/86400)*86400,dd=day.get(ds);if(!dd)day.set(ds,{o:k.o,h:k.h,l:k.l});else{dd.h=Math.max(dd.h,k.h);dd.l=Math.min(dd.l,k.l)}}
+ return {PH,PL,day};
+}
+function patterns(C,i,P,sm){
+ const c=C[i].c,cs=c*sm,tol=cs*Math.sqrt(5)*0.5,o={};
+ const ph=[],pl=[];for(let j=i-3;j>=Math.max(3,i-150)&&(ph.length<4||pl.length<4);j--){if(P.PH[j]&&ph.length<4)ph.push({i:j,v:C[j].h});if(P.PL[j]&&pl.length<4)pl.push({i:j,v:C[j].l})}
+ const up=ph.length>1&&pl.length>1&&ph[0].v>ph[1].v&&pl[0].v>pl[1].v,dn=ph.length>1&&pl.length>1&&ph[0].v<ph[1].v&&pl[0].v<pl[1].v;
+ o.struct=up?1:dn?-1:0;
+ const bu=ph.length&&c>ph[0].v&&C[i-3].c<=ph[0].v,bd=pl.length&&c<pl[0].v&&C[i-3].c>=pl[0].v;
+ o.bos=up&&bu?1:dn&&bd?-1:0;o.choch=dn&&bu?1:up&&bd?-1:0;
+ // support / resistance zones from clustered pivots
+ const lv=[];for(let j=i-3;j>=Math.max(3,i-150);j--){if(P.PH[j])lv.push(C[j].h);if(P.PL[j])lv.push(C[j].l)}lv.sort((a,b)=>a-b);
+ const Z=[];lv.forEach(v=>{const z=Z[Z.length-1];if(z&&v-z.v/z.n<=tol){z.v+=v;z.n++}else Z.push({v,n:1})});Z.forEach(z=>z.v/=z.n);
+ const ab=Z.filter(z=>z.v>c).sort((a,b)=>a.v-b.v)[0],be=Z.filter(z=>z.v<c).sort((a,b)=>b.v-a.v)[0],s15=cs*Math.sqrt(15);
+ o.zA=ab?clp((ab.v-c)/s15,0,3)/1.5:1.5;o.zAn=ab?clp(ab.n/4,0,1.5):0;o.zB=be?clp((c-be.v)/s15,0,3)/1.5:1.5;o.zBn=be?clp(be.n/4,0,1.5):0;
+ // trendlines
+ o.tl=0;
+ if(pl.length>1&&pl[0].v>pl[1].v){const sl=(pl[0].v-pl[1].v)/(pl[0].i-pl[1].i),ln=pl[0].v+sl*(i-pl[0].i);
+  if(c<ln-tol*0.3&&C[i-1].c>=ln)o.tl=-2;else if(Math.abs(C[i].l-ln)<tol&&c>C[i].o)o.tl=1}
+ if(!o.tl&&ph.length>1&&ph[0].v<ph[1].v){const sl=(ph[0].v-ph[1].v)/(ph[0].i-ph[1].i),ln=ph[0].v+sl*(i-ph[0].i);
+  if(c>ln+tol*0.3&&C[i-1].c<=ln)o.tl=2;else if(Math.abs(C[i].h-ln)<tol&&c<C[i].o)o.tl=-1}
+ // triangles & wedges
+ o.tri=0;
+ if(ph.length>1&&pl.length>1){const hs=(ph[0].v-ph[1].v)/(ph[0].i-ph[1].i)/cs,ls=(pl[0].v-pl[1].v)/(pl[0].i-pl[1].i)/cs,f=.15;
+  if(Math.abs(hs)<f&&ls>f)o.tri=1;else if(hs<-f&&Math.abs(ls)<f)o.tri=-1;else if(hs<0&&ls<0&&hs<ls*1.3)o.tri=2;else if(hs>0&&ls>0&&ls>hs*1.3)o.tri=-2}
+ // flags
+ const pole=C[i-5].c-C[i-12].c;let fh=-1e18,fl=1e18;for(let j=i-4;j<=i;j++){fh=Math.max(fh,C[j].h);fl=Math.min(fl,C[j].l)}
+ o.flag=(Math.abs(pole)/(cs*Math.sqrt(7))>=2.5&&fh-fl<=0.5*Math.abs(pole)&&(c-C[i-5].c)*Math.sign(pole)<=0.1*Math.abs(pole))?Math.sign(pole):0;
+ // head & shoulders
+ o.hs=0;
+ if(ph.length>2){const [cc,b,a]=ph;if(b.v>Math.max(a.v,cc.v)+tol&&Math.abs(a.v-cc.v)<2*tol){let nk=1e18;for(let j=a.i;j<=cc.i;j++)nk=Math.min(nk,C[j].l);o.hs=c<nk?-1:c<cc.v?-0.5:0}}
+ if(!o.hs&&pl.length>2){const [cc,b,a]=pl;if(b.v<Math.min(a.v,cc.v)-tol&&Math.abs(a.v-cc.v)<2*tol){let nk=-1e18;for(let j=a.i;j<=cc.i;j++)nk=Math.max(nk,C[j].h);o.hs=c>nk?1:c>cc.v?0.5:0}}
+ // liquidity sweeps
+ o.sweep=0;for(const j of [i,i-1]){if(ph.length&&C[j].h>ph[0].v&&C[j].c<ph[0].v)o.sweep=-1;if(pl.length&&C[j].l<pl[0].v&&C[j].c>pl[0].v)o.sweep=1}
+ // fair value gaps
+ o.fvg=0;for(let j=i-2;j>=i-30&&!o.fvg;j--){
+  if(C[j+1].l>C[j-1].h){const top=C[j+1].l,bot=C[j-1].h;let mn=1e18;for(let m=j+2;m<=i;m++)mn=Math.min(mn,C[m].l);if(mn>bot&&c>=bot&&c-top<2*s15)o.fvg=1}
+  else if(C[j+1].h<C[j-1].l){const bot=C[j+1].h,top=C[j-1].l;let mx=-1e18;for(let m=j+2;m<=i;m++)mx=Math.max(mx,C[m].h);if(mx<top&&c<=top&&bot-c<2*s15)o.fvg=-1}}
+ // fibonacci pullback
+ o.fib=0;if(ph.length&&pl.length){const H=ph[0],L=pl[0],leg=H.v-L.v;if(leg>2*s15){const r=H.i>L.i?(H.v-c)/leg:(c-L.v)/leg;if(r>=0.5&&r<=0.68)o.fib=H.i>L.i?1:-1}}
+ // breakout retest
+ o.retest=0;for(const z of Z){let below=false,above=false;for(let j=i-15;j<i;j++){if(C[j].c<z.v-tol*0.3)below=true;if(below&&C[j].c>z.v+tol*0.3)above=true}
+  if(above&&C[i].l<=z.v+tol&&c>z.v){o.retest=1;break}
+  let ab2=false,bl2=false;for(let j=i-15;j<i;j++){if(C[j].c>z.v+tol*0.3)ab2=true;if(ab2&&C[j].c<z.v-tol*0.3)bl2=true}
+  if(bl2&&C[i].h>=z.v-tol&&c<z.v){o.retest=-1;break}}
+ // previous day high / low, today's open
+ const ds=Math.floor(C[i].t/86400)*86400,td=P.day.get(ds),pd=P.day.get(ds-86400);
+ o.pdh=pd?clp((pd.h-c)/s15,-3,3)/1.5:0;o.pdl=pd?clp((c-pd.l)/s15,-3,3)/1.5:0;o.open=td?Math.sign(c-td.o):0;
+ // ----- advanced -----
+ const agg=(m,n)=>{const out=[];for(let e=i;out.length<n&&e-m+1>=0;e-=m){let H=-1e18,L=1e18,V=0;for(let j=e-m+1;j<=e;j++){H=Math.max(H,C[j].h);L=Math.min(L,C[j].l);V+=C[j].v}out.unshift({o:C[e-m+1].o,h:H,l:L,c:C[e].c,v:V})}return out};
+ const emaA=(A,n)=>{const k=2/(n+1);let e=A[0].c;for(let j=1;j<A.length;j++)e=A[j].c*k+e*(1-k);return e};
+ const A5=agg(5,40),A15=agg(15,30);
+ const t1=Math.sign(ema(C,i,9)-ema(C,i,21)),t5=A5.length>=25?Math.sign(emaA(A5,8)-emaA(A5,21)):0,t15=A15.length>=25?Math.sign(emaA(A15,8)-emaA(A15,21)):0;
+ o.t5=t5;o.t15=t15;o.mtf=t1&&t1===t5&&t5===t15?t1:0;
+ // ADX
+ {let tr=0,pdm=0,ndm=0,adx=0;const n=14;const st=Math.max(1,i-n*4);let first=true;
+  for(let j=st;j<=i;j++){const up=C[j].h-C[j-1].h,dw=C[j-1].l-C[j].l,t=Math.max(C[j].h-C[j].l,Math.abs(C[j].h-C[j-1].c),Math.abs(C[j].l-C[j-1].c));
+   const p0=up>dw&&up>0?up:0,n0=dw>up&&dw>0?dw:0;tr=tr-tr/n+t;pdm=pdm-pdm/n+p0;ndm=ndm-ndm/n+n0;
+   const pdi=tr?pdm/tr:0,ndi=tr?ndm/tr:0,dx=pdi+ndi?Math.abs(pdi-ndi)/(pdi+ndi):0;adx=first?dx:adx-adx/n+dx/n;first=false;o.di=pdi-ndi}
+  o.adx=clp(adx*2-0.5,-1,1)}
+ // Ichimoku (9/26/52), cloud plotted 26 bars ahead
+ {const hl=(e,n)=>{let H=-1e18,L=1e18;for(let j=e-n+1;j<=e;j++){H=Math.max(H,C[j].h);L=Math.min(L,C[j].l)}return (H+L)/2};const e=i-26;
+  if(e-52>=0){const sa=(hl(e,9)+hl(e,26))/2,sb=hl(e,52);o.cloud=c>Math.max(sa,sb)?1:c<Math.min(sa,sb)?-1:0}else o.cloud=0}
+ // Heikin-Ashi streak
+ {let ho=(C[i-20].o+C[i-20].c)/2,hc,col=0,st=0;for(let j=i-19;j<=i;j++){hc=(C[j].o+C[j].h+C[j].l+C[j].c)/4;const cc=Math.sign(hc-ho);if(cc===col)st++;else{col=cc;st=1}ho=(ho+hc)/2}o.ha=clp(col*st/5,-1.5,1.5)}
+ // volume profile, last 4 hours
+ {const n=Math.min(240,i);let H=-1e18,L=1e18;for(let j=i-n+1;j<=i;j++){H=Math.max(H,C[j].h);L=Math.min(L,C[j].l)}
+  const B=40,bw=(H-L)/B||1,vb=new Array(B).fill(0);let tot=0;for(let j=i-n+1;j<=i;j++){const k=Math.min(B-1,Math.floor(((C[j].h+C[j].l+C[j].c)/3-L)/bw));vb[k]+=C[j].v;tot+=C[j].v}
+  let pk=0;vb.forEach((v,k)=>{if(v>vb[pk])pk=k});let lo=pk,hi=pk,acc=vb[pk];while(acc<tot*0.7&&(lo>0||hi<B-1)){const a=lo>0?vb[lo-1]:-1,b=hi<B-1?vb[hi+1]:-1;if(a>=b){lo--;acc+=a}else{hi++;acc+=b}}
+  const poc=L+(pk+0.5)*bw,val=L+lo*bw,vah=L+(hi+1)*bw;o.poc=clp((c-poc)/s15,-3,3)/1.5;o.vp=c>vah?1:c<val?-1:0}
+ // daily VWAP
+ {let pv=0,vv=0;for(let j=i;j>=0&&C[j].t>=ds;j--){const tp=(C[j].h+C[j].l+C[j].c)/3;pv+=tp*C[j].v;vv+=C[j].v}const vw=vv?pv/vv:c;o.vwap=clp((c-vw)/s15,-3,3)/1.5;o.vwapd=Math.abs(c-vw)>tol?Math.sign(c-vw):0}
+ // order block
+ o.ob=0;for(let e=i-3;e>=i-40&&!o.ob;e--){const mv=C[e+2].c-C[e-1].c;if(Math.abs(mv)<2.5*cs*Math.sqrt(3))continue;
+  for(let j=e;j>=e-4;j--){const bear=C[j].c<C[j].o,bull=C[j].c>C[j].o;
+   if(mv>0&&bear){let ok=true;for(let m=j+1;m<=i;m++)if(C[m].c<C[j].l)ok=false;if(ok&&C[i].l<=C[j].h&&c>=C[j].l&&e+2<i-1)o.ob=1;break}
+   if(mv<0&&bull){let ok=true;for(let m=j+1;m<=i;m++)if(C[m].c>C[j].h)ok=false;if(ok&&C[i].h>=C[j].l&&c<=C[j].h&&e+2<i-1)o.ob=-1;break}}}
+ // MACD divergence
+ {const md=j=>ema(C,j,12)-ema(C,j,26);let h30=-1e18,l30=1e18,ih=i,il=i;for(let j=i-30;j<=i-5;j++){if(C[j].h>h30){h30=C[j].h;ih=j}if(C[j].l<l30){l30=C[j].l;il=j}}
+  o.mdiv=C[i].h>=h30&&md(i)<md(ih)?-1:C[i].l<=l30&&md(i)>md(il)?1:0}
+ return o;
+}
+function taFeat(C,i,d,sm){
+ const c=C[i].c,cs=c*sm,o=C[i].o,h=C[i].h,l=C[i].l,rg=h-l||1e-9,body=c-o;
+ const r30=clp(Math.log(c/C[i-30].c)/(sm*Math.sqrt(30))*d,-4,4)/2;
+ const g=j=>ema(C,j,9)-ema(C,j,21),g0=g(i),g3=g(i-3);
+ const cross=Math.sign(g0)!==Math.sign(g3)?Math.sign(g0)*d:0;
+ const mac=[];for(let j=i-12;j<=i;j++)mac.push(ema(C,j,12)-ema(C,j,26));let sg=mac[0];const kk=2/10;const hs=[];mac.forEach(m=>{sg=m*kk+sg*(1-kk);hs.push(m-sg)});
+ const hist0=hs[hs.length-1],hist2=hs[hs.length-3];
+ let m20=0;for(let j=i-19;j<=i;j++)m20+=C[j].c;m20/=20;let v20=0;for(let j=i-19;j<=i;j++)v20+=(C[j].c-m20)**2;const sd20=Math.sqrt(v20/20)||cs;
+ let pv=0,vv=0,tr=0;for(let j=i-59;j<=i;j++){const tp=(C[j].h+C[j].l+C[j].c)/3;pv+=tp*C[j].v;vv+=C[j].v}const vwap=vv?pv/vv:c;
+ for(let j=i-13;j<=i;j++)tr+=Math.max(C[j].h-C[j].l,Math.abs(C[j].h-C[j-1].c),Math.abs(C[j].l-C[j-1].c));const atr=tr/14;
+ let h14=-1e18,l14=1e18;for(let j=i-13;j<=i;j++){h14=Math.max(h14,C[j].h);l14=Math.min(l14,C[j].l)}
+ const P=C[i-1],pb=P.c-P.o,eng=(body>0&&pb<0&&c>=P.o&&o<=P.c)?1:(body<0&&pb>0&&c<=P.o&&o>=P.c)?-1:0;
+ const lw=Math.min(o,c)-l,uw=h-Math.max(o,c),ab=Math.abs(body)||rg*0.05,ham=(lw>=2*ab&&uw<ab)?1:(uw>=2*ab&&lw<ab)?-1:0;
+ const doji=Math.abs(body)/rg<0.1?1:0;
+ const a=C[i-2],b=C[i-1],sold=(a.c>a.o&&b.c>b.o&&body>0&&b.c>a.c&&c>b.c)?1:(a.c<a.o&&b.c<b.o&&body<0&&b.c<a.c&&c<b.c)?-1:0;
+ const bh=(x,y)=>{let H=-1e18,L=1e18;for(let j=x;j<=y;j++){H=Math.max(H,C[j].h);L=Math.min(L,C[j].l)}return [H,L]};
+ const [H1,L1]=bh(i-14,i-10),[H2,L2]=bh(i-9,i-5),[H3,L3]=bh(i-4,i),stru=(H3>H2&&H2>H1&&L3>L2&&L2>L1)?1:(H3<H2&&H2<H1&&L3<L2&&L2<L1)?-1:0;
+ let hi=-1e18,lo=1e18;for(let j=i-59;j<=i;j++){hi=Math.max(hi,C[j].h);lo=Math.min(lo,C[j].l)}
+ const tol=cs*Math.sqrt(5)*0.5,lvl=d>0?hi:lo;let touch=0,lastT=-99;for(let j=i-59;j<=i;j++){const near=d>0?C[j].h>=lvl-tol:C[j].l<=lvl+tol;if(near&&j-lastT>=5){touch++;lastT=j}}
+ const atHi=hi-c<tol,atLo=c-lo<tol;let dbl=0;
+ {let th=0,tl=0,lh=-99,ll=-99;for(let j=i-59;j<=i;j++){if(C[j].h>=hi-tol&&j-lh>=5){th++;lh=j}if(C[j].l<=lo+tol&&j-ll>=5){tl++;ll=j}}if(atHi&&th>=2)dbl=-1;else if(atLo&&tl>=2)dbl=1}
+ let vs=0;for(let j=i-59;j<=i;j++)vs+=C[j].v;const vsp=clp(C[i].v/(vs/60)-1,-1,3)/2*Math.sign(body)*d;
+ let ob=0,ovs=0;for(let j=i-14;j<=i;j++){ob+=Math.sign(C[j].c-C[j-1].c)*C[j].v;ovs+=C[j].v}
+ let div=0;{let h30=-1e18,l30=1e18,ih=i,il=i;for(let j=i-29;j<=i-5;j++){if(C[j].h>h30){h30=C[j].h;ih=j}if(C[j].l<l30){l30=C[j].l;il=j}}
+  if(h>=h30&&rsiAt(C,i,14)<rsiAt(C,ih,14))div=-1;else if(l<=l30&&rsiAt(C,i,14)>rsiAt(C,il,14))div=1}
+ const rn=d>0?Math.ceil(c/500)*500-c:c-Math.floor(c/500)*500;
+ return [r30,clp(g0/cs*d,-4,4)/2,cross,clp(hist0/cs*d,-4,4)/2,clp((hist0-hist2)/cs*d,-4,4)/2,clp(((c-(m20-2*sd20))/(4*sd20)*2-1)*d,-2,2),
+  clp(sd20/(cs*Math.sqrt(20)/1.5)-1,-1,2),clp((c-vwap)/(cs*Math.sqrt(60))*d,-3,3)/1.5,clp(atr/cs-1.3,-1,2),h14>l14?((c-l14)/(h14-l14)*2-1)*d:0,
+  eng*d,ham*d,doji,sold*d,stru*d,dbl*d,clp(touch/4,0,1.5),vsp,ovs?ob/ovs*d:0,div*d,clp(rn/(cs*Math.sqrt(15)),0,3)/1.5];
+}
+let CB={st:'studying',net:null,test:null,live:[],sAll:null,days:0};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function cbCandles(mins){
+ const end=Math.floor(Date.now()/60000)*60,out=new Map();
+ for(let t=end-mins*60;t<end;t+=300*60){
+  const s0=new Date(t*1000).toISOString(),e0=new Date(Math.min(end,t+300*60)*1000).toISOString();
+  for(let tr=0;tr<3;tr++){try{const r=await fetch(`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=60&start=${s0}&end=${e0}`);const a=await r.json();
+   if(Array.isArray(a)){a.forEach(k=>out.set(k[0],{t:k[0],l:+k[1],h:+k[2],o:+k[3],c:+k[4],v:+k[5]}));break}}catch(e){}await sleep(600)}
+  await sleep(150);
+ }
+ return [...out.values()].sort((a,b)=>a.t-b.t);
+}
+function cbSig(C,i){let m=0,v=0,n=0;for(let j=i-59;j<=i;j++){const r=Math.log(C[j].c/C[j-1].c);m+=r;v+=r*r;n++}m/=n;return Math.max(Math.sqrt(Math.max(v/n-m*m,0)),1e-5)}
+function cbFeat(C,i,d,P){
+ const c=C[i].c,sm=cbSig(C,i),r=k=>clp(Math.log(c/C[i-k].c)/(sm*Math.sqrt(k))*d,-4,4)/2;
+ let hi=-1e18,lo=1e18,vs=0;for(let j=i-59;j<=i;j++){hi=Math.max(hi,C[j].h);lo=Math.min(lo,C[j].l);vs+=C[j].v}
+ const s60=sm*c*Math.sqrt(60),dhi=clp((hi-c)/s60,0,3)/1.5,dlo=clp((c-lo)/s60,0,3)/1.5;
+ let mt=0,mp=0;for(let j=i-14;j<=i;j++){mt+=j;mp+=C[j].c}mt/=15;mp/=15;let sxy=0,sxx=0;for(let j=i-14;j<=i;j++){sxy+=(j-mt)*(C[j].c-mp);sxx+=(j-mt)**2}
+ let m30=0;for(let j=i-29;j<=i;j++)m30+=C[j].c;m30/=30;let v30=0;for(let j=i-29;j<=i;j++)v30+=(C[j].c-m30)**2;const sd30=Math.sqrt(v30/30)||c*sm;
+ let up=0,dn=0;for(let j=i-13;j<=i;j++){const m=C[j].c-C[j-1].c;if(m>0)up+=m;else dn-=m}
+ const rg=C[i].h-C[i].l||1e-9,hr=new Date(C[i].t*1000).getUTCHours()+new Date(C[i].t*1000).getUTCMinutes()/60;
+ return [1,r(1),r(3),r(5),r(15),hi>lo?((c-lo)/(hi-lo)*2-1)*d:0,d>0?dhi:dlo,d>0?dlo:dhi,
+  clp(sxy/sxx*15/(sm*c*Math.sqrt(15))*d,-4,4)/2,clp((c-m30)/sd30*d,-3,3)/1.5,up+dn>0?(up/(up+dn)*2-1)*d:0,
+  clp(C[i].v/(vs/60)-1,-1,3)/2,(C[i].c-C[i].o)/rg*d,d>0?(C[i].h-Math.max(C[i].o,C[i].c))/rg:(Math.min(C[i].o,C[i].c)-C[i].l)/rg,
+  CB.sAll?clp(sm/CB.sAll-1,-1,2):0,Math.sin(hr/24*2*Math.PI),Math.cos(hr/24*2*Math.PI),...taFeat(C,i,d,sm),...paFeat(patterns(C,i,P||pivots(C),sm),d)];
+}
+function paFeat(o,d){const s=v=>Math.sign(v)*Math.min(1,Math.abs(v));
+ return [o.struct*d,o.bos*d,o.choch*d,d>0?o.zA:o.zB,d>0?o.zAn:o.zBn,d>0?o.zB:o.zA,d>0?o.zBn:o.zAn,s(o.tl)*d,s(o.tri)*d,o.flag*d,o.hs*d,o.sweep*d,o.fvg*d,o.fib*d,o.retest*d,d>0?o.pdh:o.pdl,o.open*d,
+  o.t5*d,o.t15*d,o.mtf*d,o.adx,clp(o.di*3,-1,1)*d,o.cloud*d,o.ha*d,o.poc*d,o.vp*d,o.vwap*d,o.ob*d,o.mdiv*d]}
+function patNames(o){const out=[];PAT.forEach(p=>{const v=p.k==='dbl'?o.dbl:o[p.k];if(!v)return;const nm=v>0?p.b[v]:p.r[v];if(nm)out.push(nm)});return out}
+function cbLabel(C,i,d){ // did BTC break 1 "normal 3-minute move" this way before breaking that much the other way?
+ const c=C[i].c,th=c*cbSig(C,i)*Math.sqrt(3);
+ for(let j=i+1;j<=i+3;j++){const f=d>0?C[j].h>=c+th:C[j].l<=c-th,a=d>0?C[j].l<=c-th:C[j].h>=c+th;if(f&&a)return 0;if(f)return 1;if(a)return 0}
+ return 0;
+}
+function cbTrain(N,x,y,lr){const {h,p}=netFwd(N,x),g=p-y;for(let j=0;j<N.W2.length;j++){const gh=g*N.W2[j]*(1-h[j]*h[j]);N.W2[j]-=lr*(g*h[j]+1e-4*N.W2[j]);for(let k=0;k<x.length;k++)N.W1[j][k]-=lr*(gh*x[k]+1e-4*N.W1[j][k]);N.b1[j]-=lr*gh}N.b2-=lr*g}
+async function cbStudy(){
+ try{
+  CB.st='studying';const C=await cbCandles(3*1440);
+  if(C.length<600){CB.st='no history';return}
+  let a=0,n=0;for(let i=1;i<C.length;i++){const r=Math.log(C[i].c/C[i-1].c);a+=r*r;n++}CB.sAll=Math.sqrt(a/n);
+  const P=pivots(C),S=[],PS={};let ally=0,alln=0;
+  for(let i=320;i<C.length-3;i++){
+   const sm=cbSig(C,i),o=patterns(C,i,P,sm),y1=cbLabel(C,i,1),y0=cbLabel(C,i,-1);ally+=y1+y0;alln+=2;
+   const ta=taFeat(C,i,1,sm);o.dbl=ta[15];
+   for(const k of [...PKEYS,'dbl']){const v=o[k];if(!v)continue;const key=k+':'+v,y=v>0?y1:y0;(PS[key]=PS[key]||{n:0,h:0}).n++;PS[key].h+=y}
+   for(const d of [1,-1])S.push({x:cbFeat(C,i,d,P),y:d>0?y1:y0});
+   if(i%400===0)await sleep(0);
+  }
+  CB.pstats=PS;CB.pbase=ally/alln;
+  const cut=Math.floor(S.length*0.8),tr=S.slice(0,cut),te=S.slice(cut);
+  let sd=42;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647};
+  const N={W1:Array.from({length:CNH},()=>Array.from({length:CNI},()=>(rnd()-.5)*.5)),b1:Array(CNH).fill(0),W2:Array.from({length:CNH},()=>(rnd()-.5)*.5),b2:-0.5};
+  for(let ep=0;ep<4;ep++){const idx=tr.map((_,i)=>i).sort(()=>rnd()-.5);for(let k=0;k<idx.length;k++){cbTrain(N,tr[idx[k]].x,tr[idx[k]].y,0.03*(1-ep*0.2));if(k%2000===0)await sleep(0)}}
+  const R=te.map(q=>({p:netFwd(N,q.x).p,y:q.y})),pk=[...R].sort((a,b)=>b.p-a.p).slice(0,Math.max(20,Math.floor(R.length*0.1)));
+  CB.test={n:R.length,base:R.reduce((a,r)=>a+r.y,0)/R.length,pk:pk.length,pr:pk.length?pk.reduce((a,r)=>a+r.y,0)/pk.length:0};
+  const LL=arr=>arr.reduce((a,q)=>{const p=Math.min(Math.max(netFwd(N,q.x).p,1e-4),1-1e-4);return a-(q.y?Math.log(p):Math.log(1-p))},0)/arr.length;
+  const base=LL(te),imp=[];
+  for(let k=1;k<CNI;k++){const col=te.map(q=>q.x[k]).sort(()=>rnd()-.5);const sh=te.map((q,j)=>({x:q.x.map((v,m)=>m===k?col[j]:v),y:q.y}));imp.push({k,v:LL(sh)-base});if(k%6===0)await sleep(0)}
+  CB.top=imp.filter(z=>z.v>0).sort((a,b)=>b.v-a.v).slice(0,3).map(z=>CNAMES[z.k]);
+  te.forEach(q=>cbTrain(N,q.x,q.y,0.015)); // then learn the newest hours too
+  CB.net=N;CB.live=C.slice(-1600);CB.days=(C[C.length-1].t-C[0].t)/86400;CB.st='ready';renderGuide();
+ }catch(e){CB.st='no history'}
+}
+async function cbRefresh(){try{const C=await cbCandles(180);if(C.length>120){const m=new Map(CB.live.map(k=>[k.t,k]));C.forEach(k=>m.set(k.t,k));CB.live=[...m.values()].sort((a,b)=>a.t-b.t).slice(-1600)}}catch(e){}}
+let cpCache={};
+function chartP(sd,price){const ck=sd+Math.floor(Date.now()/1000);if(cpCache[ck]!==undefined)return cpCache[ck];const v=chartP0(sd,price);cpCache={[ck]:v,...(cpCache[(sd==='up'?'down':'up')+Math.floor(Date.now()/1000)]!==undefined?{[(sd==='up'?'down':'up')+Math.floor(Date.now()/1000)]:cpCache[(sd==='up'?'down':'up')+Math.floor(Date.now()/1000)]}:{})};return v}
+function chartP0(sd,price){ // chart brain's read right now, using the live minute candles with the current price patched in
+ const C=CB.live;if(!CB.net||C.length<120)return null;
+ const L=C.slice(-1500).map(k=>({...k})),last=L[L.length-1];
+ if(Date.now()/1000-last.t<60){last.c=price;last.h=Math.max(last.h,price);last.l=Math.min(last.l,price)}
+ else L.push({t:Math.floor(Date.now()/60000)*60,o:last.c,h:Math.max(last.c,price),l:Math.min(last.c,price),c:price,v:last.v});
+ const P=pivots(L),i=L.length-1;
+ if(!CB.seenT||Date.now()-CB.seenT>5000){const sm=cbSig(L,i),o=patterns(L,i,P,sm);o.dbl=taFeat(L,i,1,sm)[15];CB.seeing=patNames(o);CB.seenT=Date.now();renderGuide()}
+ return netFwd(CB.net,cbFeat(L,i,sd==='up'?1:-1,P)).p;
+}
+function renderGuide(){
+ const el=document.getElementById('guide');if(!el)return;
+ const PS=CB.pstats||{},base=CB.pbase;
+ const sb=['flip','dip','rocket','ai'].map(k=>{const st=kindStats(k);return st.n?`${KNAME[k]}: ${st.n} trades, ${st.won} won, <b style="color:${st.pnl>=0?'var(--g)':'var(--r)'}">${st.pnl>=0?'+':''}${st.pnl.toFixed(0)}¢</b>${benched(k)?' · BENCHED':''}`:''}).filter(Boolean).join('<br>');
+ el.innerHTML=(sb?'<b>Scoreboard (last 30 each)</b><br>'+sb+'<br>':'')+(CB.rec5?CB.rec5+'<br>':'')+(CB.top&&CB.top.length?`🔎 Top signals lately: ${CB.top.join(', ')}<br>`:'')+(CB.test?`📚 Unseen-hours test: its top ${CB.test.pk} calls hit ${Math.round(CB.test.pr*100)}% vs ${Math.round(CB.test.base*100)}% normal<br>`:'')+'<br>'+(CB.seeing&&CB.seeing.length?`<b>Seeing now:</b> ${CB.seeing.join(' · ')}<br><br>`:'<b>Seeing now:</b> no clear pattern<br><br>')+PAT.map(p=>{
+  const rows=Object.entries(PS).filter(([k])=>k.split(':')[0]===p.k).map(([k,v])=>{const code=k.split(':')[1],nm=(+code>0?p.b[code]:p.r[code])||code;const r=v.n?v.h/v.n:0;
+   return `${nm}: worked <b style="color:${r>base+0.05?'var(--g)':r<base-0.02?'var(--r)':'var(--tx)'}">${Math.round(r*100)}%</b> of ${v.n}`}).join('<br>');
+  return `<b>${p.n}</b> — ${p.w}<br><span class="s">${rows||'not seen in the last 3 days'}</span>`}).join('<br><br>')+(base!=null?`<br><br><span class="s">"Worked" = BTC broke a normal 3-minute move that way within 3 minutes. Normal rate for any random minute: ${Math.round(base*100)}%. Green = better than normal lately.</span>`:'');
+}
+setTimeout(cbStudy,3000);setInterval(cbStudy,6*3600e3);setInterval(cbRefresh,60e3);
+// ---------- ONE BOX: blends everything into a single Up/Down call ----------
+let fwPct=null,flNow=null,fwNow=null,oneP=null,oneWin=null,oneLog=[],onePend=null,onePrevAvg=null,armed=false,actx=null,wake=null,lastGood=false;
+try{oneLog=JSON.parse(localStorage.getItem('btcOne')||'[]')}catch(e){}
+// tap the box: turn on beep alerts + keep the screen awake
+async function armBox(e){
+ armed=!armed;
+ if(armed){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();actx.resume();beep(660)}catch(x){}
+  try{if(navigator.wakeLock)wake=await navigator.wakeLock.request('screen')}catch(x){}}
+ else{try{wake&&wake.release()}catch(x){}wake=null}
+}
+document.addEventListener('visibilitychange',async()=>{if(armed&&document.visibilityState==='visible'&&navigator.wakeLock){try{wake=await navigator.wakeLock.request('screen')}catch(x){}}});
+function beep(f){if(!actx)return;try{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;g.gain.setValueAtTime(.25,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.35);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+.35)}catch(x){}}
+function kindStats(k){const L=autoLog.filter(x=>x.kind===k).slice(-30);return {n:L.length,pnl:L.reduce((a,x)=>a+x.pnl,0),won:L.filter(x=>x.pnl>0).length}}
+function benched(k){const st=kindStats(k);return st.n>=8&&st.pnl<0}
+const KNAME={flip:'🔄 Flips',dip:'Dip buys',rocket:'🚀 Takeoffs',ai:'🧠 AI'};
+// ---------- auto trade: box buys -> holds -> sells -> closes, all on its own ----------
+// ---------- paper account: fake $30 -> $500, sizes its own bets, re-bets profits, daily lottery ticket ----------
+const PA0={frac:0.25,hold85:true,bank:30,start:30,goal:500,floor:15,n:0,w:0,lotN:0,lotW:0,lotDay:'',cur:null,log:[]};
+let PA=JSON.parse(JSON.stringify(PA0));try{const q=JSON.parse(localStorage.getItem('btcPA')||'null');if(q&&q.bank!=null)PA=Object.assign(JSON.parse(JSON.stringify(PA0)),q)}catch(e){}
+function paSave(){try{localStorage.setItem('btcPA',JSON.stringify(PA))}catch(e){}}
+function paReset(){PA=JSON.parse(JSON.stringify(PA0));paSave()}
+function paOpen(){return PA.bank>PA.floor&&PA.bank<PA.goal}
+function paFracNow(){const f=PA.frac||0.25;return PA.safe!==false&&PA.bank>=2*PA.start?Math.min(f,0.25):f} // once the account has doubled, bets drop to 25% max to protect the gains
+function paCount(ask){return Math.max(1,Math.floor(PA.bank*paFracNow()/(ask/100)))} // risks this share of the account per trade (you pick it on the card)
+function paFrac(v){PA.frac=+v;paSave()}
+function paGate(v){PA.gate=!!v;paSave()}
+function paFewer(){PA.mode='hold';PA.frac=0.25;PA.gate=true;PA.minEdge=0.08;paSave()}
+// both flip readings must be 70%+ and point the same way as the trade
+function flipGate(side,now){
+ if(!PA.gate)return true;
+ const fw=fwPct&&now-fwPct.t<3000?fwPct:null,fl=flNow&&now-flNow.t<3000?flNow:null;
+ return !!(fw&&fl&&fw.tp>=70&&fl.pl*100>=70&&fw.side===side&&(fl.dir>0?'up':'down')===side);
+}
+function paMode(v){PA.mode=v;paSave()}
+function paAdd(kind,side,cnt,entry,pnlC,how){PA.bank=Math.max(0,PA.bank+cnt*pnlC/100);PA.n++;if(pnlC>0)PA.w++;PA.log.push({k:kind,s:side,c:cnt,e:entry,p:Math.round(cnt*pnlC)/100,h:how,t:Date.now()});PA.log=PA.log.slice(-60);paSave()}
+function paTick(now,left,Kf,useS,avg,pm){
+ const day=new Date().toDateString();if(PA.lotDay!==day){PA.lotDay=day;PA.lotToday=0}
+ // settle a finished lottery ticket
+ if(PA.cur&&PA.cur.win!==curWin()){const c=PA.cur;PA.cur=null;
+  if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
+   paAdd('lottery',c.side,c.cnt,c.ask,won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100),won?'won':'lost');PA.lotN++;if(won)PA.lotW++;PA.lotPnl=(PA.lotPnl||0)+c.cnt*(won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100))/100;paSave()}
+  else paSave()}
+ // hold-to-the-end mode: buy one side at 50 cents or less and let the window settle (a win roughly doubles the stake or better, a loss loses it all)
+ if(PA.hcur&&PA.hcur.win!==curWin()){const c=PA.hcur;PA.hcur=null;
+  if(onePrevAvg&&Math.abs(onePrevAvg.t-(c.win+W15))<30000){const fin=onePrevAvg.v,won=c.side==='up'?fin>c.s:fin<c.s;
+   const pc=won?100-c.ask-kfee(c.ask/100):-c.ask-kfee(c.ask/100);
+   paAdd('hold',c.side,c.cnt,c.ask,pc,won?'won':'lost');PA.hN=(PA.hN||0)+1;if(won)PA.hW=(PA.hW||0)+1;PA.hPnl=(PA.hPnl||0)+c.cnt*pc/100;paSave()}
+  else paSave()}
+ if(PA.mode==='hold'&&Kf&&useS!=null&&pm!=null&&paOpen()&&!PA.hcur&&left>=240&&left<=540){
+  let best=null;
+  for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;if(ask==null||ask<20||ask>50)continue;
+   if(!flipGate(sd,now))continue;const ps=sd==='up'?pm:1-pm,edge=ps-ask/100-kfee(ask/100)/100;
+   if(edge>=(PA.minEdge||0.03)&&(!best||edge>best.edge))best={sd,ask,edge}}
+  if(best){PA.hcur={win:curWin(),side:best.sd,ask:best.ask,cnt:paCount(best.ask),s:useS};paSave()}}
+ // buy the daily lottery ticket: a cheap contract (3-8 cents), NOT picked for edge
+ if(Kf&&useS!=null&&paOpen()&&!PA.cur&&left>=480&&left<=840){
+  for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;
+   if(ask!=null&&ask>=3&&ask<=8){const cnt=Math.floor(Math.min(3,PA.bank*0.10)/(ask/100));
+    if(cnt>=1){PA.cur={win:curWin(),side:sd,ask,cnt,s:useS};PA.lotToday=(PA.lotToday||0)+1;paSave()}break}}}
+ const el=$('pa');if(!el)return;const hc=$('pah85');if(hc&&document.activeElement!==hc)hc.checked=PA.hold85!==false;const sc=$('pasafe');if(sc&&document.activeElement!==sc)sc.checked=PA.safe!==false;const gc=$('pagate');if(gc&&document.activeElement!==gc)gc.checked=!!PA.gate;{const g=$('pagst');if(g){const fw=fwPct&&now-fwPct.t<3000?fwPct:null,fl=flNow&&now-flNow.t<3000?flNow:null;g.textContent=PA.gate?`Flip gate ON · flip watch ${fw?fw.tp+'% '+fw.side:'—'} · flip learner ${fl?Math.round(fl.pl*100)+'% '+(fl.dir>0?'up':'down'):'—'} · ${fw&&fl&&fw.tp>=70&&fl.pl*100>=70&&fw.side===(fl.dir>0?'up':'down')?'OPEN: trades allowed':'closed: no new trades'} (lottery tickets are not gated)`:''}}const ms=$('pamode');if(ms&&document.activeElement!==ms)ms.value=PA.mode||'scalp';const sel=$('pafrac');if(sel&&document.activeElement!==sel)sel.value=String(PA.frac||0.25);
+ const pct=Math.max(0,Math.min(100,(PA.bank-PA.floor)/(PA.goal-PA.floor)*100));
+ const st=PA.bank>=PA.goal?' 🎉 GOAL REACHED':PA.bank<=PA.floor?' 🛑 FLOOR HIT (stopped)':'';
+ el.innerHTML=`$${PA.bank.toFixed(2)}${st}`;el.style.color=PA.bank>=PA.start?'var(--g)':'var(--r)';
+ const last=PA.log.slice(-4).reverse().map(x=>`${x.k==='lottery'?'🎟':'•'} ${x.s} x${x.c} @ ${x.e}¢: ${x.p>=0?'+':''}$${x.p.toFixed(2)}`).join('<br>');
+ $('pa2').innerHTML=`<div style="height:8px;background:#2a3550;border-radius:4px;margin:4px 0"><div style="height:8px;width:${pct}%;background:var(--g);border-radius:4px"></div></div>Started $${PA.start} · goal $${PA.goal} · stops at $${PA.floor}. ${PA.n} trades, ${PA.w} won. Mode: ${PA.mode==='hold'?'hold to the end':'scalp'}${PA.mode==='hold'?` · hold bets ${PA.hW||0}/${PA.hN||0} won, net ${(PA.hPnl||0)>=0?'+':'-'}$${Math.abs(PA.hPnl||0).toFixed(2)}${PA.hcur?' · open: '+PA.hcur.side+' @ '+PA.hcur.ask+'¢':''}`:''}. Lottery tickets (one per window, no daily limit): ${PA.lotW}/${PA.lotN} won, net ${(PA.lotPnl||0)>=0?'+':'-'}$${Math.abs(PA.lotPnl||0).toFixed(2)}${PA.cur?` · one open now (${PA.cur.side} @ ${PA.cur.ask}¢)`:''}.<br>`+(last||'No trades yet.')+'<br>'+(SH.length?`Early sells vs holding to the end (${SH.length} sells): sold for ${SH.reduce((q,x)=>q+x.a,0).toFixed(0)}¢ total, holding would have made ${SH.reduce((q,x)=>q+x.h,0).toFixed(0)}¢ per contract.`:'Early sells vs holding to the end: collecting…')+'<br><span style="opacity:.8">Fake money. It follows the same paper trades as the box and bets the share of the account you pick ('+Math.round((PA.frac||0.25)*100)+'%) each time'+(paFracNow()<(PA.frac||0.25)?', now '+Math.round(paFracNow()*100)+'% because the account has doubled':'')+'.</span>';
+}
+let SH=[],SHp=[];try{SH=JSON.parse(localStorage.getItem('btcSH')||'[]')}catch(e){}
+function shSave(){try{localStorage.setItem('btcSH',JSON.stringify(SH.slice(-300)))}catch(e){}}
+function shTick(){ // after a window ends, work out what each early SELL would have made if held to the end
+ SHp=SHp.filter(q=>{if(q.win===curWin())return true;
+  if(onePrevAvg&&Math.abs(onePrevAvg.t-(q.win+W15))<30000){const fin=onePrevAvg.v,won=q.side==='up'?fin>q.s:fin<q.s;
+   SH.push({a:q.actual,h:Math.round(((won?100:0)-q.entry-kfee(q.entry/100))*10)/10});shSave()}
+  return false});
+}
+let AT=null,autoLog=[],goodSince=0,lastRes1=null;
+try{AT=JSON.parse(localStorage.getItem('btcAT')||'null');autoLog=JSON.parse(localStorage.getItem('btcAuto')||'[]')}catch(e){}
+if(AT&&AT.win!==curWin()&&AT.sellAt==null)AT.stale=true;
+function saveAT(){try{localStorage.setItem('btcAT',JSON.stringify(AT));localStorage.setItem('btcAuto',JSON.stringify(autoLog.slice(-300)))}catch(e){}}
+function closeAT(exitPx,how){
+ const pnl=Math.round((exitPx-AT.entry-kfee(AT.entry/100)-(how==='sold'?kfee(exitPx/100):0))*10)/10;
+ autoLog.push({side:AT.side,kind:AT.kind||'?',entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win});
+ try{if(paOpen()&&PA.mode!=='hold')paAdd(AT.kind||'?',AT.side,AT.cnt||1,AT.entry,pnl,how)}catch(e){}
+ if(how==='sold'&&AT.s!=null)SHp.push({win:AT.win,side:AT.side,entry:AT.entry,s:AT.s,actual:pnl});
+ lastRes1={side:AT.side,entry:AT.entry,exit:exitPx,pnl,how,t:Date.now(),win:AT.win};
+ AT=null;setPos(null);saveAT();
+}
+function undoAuto(){AT=null;setPos(null);saveAT()}
+// restore a trade that was open when the page reloaded
+setTimeout(()=>{if(AT&&!AT.stale&&AT.win===curWin()){setPos(AT.side);entry=AT.entry;try{$('entryP').value=AT.entry}catch(e){}}},0);
+// the box's own report card: its call at 5:00 left vs how the window settled
+function oneRecord(now,left,useS,avg){
+ const cw=curWin();
+ if(onePend&&onePend.win!==cw){
+  if(onePrevAvg&&Math.abs(onePrevAvg.t-(onePend.win+W15))<30000){const upW=onePrevAvg.v>onePend.s;oneLog.push({ok:(onePend.p>=.5)===upW,c:onePend.c});oneLog=oneLog.slice(-300);try{localStorage.setItem('btcOne',JSON.stringify(oneLog))}catch(e){}}
+  onePend=null;
+ }
+ if(!onePend&&oneP!=null&&useS!=null&&left<=300&&left>270&&now-lastT<10000)onePend={win:cw,p:oneP,s:useS,c:Math.round(Math.max(oneP,1-oneP)*100)};
+ if(avg!=null)onePrevAvg={v:avg,t:now};
+ const n=oneLog.length,h=oneLog.filter(x=>x.ok).length,st=oneLog.filter(x=>x.c>=70),sh=st.filter(x=>x.ok).length;
+ const an=autoLog.length,ap=autoLog.reduce((a,x)=>a+x.pnl,0),aw=autoLog.filter(x=>x.pnl>0).length;
+ const as=aiStats();
+ const lead=(()=>{const w=aiWts();const i=w.indexOf(Math.max(...w));return BR[i].nm})();
+ const aiLine=!as.n?(aiPend.length?`🧠 AI: ${aiPend.length} snapshots waiting to be scored (first in ~1 min)`:`🧠 AI paused: ${aiWhy}`):as.ready&&benched('ai')?'🧠 AI benched: its real trades are losing, back to basic rules':as.ready?`🧠 AI in charge (${lead} brain leading) · picks won ${Math.round(as.pr*100)}% vs ${Math.round(as.base*100)}% normal (${as.pk})`:`🧠 AI learning: ${as.n}/400 samples`+(as.pk?` · picks ${Math.round(as.pr*100)}% vs ${Math.round(as.base*100)}% normal (${as.pk})`:'');
+ const cbLine=CB.st==='ready'&&CB.test?`📚 ${CB.days.toFixed(1)} days studied · best calls hit ${Math.round(CB.test.pr*100)}% vs ${Math.round(CB.test.base*100)}% normal`:CB.st==='studying'?'📚 Studying the last 3 days of BTC…':'📚 Couldn\'t load BTC history';
+ const seeLine=CB.seeing&&CB.seeing.length?`📐 ${CB.seeing.slice(0,2).join(' · ')}<br>`:'';
+ $('orec').innerHTML=seeLine+cbLine+'<br>'+aiLine+'<br>'+(an?`Trades: ${an} · ${aw} won · <b style="color:${ap>=0?'var(--g)':'var(--r)'}">${ap>=0?'+':''}${ap.toFixed(0)}¢</b> per contract<br>`:'');
+ CB.rec5=n?`Box record at 5:00 left: ${h}/${n} right (${Math.round(h/n*100)}%)`+(st.length?` · when 70%+: ${sh}/${st.length}`:''):'Box record starts at 5:00 left';
+}
+const rec=(arr,minN)=>{if(arr.length<minN)return 1;const h=arr.filter(x=>x.ok).length/arr.length;return h<0.5?0:1}; // mute a hint whose own record is losing
+function oneBox(now,left,Kf,price,useS,p,avg){
+ const box=$('ob1'),cw=curWin();
+ // a trade still open when its window ended settles at Kalshi's payout: 100¢ if right, 0¢ if wrong
+ if(AT&&(AT.win!==cw||AT.stale)){
+  const fin=AT.stale?null:(onePrevAvg&&Math.abs(onePrevAvg.t-(AT.win+W15))<30000?onePrevAvg.v:null);
+  if(fin!=null&&AT.s!=null){const won=AT.side==='up'?fin>AT.s:fin<AT.s;closeAT(won?100:0,won?'settled win':'settled loss')}
+  else{AT=null;saveAT()} // couldn't see the ending, so it isn't scored
+ }
+ // you cleared it yourself in details
+ if(AT&&!pos&&AT.sellAt==null){AT=null;saveAT()}
+ oneRecord(now,left,useS,avg);
+ if(oneWin!==cw){oneWin=cw;oneP=null}
+ $('ol').textContent=`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,'0')} left`;
+ $('obar').style.width=Math.min(100,(1-left/900)*100)+'%';
+ const nf=Object.values(ex).filter(e=>now-e.t<30000).length;
+ $('os').textContent=`${nf} price feed${nf===1?'':'s'} · ${Kf?'Kalshi live':'Kalshi offline, using estimate'} · ${armed?'🔔 alerts on, screen awake':'tap box for alerts'}`;
+ if(p==null||useS==null){box.className='ob wt';$('oa').textContent='•';$('oc').textContent='…';$('of').textContent=price==null?'Getting BTC price':'Finding the price to beat';$('ot').textContent='';return}
+ if(now-lastT>15000){box.className='ob wt';$('oa').textContent='•';$('oc').textContent='WAIT';$('of').textContent='Data stalled';$('ot').textContent='Feeds paused (tab asleep?). Give it a few seconds.';return}
+ // 1) the model (already has: distance to strike, volatility, 60s settle average, trade flow, futures lead, options flow)
+ let q=p;
+ // 2) blend in Kalshi's crowd price
+ const mid=Kf&&K.ya!=null&&K.yb!=null&&K.ya-K.yb<=15?(K.ya+K.yb)/200:null;
+ if(mid!=null)q=0.6*q+0.4*mid;
+ // 3) small nudges from the hint cards, bigger when price is near the strike and there's time left
+ const near=Math.min(1,left/300)*(1-Math.min(1,Math.abs(q-0.5)*2)*0.7);
+ let nudge=0;
+ if(abDirNow&&now-abDirNow.t<5000)nudge+=0.03*abDirNow.d*rec(abRes,50);
+ const o=obImb(price);if(o&&Math.abs(o.imb)>=0.4)nudge+=0.02*Math.sign(o.imb)*rec(obRes,50);
+ if(flNow&&flNow.ok&&now-flNow.t<3000&&flNow.pl>=0.6)nudge+=0.04*flNow.dir;
+ q+=nudge*near;
+ q=left<=0?q:Math.min(0.97,Math.max(0.03,q));
+ oneP=oneP==null?q:oneP*0.8+q*0.2; // steady it so it doesn't flicker
+ const up=oneP>=0.5,conf=Math.round((up?oneP:1-oneP)*100);
+ box.className='ob '+(up?'up':'dn');
+ $('oa').textContent=up?'▲':'▼';$('oc').textContent=up?'UP':'DOWN';
+ $('of').textContent=conf<58?`${conf}% · weak lean`:conf>=80?`${conf}% · strong`:`${conf}% sure`;
+ // ---------- swing finder: only buy a dip the model thinks went too far, once BTC turns back ----------
+ // rule (dip / target / stop) comes from the scalp lab: its best rule once it has 10+ fake trades in profit
+ const best=SR.filter(r=>r.n>=10&&r.pnl>0).sort((x,y)=>y.pnl/y.n-x.pnl/x.n)[0];
+ const RD=best?best.D:6,RT=best?best.T:6,RS=best?best.S:6;
+ let setup=null;const ais=aiStats();
+ const aiOn=ais.ready&&!benched('ai');
+ // 🔄 flip: flip watch or the proven flip learner says price is about to cross the strike -> buy the cheap side
+ if(Kf&&!AT&&!pos&&left>=45&&useS!=null&&!benched('flip')&&!(lastRes1&&now-lastRes1.t<15000)){
+  const fw=fwNow&&now-fwNow.t<3000?fwNow.side:null;
+  const fl=flNow&&flNow.ok&&now-flNow.t<3000&&flNow.pl>=0.6?(flNow.dir>0?'up':'down'):null;
+  const sd=fl||fw;
+  if(sd){const a1=sd==='up'?K.ya:K.na,b1=sd==='up'?K.yb:K.nb;
+   if(a1!=null&&b1!=null&&a1>=5&&a1<=60&&a1-b1<=3)setup={side:sd,ask:a1,edge:0,kind:'flip',why:fl&&fw?`flip watch + learner ${Math.round(flNow.pl*100)}%`:fl?`flip learner ${Math.round(flNow.pl*100)}%`:'flip watch firing'}}
+ }
+ if(!setup&&aiOn&&aiNow&&Kf&&!AT&&!pos&&left>=AIH+5&&!(lastRes1&&now-lastRes1.t<15000)){
+  for(const sd of ['up','down']){const q=aiNow[sd];if(q&&q.p>=AITH&&q.ask<=80&&(!setup||q.p>setup.p))setup={side:sd,ask:q.ask,p:q.p,edge:0,kind:'ai'}}
+ }
+ else if(!setup&&!aiOn&&Kf&&!AT&&!pos&&left>=3&&left<=840&&skH.length>=8&&!(lastRes1&&now-lastRes1.t<15000)){
+  const p5=hist.find(h=>h.t>=now-5000),mv=p5?price-p5.p:0,th=price*0.00002;
+  for(const sd of ['up','down']){
+   const a1=sd==='up'?K.ya:K.na,b1=sd==='up'?K.yb:K.nb,key=sd==='up'?'y':'n';
+   if(a1==null||b1==null||a1<15||a1>80||a1-b1>3)continue;
+   const hi=Math.max(...skH.map(x=>x[key])),dip=hi-a1;          // how far this side just dropped (last ~20s)
+   const fair=(sd==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100); // model thinks it's worth more than the ask
+   const turn=(sd==='up'?mv:-mv)>=th;                            // BTC already moving back this side's way
+   if(!benched('dip')&&dip>=RD&&edge>=5&&turn&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,dip,edge,kind:'dip'};
+  }
+  // takeoff: BTC ripping one way (big 10s move, still going, buyers/sellers piling in) and Kalshi hasn't caught up
+  const p10=hist.find(h=>h.t>=now-10000),p3=hist.find(h=>h.t>=now-3000);
+  if(p10&&p3){
+   const m10=price-p10.p,m3=price-p3.p,sd10=vol()*price*Math.sqrt(10),dir=Math.sign(m10);
+   if(dir&&Math.abs(m10)>=2*sd10&&m3*dir>=0&&imbW(now,5000)*dir>=0.2){
+    const sd=dir>0?'up':'down',a1=sd==='up'?K.ya:K.na,b1=sd==='up'?K.yb:K.nb;
+    if(a1!=null&&b1!=null&&a1>=15&&a1<=85&&a1-b1<=3){
+     const fair=(sd==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100);
+     if(!benched('rocket')&&edge>=5&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,edge,kind:'rocket',move:Math.abs(m10)};
+    }
+   }
+  }
+ }
+ let t;
+ if(setup){
+  const nm=setup.side==='up'?'Up':'Down';
+  box.className='ob '+(setup.side==='up'?'up':'dn');$('oa').textContent=setup.side==='up'?'▲':'▼';$('oc').textContent='BUY '+nm.toUpperCase();
+  if(setup.kind==='flip'){$('oa').textContent='🔄';$('of').textContent=`at ${setup.ask}¢ · ${setup.why}`;t=`✅ Sells when BTC crosses $${Math.round(useS).toLocaleString()} · stop ${Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}¢`}
+  else if(setup.kind==='ai'){$('oa').textContent='🧠';$('of').textContent=`at ${setup.ask}¢ · AI: ${Math.round(setup.p*100)}% it swings +${AIT}¢ first`;t=`✅ Target ${Math.ceil(setup.ask+AIT+kfee(setup.ask/100)*2)}¢ · stop ${Math.floor(setup.ask-AIS)}¢`}
+  else if(setup.kind==='rocket'){$('oa').textContent='🚀';$('of').textContent=`at ${setup.ask}¢ · BTC ${setup.side==='up'?'+':'-'}$${setup.move.toFixed(0)} in 10s, Kalshi lagging`;t=`✅ Riding it — sells when it tops out · stop ${Math.floor(setup.ask-RS)}¢`}
+  else{$('of').textContent=`at ${setup.ask}¢ · dipped ${setup.dip.toFixed(0)}¢, bouncing`;
+  t=`✅ Target ${Math.ceil(setup.ask+RT+kfee(setup.ask/100)*2)}¢ · stop ${Math.floor(setup.ask-RS)}¢`}
+ }
+ else if(!Kf)t='Needs Kalshi live prices to find swings';
+ else t=aiOn?'🧠 AI watching for a swing…':`Watching for a swing or takeoff… (dips: buys ${RD}¢+, sells +${RT}¢)`;
+ $('ot').textContent=t;
+ const good=!!setup;if(good&&!lastGood&&armed){beep(880);setTimeout(()=>beep(1100),200)}lastGood=good;
+ // auto buy: the setup has to hold for 2 seconds
+ if(!good)goodSince=0;else if(!goodSince)goodSince=now;
+ if(good&&now-goodSince>=2000&&paOpen()&&flipGate(setup.side,now)){
+  AT={side:setup.side,kind:setup.kind,peak:setup.ask,entry:setup.ask,win:cw,s:useS,t:now,sellAt:null,cnt:paCount(setup.ask),tgt:Math.ceil(setup.ask+(setup.kind==='ai'?AIT:RT)+kfee(setup.ask/100)*2),stop:Math.floor(setup.ask-(setup.kind==='ai'?AIS:RS))};
+  if(setup.kind==='flip'){AT.strike=useS;AT.tgt=Math.ceil(setup.ask+12+kfee(setup.ask/100)*2);AT.stop=Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}
+  if(PA.hold85!==false)AT.tgt=Math.min(98,Math.max(85,setup.ask+4)); // hold until the contract is worth 85 cents or the window settles
+  setPos(AT.side);entry=setup.ask;try{$('entryP').value=setup.ask}catch(e){}saveAT();
+  lastRes1=null;goodSince=0;
+ }
+ $('oundo').style.display=AT&&AT.sellAt==null?'':'none';
+ if(AT){
+  const nm=AT.side==='up'?'Up':'Down',bid=Kf?(AT.side==='up'?K.yb:K.nb):null,mine=AT.side==='up'?oneP:1-oneP;
+  const pl=bid!=null?bid-AT.entry:null,plTxt=pl==null?'':` · now ${bid}¢ (${pl>=0?'+':''}${pl.toFixed(0)}¢)`;
+  const tgt=AT.tgt??Math.ceil(AT.entry+8),stop=AT.stop??Math.floor(AT.entry-6),age=(now-AT.t)/1000;
+  // sell rules: hit target, hit stop, swing went stale (2 min), or window almost over (hold to the end only if very likely to win)
+  let why=null;
+  // trend-aware stop: a dip below the stop does NOT sell while the model still gives your side 55%+ and there's time left (a wider emergency stop still applies)
+  const trendHold=b=>{const pp=p==null?null:(AT.side==='up'?p:1-p),hard=AT.entry-Math.max(8,(AT.entry-stop)*2.5);return pp!=null&&pp>=0.55&&left>60&&b>hard};
+  AT.hold=(bid!=null&&bid<=stop&&AT.kind!=='flip'&&trendHold(bid))?1:0;
+  if(bid!=null&&AT.kind==='flip'){
+   const be=AT.entry+kfee(AT.entry/100)*2,crossed=AT.side==='up'?price>=AT.strike:price<=AT.strike;
+   if(PA.hold85===false&&crossed&&bid>be)why='profit';
+   else if(bid>=tgt)why='profit';
+   else if(bid<=stop)why='cut';
+   else if(PA.hold85===false&&age>120)why=bid>be?'profit':'stale';
+  }
+  else if(bid!=null&&AT.kind==='rocket'){
+   if(AT.sellAt==null&&bid>AT.peak){AT.peak=bid;saveAT()}
+   const be=AT.entry+kfee(AT.entry/100)*2,trail=AT.peak-4;
+   const p4=hist.find(h=>h.t>=now-4000),d=AT.side==='up'?1:-1,stall=p4?(price-p4.p)*d<0:false;
+   if(bid>=95)why='profit';                                   // nothing left to squeeze
+   else if(PA.hold85===false&&AT.peak>=be+4&&bid<=trail)why=bid>be?'profit':'cut'; // came off the top
+   else if(PA.hold85===false&&stall&&bid>=be+2)why='profit';                     // BTC stopped running, bank it
+   else if(bid<=stop&&!AT.hold)why='cut';
+   else if(PA.hold85===false&&age>90)why=bid>AT.entry?'profit':'stale';
+  }
+  else if(bid!=null){
+   if(bid>=tgt)why='profit';
+   else if(bid<=stop&&!AT.hold)why='cut';
+   else if(PA.hold85===false&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
+  }
+  if(AT.sellAt==null&&why&&left>1){AT.sellAt=now;AT.sellPx=bid;AT.why=why;saveAT();if(armed){beep(1100);setTimeout(()=>beep(880),200);setTimeout(()=>beep(1100),400)}}
+  if(AT.sellAt!=null){
+   const g=AT.why==='profit'||(AT.sellPx-AT.entry)>0;
+   box.className='ob '+(g?'up':'dn');$('oa').textContent=g?'💰':'✂️';
+   $('oc').textContent='SELL';$('of').textContent=`Sell your ${nm} now${AT.sellPx!=null?` (bid ${AT.sellPx}¢, paid ${AT.entry}¢)`:''}`;
+   $('ot').textContent=AT.why==='profit'?'Take the profit':AT.why==='stale'?'Swing ran out of steam — get out':'Cut the loss before it gets worse';
+   if(now-AT.sellAt>=Math.min(20000,Math.max(1000,left*1000)))closeAT(AT.sellPx,'sold'); // assumes you sold; closes itself after 20s
+   return;
+  }
+  box.className='ob '+(AT.side==='up'?'up':'dn');$('oa').textContent=AT.side==='up'?'▲':'▼';
+  $('oc').textContent='HOLD';$('of').textContent=`${nm} · paid ${AT.entry}¢${plTxt}`;
+  $('ot').textContent=(AT.hold?'⏳ Dipped past the stop but the trend still favors you, holding. ':'')+(AT.kind==='flip'?`🔄 Waiting for the flip · sells when BTC crosses $${Math.round(AT.strike).toLocaleString()} · stop ${stop}¢`:AT.kind==='rocket'?`🚀 Riding · top so far ${AT.peak}¢ · stop ${stop}¢`:`Selling at ${tgt}¢ (profit) or ${stop}¢ (stop)`);
+  return;
+ }
+ if(setup)return;
+ if(lastRes1&&now-lastRes1.t<8000){
+  const w=lastRes1.pnl>=0;box.className='ob '+(w?'up':'dn');$('oa').textContent=w?'✅':'❌';
+  $('oc').textContent=`${w?'+':''}${lastRes1.pnl.toFixed(0)}¢`;
+  $('of').textContent=`${lastRes1.side==='up'?'Up':'Down'} trade closed (${lastRes1.how})`;
+  $('ot').textContent=`Paid ${lastRes1.entry}¢ → ${lastRes1.exit}¢, after fees`;
+  return;
+ }
+}
+// ---------- main loop ----------
+function update(){
+ const now=Date.now();trades=trades.filter(t=>t.t>now-60000);hist=hist.filter(h=>h.t>now-1200000);
+ const price=composite();
+ $('status').textContent=(now-lastT>15000)?'⚠ No trades for '+Math.round((now-lastT)/1000)+'s: feed stalled or tab was asleep. Numbers may be stale.':'Live: '+([...live].join(', ')||'connecting…');
+ if(price==null){oneBox(now,Math.max(0,(curWin()+W15-now)/1000),false,null,null,null);return}
+ if(manual.win!=null&&manual.win!==curWin()){manual={s:null,win:null};$('mS').value=''}
+ const st=curWin();close=st+W15;const Kf=!!K&&now-Kt<8000&&Math.abs(K.close-(st+W15))<90000;if(Kf&&K.close>now)close=K.close; // only trust Kalshi data that belongs to THIS window (never the next one)
+ const h0=hist.find(x=>x.t>=st);strike=(h0&&h0.t-st<20000)?h0.p:null;
+ const useS=manual.s!=null?manual.s:(Kf&&K.strike?K.strike:strike);Kauto=Kf&&manual.s==null&&!!K.strike;
+ const left=Math.max(0,(close-now)/1000),avg=avg60(now);
+ $('px').textContent=fmt(price);
+ const c=open24?(price/open24-1)*100:null;
+ $('chg').innerHTML=(c!=null?`<span class="${c>=0?'g':'r'}">${c>=0?'+':''}${c.toFixed(2)}%</span> 24h · `:'')+`60s avg ${fmt(avg)}`;
+ $('tl').textContent=`${Math.floor(left/60)}:${String(Math.floor(left%60)).padStart(2,'0')}`;
+ $('src').textContent='15-min clock (assumed quarter-hour)';
+ const w6=trades,b6=sum(w6,true),s6=sum(w6,false),imb=(b6+s6)?(b6-s6)/(b6+s6):0; // 60s flow feeds the model
+ const wd=trades.filter(t=>t.t>now-FW),bv=sum(wd,true),sv=sum(wd,false),imbD=(bv+sv)?(bv-sv)/(bv+sv):0;
+ $('bv').textContent=bv.toFixed(3);$('sv').textContent=sv.toFixed(3);
+ $('imb').innerHTML=(bv+sv)?`<b class="${imbD>=0?'g':'r'}">${imbD>=0?'Buy':'Sell'} pressure ${(Math.abs(imbD)*100).toFixed(0)}%</b>`:'<b>No trades</b>';
+ $('ib').style.width=(50+imbD*50)+'%';
+ const pw=hist.find(h=>h.t>=now-FW),mv=pw?price-pw.p:0;
+ $('exf').innerHTML=['Coinbase','Kraken','Bitstamp','Gemini'].map(n=>{const a=wd.filter(t=>t.ex===n);return `${n}: <span class="g">${sum(a,true).toFixed(2)}</span> bought / <span class="r">${sum(a,false).toFixed(2)}</span> sold`}).join('<br>')+`<br>Price over this window: <b class="${mv>=0?'g':'r'}">${mv>=0?'+':'-'}$${Math.abs(mv).toFixed(2)}</b>`;
+ const p1=hist.find(h=>h.t>=now-60000),mom=p1?(price/p1.p-1)*100:0;
+ {const pl=perpLead(now,price);$('mom').textContent=`1-min momentum ${mom>=0?'+':''}${mom.toFixed(3)}%`+(pl==null?' · futures feed: off':` · futures lead ${pl>=0?'+':'-'}$${Math.abs(pl).toFixed(1)}`)}
+ let p=null;
+ if(useS==null){
+  $('strike').textContent='—';$('dist').textContent='Strike unknown: type it in below';
+  $('mp').textContent='—';$('mp').className='v';
+ }else{
+  $('strike').textContent=fmt(useS);
+  const d0=price-useS;$('dist').innerHTML=`<span class="${d0>=0?'g':'r'}">${d0>=0?'+':''}${d0.toFixed(2)}</span> from strike`+(manual.s!=null?' · manual':(Kauto?' · Kalshi':' · simulated'));
+  const sig=vol()*price,ss=settleStats(now,close,left,price,sig),sd=Math.max(ss.sd,sig*0.6*Math.sqrt(Math.max(left,1)));
+  const pl=perpLead(now,price),lead=pl==null?0:Math.max(-1,Math.min(1,pl/(sig*3)));
+  const d=(ss.m-useS)+Math.max(-1,Math.min(1,imb))*sd*0.1+lead*sd*0.1+optAdj*sd; // settle-average model + capped flow and futures-lead nudges
+  p=left<=0?(avg>=useS?1:0):Math.min(0.97,Math.max(0.03,tcdf4(d/sd))); // never claim certainty: sudden jumps happen
+  $('mp').textContent=(p*100).toFixed(1)+'%';$('mp').className='v '+(p>=.5?'g':'r');
+ }
+ if(Kf){$('kst').textContent='Connected: '+K.tk;$('kpx').innerHTML=(K.strike?`Kalshi target: $${K.strike.toLocaleString()} (used automatically unless you type one)<br>`:'')+`Up: bid ${K.yb}¢ / ask ${K.ya}¢ &nbsp;|&nbsp; Down: bid ${K.nb}¢ / ask ${K.na}¢`}
+ signalUI(p,left,useS,now-lastT>15000,Kf);
+ decisionUI(now,left,Kf,price,avg,useS);
+ flipWatch(price,useS,left,now,Kf);
+ learner(price,useS,left,now,now-lastT>15000); // right after flip watch, so the gate compares two readings from the same moment
+ lagWatch(p,left,now,Kf);
+ try{pmWatch(p,now,Kf)}catch(e){}
+ try{paTick(now,left,Kf,useS,avg,p)}catch(e){}
+ try{shTick()}catch(e){}
+ absWatch(price,now);
+ obWatch(price,now);
+ optWatch(price,now);
+ scalpLab(now,Kf,left);
+ track(now,useS,p==null?.5:p,left,price,avg);
+  draw(useS);
+ try{aiTick(now,left,Kf,price,useS)}catch(e){aiWhy='error: '+e.message}
+ oneBox(now,left,Kf,price,useS,p,avg);
+}
+function draw(strike){
+ const c=$('c'),x=c.getContext('2d'),W=c.width,H=c.height;x.clearRect(0,0,W,H);
+ const now=Date.now(),pts=back.concat(hist).filter(h=>h.t>now-900000).sort((a,b)=>a.t-b.t);if(pts.length<2)return;
+ const ps=pts.map(p=>p.p).concat(strike?[strike]:[]),mn=Math.min(...ps),mx=Math.max(...ps),pad=(mx-mn)*.1||1;
+ const y=v=>H-8-(v-(mn-pad))/(mx-mn+2*pad)*(H-16),t0=now-900000,X=t=>(t-t0)/900000*W;
+ if(strike){x.strokeStyle='#f7931a';x.setLineDash([6,5]);x.beginPath();x.moveTo(0,y(strike));x.lineTo(W,y(strike));x.stroke();x.setLineDash([]);x.fillStyle='#f7931a';x.font='12px sans-serif';x.fillText('strike',4,y(strike)-4)}
+ x.strokeStyle=pts[pts.length-1].p>=(strike??0)?'#22c55e':'#ef4444';x.lineWidth=2;x.beginPath();
+ pts.forEach((p,i)=>i?x.lineTo(X(p.t),y(p.p)):x.moveTo(X(p.t),y(p.p)));x.stroke();
+}
+
+// ---------- keep learning: stay awake, show learning status, back up / restore the brain ----------
+const BRAIN_KEYS=['btcAI','btcModel','btcRes','btcLog','btcOne','btcAT','btcAuto','btcFlip','btcOB','btcOpt','btcAbs','btcLag','btcScalp','btcRelay','btcPM','btcPA','btcSH'];
+let keepWake=null,lastLesson=Date.now(),lastAIn=AI.n;
+async function keepAwake(){try{if(navigator.wakeLock&&document.visibilityState==='visible'&&!keepWake){keepWake=await navigator.wakeLock.request('screen');keepWake.addEventListener('release',()=>{keepWake=null})}}catch(x){keepWake=null}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')keepAwake()});
+document.addEventListener('click',keepAwake);document.addEventListener('touchstart',keepAwake,{passive:true});keepAwake();
+function brainPack(){const o={v:22,t:Date.now()};BRAIN_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!=null)o[k]=v}catch(e){}});return JSON.stringify(o)}
+async function brainCopy(){const t=brainPack();try{await navigator.clipboard.writeText(t);alert('Brain copied ('+Math.round(t.length/1024)+' KB). Paste it into Notes to keep a backup.')}catch(e){prompt('Copy this whole text and keep it somewhere safe:',t)}}
+function brainPaste(){const t=prompt('Paste your saved brain text here:');if(!t)return;try{const o=JSON.parse(t);if(!o||o.v==null)throw 0;BRAIN_KEYS.forEach(k=>{if(o[k]!=null)localStorage.setItem(k,o[k])});alert('Brain restored. Reloading.');location.reload()}catch(e){alert('That did not look like a saved brain.')}}
+setInterval(()=>{
+ const now=Date.now();if(AI.n!==lastAIn){lastAIn=AI.n;lastLesson=now}
+ const el=$('lrn');if(!el)return;
+ const hid=document.visibilityState!=='visible',stall=now-lastT>15000,since=Math.round((now-lastLesson)/1000);
+ const awake=keepWake?'screen kept awake':'screen may sleep (tap the page once)';
+ const state=hid?'<b style="color:var(--r)">PAUSED: page is in the background, learning is off</b>':stall?'<b style="color:var(--r)">PAUSED: price feed stalled</b>':'<b style="color:var(--g)">LEARNING</b>';
+ el.innerHTML=`🔁 ${state} · ${AI.n} lessons so far · last lesson ${since<120?since+'s':Math.round(since/60)+' min'} ago · ${awake}<br><span style="opacity:.8">It learns only while this page is open and visible, and it is saved only on this device. Use Copy brain to back it up.</span>`;
+},1000);
+
+// ---------- Polymarket comparison: which market follows the model/real price faster ----------
+let PM=null,PMt=0,PMS=[],pmLast=0,pmCalc=0,pmEst=[];try{pmEst=JSON.parse(localStorage.getItem('btcPM')||'[]')}catch(e){}
+async function pollPM(){
+ const r=$('relay').value.trim();if(!r)return;
+ try{const j=await (await fetch(r.replace(/\/k$/,'/pm'),{cache:'no-store'})).json();PM=j;PMt=Date.now()}catch(e){PM=null}
+}
+setInterval(pollPM,3000);
+function xlag(a,b,maxL){ // a leads b by L samples? returns best lag and its correlation
+ const da=[],db=[];for(let i=1;i<a.length;i++){da.push(a[i]-a[i-1]);db.push(b[i]-b[i-1])}
+ let best=null;
+ for(let L=0;L<=maxL;L++){let sxy=0,sxx=0,syy=0;for(let i=0;i+L<da.length;i++){const x=da[i],y=db[i+L];sxy+=x*y;sxx+=x*x;syy+=y*y}
+  const c=(sxx>0&&syy>0)?sxy/Math.sqrt(sxx*syy):0;if(!best||c>best.c)best={L,c}}
+ return best;
+}
+function pmWatch(p,now,Kf){
+ const set=(h,c,t)=>{$('pm').textContent=h;$('pm').style.color=c;$('pm2').innerHTML=t};const mu='var(--mu)';
+ const med=k=>{const v=pmEst.map(e=>e[k]).filter(x=>x!=null).sort((x,y)=>x-y);return v.length?v[Math.floor(v.length/2)]:null};
+ const n=pmEst.length,mk=med('k'),mp=med('p');
+ $('pmst').innerHTML=n?`Lag estimates so far: ${n} (each from ~15 min of prices). Typical delay behind the model: Kalshi ${mk==null?'?':mk+'s'}, Polymarket ${mp==null?'?':mp+'s'}. Needs 20+ estimates before it means anything.`:'No lag estimates yet. Each one needs ~15 minutes of both prices.';
+ if(!PM||PM.error||PM.up==null||now-PMt>10000){set('POLYMARKET NOT READING',mu,'Could not read Polymarket prices'+(PM&&PM.error?' ('+PM.error+')':'')+'. Its site may block this, or the market name changed. Nothing else on the page is affected.');return}
+ const pu=PM.up*100;
+ set(`POLYMARKET UP ${pu.toFixed(1)}¢`,'var(--tx)',`Kalshi Up: ${Kf&&K.yb!=null?((K.yb+K.ya)/2).toFixed(1)+'¢':'—'} · Model: ${p!=null?(p*100).toFixed(1)+'%':'—'}<br>Market: ${PM.slug}`);
+ if(p!=null&&Kf&&K.yb!=null&&K.ya!=null&&now-pmLast>=2000){pmLast=now;PMS.push({t:now,m:p*100,k:(K.yb+K.ya)/2,p:pu,w:curWin()});if(PMS.length>450)PMS.shift()}
+ if(now-pmCalc>=30000&&PMS.length>=300){pmCalc=now;
+  const w=curWin(),seg=PMS.filter(x=>x.w===w);
+  if(seg.length>=300){const m=seg.map(x=>x.m),k=seg.map(x=>x.k),q=seg.map(x=>x.p),a=xlag(m,k,8),b=xlag(m,q,8);
+   pmEst.push({k:a&&a.c>=0.15?a.L*2:null,p:b&&b.c>=0.15?b.L*2:null,t:now});pmEst=pmEst.slice(-60);try{localStorage.setItem('btcPM',JSON.stringify(pmEst))}catch(e){}}}
+}
+setFW(5);setPos(null);try{startFeeds()}catch(e){}try{perpFeed()}catch(e){}try{bookFeed()}catch(e){}try{optFeed()}catch(e){}backfill();setInterval(update,500);setInterval(pollK,1000);
+</script></body></html>

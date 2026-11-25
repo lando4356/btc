@@ -24,7 +24,7 @@ const ncdf = x => { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.398
 const volPerSec = 2.2;            // ~$85 typical move over 15 minutes
 let btc = 95000, t0 = Date.UTC(2026, 10, 1);
 const recent = [];
-const rows = ['t,ticker,closeTs,strike,btc,yesBid,yesAsk,noBid,noAsk'];
+const rows = ['t,ticker,closeTs,strike,btc,yesBid,yesAsk,noBid,noAsk,imb5,imb60'];
 for (let w = 0; w < hours * 4; w++) {
   const open = t0 + w * 900_000, close = open + 900_000, strike = btc;
   const ticker = `KXBTC15M-FAKE${String(w).padStart(5, '0')}`;
@@ -36,7 +36,9 @@ for (let w = 0; w < hours * 4; w++) {
     const skew = plant && recent.length > 90 && btc - recent[0] > 30 ? -10 : 0;
     const mid = Math.min(99, Math.max(1, Math.round(pUp * 100) + skew));
     const yesBid = Math.max(1, mid - 1), yesAsk = Math.min(99, mid + 1);
-    rows.push([t, ticker, close, strike.toFixed(2), btc.toFixed(2), yesBid, yesAsk, 100 - yesAsk, 100 - yesBid].join(','));
+    const m3 = recent.length > 1 ? btc - recent[Math.max(0, recent.length - 2)] : 0;   // trade flow loosely follows the last move
+    const imb5 = Math.max(-1, Math.min(1, Math.tanh(m3 / 4) * 0.6 + gauss() * 0.25));
+    rows.push([t, ticker, close, strike.toFixed(2), btc.toFixed(2), yesBid, yesAsk, 100 - yesAsk, 100 - yesBid, imb5.toFixed(3), (imb5 * 0.4).toFixed(3)].join(','));
   }
 }
 fs.writeFileSync(path.join(out, 'ticks-fake.csv'), rows.join('\n') + '\n');

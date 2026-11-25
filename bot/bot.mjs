@@ -66,6 +66,25 @@ async function btcPrice() {
   return +j.price;
 }
 
+// recent Coinbase trades -> buy/sell pressure (the page's trade-flow signal)
+const TRADES_URL = process.env.TRADES_URL || 'https://api.exchange.coinbase.com/products/BTC-USD/trades?limit=100';
+let flow = [], seenTrade = new Set();
+async function tradeFlow(now) {
+  try {
+    const list = await getJSON(TRADES_URL);
+    for (const x of list) {
+      if (seenTrade.has(x.trade_id)) continue;
+      seenTrade.add(x.trade_id);
+      // Coinbase's "side" is the resting order's side, so a taker BUY shows as side "sell"
+      flow.push({ t: Date.parse(x.time), sz: +x.size, buy: x.side === 'sell' });
+    }
+  } catch {}
+  flow = flow.filter(x => x.t > now - 60_000);
+  if (seenTrade.size > 5000) seenTrade = new Set([...seenTrade].slice(-2000));
+  const imb = ms => { let b = 0, sl = 0; for (const x of flow) if (x.t > now - ms) x.buy ? (b += x.sz) : (sl += x.sz); return b + sl ? (b - sl) / (b + sl) : 0; };
+  return { imb5: +imb(5000).toFixed(3), imb60: +imb(60_000).toFixed(3) };
+}
+
 async function marketResult(ticker) {
   try {
     const j = await getJSON(`${KALSHI}/markets/${ticker}`);
@@ -77,8 +96,8 @@ async function marketResult(ticker) {
 
 function recordTick(t) {
   const f = path.join(DATA, `ticks-${new Date(t.t).toISOString().slice(0, 10)}.csv`);
-  if (!fs.existsSync(f)) fs.writeFileSync(f, 't,ticker,closeTs,strike,btc,yesBid,yesAsk,noBid,noAsk\n');
-  fs.appendFileSync(f, [t.t, t.ticker, t.closeTs, t.strike, t.btc, t.yesBid, t.yesAsk, t.noBid, t.noAsk].join(',') + '\n');
+  if (!fs.existsSync(f)) fs.writeFileSync(f, 't,ticker,closeTs,strike,btc,yesBid,yesAsk,noBid,noAsk,imb5,imb60\n');
+  fs.appendFileSync(f, [t.t, t.ticker, t.closeTs, t.strike, t.btc, t.yesBid, t.yesAsk, t.noBid, t.noAsk, t.imb5, t.imb60].join(',') + '\n');
 }
 function recordTrade(tr) {
   if (!fs.existsSync(TRADES_FILE)) fs.writeFileSync(TRADES_FILE, 'closedAt,ticker,side,contracts,entry,exit,reason,pnl\n');
@@ -102,8 +121,9 @@ function runFinder() {
 
 async function loop() {
   try {
-    const [m, btc] = await Promise.all([currentMarket(), btcPrice()]);
-    const tick = { t: Date.now(), btc, ...m };
+    const now0 = Date.now();
+    const [m, btc, fl] = await Promise.all([currentMarket(), btcPrice(), tradeFlow(now0)]);
+    const tick = { t: now0, btc, ...m, ...fl };
 
     // a position from a window that has closed: settle it from Kalshi's result
     if (s.pos && s.pos.ticker !== tick.ticker) {
@@ -128,7 +148,7 @@ async function loop() {
     if (String(e.message) !== lastErr) note(`data error: ${e.message}`);
     lastErr = String(e.message);
   }
-  setTimeout(loop, 2000);
+  setTimeout(loop, 1000);   // every second, like the page
 }
 
 function page() {
