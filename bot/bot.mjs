@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { DEFAULTS, newState, onTick, settle, scoreboard } from './strategy.mjs';
 import { findPatterns } from './finder.mjs';
 import { loadTicks } from './backtest.mjs';
+import { parseBook } from './book.mjs';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const DATA = process.env.DATA_DIR || path.join(DIR, 'data');
@@ -70,14 +71,11 @@ async function currentMarket() {
   };
   // The market LIST only refreshes its prices about every 30 seconds. Trading off it makes Kalshi look
   // "slow" when it isn't, and paper trades fill at prices that are already gone. Use the live order book.
+  // Kalshi's reply key is `orderbook_fp` now (it used to be `orderbook`); reading only the old key left
+  // every tick on stale list prices (runs on Nov 25-26: "quotes list", Live prices ❌). parseBook reads both.
   try {
-    const ob = (await getJSON(`${KALSHI}/markets/${m.ticker}/orderbook`)).orderbook || {};
-    const lv = (c, d) => (c || (d || []).map(([p, q]) => [Math.round(parseFloat(p) * 100), +q])).filter(x => x[1] > 0).map(x => +x[0]);
-    const yes = lv(ob.yes, ob.yes_dollars), no = lv(ob.no, ob.no_dollars);
-    if (yes.length && no.length) {
-      const yb = Math.max(...yes), nb = Math.max(...no);
-      Object.assign(out, { yesBid: yb, noBid: nb, yesAsk: 100 - nb, noAsk: 100 - yb, src: 'book' });
-    }
+    const b = parseBook(await getJSON(`${KALSHI}/markets/${m.ticker}/orderbook`));
+    if (b) Object.assign(out, b, { src: 'book' });
   } catch {}
   return out;
 }

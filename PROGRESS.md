@@ -33,6 +33,8 @@ Find out honestly whether any strategy beats Kalshi's BTC 15-minute markets afte
 | Retried hold-to-85 / flip gate after they lost | Harness | Dead ends list (this file) |
 | Same failure run after run | Loop | 🛑 ESCALATE when one check fails two runs in a row |
 | Radar paper account stopped trading for good (v47.1) | Harness | a losing rule was "benched" and a benched rule never traded again, so it could never recover. v47.3: benched only blocks real money; the card says why paper isn't trading |
+| Run 2 still on stale list prices: Kalshi renamed the order-book reply key to `orderbook_fp`, the bot only read `orderbook` (Nov 26) | Harness | `bot/book.mjs` reads both + `bot/test/book.test.mjs` runs before every Actions run; run 2 archived |
+| Only ~2 paper runs a day: GitHub cron late/skipped, 39% coverage (Nov 26) | Harness | each run starts the next one (`gh workflow run`), cron kept as backup |
 | Keys could leak into the repo | Harness | `.gitignore` wall + no login code in the paper bot |
 
 ## Next
