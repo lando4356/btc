@@ -1,466 +1,774 @@
-4:36:21 PM  Paper bot running (no real money). Open http://localhost:8787
-4:36:21 PM  pattern finder: 4:36:21 PM: 0 windows searched, 0 pattern(s) passed the held-back test
-4:36:22 PM  status · KXBTC15M-26NOV251145-45 8:38 left · BTC -126 vs strike · Up 17¢ Down 84¢ · paper $30 · 0 trades · quotes list (changed on 100% of seconds)
-4:37:22 PM  status · KXBTC15M-26NOV251145-45 7:37 left · BTC -218 vs strike · Up 18¢ Down 83¢ · paper $30 · 0 trades · quotes list (changed on 5% of seconds)
-4:38:23 PM  status · KXBTC15M-26NOV251145-45 6:37 left · BTC -350 vs strike · Up 12¢ Down 89¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:39:24 PM  status · KXBTC15M-26NOV251145-45 5:36 left · BTC -407 vs strike · Up 2¢ Down 98¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:40:24 PM  status · KXBTC15M-26NOV251145-45 4:35 left · BTC -239 vs strike · Up 3¢ Down 97¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:41:25 PM  status · KXBTC15M-26NOV251145-45 3:35 left · BTC -354 vs strike · Up 2¢ Down 98¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:42:26 PM  status · KXBTC15M-26NOV251145-45 2:34 left · BTC -403 vs strike · Up 0¢ Down 100¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:43:27 PM  status · KXBTC15M-26NOV251145-45 1:33 left · BTC -496 vs strike · Up 0¢ Down 100¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:44:27 PM  status · KXBTC15M-26NOV251145-45 0:33 left · BTC -530 vs strike · Up 0¢ Down 100¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251200-00
-4:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251200-00 cleared)
-4:45:28 PM  status · KXBTC15M-26NOV251200-00 14:32 left · BTC +49 vs strike · Up 58¢ Down 43¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:46:28 PM  status · KXBTC15M-26NOV251200-00 13:31 left · BTC +140 vs strike · Up 70¢ Down 31¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:47:29 PM  status · KXBTC15M-26NOV251200-00 12:31 left · BTC +198 vs strike · Up 76¢ Down 25¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:48:29 PM  status · KXBTC15M-26NOV251200-00 11:31 left · BTC +142 vs strike · Up 77¢ Down 24¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:49:30 PM  status · KXBTC15M-26NOV251200-00 10:30 left · BTC +128 vs strike · Up 71¢ Down 30¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:50:30 PM  status · KXBTC15M-26NOV251200-00 9:29 left · BTC +198 vs strike · Up 80¢ Down 21¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:51:31 PM  status · KXBTC15M-26NOV251200-00 8:28 left · BTC +246 vs strike · Up 90¢ Down 11¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:52:32 PM  status · KXBTC15M-26NOV251200-00 7:28 left · BTC +234 vs strike · Up 90¢ Down 10¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:53:33 PM  status · KXBTC15M-26NOV251200-00 6:27 left · BTC +207 vs strike · Up 89¢ Down 12¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:54:33 PM  status · KXBTC15M-26NOV251200-00 5:26 left · BTC +279 vs strike · Up 95¢ Down 5¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:55:34 PM  status · KXBTC15M-26NOV251200-00 4:26 left · BTC +270 vs strike · Up 97¢ Down 3¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:56:34 PM  status · KXBTC15M-26NOV251200-00 3:26 left · BTC +225 vs strike · Up 99¢ Down 1¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:57:34 PM  status · KXBTC15M-26NOV251200-00 2:25 left · BTC +354 vs strike · Up 100¢ Down 0¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-4:58:35 PM  status · KXBTC15M-26NOV251200-00 1:25 left · BTC +426 vs strike · Up 100¢ Down 0¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-4:59:36 PM  status · KXBTC15M-26NOV251200-00 0:24 left · BTC +423 vs strike · Up 100¢ Down 0¢ · paper $30 · 0 trades · quotes list (changed on 3% of seconds)
-5:00:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251215-15
-5:00:02 PM  data back (strike not posted yet for KXBTC15M-26NOV251215-15 cleared)
-5:00:37 PM  status · KXBTC15M-26NOV251215-15 14:23 left · BTC -52 vs strike · Up 53¢ Down 48¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-5:01:37 PM  status · KXBTC15M-26NOV251215-15 13:23 left · BTC -118 vs strike · Up 31¢ Down 70¢ · paper $30 · 0 trades · quotes list (changed on 4% of seconds)
-5:01:59 PM  BUY Up 9 @ 31c (🚀 takeoff: BTC +$83 in 10s, Kalshi lagging)
-5:02:07 PM  SELL Up 9 @ 53c — profit (BTC stopped running) — pnl $1.68
-5:02:37 PM  status · KXBTC15M-26NOV251215-15 12:23 left · BTC +88 vs strike · Up 54¢ Down 47¢ · paper $31.68 · 1 trades · quotes list (changed on 4% of seconds)
-5:03:37 PM  status · KXBTC15M-26NOV251215-15 11:22 left · BTC +93 vs strike · Up 62¢ Down 39¢ · paper $31.68 · 1 trades · quotes list (changed on 4% of seconds)
-5:04:38 PM  status · KXBTC15M-26NOV251215-15 10:22 left · BTC +166 vs strike · Up 81¢ Down 20¢ · paper $31.68 · 1 trades · quotes list (changed on 4% of seconds)
-5:05:39 PM  status · KXBTC15M-26NOV251215-15 9:21 left · BTC +202 vs strike · Up 80¢ Down 21¢ · paper $31.68 · 1 trades · quotes list (changed on 4% of seconds)
-5:06:06 PM  BUY Up 3 @ 79c (🚀 takeoff: BTC +$60 in 10s, Kalshi lagging)
-5:06:33 PM  SELL Up 3 @ 92c — profit (BTC stopped running) — pnl $0.33
-5:06:40 PM  status · KXBTC15M-26NOV251215-15 8:19 left · BTC +307 vs strike · Up 92¢ Down 8¢ · paper $32.01 · 2 trades · quotes list (changed on 4% of seconds)
-5:07:41 PM  status · KXBTC15M-26NOV251215-15 7:19 left · BTC +560 vs strike · Up 97¢ Down 3¢ · paper $32.01 · 2 trades · quotes list (changed on 4% of seconds)
-5:08:41 PM  status · KXBTC15M-26NOV251215-15 6:18 left · BTC +600 vs strike · Up 99¢ Down 1¢ · paper $32.01 · 2 trades · quotes list (changed on 4% of seconds)
-5:09:41 PM  status · KXBTC15M-26NOV251215-15 5:18 left · BTC +649 vs strike · Up 100¢ Down 1¢ · paper $32.01 · 2 trades · quotes list (changed on 4% of seconds)
-5:10:42 PM  status · KXBTC15M-26NOV251215-15 4:17 left · BTC +688 vs strike · Up 100¢ Down 1¢ · paper $32.01 · 2 trades · quotes list (changed on 4% of seconds)
-5:11:43 PM  status · KXBTC15M-26NOV251215-15 3:16 left · BTC +570 vs strike · Up 100¢ Down 1¢ · paper $32.01 · 2 trades · quotes list (changed on 3% of seconds)
-5:12:43 PM  status · KXBTC15M-26NOV251215-15 2:16 left · BTC +633 vs strike · Up 100¢ Down 0¢ · paper $32.01 · 2 trades · quotes list (changed on 3% of seconds)
-5:13:44 PM  status · KXBTC15M-26NOV251215-15 1:16 left · BTC +665 vs strike · Up 100¢ Down 0¢ · paper $32.01 · 2 trades · quotes list (changed on 3% of seconds)
-5:14:45 PM  status · KXBTC15M-26NOV251215-15 0:15 left · BTC +685 vs strike · Up 100¢ Down 0¢ · paper $32.01 · 2 trades · quotes list (changed on 3% of seconds)
-5:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251230-30
-5:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251230-30 cleared)
-5:15:45 PM  status · KXBTC15M-26NOV251230-30 14:15 left · BTC +253 vs strike · Up 52¢ Down 49¢ · paper $32.01 · 2 trades · quotes list (changed on 3% of seconds)
-5:16:19 PM  BUY Up 5 @ 60c (dip: dipped 9¢, bouncing, 6¢ edge)
-5:16:45 PM  status · KXBTC15M-26NOV251230-30 13:14 left · BTC +257 vs strike · Up 60¢ Down 41¢ · paper $28.92 · 2 trades · quotes list (changed on 3% of seconds) · holding Up @ 60¢
-5:16:47 PM  SELL Up 5 @ 72c — profit (target) — pnl $0.43
-5:17:46 PM  status · KXBTC15M-26NOV251230-30 12:14 left · BTC +286 vs strike · Up 73¢ Down 28¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:18:47 PM  status · KXBTC15M-26NOV251230-30 11:13 left · BTC +390 vs strike · Up 91¢ Down 9¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:19:47 PM  status · KXBTC15M-26NOV251230-30 10:13 left · BTC +280 vs strike · Up 86¢ Down 15¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:20:47 PM  status · KXBTC15M-26NOV251230-30 9:13 left · BTC +158 vs strike · Up 77¢ Down 24¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:21:47 PM  status · KXBTC15M-26NOV251230-30 8:12 left · BTC +114 vs strike · Up 65¢ Down 36¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:22:48 PM  status · KXBTC15M-26NOV251230-30 7:11 left · BTC +6 vs strike · Up 70¢ Down 31¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:23:49 PM  status · KXBTC15M-26NOV251230-30 6:10 left · BTC -99 vs strike · Up 40¢ Down 61¢ · paper $32.44 · 3 trades · quotes list (changed on 3% of seconds)
-5:24:02 PM  BID Up 10 @ 30c (resting) — uptrend, dipped -$294 off high
-5:24:33 PM  FILLED Up 10 @ 30c
-5:24:49 PM  status · KXBTC15M-26NOV251230-30 5:10 left · BTC -83 vs strike · Up 29¢ Down 72¢ · paper $29.44 · 3 trades · quotes list (changed on 3% of seconds) · holding Up @ 30¢
-5:25:50 PM  status · KXBTC15M-26NOV251230-30 4:10 left · BTC -138 vs strike · Up 20¢ Down 81¢ · paper $29.44 · 3 trades · quotes list (changed on 3% of seconds) · holding Up @ 30¢
-5:26:51 PM  status · KXBTC15M-26NOV251230-30 3:09 left · BTC -123 vs strike · Up 20¢ Down 81¢ · paper $29.44 · 3 trades · quotes list (changed on 3% of seconds) · holding Up @ 30¢
-5:27:51 PM  status · KXBTC15M-26NOV251230-30 2:08 left · BTC -198 vs strike · Up 15¢ Down 86¢ · paper $29.44 · 3 trades · quotes list (changed on 3% of seconds) · holding Up @ 30¢
-5:28:00 PM  SELL Up 10 @ 14c (cut loser) pnl $-1.69
-5:28:52 PM  status · KXBTC15M-26NOV251230-30 1:07 left · BTC -77 vs strike · Up 1¢ Down 99¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:29:53 PM  status · KXBTC15M-26NOV251230-30 0:07 left · BTC -95 vs strike · Up 0¢ Down 100¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251245-45
-5:30:02 PM  data back (strike not posted yet for KXBTC15M-26NOV251245-45 cleared)
-5:30:54 PM  status · KXBTC15M-26NOV251245-45 14:06 left · BTC +142 vs strike · Up 61¢ Down 40¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:31:54 PM  status · KXBTC15M-26NOV251245-45 13:06 left · BTC +174 vs strike · Up 70¢ Down 31¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:32:54 PM  status · KXBTC15M-26NOV251245-45 12:06 left · BTC +210 vs strike · Up 78¢ Down 23¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:33:55 PM  status · KXBTC15M-26NOV251245-45 11:05 left · BTC +273 vs strike · Up 80¢ Down 21¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:34:55 PM  status · KXBTC15M-26NOV251245-45 10:05 left · BTC +248 vs strike · Up 82¢ Down 19¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:35:55 PM  status · KXBTC15M-26NOV251245-45 9:05 left · BTC +422 vs strike · Up 91¢ Down 10¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:36:55 PM  status · KXBTC15M-26NOV251245-45 8:04 left · BTC +397 vs strike · Up 95¢ Down 5¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:37:56 PM  status · KXBTC15M-26NOV251245-45 7:04 left · BTC +304 vs strike · Up 96¢ Down 4¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:38:56 PM  status · KXBTC15M-26NOV251245-45 6:04 left · BTC +381 vs strike · Up 97¢ Down 3¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:39:57 PM  status · KXBTC15M-26NOV251245-45 5:03 left · BTC +439 vs strike · Up 99¢ Down 1¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:40:57 PM  status · KXBTC15M-26NOV251245-45 4:02 left · BTC +504 vs strike · Up 99¢ Down 1¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:41:58 PM  status · KXBTC15M-26NOV251245-45 3:01 left · BTC +607 vs strike · Up 100¢ Down 0¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:42:59 PM  status · KXBTC15M-26NOV251245-45 2:01 left · BTC +679 vs strike · Up 100¢ Down 0¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:43:59 PM  status · KXBTC15M-26NOV251245-45 1:01 left · BTC +615 vs strike · Up 100¢ Down 0¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251300-00
-5:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251300-00 cleared)
-5:45:01 PM  status · KXBTC15M-26NOV251300-00 14:59 left · BTC -27 vs strike · Up 46¢ Down 55¢ · paper $30.75 · 4 trades · quotes list (changed on 3% of seconds)
-5:46:02 PM  status · KXBTC15M-26NOV251300-00 13:58 left · BTC -27 vs strike · Up 38¢ Down 63¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:47:03 PM  status · KXBTC15M-26NOV251300-00 12:57 left · BTC -37 vs strike · Up 40¢ Down 61¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:48:04 PM  status · KXBTC15M-26NOV251300-00 11:56 left · BTC -106 vs strike · Up 33¢ Down 68¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:49:04 PM  status · KXBTC15M-26NOV251300-00 10:55 left · BTC -162 vs strike · Up 21¢ Down 80¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:49:59 PM  BID Up 18 @ 16c (resting) — uptrend, dipped -$167 off high
-5:50:04 PM  status · KXBTC15M-26NOV251300-00 9:55 left · BTC -193 vs strike · Up 17¢ Down 84¢ · paper $30.75 · 4 trades · quotes list (changed on 4% of seconds)
-5:50:47 PM  FILLED Up 18 @ 16c
-5:51:05 PM  status · KXBTC15M-26NOV251300-00 8:55 left · BTC -218 vs strike · Up 11¢ Down 90¢ · paper $27.87 · 4 trades · quotes list (changed on 4% of seconds) · holding Up @ 16¢
-5:52:05 PM  status · KXBTC15M-26NOV251300-00 7:55 left · BTC -265 vs strike · Up 8¢ Down 92¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:53:06 PM  status · KXBTC15M-26NOV251300-00 6:54 left · BTC -279 vs strike · Up 7¢ Down 93¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:54:07 PM  status · KXBTC15M-26NOV251300-00 5:53 left · BTC -169 vs strike · Up 5¢ Down 95¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:55:07 PM  status · KXBTC15M-26NOV251300-00 4:52 left · BTC -99 vs strike · Up 20¢ Down 81¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:56:08 PM  status · KXBTC15M-26NOV251300-00 3:52 left · BTC -2 vs strike · Up 50¢ Down 51¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:57:08 PM  status · KXBTC15M-26NOV251300-00 2:51 left · BTC -66 vs strike · Up 21¢ Down 80¢ · paper $27.87 · 4 trades · quotes list (changed on 3% of seconds) · holding Up @ 16¢
-5:58:00 PM  SELL Up 18 @ 2c (cut loser) pnl $-2.55
-5:58:09 PM  status · KXBTC15M-26NOV251300-00 1:51 left · BTC -130 vs strike · Up 2¢ Down 98¢ · paper $28.2 · 5 trades · quotes list (changed on 3% of seconds)
-5:59:10 PM  status · KXBTC15M-26NOV251300-00 0:50 left · BTC -154 vs strike · Up 0¢ Down 100¢ · paper $28.2 · 5 trades · quotes list (changed on 3% of seconds)
-6:00:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251315-15
-6:00:02 PM  data back (strike not posted yet for KXBTC15M-26NOV251315-15 cleared)
-6:00:10 PM  status · KXBTC15M-26NOV251315-15 14:50 left · BTC -21 vs strike · Up 49¢ Down 52¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:01:11 PM  status · KXBTC15M-26NOV251315-15 13:49 left · BTC +74 vs strike · Up 44¢ Down 57¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:02:11 PM  status · KXBTC15M-26NOV251315-15 12:48 left · BTC +116 vs strike · Up 60¢ Down 41¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:03:12 PM  status · KXBTC15M-26NOV251315-15 11:48 left · BTC +105 vs strike · Up 69¢ Down 32¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:04:12 PM  status · KXBTC15M-26NOV251315-15 10:48 left · BTC +89 vs strike · Up 59¢ Down 42¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:05:12 PM  status · KXBTC15M-26NOV251315-15 9:47 left · BTC +51 vs strike · Up 48¢ Down 53¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:06:13 PM  status · KXBTC15M-26NOV251315-15 8:46 left · BTC +232 vs strike · Up 79¢ Down 22¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:07:13 PM  status · KXBTC15M-26NOV251315-15 7:47 left · BTC +259 vs strike · Up 88¢ Down 13¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:08:13 PM  status · KXBTC15M-26NOV251315-15 6:46 left · BTC +149 vs strike · Up 90¢ Down 10¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:09:13 PM  status · KXBTC15M-26NOV251315-15 5:46 left · BTC +156 vs strike · Up 77¢ Down 24¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:10:14 PM  status · KXBTC15M-26NOV251315-15 4:46 left · BTC +256 vs strike · Up 87¢ Down 14¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:11:14 PM  status · KXBTC15M-26NOV251315-15 3:45 left · BTC +181 vs strike · Up 96¢ Down 4¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:12:14 PM  status · KXBTC15M-26NOV251315-15 2:45 left · BTC +192 vs strike · Up 94¢ Down 6¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:13:15 PM  status · KXBTC15M-26NOV251315-15 1:45 left · BTC +118 vs strike · Up 99¢ Down 1¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:14:15 PM  status · KXBTC15M-26NOV251315-15 0:44 left · BTC +151 vs strike · Up 100¢ Down 0¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251330-30
-6:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251330-30 cleared)
-6:15:16 PM  status · KXBTC15M-26NOV251330-30 14:43 left · BTC -10 vs strike · Up 50¢ Down 51¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:16:17 PM  status · KXBTC15M-26NOV251330-30 13:42 left · BTC +140 vs strike · Up 64¢ Down 37¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:17:17 PM  status · KXBTC15M-26NOV251330-30 12:42 left · BTC +322 vs strike · Up 85¢ Down 16¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:18:18 PM  status · KXBTC15M-26NOV251330-30 11:42 left · BTC +220 vs strike · Up 86¢ Down 15¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:19:18 PM  status · KXBTC15M-26NOV251330-30 10:41 left · BTC +238 vs strike · Up 82¢ Down 19¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:20:18 PM  status · KXBTC15M-26NOV251330-30 9:41 left · BTC +235 vs strike · Up 85¢ Down 16¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:21:19 PM  status · KXBTC15M-26NOV251330-30 8:41 left · BTC +185 vs strike · Up 89¢ Down 12¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:22:20 PM  status · KXBTC15M-26NOV251330-30 7:40 left · BTC +6 vs strike · Up 79¢ Down 22¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:23:20 PM  status · KXBTC15M-26NOV251330-30 6:40 left · BTC -68 vs strike · Up 41¢ Down 60¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:24:21 PM  status · KXBTC15M-26NOV251330-30 5:39 left · BTC -30 vs strike · Up 39¢ Down 62¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:25:22 PM  status · KXBTC15M-26NOV251330-30 4:38 left · BTC -24 vs strike · Up 47¢ Down 54¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:26:22 PM  status · KXBTC15M-26NOV251330-30 3:37 left · BTC -10 vs strike · Up 39¢ Down 62¢ · paper $28.2 · 5 trades · quotes list (changed on 4% of seconds)
-6:26:49 PM  BUY Down 5 @ 54c (dip: dipped 8¢, bouncing, 7¢ edge)
-6:27:02 PM  SELL Down 5 @ 68c — profit (target) — pnl $0.53
-6:27:23 PM  status · KXBTC15M-26NOV251330-30 2:36 left · BTC -48 vs strike · Up 32¢ Down 69¢ · paper $28.73 · 6 trades · quotes list (changed on 4% of seconds)
-6:28:14 PM  BUY Down 4 @ 66c (dip: dipped 12¢, bouncing, 7¢ edge)
-6:28:24 PM  status · KXBTC15M-26NOV251330-30 1:36 left · BTC -90 vs strike · Up 35¢ Down 66¢ · paper $26.02 · 6 trades · quotes list (changed on 4% of seconds) · holding Down @ 66¢
-6:28:47 PM  SELL Down 4 @ 78c — profit (target) — pnl $0.36
-6:29:25 PM  status · KXBTC15M-26NOV251330-30 0:35 left · BTC -7 vs strike · Up 13¢ Down 88¢ · paper $29.09 · 7 trades · quotes list (changed on 4% of seconds)
-6:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251345-45
-6:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251345-45 cleared)
-6:30:29 PM  data error: The operation was aborted due to timeout
-6:30:32 PM  data back (The operation was aborted due to timeout cleared)
-6:30:32 PM  status · KXBTC15M-26NOV251345-45 14:30 left · BTC -102 vs strike · Up 40¢ Down 61¢ · paper $29.09 · 7 trades · quotes list (changed on 4% of seconds)
-6:31:32 PM  status · KXBTC15M-26NOV251345-45 13:27 left · BTC -99 vs strike · Up 35¢ Down 66¢ · paper $29.09 · 7 trades · quotes list (changed on 4% of seconds)
-6:32:34 PM  status · KXBTC15M-26NOV251345-45 12:26 left · BTC -117 vs strike · Up 29¢ Down 72¢ · paper $29.09 · 7 trades · quotes list (changed on 4% of seconds)
-6:32:58 PM  BUY Down 4 @ 72c (🚀 takeoff: BTC -$84 in 10s, Kalshi lagging)
-6:33:03 PM  SELL Down 4 @ 79c — profit (BTC stopped running) — pnl $0.17
-6:33:34 PM  status · KXBTC15M-26NOV251345-45 11:25 left · BTC -198 vs strike · Up 21¢ Down 80¢ · paper $29.26 · 8 trades · quotes list (changed on 4% of seconds)
-6:34:35 PM  status · KXBTC15M-26NOV251345-45 10:25 left · BTC -156 vs strike · Up 19¢ Down 82¢ · paper $29.26 · 8 trades · quotes list (changed on 4% of seconds)
-6:35:36 PM  status · KXBTC15M-26NOV251345-45 9:24 left · BTC -108 vs strike · Up 16¢ Down 85¢ · paper $29.26 · 8 trades · quotes list (changed on 4% of seconds)
-6:36:36 PM  status · KXBTC15M-26NOV251345-45 8:23 left · BTC -58 vs strike · Up 28¢ Down 73¢ · paper $29.26 · 8 trades · quotes list (changed on 4% of seconds)
-6:36:46 PM  BUY Up 10 @ 28c (🚀 takeoff: BTC +$65 in 10s, Kalshi lagging)
-6:37:02 PM  SELL Up 10 @ 63c — profit (BTC stopped running) — pnl $3.18
-6:37:36 PM  status · KXBTC15M-26NOV251345-45 7:23 left · BTC -18 vs strike · Up 50¢ Down 51¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:38:37 PM  status · KXBTC15M-26NOV251345-45 6:22 left · BTC +15 vs strike · Up 52¢ Down 49¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:39:38 PM  status · KXBTC15M-26NOV251345-45 5:22 left · BTC -119 vs strike · Up 23¢ Down 78¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:40:38 PM  status · KXBTC15M-26NOV251345-45 4:21 left · BTC -102 vs strike · Up 24¢ Down 77¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:41:39 PM  status · KXBTC15M-26NOV251345-45 3:20 left · BTC -57 vs strike · Up 21¢ Down 80¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:42:40 PM  status · KXBTC15M-26NOV251345-45 2:19 left · BTC -81 vs strike · Up 19¢ Down 82¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:43:41 PM  status · KXBTC15M-26NOV251345-45 1:19 left · BTC -23 vs strike · Up 35¢ Down 66¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:44:41 PM  status · KXBTC15M-26NOV251345-45 0:19 left · BTC -48 vs strike · Up 0¢ Down 100¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251400-00
-6:45:02 PM  data back (strike not posted yet for KXBTC15M-26NOV251400-00 cleared)
-6:45:42 PM  status · KXBTC15M-26NOV251400-00 14:18 left · BTC +33 vs strike · Up 51¢ Down 50¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:46:42 PM  status · KXBTC15M-26NOV251400-00 13:17 left · BTC +125 vs strike · Up 71¢ Down 30¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:47:43 PM  status · KXBTC15M-26NOV251400-00 12:16 left · BTC +93 vs strike · Up 70¢ Down 31¢ · paper $32.44 · 9 trades · quotes list (changed on 4% of seconds)
-6:48:00 PM  BID Down 10 @ 30c (resting) — downtrend, bounced +$100 off low
-6:48:32 PM  FILLED Down 10 @ 30c
-6:48:44 PM  status · KXBTC15M-26NOV251400-00 11:16 left · BTC +113 vs strike · Up 78¢ Down 23¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:49:45 PM  status · KXBTC15M-26NOV251400-00 10:15 left · BTC +130 vs strike · Up 71¢ Down 30¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:50:45 PM  status · KXBTC15M-26NOV251400-00 9:14 left · BTC +112 vs strike · Up 80¢ Down 21¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:51:46 PM  status · KXBTC15M-26NOV251400-00 8:14 left · BTC +63 vs strike · Up 69¢ Down 32¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:52:46 PM  status · KXBTC15M-26NOV251400-00 7:13 left · BTC +167 vs strike · Up 68¢ Down 33¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:53:47 PM  status · KXBTC15M-26NOV251400-00 6:12 left · BTC +149 vs strike · Up 77¢ Down 24¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:54:47 PM  status · KXBTC15M-26NOV251400-00 5:12 left · BTC +114 vs strike · Up 80¢ Down 21¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:55:48 PM  status · KXBTC15M-26NOV251400-00 4:12 left · BTC +117 vs strike · Up 93¢ Down 8¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:56:48 PM  status · KXBTC15M-26NOV251400-00 3:12 left · BTC +129 vs strike · Up 90¢ Down 11¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:57:48 PM  status · KXBTC15M-26NOV251400-00 2:11 left · BTC +85 vs strike · Up 91¢ Down 9¢ · paper $29.44 · 9 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
-6:58:00 PM  SELL Down 10 @ 9c (cut loser) pnl $-2.16
-6:58:49 PM  status · KXBTC15M-26NOV251400-00 1:11 left · BTC +97 vs strike · Up 100¢ Down 0¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-6:59:49 PM  status · KXBTC15M-26NOV251400-00 0:10 left · BTC +106 vs strike · Up 100¢ Down 0¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:00:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251415-15
-7:00:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251415-15 cleared)
-7:00:50 PM  status · KXBTC15M-26NOV251415-15 14:11 left · BTC -53 vs strike · Up 37¢ Down 64¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:01:50 PM  status · KXBTC15M-26NOV251415-15 13:09 left · BTC -37 vs strike · Up 44¢ Down 57¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:02:51 PM  status · KXBTC15M-26NOV251415-15 12:09 left · BTC +32 vs strike · Up 47¢ Down 54¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:03:51 PM  status · KXBTC15M-26NOV251415-15 11:09 left · BTC +131 vs strike · Up 61¢ Down 40¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:04:52 PM  status · KXBTC15M-26NOV251415-15 10:08 left · BTC +174 vs strike · Up 75¢ Down 26¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:05:53 PM  status · KXBTC15M-26NOV251415-15 9:07 left · BTC +260 vs strike · Up 85¢ Down 16¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:06:53 PM  status · KXBTC15M-26NOV251415-15 8:07 left · BTC +202 vs strike · Up 90¢ Down 11¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:07:53 PM  status · KXBTC15M-26NOV251415-15 7:06 left · BTC +165 vs strike · Up 87¢ Down 14¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:08:54 PM  status · KXBTC15M-26NOV251415-15 6:06 left · BTC +121 vs strike · Up 83¢ Down 18¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:09:54 PM  status · KXBTC15M-26NOV251415-15 5:06 left · BTC +233 vs strike · Up 88¢ Down 13¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:10:54 PM  status · KXBTC15M-26NOV251415-15 4:05 left · BTC +189 vs strike · Up 98¢ Down 2¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:11:55 PM  status · KXBTC15M-26NOV251415-15 3:05 left · BTC +211 vs strike · Up 99¢ Down 1¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:12:55 PM  status · KXBTC15M-26NOV251415-15 2:05 left · BTC +193 vs strike · Up 100¢ Down 1¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:13:55 PM  status · KXBTC15M-26NOV251415-15 1:04 left · BTC +153 vs strike · Up 100¢ Down 0¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:14:55 PM  status · KXBTC15M-26NOV251415-15 0:04 left · BTC +149 vs strike · Up 100¢ Down 0¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251430-30
-7:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251430-30 cleared)
-7:15:56 PM  status · KXBTC15M-26NOV251430-30 14:03 left · BTC +126 vs strike · Up 65¢ Down 36¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:16:57 PM  status · KXBTC15M-26NOV251430-30 13:03 left · BTC +176 vs strike · Up 67¢ Down 34¢ · paper $30.28 · 10 trades · quotes list (changed on 4% of seconds)
-7:17:01 PM  BUY Up 4 @ 67c (🚀 takeoff: BTC +$86 in 10s, Kalshi lagging)
-7:17:03 PM  SELL Up 4 @ 79c — profit (BTC stopped running) — pnl $0.36
-7:17:57 PM  status · KXBTC15M-26NOV251430-30 12:03 left · BTC +288 vs strike · Up 87¢ Down 14¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:18:58 PM  status · KXBTC15M-26NOV251430-30 11:02 left · BTC +223 vs strike · Up 87¢ Down 14¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:19:58 PM  status · KXBTC15M-26NOV251430-30 10:05 left · BTC +162 vs strike · Up 84¢ Down 17¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:20:58 PM  status · KXBTC15M-26NOV251430-30 9:01 left · BTC +230 vs strike · Up 90¢ Down 10¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:21:59 PM  status · KXBTC15M-26NOV251430-30 8:00 left · BTC +349 vs strike · Up 93¢ Down 7¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:22:59 PM  status · KXBTC15M-26NOV251430-30 7:00 left · BTC +429 vs strike · Up 99¢ Down 2¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:23:59 PM  status · KXBTC15M-26NOV251430-30 6:00 left · BTC +412 vs strike · Up 99¢ Down 1¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:25:00 PM  status · KXBTC15M-26NOV251430-30 4:59 left · BTC +354 vs strike · Up 99¢ Down 1¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:26:01 PM  status · KXBTC15M-26NOV251430-30 3:59 left · BTC +290 vs strike · Up 98¢ Down 2¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:27:02 PM  status · KXBTC15M-26NOV251430-30 2:58 left · BTC +312 vs strike · Up 99¢ Down 1¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:28:03 PM  status · KXBTC15M-26NOV251430-30 1:57 left · BTC +315 vs strike · Up 100¢ Down 0¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:29:04 PM  status · KXBTC15M-26NOV251430-30 0:56 left · BTC +252 vs strike · Up 100¢ Down 0¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251445-45
-7:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251445-45 cleared)
-7:30:05 PM  status · KXBTC15M-26NOV251445-45 14:55 left · BTC +10 vs strike · Up 54¢ Down 47¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:31:05 PM  status · KXBTC15M-26NOV251445-45 13:54 left · BTC -103 vs strike · Up 32¢ Down 69¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:32:06 PM  status · KXBTC15M-26NOV251445-45 12:54 left · BTC -4 vs strike · Up 40¢ Down 61¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:33:06 PM  status · KXBTC15M-26NOV251445-45 11:54 left · BTC -91 vs strike · Up 39¢ Down 62¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:33:32 PM  BID Up 10 @ 30c (resting) — uptrend, dipped -$62 off high
-7:34:07 PM  status · KXBTC15M-26NOV251445-45 10:53 left · BTC -111 vs strike · Up 32¢ Down 69¢ · paper $30.64 · 11 trades · quotes list (changed on 4% of seconds)
-7:35:02 PM  FILLED Up 10 @ 30c
-7:35:08 PM  status · KXBTC15M-26NOV251445-45 9:52 left · BTC -100 vs strike · Up 28¢ Down 73¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:36:08 PM  status · KXBTC15M-26NOV251445-45 8:51 left · BTC -53 vs strike · Up 28¢ Down 73¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:37:08 PM  status · KXBTC15M-26NOV251445-45 7:51 left · BTC -106 vs strike · Up 35¢ Down 66¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:38:09 PM  status · KXBTC15M-26NOV251445-45 6:50 left · BTC -95 vs strike · Up 40¢ Down 61¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:39:10 PM  status · KXBTC15M-26NOV251445-45 5:50 left · BTC -99 vs strike · Up 22¢ Down 79¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:40:10 PM  status · KXBTC15M-26NOV251445-45 4:49 left · BTC -112 vs strike · Up 10¢ Down 90¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:41:10 PM  status · KXBTC15M-26NOV251445-45 3:49 left · BTC -91 vs strike · Up 10¢ Down 90¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:42:11 PM  status · KXBTC15M-26NOV251445-45 2:48 left · BTC -144 vs strike · Up 5¢ Down 95¢ · paper $27.64 · 11 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-7:43:01 PM  SELL Up 10 @ 2c (cut loser) pnl $-2.82
-7:43:12 PM  status · KXBTC15M-26NOV251445-45 1:48 left · BTC -207 vs strike · Up 0¢ Down 100¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:44:13 PM  status · KXBTC15M-26NOV251445-45 0:47 left · BTC -264 vs strike · Up 0¢ Down 100¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251500-00
-7:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251500-00 cleared)
-7:45:14 PM  status · KXBTC15M-26NOV251500-00 14:46 left · BTC -16 vs strike · Up 47¢ Down 54¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:46:14 PM  status · KXBTC15M-26NOV251500-00 13:46 left · BTC -0 vs strike · Up 45¢ Down 56¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:47:14 PM  status · KXBTC15M-26NOV251500-00 12:45 left · BTC -33 vs strike · Up 50¢ Down 51¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:48:15 PM  status · KXBTC15M-26NOV251500-00 11:45 left · BTC -29 vs strike · Up 53¢ Down 48¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:49:15 PM  status · KXBTC15M-26NOV251500-00 10:44 left · BTC -51 vs strike · Up 44¢ Down 57¢ · paper $27.82 · 12 trades · quotes list (changed on 4% of seconds)
-7:49:55 PM  BUY Up 8 @ 34c (🚀 takeoff: BTC +$47 in 10s, Kalshi lagging)
-7:50:02 PM  SELL Up 8 @ 50c — profit (BTC stopped running) — pnl $1.01
-7:50:16 PM  status · KXBTC15M-26NOV251500-00 9:43 left · BTC -13 vs strike · Up 51¢ Down 50¢ · paper $28.83 · 13 trades · quotes list (changed on 4% of seconds)
-7:51:17 PM  status · KXBTC15M-26NOV251500-00 8:43 left · BTC -48 vs strike · Up 48¢ Down 53¢ · paper $28.83 · 13 trades · quotes list (changed on 4% of seconds)
-7:52:18 PM  status · KXBTC15M-26NOV251500-00 7:42 left · BTC -16 vs strike · Up 33¢ Down 68¢ · paper $28.83 · 13 trades · quotes list (changed on 4% of seconds)
-7:53:19 PM  status · KXBTC15M-26NOV251500-00 6:41 left · BTC +16 vs strike · Up 49¢ Down 52¢ · paper $28.83 · 13 trades · quotes list (changed on 4% of seconds)
-7:53:50 PM  BUY Up 5 @ 49c (🚀 takeoff: BTC +$41 in 10s, Kalshi lagging)
-7:54:02 PM  SELL Up 5 @ 74c — profit (BTC stopped running) — pnl $1.09
-7:54:02 PM  BID Down 11 @ 25c (resting) — downtrend, bounced +$142 off low
-7:54:19 PM  status · KXBTC15M-26NOV251500-00 5:41 left · BTC +92 vs strike · Up 75¢ Down 26¢ · paper $29.92 · 14 trades · quotes list (changed on 4% of seconds)
-7:54:32 PM  FILLED Down 11 @ 25c
-7:55:20 PM  status · KXBTC15M-26NOV251500-00 4:40 left · BTC +100 vs strike · Up 90¢ Down 11¢ · paper $27.17 · 14 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
-7:56:20 PM  status · KXBTC15M-26NOV251500-00 3:39 left · BTC +68 vs strike · Up 92¢ Down 8¢ · paper $27.17 · 14 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
-7:57:21 PM  status · KXBTC15M-26NOV251500-00 2:38 left · BTC +16 vs strike · Up 70¢ Down 31¢ · paper $27.17 · 14 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
-7:58:22 PM  status · KXBTC15M-26NOV251500-00 1:37 left · BTC +22 vs strike · Up 64¢ Down 37¢ · paper $27.17 · 14 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
-7:58:47 PM  SELL Down 11 @ 19c (cut loser) pnl $-0.78
-7:59:03 PM  BUY Down 14 @ 20c (dip: dipped 17¢, bouncing, 22¢ edge)
-7:59:17 PM  SELL Down 14 @ 73c — profit (target) — pnl $7.06
-7:59:23 PM  status · KXBTC15M-26NOV251500-00 0:37 left · BTC -49 vs strike · Up 27¢ Down 74¢ · paper $36.2 · 16 trades · quotes list (changed on 4% of seconds)
-7:59:33 PM  BUY Down 4 @ 74c (🚀 takeoff: BTC -$39 in 10s, Kalshi lagging)
-7:59:47 PM  SELL Down 4 @ 100c — profit (nothing left to squeeze) — pnl $0.98
-8:00:24 PM  status · KXBTC15M-26NOV251515-15 14:36 left · BTC +46 vs strike · Up 60¢ Down 41¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:01:24 PM  status · KXBTC15M-26NOV251515-15 13:35 left · BTC +75 vs strike · Up 59¢ Down 42¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:02:25 PM  status · KXBTC15M-26NOV251515-15 12:35 left · BTC +75 vs strike · Up 68¢ Down 33¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:03:17 PM  BID Down 10 @ 29c (resting) — downtrend, bounced +$69 off low
-8:03:25 PM  status · KXBTC15M-26NOV251515-15 11:35 left · BTC +98 vs strike · Up 71¢ Down 30¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:04:25 PM  status · KXBTC15M-26NOV251515-15 10:34 left · BTC +52 vs strike · Up 66¢ Down 35¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:04:47 PM  cancel order (timed out)
-8:05:25 PM  status · KXBTC15M-26NOV251515-15 9:34 left · BTC +10 vs strike · Up 57¢ Down 44¢ · paper $37.18 · 17 trades · quotes list (changed on 4% of seconds)
-8:06:20 PM  BUY Up 6 @ 45c (dip: dipped 13¢, bouncing, 5¢ edge)
-8:06:26 PM  status · KXBTC15M-26NOV251515-15 8:33 left · BTC +1 vs strike · Up 45¢ Down 56¢ · paper $34.37 · 17 trades · quotes list (changed on 4% of seconds) · holding Up @ 45¢
-8:07:02 PM  SELL Up 6 @ 58c — profit (target) — pnl $0.56
-8:07:27 PM  status · KXBTC15M-26NOV251515-15 7:32 left · BTC +50 vs strike · Up 59¢ Down 42¢ · paper $37.74 · 18 trades · quotes list (changed on 4% of seconds)
-8:08:28 PM  status · KXBTC15M-26NOV251515-15 6:31 left · BTC +1 vs strike · Up 60¢ Down 41¢ · paper $37.74 · 18 trades · quotes list (changed on 4% of seconds)
-8:09:29 PM  status · KXBTC15M-26NOV251515-15 5:31 left · BTC +9 vs strike · Up 53¢ Down 48¢ · paper $37.74 · 18 trades · quotes list (changed on 4% of seconds)
-8:10:17 PM  BID Down 11 @ 27c (resting) — downtrend, bounced +$100 off low
-8:10:29 PM  status · KXBTC15M-26NOV251515-15 4:30 left · BTC +76 vs strike · Up 73¢ Down 28¢ · paper $37.74 · 18 trades · quotes list (changed on 4% of seconds)
-8:11:17 PM  FILLED Down 11 @ 27c
-8:11:29 PM  status · KXBTC15M-26NOV251515-15 3:30 left · BTC +68 vs strike · Up 77¢ Down 24¢ · paper $34.77 · 18 trades · quotes list (changed on 4% of seconds) · holding Down @ 27¢
-8:12:30 PM  status · KXBTC15M-26NOV251515-15 2:30 left · BTC +89 vs strike · Up 84¢ Down 17¢ · paper $34.77 · 18 trades · quotes list (changed on 4% of seconds) · holding Down @ 27¢
-8:13:01 PM  SELL Down 11 @ 16c (cut loser) pnl $-1.32
-8:13:30 PM  status · KXBTC15M-26NOV251515-15 1:30 left · BTC +168 vs strike · Up 97¢ Down 3¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:14:30 PM  status · KXBTC15M-26NOV251515-15 0:30 left · BTC +132 vs strike · Up 100¢ Down 0¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:15:31 PM  status · KXBTC15M-26NOV251530-30 14:29 left · BTC +11 vs strike · Up 54¢ Down 47¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:16:32 PM  status · KXBTC15M-26NOV251530-30 13:28 left · BTC +53 vs strike · Up 56¢ Down 45¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:17:33 PM  status · KXBTC15M-26NOV251530-30 12:27 left · BTC +75 vs strike · Up 62¢ Down 39¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:18:33 PM  status · KXBTC15M-26NOV251530-30 11:27 left · BTC -3 vs strike · Up 59¢ Down 42¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:19:34 PM  status · KXBTC15M-26NOV251530-30 10:26 left · BTC -0 vs strike · Up 51¢ Down 50¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:20:35 PM  status · KXBTC15M-26NOV251530-30 9:25 left · BTC +18 vs strike · Up 61¢ Down 40¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:21:35 PM  status · KXBTC15M-26NOV251530-30 8:25 left · BTC -25 vs strike · Up 51¢ Down 50¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:22:36 PM  status · KXBTC15M-26NOV251530-30 7:24 left · BTC +11 vs strike · Up 51¢ Down 50¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:23:36 PM  status · KXBTC15M-26NOV251530-30 6:24 left · BTC +4 vs strike · Up 54¢ Down 47¢ · paper $36.42 · 19 trades · quotes list (changed on 4% of seconds)
-8:24:05 PM  BUY Up 6 @ 45c (dip: dipped 9¢, bouncing, 8¢ edge)
-8:24:37 PM  status · KXBTC15M-26NOV251530-30 5:23 left · BTC +19 vs strike · Up 54¢ Down 47¢ · paper $33.61 · 19 trades · quotes list (changed on 4% of seconds) · holding Up @ 45¢
-8:25:02 PM  SELL Up 6 @ 39c — cut (stop) — pnl $-0.57
-8:25:38 PM  status · KXBTC15M-26NOV251530-30 4:22 left · BTC -44 vs strike · Up 42¢ Down 59¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:26:38 PM  status · KXBTC15M-26NOV251530-30 3:22 left · BTC -50 vs strike · Up 23¢ Down 78¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:27:39 PM  status · KXBTC15M-26NOV251530-30 2:21 left · BTC -93 vs strike · Up 20¢ Down 81¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:28:39 PM  status · KXBTC15M-26NOV251530-30 1:21 left · BTC -101 vs strike · Up 1¢ Down 99¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:29:39 PM  status · KXBTC15M-26NOV251530-30 0:21 left · BTC -97 vs strike · Up 0¢ Down 100¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251545-45
-8:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251545-45 cleared)
-8:30:39 PM  status · KXBTC15M-26NOV251545-45 14:20 left · BTC -119 vs strike · Up 31¢ Down 70¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:31:40 PM  status · KXBTC15M-26NOV251545-45 13:20 left · BTC -87 vs strike · Up 27¢ Down 74¢ · paper $35.85 · 20 trades · quotes list (changed on 4% of seconds)
-8:31:50 PM  BUY Down 4 @ 67c (dip: dipped 7¢, bouncing, 8¢ edge)
-8:32:40 PM  status · KXBTC15M-26NOV251545-45 12:20 left · BTC -124 vs strike · Up 24¢ Down 77¢ · paper $33.1 · 20 trades · quotes list (changed on 4% of seconds) · holding Down @ 67¢
-8:33:40 PM  status · KXBTC15M-26NOV251545-45 11:19 left · BTC +7 vs strike · Up 35¢ Down 66¢ · paper $33.1 · 20 trades · quotes list (changed on 4% of seconds) · holding Down @ 67¢
-8:33:47 PM  SELL Down 4 @ 49c — cut (stop) — pnl $-0.86
-8:34:41 PM  status · KXBTC15M-26NOV251545-45 10:19 left · BTC +53 vs strike · Up 65¢ Down 36¢ · paper $34.99 · 21 trades · quotes list (changed on 4% of seconds)
-8:35:42 PM  status · KXBTC15M-26NOV251545-45 9:18 left · BTC +37 vs strike · Up 53¢ Down 48¢ · paper $34.99 · 21 trades · quotes list (changed on 4% of seconds)
-8:36:42 PM  status · KXBTC15M-26NOV251545-45 8:17 left · BTC +55 vs strike · Up 65¢ Down 36¢ · paper $34.99 · 21 trades · quotes list (changed on 4% of seconds)
-8:37:37 PM  BUY Up 5 @ 53c (dip: dipped 12¢, bouncing, 6¢ edge)
-8:37:42 PM  status · KXBTC15M-26NOV251545-45 7:17 left · BTC +22 vs strike · Up 53¢ Down 48¢ · paper $32.25 · 21 trades · quotes list (changed on 4% of seconds) · holding Up @ 53¢
-8:38:43 PM  status · KXBTC15M-26NOV251545-45 6:16 left · BTC +3 vs strike · Up 57¢ Down 44¢ · paper $32.25 · 21 trades · quotes list (changed on 4% of seconds) · holding Up @ 53¢
-8:38:48 PM  SELL Up 5 @ 45c — cut (stop) — pnl $-0.58
-8:39:44 PM  status · KXBTC15M-26NOV251545-45 5:16 left · BTC -77 vs strike · Up 27¢ Down 74¢ · paper $34.41 · 22 trades · quotes list (changed on 4% of seconds)
-8:40:45 PM  status · KXBTC15M-26NOV251545-45 4:15 left · BTC -118 vs strike · Up 27¢ Down 74¢ · paper $34.41 · 22 trades · quotes list (changed on 4% of seconds)
-8:40:50 PM  BUY Down 4 @ 74c (🚀 takeoff: BTC -$49 in 10s, Kalshi lagging)
-8:41:17 PM  SELL Down 4 @ 90c — profit (BTC stopped running) — pnl $0.55
-8:41:46 PM  status · KXBTC15M-26NOV251545-45 3:14 left · BTC -125 vs strike · Up 6¢ Down 94¢ · paper $34.96 · 23 trades · quotes list (changed on 4% of seconds)
-8:42:46 PM  status · KXBTC15M-26NOV251545-45 2:13 left · BTC -94 vs strike · Up 3¢ Down 97¢ · paper $34.96 · 23 trades · quotes list (changed on 4% of seconds)
-8:43:47 PM  status · KXBTC15M-26NOV251545-45 1:13 left · BTC -2 vs strike · Up 41¢ Down 60¢ · paper $34.96 · 23 trades · quotes list (changed on 4% of seconds)
-8:44:21 PM  BUY Down 8 @ 35c (dip: dipped 25¢, bouncing, 9¢ edge)
-8:44:47 PM  status · KXBTC15M-26NOV251545-45 0:12 left · BTC -10 vs strike · Up 66¢ Down 35¢ · paper $32.03 · 23 trades · quotes list (changed on 4% of seconds) · holding Down @ 35¢
-8:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251600-00
-8:45:02 PM  data back (strike not posted yet for KXBTC15M-26NOV251600-00 cleared)
-8:45:07 PM  SETTLED Down → WON, pnl $5.07
-8:45:48 PM  status · KXBTC15M-26NOV251600-00 14:12 left · BTC +48 vs strike · Up 55¢ Down 46¢ · paper $40.03 · 24 trades · quotes list (changed on 4% of seconds)
-8:46:49 PM  status · KXBTC15M-26NOV251600-00 13:11 left · BTC +44 vs strike · Up 65¢ Down 36¢ · paper $40.03 · 24 trades · quotes list (changed on 4% of seconds)
-8:47:35 PM  BUY Up 6 @ 48c (dip: dipped 17¢, bouncing, 8¢ edge)
-8:47:47 PM  SELL Up 6 @ 72c — profit (target) — pnl $1.24
-8:47:49 PM  status · KXBTC15M-26NOV251600-00 12:10 left · BTC +78 vs strike · Up 73¢ Down 28¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:48:50 PM  status · KXBTC15M-26NOV251600-00 11:10 left · BTC +159 vs strike · Up 75¢ Down 26¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:49:51 PM  status · KXBTC15M-26NOV251600-00 10:09 left · BTC +201 vs strike · Up 87¢ Down 14¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:50:51 PM  status · KXBTC15M-26NOV251600-00 9:08 left · BTC +269 vs strike · Up 90¢ Down 10¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:51:51 PM  status · KXBTC15M-26NOV251600-00 8:08 left · BTC +282 vs strike · Up 91¢ Down 9¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:52:52 PM  status · KXBTC15M-26NOV251600-00 7:07 left · BTC +276 vs strike · Up 93¢ Down 7¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:53:53 PM  status · KXBTC15M-26NOV251600-00 6:06 left · BTC +236 vs strike · Up 97¢ Down 3¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:54:54 PM  status · KXBTC15M-26NOV251600-00 5:06 left · BTC +269 vs strike · Up 95¢ Down 5¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:55:54 PM  status · KXBTC15M-26NOV251600-00 4:06 left · BTC +312 vs strike · Up 99¢ Down 1¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:56:54 PM  status · KXBTC15M-26NOV251600-00 3:05 left · BTC +387 vs strike · Up 100¢ Down 0¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:57:55 PM  status · KXBTC15M-26NOV251600-00 2:05 left · BTC +429 vs strike · Up 100¢ Down 0¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:58:56 PM  status · KXBTC15M-26NOV251600-00 1:04 left · BTC +437 vs strike · Up 100¢ Down 0¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-8:59:57 PM  status · KXBTC15M-26NOV251600-00 0:03 left · BTC +323 vs strike · Up 100¢ Down 0¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:00:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251615-15
-9:00:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251615-15 cleared)
-9:00:57 PM  status · KXBTC15M-26NOV251615-15 14:02 left · BTC -65 vs strike · Up 38¢ Down 63¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:01:57 PM  status · KXBTC15M-26NOV251615-15 13:02 left · BTC -32 vs strike · Up 43¢ Down 58¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:02:58 PM  status · KXBTC15M-26NOV251615-15 12:01 left · BTC +108 vs strike · Up 52¢ Down 49¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:03:59 PM  status · KXBTC15M-26NOV251615-15 11:00 left · BTC +142 vs strike · Up 78¢ Down 23¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:05:00 PM  status · KXBTC15M-26NOV251615-15 10:00 left · BTC +191 vs strike · Up 78¢ Down 23¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:06:00 PM  status · KXBTC15M-26NOV251615-15 8:59 left · BTC +101 vs strike · Up 81¢ Down 20¢ · paper $41.27 · 25 trades · quotes list (changed on 4% of seconds)
-9:06:31 PM  BUY Up 4 @ 73c (dip: dipped 8¢, bouncing, 5¢ edge)
-9:07:00 PM  status · KXBTC15M-26NOV251615-15 7:59 left · BTC +120 vs strike · Up 80¢ Down 21¢ · paper $38.29 · 25 trades · quotes list (changed on 4% of seconds) · holding Up @ 73¢
-9:08:01 PM  status · KXBTC15M-26NOV251615-15 6:59 left · BTC +49 vs strike · Up 70¢ Down 31¢ · paper $38.29 · 25 trades · quotes list (changed on 4% of seconds) · holding Up @ 73¢
-9:08:32 PM  SELL Up 4 @ 66c — stale (2 min) — pnl $-0.41
-9:09:01 PM  status · KXBTC15M-26NOV251615-15 5:59 left · BTC +35 vs strike · Up 67¢ Down 34¢ · paper $40.86 · 26 trades · quotes list (changed on 4% of seconds)
-9:10:01 PM  status · KXBTC15M-26NOV251615-15 4:58 left · BTC -46 vs strike · Up 37¢ Down 64¢ · paper $40.86 · 26 trades · quotes list (changed on 4% of seconds)
-9:10:17 PM  BID Up 10 @ 30c (resting) — uptrend, dipped -$141 off high
-9:10:47 PM  FILLED Up 10 @ 30c
-9:11:02 PM  status · KXBTC15M-26NOV251615-15 3:58 left · BTC -56 vs strike · Up 21¢ Down 80¢ · paper $37.86 · 26 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-9:12:03 PM  status · KXBTC15M-26NOV251615-15 2:57 left · BTC -67 vs strike · Up 18¢ Down 83¢ · paper $37.86 · 26 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
-9:13:00 PM  SELL Up 10 @ 11c (cut loser) pnl $-1.97
-9:13:03 PM  status · KXBTC15M-26NOV251615-15 1:56 left · BTC -65 vs strike · Up 11¢ Down 90¢ · paper $38.89 · 27 trades · quotes list (changed on 4% of seconds)
-9:13:34 PM  BUY Down 4 @ 64c (dip: dipped 26¢, bouncing, 15¢ edge)
-9:14:02 PM  SELL Down 4 @ 93c — profit (target) — pnl $1.07
-9:14:04 PM  status · KXBTC15M-26NOV251615-15 0:56 left · BTC -53 vs strike · Up 7¢ Down 94¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251630-30
-9:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251630-30 cleared)
-9:15:05 PM  status · KXBTC15M-26NOV251630-30 14:55 left · BTC +26 vs strike · Up 57¢ Down 44¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:16:06 PM  status · KXBTC15M-26NOV251630-30 13:54 left · BTC +9 vs strike · Up 55¢ Down 46¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:17:07 PM  status · KXBTC15M-26NOV251630-30 12:53 left · BTC +5 vs strike · Up 58¢ Down 43¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:18:07 PM  status · KXBTC15M-26NOV251630-30 11:52 left · BTC +1 vs strike · Up 50¢ Down 51¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:19:08 PM  status · KXBTC15M-26NOV251630-30 10:52 left · BTC -4 vs strike · Up 55¢ Down 46¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:20:09 PM  status · KXBTC15M-26NOV251630-30 9:51 left · BTC +12 vs strike · Up 54¢ Down 47¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:21:09 PM  status · KXBTC15M-26NOV251630-30 8:51 left · BTC +29 vs strike · Up 60¢ Down 41¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:22:10 PM  status · KXBTC15M-26NOV251630-30 7:50 left · BTC -10 vs strike · Up 45¢ Down 56¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:23:10 PM  status · KXBTC15M-26NOV251630-30 6:50 left · BTC +30 vs strike · Up 52¢ Down 49¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:24:11 PM  status · KXBTC15M-26NOV251630-30 5:49 left · BTC +39 vs strike · Up 61¢ Down 40¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:25:11 PM  status · KXBTC15M-26NOV251630-30 4:49 left · BTC +37 vs strike · Up 70¢ Down 31¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:26:12 PM  status · KXBTC15M-26NOV251630-30 3:48 left · BTC +87 vs strike · Up 88¢ Down 13¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:27:12 PM  status · KXBTC15M-26NOV251630-30 2:48 left · BTC +167 vs strike · Up 97¢ Down 3¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:28:13 PM  status · KXBTC15M-26NOV251630-30 1:47 left · BTC +234 vs strike · Up 100¢ Down 0¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:29:14 PM  status · KXBTC15M-26NOV251630-30 0:46 left · BTC +147 vs strike · Up 100¢ Down 0¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251645-45
-9:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251645-45 cleared)
-9:30:14 PM  status · KXBTC15M-26NOV251645-45 14:46 left · BTC -29 vs strike · Up 43¢ Down 58¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:31:15 PM  status · KXBTC15M-26NOV251645-45 13:45 left · BTC -8 vs strike · Up 50¢ Down 51¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:32:16 PM  status · KXBTC15M-26NOV251645-45 12:44 left · BTC -32 vs strike · Up 36¢ Down 65¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:33:16 PM  status · KXBTC15M-26NOV251645-45 11:44 left · BTC +4 vs strike · Up 51¢ Down 50¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:34:16 PM  status · KXBTC15M-26NOV251645-45 10:43 left · BTC +14 vs strike · Up 59¢ Down 42¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:35:17 PM  status · KXBTC15M-26NOV251645-45 9:43 left · BTC -11 vs strike · Up 43¢ Down 58¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:36:18 PM  status · KXBTC15M-26NOV251645-45 8:42 left · BTC -12 vs strike · Up 46¢ Down 55¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:37:18 PM  status · KXBTC15M-26NOV251645-45 7:41 left · BTC -17 vs strike · Up 47¢ Down 54¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:38:19 PM  status · KXBTC15M-26NOV251645-45 6:41 left · BTC -12 vs strike · Up 56¢ Down 45¢ · paper $39.96 · 28 trades · quotes list (changed on 4% of seconds)
-9:39:07 PM  BUY Down 5 @ 52c (dip: dipped 8¢, bouncing, 6¢ edge)
-9:39:19 PM  status · KXBTC15M-26NOV251645-45 5:40 left · BTC -28 vs strike · Up 49¢ Down 52¢ · paper $37.27 · 28 trades · quotes list (changed on 4% of seconds) · holding Down @ 52¢
-9:39:32 PM  SELL Down 5 @ 71c — profit (target) — pnl $0.78
-9:39:38 PM  BID Up 10 @ 28c (resting) — uptrend, dipped -$75 off high
-9:40:17 PM  FILLED Up 10 @ 28c
-9:40:20 PM  status · KXBTC15M-26NOV251645-45 4:39 left · BTC -44 vs strike · Up 26¢ Down 75¢ · paper $37.94 · 29 trades · quotes list (changed on 4% of seconds) · holding Up @ 28¢
-9:41:20 PM  status · KXBTC15M-26NOV251645-45 3:39 left · BTC -65 vs strike · Up 13¢ Down 88¢ · paper $37.94 · 29 trades · quotes list (changed on 4% of seconds) · holding Up @ 28¢
-9:42:21 PM  status · KXBTC15M-26NOV251645-45 2:39 left · BTC -76 vs strike · Up 11¢ Down 90¢ · paper $37.94 · 29 trades · quotes list (changed on 4% of seconds) · holding Up @ 28¢
-9:43:01 PM  SELL Up 10 @ 6c (cut loser) pnl $-2.24
-9:43:21 PM  status · KXBTC15M-26NOV251645-45 1:38 left · BTC -14 vs strike · Up 9¢ Down 92¢ · paper $38.5 · 30 trades · quotes list (changed on 4% of seconds)
-9:44:05 PM  BUY Down 4 @ 61c (🚀 takeoff: BTC -$24 in 10s, Kalshi lagging)
-9:44:22 PM  status · KXBTC15M-26NOV251645-45 0:37 left · BTC -27 vs strike · Up 40¢ Down 61¢ · paper $35.99 · 30 trades · quotes list (changed on 4% of seconds) · holding Down @ 61¢
-9:44:32 PM  SELL Down 4 @ 100c — profit (nothing left to squeeze) — pnl $1.49
-9:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251700-00
-9:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251700-00 cleared)
-9:45:23 PM  status · KXBTC15M-26NOV251700-00 14:36 left · BTC -28 vs strike · Up 45¢ Down 56¢ · paper $39.99 · 31 trades · quotes list (changed on 4% of seconds)
-9:46:24 PM  status · KXBTC15M-26NOV251700-00 13:35 left · BTC -64 vs strike · Up 33¢ Down 68¢ · paper $39.99 · 31 trades · quotes list (changed on 4% of seconds)
-9:47:24 PM  status · KXBTC15M-26NOV251700-00 12:35 left · BTC -54 vs strike · Up 37¢ Down 64¢ · paper $39.99 · 31 trades · quotes list (changed on 4% of seconds)
-9:48:25 PM  status · KXBTC15M-26NOV251700-00 11:35 left · BTC -39 vs strike · Up 45¢ Down 56¢ · paper $39.99 · 31 trades · quotes list (changed on 4% of seconds)
-9:49:06 PM  BUY Down 5 @ 57c (dip: dipped 6¢, bouncing, 8¢ edge)
-9:49:25 PM  status · KXBTC15M-26NOV251700-00 10:34 left · BTC -11 vs strike · Up 44¢ Down 57¢ · paper $37.05 · 31 trades · quotes list (changed on 4% of seconds) · holding Down @ 57¢
-9:50:25 PM  status · KXBTC15M-26NOV251700-00 9:34 left · BTC -38 vs strike · Up 45¢ Down 56¢ · paper $37.05 · 31 trades · quotes list (changed on 4% of seconds) · holding Down @ 57¢
-9:51:07 PM  SELL Down 5 @ 65c — profit (2 min) — pnl $0.23
-9:51:25 PM  status · KXBTC15M-26NOV251700-00 8:34 left · BTC +19 vs strike · Up 62¢ Down 39¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:52:26 PM  status · KXBTC15M-26NOV251700-00 7:34 left · BTC -18 vs strike · Up 48¢ Down 53¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:53:27 PM  status · KXBTC15M-26NOV251700-00 6:33 left · BTC -32 vs strike · Up 42¢ Down 59¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:54:27 PM  status · KXBTC15M-26NOV251700-00 5:33 left · BTC -57 vs strike · Up 26¢ Down 75¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:55:27 PM  status · KXBTC15M-26NOV251700-00 4:32 left · BTC -64 vs strike · Up 26¢ Down 75¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:56:28 PM  status · KXBTC15M-26NOV251700-00 3:31 left · BTC -36 vs strike · Up 19¢ Down 82¢ · paper $40.22 · 32 trades · quotes list (changed on 4% of seconds)
-9:57:19 PM  BUY Down 4 @ 66c (dip: dipped 6¢, bouncing, 5¢ edge)
-9:57:29 PM  status · KXBTC15M-26NOV251700-00 2:31 left · BTC -23 vs strike · Up 35¢ Down 66¢ · paper $37.51 · 32 trades · quotes list (changed on 4% of seconds) · holding Down @ 66¢
-9:58:30 PM  status · KXBTC15M-26NOV251700-00 1:30 left · BTC -34 vs strike · Up 30¢ Down 71¢ · paper $37.51 · 32 trades · quotes list (changed on 4% of seconds) · holding Down @ 66¢
-9:59:03 PM  SELL Down 4 @ 99c — profit (target) — pnl $1.24
-9:59:30 PM  status · KXBTC15M-26NOV251700-00 0:30 left · BTC -77 vs strike · Up 1¢ Down 99¢ · paper $41.46 · 33 trades · quotes list (changed on 4% of seconds)
-10:00:31 PM  status · KXBTC15M-26NOV251715-15 14:29 left · BTC -88 vs strike · Up 32¢ Down 69¢ · paper $41.46 · 33 trades · quotes list (changed on 4% of seconds)
-10:01:32 PM  status · KXBTC15M-26NOV251715-15 13:28 left · BTC -100 vs strike · Up 25¢ Down 76¢ · paper $41.46 · 33 trades · quotes list (changed on 4% of seconds)
-10:01:55 PM  BUY Down 4 @ 69c (dip: dipped 7¢, bouncing, 8¢ edge)
-10:02:32 PM  status · KXBTC15M-26NOV251715-15 12:27 left · BTC -98 vs strike · Up 26¢ Down 75¢ · paper $38.64 · 33 trades · quotes list (changed on 4% of seconds) · holding Down @ 69¢
-10:03:33 PM  status · KXBTC15M-26NOV251715-15 11:27 left · BTC -95 vs strike · Up 26¢ Down 75¢ · paper $38.64 · 33 trades · quotes list (changed on 4% of seconds) · holding Down @ 69¢
-10:03:55 PM  SELL Down 4 @ 69c — stale (2 min) — pnl $-0.12
-10:04:33 PM  status · KXBTC15M-26NOV251715-15 10:26 left · BTC -98 vs strike · Up 30¢ Down 71¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:05:34 PM  status · KXBTC15M-26NOV251715-15 9:26 left · BTC -102 vs strike · Up 22¢ Down 79¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:06:35 PM  status · KXBTC15M-26NOV251715-15 8:25 left · BTC -72 vs strike · Up 31¢ Down 70¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:07:35 PM  status · KXBTC15M-26NOV251715-15 7:24 left · BTC -69 vs strike · Up 33¢ Down 68¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:08:35 PM  status · KXBTC15M-26NOV251715-15 6:24 left · BTC -14 vs strike · Up 39¢ Down 62¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:09:36 PM  status · KXBTC15M-26NOV251715-15 5:24 left · BTC -74 vs strike · Up 44¢ Down 57¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:10:37 PM  status · KXBTC15M-26NOV251715-15 4:23 left · BTC -90 vs strike · Up 20¢ Down 81¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:11:37 PM  status · KXBTC15M-26NOV251715-15 3:22 left · BTC -130 vs strike · Up 7¢ Down 93¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:12:38 PM  status · KXBTC15M-26NOV251715-15 2:21 left · BTC -157 vs strike · Up 2¢ Down 98¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:13:39 PM  status · KXBTC15M-26NOV251715-15 1:21 left · BTC -148 vs strike · Up 0¢ Down 100¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:14:39 PM  status · KXBTC15M-26NOV251715-15 0:20 left · BTC -169 vs strike · Up 0¢ Down 100¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV251730-30
-10:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV251730-30 cleared)
-10:15:40 PM  status · KXBTC15M-26NOV251730-30 14:20 left · BTC +30 vs strike · Up 59¢ Down 42¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:16:40 PM  status · KXBTC15M-26NOV251730-30 13:20 left · BTC +83 vs strike · Up 67¢ Down 34¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:17:41 PM  status · KXBTC15M-26NOV251730-30 12:19 left · BTC +35 vs strike · Up 61¢ Down 40¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:18:42 PM  status · KXBTC15M-26NOV251730-30 11:18 left · BTC +54 vs strike · Up 53¢ Down 48¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:18:47 PM  BID Down 10 @ 30c (resting) — downtrend, bounced +$76 off low
-10:19:43 PM  status · KXBTC15M-26NOV251730-30 10:17 left · BTC -12 vs strike · Up 65¢ Down 36¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
-10:20:19 PM  cancel order (timed out)
-10:20:43 PM  status · KXBTC15M-26NOV251730-30 9:17 left · BTC +23 vs strike · Up 55¢ Down 46¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
+Loaded saved paper state: 34 trades.
+8:02:19 AM  Paper bot running (no real money). Open http://localhost:8787
+8:02:19 AM  pattern finder: 8:02:19 AM: 24 windows searched, 0 pattern(s) passed the held-back test
+8:02:20 AM  data error: no open KXBTC15M market (between windows?)
+8:15:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680955&max_close_ts=1795682755&limit=20
+8:15:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680956&max_close_ts=1795682756&limit=20
+8:15:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680957&max_close_ts=1795682757&limit=20
+8:15:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680958&max_close_ts=1795682758&limit=20
+8:15:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680959&max_close_ts=1795682759&limit=20
+8:16:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680960&max_close_ts=1795682760&limit=20
+8:16:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680961&max_close_ts=1795682761&limit=20
+8:16:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680962&max_close_ts=1795682762&limit=20
+8:16:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680963&max_close_ts=1795682763&limit=20
+8:16:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680964&max_close_ts=1795682764&limit=20
+8:16:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680965&max_close_ts=1795682765&limit=20
+8:16:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680966&max_close_ts=1795682766&limit=20
+8:16:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680967&max_close_ts=1795682767&limit=20
+8:16:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680968&max_close_ts=1795682768&limit=20
+8:16:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680969&max_close_ts=1795682769&limit=20
+8:16:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680970&max_close_ts=1795682770&limit=20
+8:16:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680971&max_close_ts=1795682771&limit=20
+8:16:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680972&max_close_ts=1795682772&limit=20
+8:16:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680973&max_close_ts=1795682773&limit=20
+8:16:14 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680974&max_close_ts=1795682774&limit=20
+8:16:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680975&max_close_ts=1795682775&limit=20
+8:16:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680976&max_close_ts=1795682776&limit=20
+8:16:18 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680977&max_close_ts=1795682777&limit=20
+8:16:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680979&max_close_ts=1795682779&limit=20
+8:16:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680980&max_close_ts=1795682780&limit=20
+8:16:21 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680981&max_close_ts=1795682781&limit=20
+8:16:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680982&max_close_ts=1795682782&limit=20
+8:16:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680983&max_close_ts=1795682783&limit=20
+8:16:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680984&max_close_ts=1795682784&limit=20
+8:16:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680985&max_close_ts=1795682785&limit=20
+8:16:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680986&max_close_ts=1795682786&limit=20
+8:16:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680987&max_close_ts=1795682787&limit=20
+8:16:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680989&max_close_ts=1795682789&limit=20
+8:16:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680990&max_close_ts=1795682790&limit=20
+8:16:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680991&max_close_ts=1795682791&limit=20
+8:16:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680992&max_close_ts=1795682792&limit=20
+8:16:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680993&max_close_ts=1795682793&limit=20
+8:16:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680995&max_close_ts=1795682795&limit=20
+8:16:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680996&max_close_ts=1795682796&limit=20
+8:16:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680997&max_close_ts=1795682797&limit=20
+8:16:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795680998&max_close_ts=1795682798&limit=20
+8:16:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681000&max_close_ts=1795682800&limit=20
+8:16:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681001&max_close_ts=1795682801&limit=20
+8:16:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681002&max_close_ts=1795682802&limit=20
+8:16:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681004&max_close_ts=1795682804&limit=20
+8:16:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681005&max_close_ts=1795682805&limit=20
+8:16:48 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681007&max_close_ts=1795682807&limit=20
+8:16:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681009&max_close_ts=1795682809&limit=20
+8:16:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681010&max_close_ts=1795682810&limit=20
+8:16:53 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681011&max_close_ts=1795682811&limit=20
+8:16:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681014&max_close_ts=1795682814&limit=20
+8:16:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681015&max_close_ts=1795682815&limit=20
+8:16:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681016&max_close_ts=1795682816&limit=20
+8:16:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681017&max_close_ts=1795682817&limit=20
+8:16:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681018&max_close_ts=1795682818&limit=20
+8:17:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681020&max_close_ts=1795682820&limit=20
+8:17:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681021&max_close_ts=1795682821&limit=20
+8:17:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681022&max_close_ts=1795682822&limit=20
+8:17:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681023&max_close_ts=1795682823&limit=20
+8:17:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681024&max_close_ts=1795682824&limit=20
+8:17:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681025&max_close_ts=1795682825&limit=20
+8:17:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681026&max_close_ts=1795682826&limit=20
+8:17:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681027&max_close_ts=1795682827&limit=20
+8:17:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681028&max_close_ts=1795682828&limit=20
+8:17:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681029&max_close_ts=1795682829&limit=20
+8:17:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681030&max_close_ts=1795682830&limit=20
+8:17:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681031&max_close_ts=1795682831&limit=20
+8:17:14 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681033&max_close_ts=1795682833&limit=20
+8:17:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681035&max_close_ts=1795682835&limit=20
+8:17:18 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681037&max_close_ts=1795682837&limit=20
+8:17:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681039&max_close_ts=1795682839&limit=20
+8:17:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681040&max_close_ts=1795682840&limit=20
+8:17:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681041&max_close_ts=1795682841&limit=20
+8:17:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681044&max_close_ts=1795682844&limit=20
+8:17:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681045&max_close_ts=1795682845&limit=20
+8:17:27 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681046&max_close_ts=1795682846&limit=20
+8:17:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681048&max_close_ts=1795682848&limit=20
+8:17:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681049&max_close_ts=1795682849&limit=20
+8:17:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681050&max_close_ts=1795682850&limit=20
+8:17:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681051&max_close_ts=1795682851&limit=20
+8:17:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681052&max_close_ts=1795682852&limit=20
+8:17:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681053&max_close_ts=1795682853&limit=20
+8:17:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681055&max_close_ts=1795682855&limit=20
+8:17:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681057&max_close_ts=1795682857&limit=20
+8:17:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681058&max_close_ts=1795682858&limit=20
+8:17:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681060&max_close_ts=1795682860&limit=20
+8:17:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681061&max_close_ts=1795682861&limit=20
+8:17:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681063&max_close_ts=1795682863&limit=20
+8:17:45 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681064&max_close_ts=1795682864&limit=20
+8:17:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681066&max_close_ts=1795682866&limit=20
+8:17:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681068&max_close_ts=1795682868&limit=20
+8:17:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681070&max_close_ts=1795682870&limit=20
+8:17:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681072&max_close_ts=1795682872&limit=20
+8:17:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681073&max_close_ts=1795682873&limit=20
+8:17:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681075&max_close_ts=1795682875&limit=20
+8:17:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681076&max_close_ts=1795682876&limit=20
+8:17:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681077&max_close_ts=1795682877&limit=20
+8:17:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681079&max_close_ts=1795682879&limit=20
+8:18:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681080&max_close_ts=1795682880&limit=20
+8:18:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681081&max_close_ts=1795682881&limit=20
+8:18:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681082&max_close_ts=1795682882&limit=20
+8:18:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681083&max_close_ts=1795682883&limit=20
+8:18:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681084&max_close_ts=1795682884&limit=20
+8:18:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681085&max_close_ts=1795682885&limit=20
+8:18:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681087&max_close_ts=1795682887&limit=20
+8:18:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681088&max_close_ts=1795682888&limit=20
+8:18:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681089&max_close_ts=1795682889&limit=20
+8:18:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681090&max_close_ts=1795682890&limit=20
+8:18:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681091&max_close_ts=1795682891&limit=20
+8:18:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681093&max_close_ts=1795682893&limit=20
+8:18:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681094&max_close_ts=1795682894&limit=20
+8:18:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681096&max_close_ts=1795682896&limit=20
+8:18:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681097&max_close_ts=1795682897&limit=20
+8:18:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681100&max_close_ts=1795682900&limit=20
+8:18:21 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681101&max_close_ts=1795682901&limit=20
+8:18:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681102&max_close_ts=1795682902&limit=20
+8:18:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681104&max_close_ts=1795682904&limit=20
+8:18:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681105&max_close_ts=1795682905&limit=20
+8:18:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681106&max_close_ts=1795682906&limit=20
+8:18:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681107&max_close_ts=1795682907&limit=20
+8:18:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681109&max_close_ts=1795682909&limit=20
+8:18:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681110&max_close_ts=1795682910&limit=20
+8:18:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681111&max_close_ts=1795682911&limit=20
+8:18:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681112&max_close_ts=1795682912&limit=20
+8:18:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681113&max_close_ts=1795682913&limit=20
+8:18:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681115&max_close_ts=1795682915&limit=20
+8:18:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681116&max_close_ts=1795682916&limit=20
+8:18:38 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681117&max_close_ts=1795682917&limit=20
+8:18:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681119&max_close_ts=1795682919&limit=20
+8:18:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681120&max_close_ts=1795682920&limit=20
+8:18:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681121&max_close_ts=1795682921&limit=20
+8:18:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681122&max_close_ts=1795682922&limit=20
+8:18:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681124&max_close_ts=1795682924&limit=20
+8:18:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681125&max_close_ts=1795682925&limit=20
+8:18:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681127&max_close_ts=1795682927&limit=20
+8:18:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681130&max_close_ts=1795682930&limit=20
+8:18:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681131&max_close_ts=1795682931&limit=20
+8:18:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681132&max_close_ts=1795682932&limit=20
+8:18:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681133&max_close_ts=1795682933&limit=20
+8:18:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681135&max_close_ts=1795682935&limit=20
+8:18:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681136&max_close_ts=1795682936&limit=20
+8:18:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681138&max_close_ts=1795682938&limit=20
+8:18:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681139&max_close_ts=1795682939&limit=20
+8:19:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681140&max_close_ts=1795682940&limit=20
+8:19:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681141&max_close_ts=1795682941&limit=20
+8:19:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681142&max_close_ts=1795682942&limit=20
+8:19:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681143&max_close_ts=1795682943&limit=20
+8:19:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681144&max_close_ts=1795682944&limit=20
+8:19:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681145&max_close_ts=1795682945&limit=20
+8:19:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681147&max_close_ts=1795682947&limit=20
+8:19:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681148&max_close_ts=1795682948&limit=20
+8:19:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681149&max_close_ts=1795682949&limit=20
+8:19:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681150&max_close_ts=1795682950&limit=20
+8:19:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681151&max_close_ts=1795682951&limit=20
+8:19:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681152&max_close_ts=1795682952&limit=20
+8:19:14 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681154&max_close_ts=1795682954&limit=20
+8:19:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681155&max_close_ts=1795682955&limit=20
+8:19:18 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681157&max_close_ts=1795682957&limit=20
+8:19:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681159&max_close_ts=1795682959&limit=20
+8:19:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681160&max_close_ts=1795682960&limit=20
+8:19:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681161&max_close_ts=1795682961&limit=20
+8:19:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681163&max_close_ts=1795682963&limit=20
+8:19:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681165&max_close_ts=1795682965&limit=20
+8:19:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681166&max_close_ts=1795682966&limit=20
+8:19:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681167&max_close_ts=1795682967&limit=20
+8:19:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681169&max_close_ts=1795682969&limit=20
+8:19:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681170&max_close_ts=1795682970&limit=20
+8:19:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681171&max_close_ts=1795682971&limit=20
+8:19:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681172&max_close_ts=1795682972&limit=20
+8:19:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681173&max_close_ts=1795682973&limit=20
+8:19:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681175&max_close_ts=1795682975&limit=20
+8:19:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681176&max_close_ts=1795682976&limit=20
+8:19:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681177&max_close_ts=1795682977&limit=20
+8:19:38 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681178&max_close_ts=1795682978&limit=20
+8:19:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681179&max_close_ts=1795682979&limit=20
+8:19:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681181&max_close_ts=1795682981&limit=20
+8:19:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681182&max_close_ts=1795682982&limit=20
+8:19:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681183&max_close_ts=1795682983&limit=20
+8:19:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681185&max_close_ts=1795682985&limit=20
+8:19:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681187&max_close_ts=1795682987&limit=20
+8:19:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681188&max_close_ts=1795682988&limit=20
+8:19:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681190&max_close_ts=1795682990&limit=20
+8:19:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681191&max_close_ts=1795682991&limit=20
+8:19:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681192&max_close_ts=1795682992&limit=20
+8:19:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681195&max_close_ts=1795682995&limit=20
+8:19:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681196&max_close_ts=1795682996&limit=20
+8:19:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681197&max_close_ts=1795682997&limit=20
+8:19:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681198&max_close_ts=1795682998&limit=20
+8:20:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681199&max_close_ts=1795682999&limit=20
+8:20:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681201&max_close_ts=1795683001&limit=20
+8:20:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681202&max_close_ts=1795683002&limit=20
+8:20:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681203&max_close_ts=1795683003&limit=20
+8:20:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681204&max_close_ts=1795683004&limit=20
+8:20:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681205&max_close_ts=1795683005&limit=20
+8:20:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681206&max_close_ts=1795683006&limit=20
+8:20:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681207&max_close_ts=1795683007&limit=20
+8:20:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681208&max_close_ts=1795683008&limit=20
+8:20:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681209&max_close_ts=1795683009&limit=20
+8:20:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681210&max_close_ts=1795683010&limit=20
+8:20:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681211&max_close_ts=1795683011&limit=20
+8:20:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681213&max_close_ts=1795683013&limit=20
+8:20:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681214&max_close_ts=1795683014&limit=20
+8:20:17 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681217&max_close_ts=1795683017&limit=20
+8:20:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681218&max_close_ts=1795683018&limit=20
+8:20:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681220&max_close_ts=1795683020&limit=20
+8:20:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681221&max_close_ts=1795683021&limit=20
+8:20:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681223&max_close_ts=1795683023&limit=20
+8:20:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681225&max_close_ts=1795683025&limit=20
+8:20:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681226&max_close_ts=1795683026&limit=20
+8:20:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681227&max_close_ts=1795683027&limit=20
+8:20:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681229&max_close_ts=1795683029&limit=20
+8:20:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681230&max_close_ts=1795683030&limit=20
+8:20:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681231&max_close_ts=1795683031&limit=20
+8:20:33 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681232&max_close_ts=1795683032&limit=20
+8:20:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681234&max_close_ts=1795683034&limit=20
+8:20:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681236&max_close_ts=1795683036&limit=20
+8:20:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681237&max_close_ts=1795683037&limit=20
+8:20:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681238&max_close_ts=1795683038&limit=20
+8:20:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681240&max_close_ts=1795683040&limit=20
+8:20:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681241&max_close_ts=1795683041&limit=20
+8:20:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681242&max_close_ts=1795683042&limit=20
+8:20:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681244&max_close_ts=1795683044&limit=20
+8:20:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681245&max_close_ts=1795683045&limit=20
+8:20:48 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681247&max_close_ts=1795683047&limit=20
+8:20:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681249&max_close_ts=1795683049&limit=20
+8:20:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681250&max_close_ts=1795683050&limit=20
+8:20:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681252&max_close_ts=1795683052&limit=20
+8:20:53 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681253&max_close_ts=1795683053&limit=20
+8:20:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681254&max_close_ts=1795683054&limit=20
+8:20:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681256&max_close_ts=1795683056&limit=20
+8:20:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681257&max_close_ts=1795683057&limit=20
+8:20:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681259&max_close_ts=1795683059&limit=20
+8:21:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681260&max_close_ts=1795683060&limit=20
+8:21:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681261&max_close_ts=1795683061&limit=20
+8:21:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681262&max_close_ts=1795683062&limit=20
+8:21:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681263&max_close_ts=1795683063&limit=20
+8:21:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681264&max_close_ts=1795683064&limit=20
+8:21:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681265&max_close_ts=1795683065&limit=20
+8:21:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681266&max_close_ts=1795683066&limit=20
+8:21:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681267&max_close_ts=1795683067&limit=20
+8:21:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681268&max_close_ts=1795683068&limit=20
+8:21:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681269&max_close_ts=1795683069&limit=20
+8:21:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681270&max_close_ts=1795683070&limit=20
+8:21:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681272&max_close_ts=1795683072&limit=20
+8:21:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681273&max_close_ts=1795683073&limit=20
+8:21:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681274&max_close_ts=1795683074&limit=20
+8:21:17 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681276&max_close_ts=1795683076&limit=20
+8:21:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681278&max_close_ts=1795683078&limit=20
+8:21:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681280&max_close_ts=1795683080&limit=20
+8:21:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681281&max_close_ts=1795683081&limit=20
+8:21:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681284&max_close_ts=1795683084&limit=20
+8:21:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681285&max_close_ts=1795683085&limit=20
+8:21:27 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681287&max_close_ts=1795683087&limit=20
+8:21:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681288&max_close_ts=1795683088&limit=20
+8:21:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681289&max_close_ts=1795683089&limit=20
+8:21:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681290&max_close_ts=1795683090&limit=20
+8:21:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681291&max_close_ts=1795683091&limit=20
+8:21:33 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681292&max_close_ts=1795683092&limit=20
+8:21:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681294&max_close_ts=1795683094&limit=20
+8:21:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681295&max_close_ts=1795683095&limit=20
+8:21:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681297&max_close_ts=1795683097&limit=20
+8:21:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681298&max_close_ts=1795683098&limit=20
+8:21:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681300&max_close_ts=1795683100&limit=20
+8:21:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681301&max_close_ts=1795683101&limit=20
+8:21:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681302&max_close_ts=1795683102&limit=20
+8:21:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681303&max_close_ts=1795683103&limit=20
+8:21:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681305&max_close_ts=1795683105&limit=20
+8:21:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681307&max_close_ts=1795683107&limit=20
+8:21:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681308&max_close_ts=1795683108&limit=20
+8:21:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681310&max_close_ts=1795683110&limit=20
+8:21:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681311&max_close_ts=1795683111&limit=20
+8:21:53 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681313&max_close_ts=1795683113&limit=20
+8:21:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681314&max_close_ts=1795683114&limit=20
+8:21:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681315&max_close_ts=1795683115&limit=20
+8:21:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681316&max_close_ts=1795683116&limit=20
+8:21:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681318&max_close_ts=1795683118&limit=20
+8:21:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681319&max_close_ts=1795683119&limit=20
+8:22:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681320&max_close_ts=1795683120&limit=20
+8:22:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681321&max_close_ts=1795683121&limit=20
+8:22:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681322&max_close_ts=1795683122&limit=20
+8:22:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681323&max_close_ts=1795683123&limit=20
+8:22:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681324&max_close_ts=1795683124&limit=20
+8:22:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681325&max_close_ts=1795683125&limit=20
+8:22:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681327&max_close_ts=1795683127&limit=20
+8:22:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681328&max_close_ts=1795683128&limit=20
+8:22:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681329&max_close_ts=1795683129&limit=20
+8:22:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681330&max_close_ts=1795683130&limit=20
+8:22:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681331&max_close_ts=1795683131&limit=20
+8:22:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681332&max_close_ts=1795683132&limit=20
+8:22:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681334&max_close_ts=1795683134&limit=20
+8:22:17 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681336&max_close_ts=1795683136&limit=20
+8:22:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681338&max_close_ts=1795683138&limit=20
+8:22:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681340&max_close_ts=1795683140&limit=20
+8:22:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681341&max_close_ts=1795683141&limit=20
+8:22:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681343&max_close_ts=1795683143&limit=20
+8:22:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681345&max_close_ts=1795683145&limit=20
+8:22:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681346&max_close_ts=1795683146&limit=20
+8:22:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681347&max_close_ts=1795683147&limit=20
+8:22:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681349&max_close_ts=1795683149&limit=20
+8:22:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681350&max_close_ts=1795683150&limit=20
+8:22:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681351&max_close_ts=1795683151&limit=20
+8:22:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681352&max_close_ts=1795683152&limit=20
+8:22:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681353&max_close_ts=1795683153&limit=20
+8:22:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681355&max_close_ts=1795683155&limit=20
+8:22:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681356&max_close_ts=1795683156&limit=20
+8:22:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681357&max_close_ts=1795683157&limit=20
+8:22:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681358&max_close_ts=1795683158&limit=20
+8:22:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681360&max_close_ts=1795683160&limit=20
+8:22:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681361&max_close_ts=1795683161&limit=20
+8:22:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681362&max_close_ts=1795683162&limit=20
+8:22:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681363&max_close_ts=1795683163&limit=20
+8:22:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681365&max_close_ts=1795683165&limit=20
+8:22:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681367&max_close_ts=1795683167&limit=20
+8:22:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681368&max_close_ts=1795683168&limit=20
+8:22:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681370&max_close_ts=1795683170&limit=20
+8:22:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681371&max_close_ts=1795683171&limit=20
+8:22:53 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681372&max_close_ts=1795683172&limit=20
+8:22:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681374&max_close_ts=1795683174&limit=20
+8:22:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681375&max_close_ts=1795683175&limit=20
+8:22:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681376&max_close_ts=1795683176&limit=20
+8:22:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681378&max_close_ts=1795683178&limit=20
+8:22:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681379&max_close_ts=1795683179&limit=20
+8:23:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681380&max_close_ts=1795683180&limit=20
+8:23:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681381&max_close_ts=1795683181&limit=20
+8:23:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681382&max_close_ts=1795683182&limit=20
+8:23:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681383&max_close_ts=1795683183&limit=20
+8:23:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681384&max_close_ts=1795683184&limit=20
+8:23:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681385&max_close_ts=1795683185&limit=20
+8:23:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681386&max_close_ts=1795683186&limit=20
+8:23:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681387&max_close_ts=1795683187&limit=20
+8:23:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681389&max_close_ts=1795683189&limit=20
+8:23:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681390&max_close_ts=1795683190&limit=20
+8:23:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681391&max_close_ts=1795683191&limit=20
+8:23:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681392&max_close_ts=1795683192&limit=20
+8:23:17 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681396&max_close_ts=1795683196&limit=20
+8:23:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681398&max_close_ts=1795683198&limit=20
+8:23:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681400&max_close_ts=1795683200&limit=20
+8:23:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681401&max_close_ts=1795683201&limit=20
+8:23:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681403&max_close_ts=1795683203&limit=20
+8:23:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681404&max_close_ts=1795683204&limit=20
+8:23:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681405&max_close_ts=1795683205&limit=20
+8:23:27 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681406&max_close_ts=1795683206&limit=20
+8:23:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681408&max_close_ts=1795683208&limit=20
+8:23:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681409&max_close_ts=1795683209&limit=20
+8:23:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681410&max_close_ts=1795683210&limit=20
+8:23:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681411&max_close_ts=1795683211&limit=20
+8:23:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681412&max_close_ts=1795683212&limit=20
+8:23:33 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681413&max_close_ts=1795683213&limit=20
+8:23:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681414&max_close_ts=1795683214&limit=20
+8:23:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681416&max_close_ts=1795683216&limit=20
+8:23:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681417&max_close_ts=1795683217&limit=20
+8:23:38 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681418&max_close_ts=1795683218&limit=20
+8:23:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681419&max_close_ts=1795683219&limit=20
+8:23:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681420&max_close_ts=1795683220&limit=20
+8:23:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681421&max_close_ts=1795683221&limit=20
+8:23:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681423&max_close_ts=1795683223&limit=20
+8:23:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681424&max_close_ts=1795683224&limit=20
+8:23:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681425&max_close_ts=1795683225&limit=20
+8:23:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681427&max_close_ts=1795683227&limit=20
+8:23:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681428&max_close_ts=1795683228&limit=20
+8:23:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681430&max_close_ts=1795683230&limit=20
+8:23:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681431&max_close_ts=1795683231&limit=20
+8:23:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681432&max_close_ts=1795683232&limit=20
+8:23:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681433&max_close_ts=1795683233&limit=20
+8:23:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681435&max_close_ts=1795683235&limit=20
+8:23:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681436&max_close_ts=1795683236&limit=20
+8:23:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681437&max_close_ts=1795683237&limit=20
+8:23:59 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681438&max_close_ts=1795683238&limit=20
+8:24:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681440&max_close_ts=1795683240&limit=20
+8:24:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681441&max_close_ts=1795683241&limit=20
+8:24:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681442&max_close_ts=1795683242&limit=20
+8:24:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681443&max_close_ts=1795683243&limit=20
+8:24:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681444&max_close_ts=1795683244&limit=20
+8:24:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681445&max_close_ts=1795683245&limit=20
+8:24:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681446&max_close_ts=1795683246&limit=20
+8:24:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681447&max_close_ts=1795683247&limit=20
+8:24:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681448&max_close_ts=1795683248&limit=20
+8:24:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681449&max_close_ts=1795683249&limit=20
+8:24:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681450&max_close_ts=1795683250&limit=20
+8:24:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681451&max_close_ts=1795683251&limit=20
+8:24:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681452&max_close_ts=1795683252&limit=20
+8:24:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681454&max_close_ts=1795683254&limit=20
+8:24:18 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681457&max_close_ts=1795683257&limit=20
+8:24:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681459&max_close_ts=1795683259&limit=20
+8:24:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681460&max_close_ts=1795683260&limit=20
+8:24:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681461&max_close_ts=1795683261&limit=20
+8:24:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681463&max_close_ts=1795683263&limit=20
+8:24:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681464&max_close_ts=1795683264&limit=20
+8:24:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681465&max_close_ts=1795683265&limit=20
+8:24:27 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681466&max_close_ts=1795683266&limit=20
+8:24:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681468&max_close_ts=1795683268&limit=20
+8:24:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681469&max_close_ts=1795683269&limit=20
+8:24:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681470&max_close_ts=1795683270&limit=20
+8:24:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681471&max_close_ts=1795683271&limit=20
+8:24:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681472&max_close_ts=1795683272&limit=20
+8:24:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681473&max_close_ts=1795683273&limit=20
+8:24:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681475&max_close_ts=1795683275&limit=20
+8:24:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681476&max_close_ts=1795683276&limit=20
+8:24:38 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681478&max_close_ts=1795683278&limit=20
+8:24:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681479&max_close_ts=1795683279&limit=20
+8:24:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681480&max_close_ts=1795683280&limit=20
+8:24:41 AM  data error: no open KXBTC15M market (between windows?)
+8:24:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681482&max_close_ts=1795683282&limit=20
+8:24:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681483&max_close_ts=1795683283&limit=20
+8:24:44 AM  data error: no open KXBTC15M market (between windows?)
+8:25:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681508&max_close_ts=1795683308&limit=20
+8:25:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681509&max_close_ts=1795683309&limit=20
+8:25:10 AM  data error: no open KXBTC15M market (between windows?)
+8:31:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681880&max_close_ts=1795683680&limit=20
+8:31:21 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681881&max_close_ts=1795683681&limit=20
+8:31:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681882&max_close_ts=1795683682&limit=20
+8:31:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681883&max_close_ts=1795683683&limit=20
+8:31:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681884&max_close_ts=1795683684&limit=20
+8:31:25 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681885&max_close_ts=1795683685&limit=20
+8:31:26 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681886&max_close_ts=1795683686&limit=20
+8:31:27 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681887&max_close_ts=1795683687&limit=20
+8:31:28 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681888&max_close_ts=1795683688&limit=20
+8:31:29 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681889&max_close_ts=1795683689&limit=20
+8:31:30 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681890&max_close_ts=1795683690&limit=20
+8:31:31 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681891&max_close_ts=1795683691&limit=20
+8:31:32 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681892&max_close_ts=1795683692&limit=20
+8:31:33 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681893&max_close_ts=1795683693&limit=20
+8:31:34 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681894&max_close_ts=1795683694&limit=20
+8:31:35 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681895&max_close_ts=1795683695&limit=20
+8:31:36 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681896&max_close_ts=1795683696&limit=20
+8:31:37 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681897&max_close_ts=1795683697&limit=20
+8:31:39 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681898&max_close_ts=1795683698&limit=20
+8:31:40 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681900&max_close_ts=1795683700&limit=20
+8:31:41 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681901&max_close_ts=1795683701&limit=20
+8:31:42 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681902&max_close_ts=1795683702&limit=20
+8:31:43 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681903&max_close_ts=1795683703&limit=20
+8:31:44 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681904&max_close_ts=1795683704&limit=20
+8:31:45 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681905&max_close_ts=1795683705&limit=20
+8:31:46 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681906&max_close_ts=1795683706&limit=20
+8:31:47 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681907&max_close_ts=1795683707&limit=20
+8:31:48 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681908&max_close_ts=1795683708&limit=20
+8:31:49 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681909&max_close_ts=1795683709&limit=20
+8:31:50 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681910&max_close_ts=1795683710&limit=20
+8:31:51 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681911&max_close_ts=1795683711&limit=20
+8:31:52 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681912&max_close_ts=1795683712&limit=20
+8:31:53 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681913&max_close_ts=1795683713&limit=20
+8:31:54 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681914&max_close_ts=1795683714&limit=20
+8:31:55 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681915&max_close_ts=1795683715&limit=20
+8:31:56 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681916&max_close_ts=1795683716&limit=20
+8:31:57 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681917&max_close_ts=1795683717&limit=20
+8:31:58 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681918&max_close_ts=1795683718&limit=20
+8:32:00 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681919&max_close_ts=1795683719&limit=20
+8:32:01 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681921&max_close_ts=1795683721&limit=20
+8:32:02 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681922&max_close_ts=1795683722&limit=20
+8:32:03 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681923&max_close_ts=1795683723&limit=20
+8:32:04 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681924&max_close_ts=1795683724&limit=20
+8:32:05 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681925&max_close_ts=1795683725&limit=20
+8:32:06 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681926&max_close_ts=1795683726&limit=20
+8:32:07 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681927&max_close_ts=1795683727&limit=20
+8:32:08 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681928&max_close_ts=1795683728&limit=20
+8:32:09 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681929&max_close_ts=1795683729&limit=20
+8:32:10 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681930&max_close_ts=1795683730&limit=20
+8:32:11 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681931&max_close_ts=1795683731&limit=20
+8:32:12 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681932&max_close_ts=1795683732&limit=20
+8:32:13 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681933&max_close_ts=1795683733&limit=20
+8:32:14 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681934&max_close_ts=1795683734&limit=20
+8:32:15 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681935&max_close_ts=1795683735&limit=20
+8:32:16 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681936&max_close_ts=1795683736&limit=20
+8:32:17 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681937&max_close_ts=1795683737&limit=20
+8:32:19 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681938&max_close_ts=1795683738&limit=20
+8:32:20 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681940&max_close_ts=1795683740&limit=20
+8:32:21 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681941&max_close_ts=1795683741&limit=20
+8:32:22 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681942&max_close_ts=1795683742&limit=20
+8:32:23 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681943&max_close_ts=1795683743&limit=20
+8:32:24 AM  data error: 500 https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXBTC15M&min_close_ts=1795681944&max_close_ts=1795683744&limit=20
+8:32:30 AM  data error: The operation was aborted due to timeout
+8:32:36 AM  data error: no open KXBTC15M market (between windows?)
+9:59:55 AM  data error: strike not posted yet for KXBTC15M-26NOV260515-15
+10:01:20 AM  data back (strike not posted yet for KXBTC15M-26NOV260515-15 cleared)
+10:01:20 AM  status · KXBTC15M-26NOV260515-15 13:40 left · BTC -55 vs strike · Up 34¢ Down 67¢ · paper $41.34 · 34 trades · quotes list (changed on 100% of seconds)
+10:02:20 AM  status · KXBTC15M-26NOV260515-15 12:39 left · BTC -40 vs strike · Up 31¢ Down 70¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
+10:03:21 AM  status · KXBTC15M-26NOV260515-15 11:39 left · BTC -37 vs strike · Up 38¢ Down 63¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
+10:04:22 AM  status · KXBTC15M-26NOV260515-15 10:40 left · BTC -40 vs strike · Up 28¢ Down 73¢ · paper $41.34 · 34 trades · quotes list (changed on 4% of seconds)
+10:04:42 AM  BUY Down 4 @ 66c (dip: dipped 7¢, bouncing, 10¢ edge)
+10:05:22 AM  status · KXBTC15M-26NOV260515-15 9:38 left · BTC -27 vs strike · Up 33¢ Down 68¢ · paper $38.63 · 34 trades · quotes list (changed on 4% of seconds) · holding Down @ 66¢
+10:06:23 AM  status · KXBTC15M-26NOV260515-15 8:37 left · BTC -36 vs strike · Up 33¢ Down 68¢ · paper $38.63 · 34 trades · quotes list (changed on 4% of seconds) · holding Down @ 66¢
+10:06:42 AM  SELL Down 4 @ 67c — profit (2 min) — pnl $-0.1
+10:07:23 AM  status · KXBTC15M-26NOV260515-15 7:37 left · BTC -30 vs strike · Up 28¢ Down 73¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:08:24 AM  status · KXBTC15M-26NOV260515-15 6:36 left · BTC -3 vs strike · Up 36¢ Down 65¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:09:24 AM  status · KXBTC15M-26NOV260515-15 5:36 left · BTC -4 vs strike · Up 52¢ Down 49¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:10:28 AM  status · KXBTC15M-26NOV260515-15 4:36 left · BTC +5 vs strike · Up 40¢ Down 61¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:11:29 AM  status · KXBTC15M-26NOV260515-15 3:31 left · BTC +55 vs strike · Up 83¢ Down 18¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:12:29 AM  status · KXBTC15M-26NOV260515-15 2:31 left · BTC +42 vs strike · Up 93¢ Down 7¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:13:30 AM  status · KXBTC15M-26NOV260515-15 1:30 left · BTC +29 vs strike · Up 82¢ Down 19¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:14:30 AM  status · KXBTC15M-26NOV260515-15 0:29 left · BTC +21 vs strike · Up 61¢ Down 40¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:15:00 AM  data error: strike not posted yet for KXBTC15M-26NOV260530-30
+10:15:02 AM  data back (strike not posted yet for KXBTC15M-26NOV260530-30 cleared)
+10:15:30 AM  status · KXBTC15M-26NOV260530-30 14:29 left · BTC -15 vs strike · Up 44¢ Down 57¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:16:31 AM  status · KXBTC15M-26NOV260530-30 13:29 left · BTC -67 vs strike · Up 37¢ Down 64¢ · paper $41.24 · 35 trades · quotes list (changed on 5% of seconds)
+10:17:31 AM  status · KXBTC15M-26NOV260530-30 12:29 left · BTC -81 vs strike · Up 25¢ Down 76¢ · paper $41.24 · 35 trades · quotes list (changed on 5% of seconds)
+10:18:31 AM  status · KXBTC15M-26NOV260530-30 11:28 left · BTC -65 vs strike · Up 22¢ Down 79¢ · paper $41.24 · 35 trades · quotes list (changed on 4% of seconds)
+10:19:09 AM  BUY Down 4 @ 71c (dip: dipped 8¢, bouncing, 5¢ edge)
+10:19:32 AM  status · KXBTC15M-26NOV260530-30 10:27 left · BTC -43 vs strike · Up 30¢ Down 71¢ · paper $38.34 · 35 trades · quotes list (changed on 4% of seconds) · holding Down @ 71¢
+10:20:32 AM  status · KXBTC15M-26NOV260530-30 9:27 left · BTC -78 vs strike · Up 24¢ Down 77¢ · paper $38.34 · 35 trades · quotes list (changed on 4% of seconds) · holding Down @ 71¢
+10:21:33 AM  status · KXBTC15M-26NOV260530-30 8:27 left · BTC -87 vs strike · Up 14¢ Down 87¢ · paper $38.34 · 35 trades · quotes list (changed on 4% of seconds) · holding Down @ 71¢
+10:21:51 AM  SELL Down 4 @ 85c — profit (BTC turned hard, sold before the drop) — pnl $0.46
+10:22:33 AM  status · KXBTC15M-26NOV260530-30 7:28 left · BTC -111 vs strike · Up 15¢ Down 86¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:23:34 AM  status · KXBTC15M-26NOV260530-30 6:26 left · BTC -140 vs strike · Up 7¢ Down 93¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:24:35 AM  status · KXBTC15M-26NOV260530-30 5:26 left · BTC -130 vs strike · Up 4¢ Down 96¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:25:35 AM  status · KXBTC15M-26NOV260530-30 4:24 left · BTC -110 vs strike · Up 1¢ Down 99¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:26:37 AM  status · KXBTC15M-26NOV260530-30 3:23 left · BTC -93 vs strike · Up 2¢ Down 98¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:27:37 AM  status · KXBTC15M-26NOV260530-30 2:22 left · BTC -132 vs strike · Up 1¢ Down 99¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:28:37 AM  status · KXBTC15M-26NOV260530-30 1:22 left · BTC -142 vs strike · Up 0¢ Down 100¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:29:38 AM  status · KXBTC15M-26NOV260530-30 0:22 left · BTC -129 vs strike · Up 0¢ Down 100¢ · paper $41.7 · 36 trades · quotes list (changed on 4% of seconds)
+10:30:39 AM  status · KXBTC15M-26NOV260545-45 14:21 left · BTC -4 vs strike · Up 60¢ Down 41¢ · paper $41.7 · 36 trades · quotes list (changed on 5% of seconds)
+10:31:39 AM  status · KXBTC15M-26NOV260545-45 13:20 left · BTC +12 vs strike · Up 63¢ Down 38¢ · paper $41.7 · 36 trades · quotes list (changed on 5% of seconds)
+10:32:08 AM  BUY Up 5 @ 52c (dip: dipped 11¢, bouncing, 5¢ edge)
+10:32:40 AM  status · KXBTC15M-26NOV260545-45 12:20 left · BTC +1 vs strike · Up 51¢ Down 50¢ · paper $39.01 · 36 trades · quotes list (changed on 5% of seconds) · holding Up @ 52¢
+10:33:05 AM  SELL Up 5 @ 41c — cut (stop) — pnl $-0.73
+10:33:41 AM  status · KXBTC15M-26NOV260545-45 11:19 left · BTC -13 vs strike · Up 45¢ Down 56¢ · paper $40.97 · 37 trades · quotes list (changed on 5% of seconds)
+10:34:41 AM  status · KXBTC15M-26NOV260545-45 10:21 left · BTC -17 vs strike · Up 46¢ Down 55¢ · paper $40.97 · 37 trades · quotes list (changed on 4% of seconds)
+10:35:44 AM  status · KXBTC15M-26NOV260545-45 9:19 left · BTC -37 vs strike · Up 33¢ Down 68¢ · paper $40.97 · 37 trades · quotes list (changed on 4% of seconds)
+10:36:44 AM  status · KXBTC15M-26NOV260545-45 8:16 left · BTC -51 vs strike · Up 24¢ Down 77¢ · paper $40.97 · 37 trades · quotes list (changed on 4% of seconds)
+10:37:19 AM  BUY Down 3 @ 76c (🚀 takeoff: BTC -$60 in 10s, Kalshi lagging)
+10:37:44 AM  status · KXBTC15M-26NOV260545-45 7:15 left · BTC -144 vs strike · Up 23¢ Down 78¢ · paper $38.65 · 37 trades · quotes list (changed on 4% of seconds) · holding Down @ 76¢
+10:38:37 AM  SELL Down 3 @ 95c — profit (nothing left to squeeze) — pnl $0.52
+10:38:44 AM  status · KXBTC15M-26NOV260545-45 6:19 left · BTC -142 vs strike · Up 6¢ Down 95¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:39:44 AM  status · KXBTC15M-26NOV260545-45 5:15 left · BTC -156 vs strike · Up 3¢ Down 97¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:40:45 AM  status · KXBTC15M-26NOV260545-45 4:15 left · BTC -182 vs strike · Up 1¢ Down 99¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:41:46 AM  status · KXBTC15M-26NOV260545-45 3:14 left · BTC -256 vs strike · Up 0¢ Down 100¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:42:46 AM  status · KXBTC15M-26NOV260545-45 2:13 left · BTC -259 vs strike · Up 0¢ Down 100¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:43:46 AM  status · KXBTC15M-26NOV260545-45 1:13 left · BTC -304 vs strike · Up 0¢ Down 100¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:44:47 AM  status · KXBTC15M-26NOV260545-45 0:13 left · BTC -308 vs strike · Up 0¢ Down 100¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:45:00 AM  data error: strike not posted yet for KXBTC15M-26NOV260600-00
+10:45:01 AM  data back (strike not posted yet for KXBTC15M-26NOV260600-00 cleared)
+10:45:47 AM  status · KXBTC15M-26NOV260600-00 14:12 left · BTC -46 vs strike · Up 39¢ Down 62¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:46:49 AM  status · KXBTC15M-26NOV260600-00 13:12 left · BTC -37 vs strike · Up 41¢ Down 60¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:47:49 AM  status · KXBTC15M-26NOV260600-00 12:10 left · BTC -32 vs strike · Up 46¢ Down 55¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:48:50 AM  status · KXBTC15M-26NOV260600-00 11:10 left · BTC -46 vs strike · Up 34¢ Down 67¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:49:50 AM  status · KXBTC15M-26NOV260600-00 10:09 left · BTC -19 vs strike · Up 46¢ Down 55¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:50:51 AM  status · KXBTC15M-26NOV260600-00 9:09 left · BTC -2 vs strike · Up 45¢ Down 56¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:51:51 AM  status · KXBTC15M-26NOV260600-00 8:08 left · BTC -17 vs strike · Up 47¢ Down 54¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:52:52 AM  status · KXBTC15M-26NOV260600-00 7:08 left · BTC -35 vs strike · Up 48¢ Down 53¢ · paper $41.49 · 38 trades · quotes list (changed on 4% of seconds)
+10:52:56 AM  BUY Down 5 @ 53c (🚀 takeoff: BTC -$33 in 10s, Kalshi lagging)
+10:53:52 AM  status · KXBTC15M-26NOV260600-00 6:07 left · BTC -27 vs strike · Up 52¢ Down 49¢ · paper $38.75 · 38 trades · quotes list (changed on 4% of seconds) · holding Down @ 53¢
+10:54:53 AM  status · KXBTC15M-26NOV260600-00 5:06 left · BTC -19 vs strike · Up 45¢ Down 56¢ · paper $38.75 · 38 trades · quotes list (changed on 4% of seconds) · holding Down @ 53¢
+10:55:53 AM  status · KXBTC15M-26NOV260600-00 4:11 left · BTC -48 vs strike · Up 34¢ Down 67¢ · paper $38.75 · 38 trades · quotes list (changed on 4% of seconds) · holding Down @ 53¢
+10:56:53 AM  SELL Down 5 @ 59c — profit (rode to 74c, came off the top) — pnl $0.12
+10:56:54 AM  status · KXBTC15M-26NOV260600-00 3:05 left · BTC -31 vs strike · Up 41¢ Down 60¢ · paper $41.61 · 39 trades · quotes list (changed on 4% of seconds)
+10:57:54 AM  status · KXBTC15M-26NOV260600-00 2:05 left · BTC -12 vs strike · Up 48¢ Down 53¢ · paper $41.61 · 39 trades · quotes list (changed on 4% of seconds)
+10:57:58 AM  BUY Down 5 @ 53c (dip: dipped 10¢, bouncing, 7¢ edge)
+10:58:55 AM  status · KXBTC15M-26NOV260600-00 1:05 left · BTC -10 vs strike · Up 28¢ Down 73¢ · paper $38.87 · 39 trades · quotes list (changed on 4% of seconds) · holding Down @ 53¢
+10:59:15 AM  SELL Down 5 @ 72c — profit (last 45s) — pnl $0.78
+10:59:55 AM  status · KXBTC15M-26NOV260600-00 0:04 left · BTC -31 vs strike · Up 0¢ Down 100¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:00:56 AM  status · KXBTC15M-26NOV260615-15 14:04 left · BTC -21 vs strike · Up 46¢ Down 55¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:01:56 AM  status · KXBTC15M-26NOV260615-15 13:04 left · BTC -4 vs strike · Up 52¢ Down 49¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:02:57 AM  status · KXBTC15M-26NOV260615-15 12:03 left · BTC -34 vs strike · Up 42¢ Down 59¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:03:57 AM  status · KXBTC15M-26NOV260615-15 11:03 left · BTC -18 vs strike · Up 41¢ Down 60¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:04:57 AM  status · KXBTC15M-26NOV260615-15 10:02 left · BTC -27 vs strike · Up 47¢ Down 54¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:05:58 AM  status · KXBTC15M-26NOV260615-15 9:02 left · BTC -27 vs strike · Up 34¢ Down 67¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:06:58 AM  status · KXBTC15M-26NOV260615-15 8:01 left · BTC -0 vs strike · Up 56¢ Down 45¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:07:59 AM  status · KXBTC15M-26NOV260615-15 7:01 left · BTC -22 vs strike · Up 40¢ Down 61¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:08:59 AM  status · KXBTC15M-26NOV260615-15 6:00 left · BTC -18 vs strike · Up 44¢ Down 57¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:09:59 AM  status · KXBTC15M-26NOV260615-15 5:00 left · BTC -11 vs strike · Up 43¢ Down 58¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:11:02 AM  status · KXBTC15M-26NOV260615-15 3:59 left · BTC +53 vs strike · Up 55¢ Down 46¢ · paper $42.39 · 40 trades · quotes list (changed on 4% of seconds)
+11:11:19 AM  BUY Down 12 @ 24c (dip: dipped 22¢, bouncing, 8¢ edge)
+11:12:02 AM  status · KXBTC15M-26NOV260615-15 2:58 left · BTC +19 vs strike · Up 66¢ Down 35¢ · paper $39.35 · 40 trades · quotes list (changed on 4% of seconds) · holding Down @ 24¢
+11:12:05 AM  SELL Down 12 @ 18c — cut (came off the top) — pnl $-1.01
+11:13:02 AM  status · KXBTC15M-26NOV260615-15 1:57 left · BTC +44 vs strike · Up 81¢ Down 20¢ · paper $41.38 · 41 trades · quotes list (changed on 4% of seconds)
+11:14:03 AM  status · KXBTC15M-26NOV260615-15 0:56 left · BTC +87 vs strike · Up 100¢ Down 0¢ · paper $41.38 · 41 trades · quotes list (changed on 4% of seconds)
+11:15:00 AM  data error: strike not posted yet for KXBTC15M-26NOV260630-30
+11:15:02 AM  data back (strike not posted yet for KXBTC15M-26NOV260630-30 cleared)
+11:15:04 AM  status · KXBTC15M-26NOV260630-30 14:55 left · BTC -23 vs strike · Up 41¢ Down 60¢ · paper $41.38 · 41 trades · quotes list (changed on 4% of seconds)
+11:16:04 AM  status · KXBTC15M-26NOV260630-30 13:55 left · BTC +22 vs strike · Up 55¢ Down 46¢ · paper $41.38 · 41 trades · quotes list (changed on 4% of seconds)
+11:17:06 AM  status · KXBTC15M-26NOV260630-30 12:55 left · BTC -1 vs strike · Up 61¢ Down 40¢ · paper $41.38 · 41 trades · quotes list (changed on 4% of seconds)
+11:17:38 AM  BUY Down 8 @ 37c (dip: dipped 14¢, bouncing, 5¢ edge)
+11:18:06 AM  status · KXBTC15M-26NOV260630-30 11:54 left · BTC -14 vs strike · Up 53¢ Down 48¢ · paper $38.28 · 41 trades · quotes list (changed on 4% of seconds) · holding Down @ 37¢
+11:18:14 AM  SELL Down 8 @ 47c — profit (BTC turned hard, sold before the drop) — pnl $0.52
+11:19:06 AM  status · KXBTC15M-26NOV260630-30 10:55 left · BTC +65 vs strike · Up 78¢ Down 23¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:20:07 AM  status · KXBTC15M-26NOV260630-30 9:53 left · BTC +49 vs strike · Up 78¢ Down 23¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:21:08 AM  status · KXBTC15M-26NOV260630-30 8:52 left · BTC +48 vs strike · Up 70¢ Down 31¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:22:11 AM  status · KXBTC15M-26NOV260630-30 7:54 left · BTC +63 vs strike · Up 78¢ Down 23¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:23:11 AM  status · KXBTC15M-26NOV260630-30 6:49 left · BTC +63 vs strike · Up 92¢ Down 8¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:24:12 AM  status · KXBTC15M-26NOV260630-30 5:48 left · BTC +68 vs strike · Up 90¢ Down 11¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:25:12 AM  status · KXBTC15M-26NOV260630-30 4:48 left · BTC +42 vs strike · Up 84¢ Down 17¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:26:13 AM  status · KXBTC15M-26NOV260630-30 3:47 left · BTC +59 vs strike · Up 92¢ Down 8¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:27:13 AM  status · KXBTC15M-26NOV260630-30 2:46 left · BTC +52 vs strike · Up 92¢ Down 9¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:28:14 AM  status · KXBTC15M-26NOV260630-30 1:46 left · BTC +59 vs strike · Up 99¢ Down 1¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:29:14 AM  status · KXBTC15M-26NOV260630-30 0:46 left · BTC +45 vs strike · Up 100¢ Down 0¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:30:00 AM  data error: strike not posted yet for KXBTC15M-26NOV260645-45
+11:30:02 AM  data back (strike not posted yet for KXBTC15M-26NOV260645-45 cleared)
+11:30:14 AM  status · KXBTC15M-26NOV260645-45 14:45 left · BTC -30 vs strike · Up 40¢ Down 61¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:31:15 AM  status · KXBTC15M-26NOV260645-45 13:45 left · BTC -23 vs strike · Up 46¢ Down 55¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:32:15 AM  status · KXBTC15M-26NOV260645-45 12:44 left · BTC -12 vs strike · Up 51¢ Down 50¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:33:16 AM  status · KXBTC15M-26NOV260645-45 11:44 left · BTC +8 vs strike · Up 47¢ Down 54¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:34:16 AM  status · KXBTC15M-26NOV260645-45 10:43 left · BTC +13 vs strike · Up 62¢ Down 39¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:35:17 AM  status · KXBTC15M-26NOV260645-45 9:42 left · BTC -14 vs strike · Up 53¢ Down 48¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:36:17 AM  status · KXBTC15M-26NOV260645-45 8:42 left · BTC -9 vs strike · Up 49¢ Down 52¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:37:17 AM  status · KXBTC15M-26NOV260645-45 7:42 left · BTC +8 vs strike · Up 55¢ Down 46¢ · paper $41.9 · 42 trades · quotes list (changed on 4% of seconds)
+11:37:26 AM  BUY Up 5 @ 55c (🚀 takeoff: BTC +$35 in 10s, Kalshi lagging)
+11:38:09 AM  SELL Up 5 @ 72c — profit (BTC turned hard, sold before the drop) — pnl $0.68
+11:38:17 AM  status · KXBTC15M-26NOV260645-45 6:42 left · BTC +28 vs strike · Up 73¢ Down 28¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:39:18 AM  status · KXBTC15M-26NOV260645-45 5:41 left · BTC +10 vs strike · Up 74¢ Down 27¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:40:18 AM  status · KXBTC15M-26NOV260645-45 4:41 left · BTC +19 vs strike · Up 64¢ Down 37¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:41:19 AM  status · KXBTC15M-26NOV260645-45 3:41 left · BTC +59 vs strike · Up 76¢ Down 25¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:42:19 AM  status · KXBTC15M-26NOV260645-45 2:40 left · BTC +89 vs strike · Up 99¢ Down 2¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:43:20 AM  status · KXBTC15M-26NOV260645-45 1:39 left · BTC +96 vs strike · Up 100¢ Down 0¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:44:21 AM  status · KXBTC15M-26NOV260645-45 0:38 left · BTC +79 vs strike · Up 100¢ Down 0¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:45:00 AM  data error: strike not posted yet for KXBTC15M-26NOV260700-00
+11:45:01 AM  data back (strike not posted yet for KXBTC15M-26NOV260700-00 cleared)
+11:45:23 AM  status · KXBTC15M-26NOV260700-00 14:38 left · BTC -14 vs strike · Up 42¢ Down 59¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:46:23 AM  status · KXBTC15M-26NOV260700-00 13:37 left · BTC -34 vs strike · Up 35¢ Down 66¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:47:24 AM  status · KXBTC15M-26NOV260700-00 12:36 left · BTC -30 vs strike · Up 38¢ Down 63¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:48:24 AM  status · KXBTC15M-26NOV260700-00 11:35 left · BTC -27 vs strike · Up 36¢ Down 65¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:49:24 AM  status · KXBTC15M-26NOV260700-00 10:35 left · BTC -6 vs strike · Up 51¢ Down 50¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:50:29 AM  status · KXBTC15M-26NOV260700-00 9:34 left · BTC -3 vs strike · Up 49¢ Down 52¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:51:22 AM  BID Up 10 @ 30c (resting) — uptrend, dipped -$31 off high
+11:51:29 AM  status · KXBTC15M-26NOV260700-00 8:30 left · BTC -12 vs strike · Up 31¢ Down 70¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:52:30 AM  status · KXBTC15M-26NOV260700-00 7:29 left · BTC -21 vs strike · Up 41¢ Down 60¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:52:31 AM  cancel order (trend flipped)
+11:53:30 AM  status · KXBTC15M-26NOV260700-00 6:29 left · BTC -38 vs strike · Up 38¢ Down 63¢ · paper $42.58 · 43 trades · quotes list (changed on 4% of seconds)
+11:53:37 AM  BUY Up 15 @ 20c (dip: dipped 18¢, bouncing, 5¢ edge)
+11:54:05 AM  SELL Up 15 @ 35c — profit (model says it will drop back) — pnl $1.84
+11:54:25 AM  BUY Down 4 @ 65c (dip: dipped 16¢, bouncing, 6¢ edge)
+11:54:31 AM  status · KXBTC15M-26NOV260700-00 5:30 left · BTC -44 vs strike · Up 36¢ Down 65¢ · paper $41.75 · 44 trades · quotes list (changed on 4% of seconds) · holding Down @ 65¢
+11:55:05 AM  SELL Down 4 @ 74c — profit (rode to 79c, came off the top) — pnl $0.23
+11:55:31 AM  status · KXBTC15M-26NOV260700-00 4:28 left · BTC -43 vs strike · Up 26¢ Down 75¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+11:56:32 AM  status · KXBTC15M-26NOV260700-00 3:28 left · BTC -42 vs strike · Up 7¢ Down 93¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+11:57:32 AM  status · KXBTC15M-26NOV260700-00 2:28 left · BTC -27 vs strike · Up 17¢ Down 84¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+11:58:32 AM  status · KXBTC15M-26NOV260700-00 1:28 left · BTC -27 vs strike · Up 14¢ Down 87¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+11:59:32 AM  status · KXBTC15M-26NOV260700-00 0:27 left · BTC -45 vs strike · Up 0¢ Down 100¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+12:00:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260715-15
+12:00:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260715-15 cleared)
+12:00:34 PM  status · KXBTC15M-26NOV260715-15 14:27 left · BTC -36 vs strike · Up 37¢ Down 64¢ · paper $44.65 · 45 trades · quotes list (changed on 4% of seconds)
+12:01:05 PM  BUY Up 7 @ 38c (🚀 takeoff: BTC +$62 in 10s, Kalshi lagging)
+12:01:34 PM  status · KXBTC15M-26NOV260715-15 13:26 left · BTC +163 vs strike · Up 73¢ Down 28¢ · paper $41.87 · 45 trades · quotes list (changed on 4% of seconds) · holding Up @ 38¢
+12:01:36 PM  SELL Up 7 @ 72c — profit (BTC turned hard, sold before the drop) — pnl $2.16
+12:02:35 PM  status · KXBTC15M-26NOV260715-15 12:25 left · BTC +187 vs strike · Up 85¢ Down 16¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:03:35 PM  status · KXBTC15M-26NOV260715-15 11:24 left · BTC +154 vs strike · Up 90¢ Down 11¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:04:38 PM  status · KXBTC15M-26NOV260715-15 10:24 left · BTC +144 vs strike · Up 91¢ Down 9¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:05:39 PM  status · KXBTC15M-26NOV260715-15 9:20 left · BTC +127 vs strike · Up 92¢ Down 8¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:06:40 PM  status · KXBTC15M-26NOV260715-15 8:20 left · BTC +116 vs strike · Up 92¢ Down 8¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:07:40 PM  status · KXBTC15M-26NOV260715-15 7:19 left · BTC +110 vs strike · Up 92¢ Down 8¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:08:41 PM  status · KXBTC15M-26NOV260715-15 6:19 left · BTC +95 vs strike · Up 94¢ Down 7¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:09:41 PM  status · KXBTC15M-26NOV260715-15 5:19 left · BTC +73 vs strike · Up 89¢ Down 12¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:10:42 PM  status · KXBTC15M-26NOV260715-15 4:18 left · BTC +77 vs strike · Up 93¢ Down 7¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:11:42 PM  status · KXBTC15M-26NOV260715-15 3:17 left · BTC +35 vs strike · Up 73¢ Down 28¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:12:43 PM  status · KXBTC15M-26NOV260715-15 2:17 left · BTC -7 vs strike · Up 71¢ Down 30¢ · paper $46.81 · 46 trades · quotes list (changed on 4% of seconds)
+12:13:14 PM  BUY Down 4 @ 70c (🚀 takeoff: BTC -$52 in 10s, Kalshi lagging)
+12:13:36 PM  SELL Down 4 @ 95c — profit (nothing left to squeeze) — pnl $0.92
+12:13:43 PM  status · KXBTC15M-26NOV260715-15 1:16 left · BTC -80 vs strike · Up 5¢ Down 95¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:14:44 PM  status · KXBTC15M-26NOV260715-15 0:16 left · BTC -64 vs strike · Up 0¢ Down 100¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260730-30
+12:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260730-30 cleared)
+12:15:44 PM  status · KXBTC15M-26NOV260730-30 14:15 left · BTC -13 vs strike · Up 60¢ Down 41¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:16:45 PM  status · KXBTC15M-26NOV260730-30 13:15 left · BTC +14 vs strike · Up 56¢ Down 45¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:17:45 PM  status · KXBTC15M-26NOV260730-30 12:15 left · BTC +32 vs strike · Up 58¢ Down 43¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:18:46 PM  status · KXBTC15M-26NOV260730-30 11:14 left · BTC +11 vs strike · Up 58¢ Down 43¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:19:46 PM  status · KXBTC15M-26NOV260730-30 10:13 left · BTC +39 vs strike · Up 76¢ Down 25¢ · paper $47.73 · 47 trades · quotes list (changed on 4% of seconds)
+12:20:42 PM  BUY Up 5 @ 58c (🚀 takeoff: BTC +$18 in 10s, Kalshi lagging)
+12:20:49 PM  status · KXBTC15M-26NOV260730-30 9:15 left · BTC +40 vs strike · Up 58¢ Down 43¢ · paper $44.74 · 47 trades · quotes list (changed on 4% of seconds) · holding Up @ 58¢
+12:20:50 PM  SELL Up 5 @ 75c — profit (BTC turned hard, sold before the drop) — pnl $0.69
+12:21:05 PM  BUY Down 12 @ 25c (dip: dipped 18¢, bouncing, 9¢ edge)
+12:21:52 PM  status · KXBTC15M-26NOV260730-30 8:10 left · BTC +11 vs strike · Up 60¢ Down 41¢ · paper $45.26 · 48 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
+12:22:53 PM  status · KXBTC15M-26NOV260730-30 7:06 left · BTC -31 vs strike · Up 51¢ Down 50¢ · paper $45.26 · 48 trades · quotes list (changed on 4% of seconds) · holding Down @ 25¢
+12:23:18 PM  SELL Down 12 @ 63c — profit (BTC turned hard, sold before the drop) — pnl $4.2
+12:23:53 PM  status · KXBTC15M-26NOV260730-30 6:06 left · BTC -13 vs strike · Up 46¢ Down 55¢ · paper $52.62 · 49 trades · quotes list (changed on 4% of seconds)
+12:24:54 PM  status · KXBTC15M-26NOV260730-30 5:06 left · BTC -65 vs strike · Up 27¢ Down 74¢ · paper $52.62 · 49 trades · quotes list (changed on 4% of seconds)
+12:25:54 PM  status · KXBTC15M-26NOV260730-30 4:06 left · BTC -18 vs strike · Up 52¢ Down 49¢ · paper $52.62 · 49 trades · quotes list (changed on 4% of seconds)
+12:26:05 PM  BUY Down 6 @ 49c (dip: dipped 32¢, bouncing, 7¢ edge)
+12:26:54 PM  status · KXBTC15M-26NOV260730-30 3:05 left · BTC -32 vs strike · Up 27¢ Down 74¢ · paper $49.57 · 49 trades · quotes list (changed on 4% of seconds) · holding Down @ 49¢
+12:27:31 PM  SELL Down 6 @ 70c — profit (model says it will drop back) — pnl $1.06
+12:27:55 PM  status · KXBTC15M-26NOV260730-30 2:04 left · BTC -11 vs strike · Up 44¢ Down 57¢ · paper $53.68 · 50 trades · quotes list (changed on 4% of seconds)
+12:28:09 PM  BUY Down 5 @ 57c (dip: dipped 14¢, bouncing, 7¢ edge)
+12:28:56 PM  SELL Down 5 @ 96c — profit (nothing left to squeeze) — pnl $1.84
+12:28:56 PM  status · KXBTC15M-26NOV260730-30 1:09 left · BTC -33 vs strike · Up 4¢ Down 96¢ · paper $55.52 · 51 trades · quotes list (changed on 4% of seconds)
+12:29:56 PM  status · KXBTC15M-26NOV260730-30 0:03 left · BTC -21 vs strike · Up 0¢ Down 100¢ · paper $55.52 · 51 trades · quotes list (changed on 4% of seconds)
+12:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260745-45
+12:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260745-45 cleared)
+12:30:56 PM  status · KXBTC15M-26NOV260745-45 14:03 left · BTC -13 vs strike · Up 49¢ Down 52¢ · paper $55.52 · 51 trades · quotes list (changed on 4% of seconds)
+12:31:57 PM  status · KXBTC15M-26NOV260745-45 13:02 left · BTC -27 vs strike · Up 39¢ Down 62¢ · paper $55.52 · 51 trades · quotes list (changed on 4% of seconds)
+12:32:57 PM  status · KXBTC15M-26NOV260745-45 12:02 left · BTC -6 vs strike · Up 46¢ Down 55¢ · paper $55.52 · 51 trades · quotes list (changed on 4% of seconds)
+12:33:14 PM  BUY Up 6 @ 46c (🚀 takeoff: BTC +$22 in 10s, Kalshi lagging)
+12:33:58 PM  status · KXBTC15M-26NOV260745-45 11:02 left · BTC +40 vs strike · Up 59¢ Down 42¢ · paper $52.65 · 51 trades · quotes list (changed on 4% of seconds) · holding Up @ 46¢
+12:34:58 PM  status · KXBTC15M-26NOV260745-45 10:01 left · BTC +39 vs strike · Up 72¢ Down 29¢ · paper $52.65 · 51 trades · quotes list (changed on 4% of seconds) · holding Up @ 46¢
+12:35:29 PM  SELL Up 6 @ 66c — profit (BTC turned hard, sold before the drop) — pnl $0.99
+12:35:29 PM  BID Down 10 @ 30c (resting) — downtrend, bounced +$39 off low
+12:35:58 PM  status · KXBTC15M-26NOV260745-45 9:01 left · BTC +28 vs strike · Up 70¢ Down 31¢ · paper $56.51 · 52 trades · quotes list (changed on 4% of seconds)
+12:36:35 PM  FILLED Down 10 @ 30c
+12:36:59 PM  status · KXBTC15M-26NOV260745-45 8:01 left · BTC +148 vs strike · Up 83¢ Down 18¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:37:59 PM  status · KXBTC15M-26NOV260745-45 7:04 left · BTC +202 vs strike · Up 98¢ Down 3¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:39:00 PM  status · KXBTC15M-26NOV260745-45 6:00 left · BTC +237 vs strike · Up 99¢ Down 2¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:40:00 PM  status · KXBTC15M-26NOV260745-45 4:59 left · BTC +223 vs strike · Up 99¢ Down 1¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:41:01 PM  status · KXBTC15M-26NOV260745-45 3:58 left · BTC +215 vs strike · Up 99¢ Down 1¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:42:02 PM  status · KXBTC15M-26NOV260745-45 2:58 left · BTC +308 vs strike · Up 100¢ Down 0¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:43:05 PM  status · KXBTC15M-26NOV260745-45 1:57 left · BTC +292 vs strike · Up 100¢ Down 0¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:44:06 PM  status · KXBTC15M-26NOV260745-45 0:55 left · BTC +279 vs strike · Up 100¢ Down 0¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260800-00
+12:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260800-00 cleared)
+12:45:06 PM  status · KXBTC15M-26NOV260800-00 14:53 left · BTC +11 vs strike · Up 54¢ Down 47¢ · paper $53.51 · 52 trades · quotes list (changed on 4% of seconds) · holding Down @ 30¢
+12:45:12 PM  SETTLED Down → lost, pnl $-3
+12:46:07 PM  status · KXBTC15M-26NOV260800-00 13:53 left · BTC +41 vs strike · Up 59¢ Down 42¢ · paper $53.51 · 53 trades · quotes list (changed on 4% of seconds)
+12:47:12 PM  status · KXBTC15M-26NOV260800-00 12:52 left · BTC +15 vs strike · Up 54¢ Down 47¢ · paper $53.51 · 53 trades · quotes list (changed on 4% of seconds)
+12:48:13 PM  status · KXBTC15M-26NOV260800-00 11:49 left · BTC -45 vs strike · Up 45¢ Down 56¢ · paper $53.51 · 53 trades · quotes list (changed on 4% of seconds)
+12:48:20 PM  BID Up 10 @ 30c (resting) — uptrend, dipped -$102 off high
+12:48:50 PM  FILLED Up 10 @ 30c
+12:49:16 PM  status · KXBTC15M-26NOV260800-00 10:49 left · BTC -51 vs strike · Up 26¢ Down 75¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:50:16 PM  status · KXBTC15M-26NOV260800-00 9:44 left · BTC -75 vs strike · Up 28¢ Down 73¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:51:17 PM  status · KXBTC15M-26NOV260800-00 8:43 left · BTC -39 vs strike · Up 17¢ Down 84¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:52:17 PM  status · KXBTC15M-26NOV260800-00 7:42 left · BTC -12 vs strike · Up 34¢ Down 67¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:53:18 PM  status · KXBTC15M-26NOV260800-00 6:42 left · BTC -3 vs strike · Up 43¢ Down 58¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:54:18 PM  status · KXBTC15M-26NOV260800-00 5:41 left · BTC +14 vs strike · Up 49¢ Down 52¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:55:19 PM  status · KXBTC15M-26NOV260800-00 4:41 left · BTC +28 vs strike · Up 57¢ Down 44¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:56:19 PM  status · KXBTC15M-26NOV260800-00 3:40 left · BTC +3 vs strike · Up 68¢ Down 33¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:57:20 PM  status · KXBTC15M-26NOV260800-00 2:40 left · BTC -34 vs strike · Up 29¢ Down 72¢ · paper $50.51 · 53 trades · quotes list (changed on 4% of seconds) · holding Up @ 30¢
+12:58:00 PM  SELL Up 10 @ 13c (cut loser) pnl $-1.78
+12:58:20 PM  status · KXBTC15M-26NOV260800-00 1:40 left · BTC -29 vs strike · Up 17¢ Down 84¢ · paper $51.73 · 54 trades · quotes list (changed on 4% of seconds)
+12:59:20 PM  status · KXBTC15M-26NOV260800-00 0:39 left · BTC -60 vs strike · Up 0¢ Down 100¢ · paper $51.73 · 54 trades · quotes list (changed on 4% of seconds)
+1:00:21 PM  status · KXBTC15M-26NOV260815-15 14:39 left · BTC -55 vs strike · Up 35¢ Down 66¢ · paper $51.73 · 54 trades · quotes list (changed on 4% of seconds)
+1:01:12 PM  BUY Down 5 @ 60c (dip: dipped 7¢, bouncing, 7¢ edge)
+1:01:21 PM  status · KXBTC15M-26NOV260815-15 13:38 left · BTC -52 vs strike · Up 41¢ Down 60¢ · paper $48.64 · 54 trades · quotes list (changed on 4% of seconds) · holding Down @ 60¢
+1:02:23 PM  status · KXBTC15M-26NOV260815-15 12:38 left · BTC -28 vs strike · Up 39¢ Down 62¢ · paper $48.64 · 54 trades · quotes list (changed on 4% of seconds) · holding Down @ 60¢
+1:03:11 PM  SELL Down 5 @ 56c — stale (2 min) — pnl $-0.38
+1:03:23 PM  status · KXBTC15M-26NOV260815-15 11:36 left · BTC -42 vs strike · Up 34¢ Down 67¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:04:24 PM  status · KXBTC15M-26NOV260815-15 10:36 left · BTC -34 vs strike · Up 42¢ Down 59¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:05:24 PM  status · KXBTC15M-26NOV260815-15 9:35 left · BTC -50 vs strike · Up 41¢ Down 60¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:06:28 PM  status · KXBTC15M-26NOV260815-15 8:34 left · BTC -42 vs strike · Up 30¢ Down 71¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:07:28 PM  status · KXBTC15M-26NOV260815-15 7:32 left · BTC +8 vs strike · Up 36¢ Down 65¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:08:28 PM  status · KXBTC15M-26NOV260815-15 6:31 left · BTC -8 vs strike · Up 49¢ Down 52¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:09:28 PM  status · KXBTC15M-26NOV260815-15 5:31 left · BTC -23 vs strike · Up 47¢ Down 54¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:10:29 PM  status · KXBTC15M-26NOV260815-15 4:31 left · BTC -14 vs strike · Up 45¢ Down 56¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:11:29 PM  status · KXBTC15M-26NOV260815-15 3:30 left · BTC -11 vs strike · Up 22¢ Down 79¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:12:29 PM  status · KXBTC15M-26NOV260815-15 2:31 left · BTC -6 vs strike · Up 32¢ Down 69¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:13:30 PM  status · KXBTC15M-26NOV260815-15 1:29 left · BTC +9 vs strike · Up 80¢ Down 21¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:14:32 PM  status · KXBTC15M-26NOV260815-15 0:28 left · BTC -31 vs strike · Up 2¢ Down 98¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:15:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260830-30
+1:15:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260830-30 cleared)
+1:15:02 PM  data error: strike not posted yet for KXBTC15M-26NOV260830-30
+1:15:03 PM  data back (strike not posted yet for KXBTC15M-26NOV260830-30 cleared)
+1:15:32 PM  status · KXBTC15M-26NOV260830-30 14:27 left · BTC +3 vs strike · Up 51¢ Down 50¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:16:33 PM  status · KXBTC15M-26NOV260830-30 13:26 left · BTC -32 vs strike · Up 59¢ Down 42¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:17:34 PM  status · KXBTC15M-26NOV260830-30 12:28 left · BTC -1 vs strike · Up 43¢ Down 58¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:18:40 PM  status · KXBTC15M-26NOV260830-30 11:24 left · BTC -16 vs strike · Up 44¢ Down 57¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:19:41 PM  status · KXBTC15M-26NOV260830-30 10:19 left · BTC -8 vs strike · Up 44¢ Down 57¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:20:42 PM  status · KXBTC15M-26NOV260830-30 9:18 left · BTC +9 vs strike · Up 56¢ Down 45¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:21:43 PM  status · KXBTC15M-26NOV260830-30 8:17 left · BTC +52 vs strike · Up 69¢ Down 32¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:22:44 PM  status · KXBTC15M-26NOV260830-30 7:16 left · BTC +39 vs strike · Up 74¢ Down 27¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:23:45 PM  status · KXBTC15M-26NOV260830-30 6:15 left · BTC +12 vs strike · Up 69¢ Down 32¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:24:45 PM  status · KXBTC15M-26NOV260830-30 5:14 left · BTC +7 vs strike · Up 54¢ Down 47¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:25:46 PM  status · KXBTC15M-26NOV260830-30 4:13 left · BTC +5 vs strike · Up 65¢ Down 36¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:26:46 PM  status · KXBTC15M-26NOV260830-30 3:13 left · BTC -4 vs strike · Up 58¢ Down 43¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:27:47 PM  status · KXBTC15M-26NOV260830-30 2:13 left · BTC -1 vs strike · Up 53¢ Down 48¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:28:47 PM  status · KXBTC15M-26NOV260830-30 1:12 left · BTC +20 vs strike · Up 41¢ Down 60¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:29:48 PM  status · KXBTC15M-26NOV260830-30 0:12 left · BTC +25 vs strike · Up 99¢ Down 1¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:30:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260845-45
+1:30:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260845-45 cleared)
+1:30:49 PM  status · KXBTC15M-26NOV260845-45 14:11 left · BTC -3 vs strike · Up 53¢ Down 48¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:31:50 PM  status · KXBTC15M-26NOV260845-45 13:13 left · BTC -19 vs strike · Up 42¢ Down 59¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:32:50 PM  status · KXBTC15M-26NOV260845-45 12:09 left · BTC +18 vs strike · Up 60¢ Down 41¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:33:50 PM  status · KXBTC15M-26NOV260845-45 11:09 left · BTC +11 vs strike · Up 51¢ Down 50¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:34:51 PM  status · KXBTC15M-26NOV260845-45 10:09 left · BTC +6 vs strike · Up 59¢ Down 42¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:35:51 PM  status · KXBTC15M-26NOV260845-45 9:08 left · BTC -8 vs strike · Up 49¢ Down 52¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:36:52 PM  status · KXBTC15M-26NOV260845-45 8:08 left · BTC +5 vs strike · Up 49¢ Down 52¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:37:53 PM  status · KXBTC15M-26NOV260845-45 7:07 left · BTC +22 vs strike · Up 64¢ Down 37¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:38:53 PM  status · KXBTC15M-26NOV260845-45 6:06 left · BTC -1 vs strike · Up 61¢ Down 40¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:39:54 PM  status · KXBTC15M-26NOV260845-45 5:06 left · BTC -21 vs strike · Up 43¢ Down 58¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:40:55 PM  status · KXBTC15M-26NOV260845-45 4:05 left · BTC +0 vs strike · Up 45¢ Down 56¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:41:55 PM  status · KXBTC15M-26NOV260845-45 3:04 left · BTC +10 vs strike · Up 60¢ Down 41¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:42:56 PM  status · KXBTC15M-26NOV260845-45 2:04 left · BTC +38 vs strike · Up 92¢ Down 8¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:43:56 PM  status · KXBTC15M-26NOV260845-45 1:04 left · BTC +45 vs strike · Up 96¢ Down 5¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:44:56 PM  status · KXBTC15M-26NOV260845-45 0:03 left · BTC +33 vs strike · Up 100¢ Down 0¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:45:00 PM  data error: strike not posted yet for KXBTC15M-26NOV260900-00
+1:45:01 PM  data back (strike not posted yet for KXBTC15M-26NOV260900-00 cleared)
+1:45:57 PM  status · KXBTC15M-26NOV260900-00 14:02 left · BTC +32 vs strike · Up 52¢ Down 49¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)
+1:46:57 PM  status · KXBTC15M-26NOV260900-00 13:02 left · BTC +21 vs strike · Up 57¢ Down 44¢ · paper $51.35 · 55 trades · quotes list (changed on 4% of seconds)

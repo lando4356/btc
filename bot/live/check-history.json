@@ -4,5 +4,12 @@
   "fails": [
    "Live prices"
   ]
+ },
+ {
+  "at": "2026-11-26T13:47:19.887Z",
+  "fails": [
+   "Live prices",
+   "Data coverage"
+  ]
  }
 ]
