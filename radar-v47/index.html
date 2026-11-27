@@ -1035,7 +1035,7 @@ let BOT={on:false,st:null,sent:{},res:null};
 // +30%, double-up exit (2x then 8c back from the top), wait 60s after a cash-out, $1 last-minute penny bets that ride
 // to the close, stop after 5 losses in a row. Buys fill at the live ask, sells at the live bid, Kalshi fees included.
 const PRACTICE=!/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-const PCFG={start:20,maxFrac:.25,maxContracts:200,maxRisk:3,holdMax:2,minBuy:10,maxBuy:40,sellAt:90,tp:30,dbl:2,give:8,wait:60,stopAfter:5,penny:1,
+const PCFG={start:20,maxFrac:.25,maxContracts:200,maxRisk:3,holdMax:2,minBuy:10,maxBuy:40,sellAt:90,tp:0,dbl:2,give:8,wait:60,stopAfter:5,penny:1,
  block:['flip','ai','dip','futures','swing','against']};
 const PRULES={box:{minEdge:-1,minPrice:10,maxPrice:85,minLeft:60},hold:{minEdge:.08,minPrice:20,maxPrice:50,minLeft:120},
  penny:{minEdge:-1,minPrice:1,maxPrice:3,minLeft:4},lottery:{minEdge:-1,minPrice:3,maxPrice:8,minLeft:300}};
@@ -1087,7 +1087,7 @@ setInterval(()=>{if(!PRACTICE||!K||!K.tk)return;
  for(const k of ['open','pen']){const P=PB[k];if(P&&P.ticker!==K.tk){PB[k]=null;PB.settle.push({P,close:P.close});pSave()}}
  const P=PB.open;if(P&&P.ticker===K.tk){const bid=P.side==='yes'?K.yb:K.nb;if(bid!=null){
   if(bid>(P.peak||0))P.peak=bid;const doubled=(P.peak||0)>=Math.min(89,P.entry*PCFG.dbl),px=Math.max(1,bid-1);
-  const tpHit=px*P.count/100-pFee(P.count,px)>=P.cost*(1+PCFG.tp/100);
+  const tpHit=PCFG.tp>0&&px*P.count/100-pFee(P.count,px)>=P.cost*(1+PCFG.tp/100);
   const why=bid>=PCFG.sellAt?'sold at 90c+':tpHit?`took profit (+${PCFG.tp}%)`:(doubled&&bid<=P.peak-PCFG.give)?`cashed out at 2x+ (top ${P.peak}c)`:null;
   if(why)pSell(why)}}
  pSettle();pDraw()},2000);
