@@ -27,6 +27,11 @@ input{width:100%;background:#0b0f17;color:var(--tx);border:1px solid #2a3550;bor
 .ol{font-size:14px;color:var(--mu);margin-top:8px;font-variant-numeric:tabular-nums}.os{font-size:11px;color:#4b5563;margin-top:12px}
 .od{background:none;border:0;color:#4b5563;font-size:12px;margin-top:10px;text-decoration:underline}
 </style></head><body>
+<div id="ovWrap" style="margin:8px auto;max-width:720px;background:#0e1420;border:1px solid #2a3550;border-radius:12px;padding:8px">
+ <div style="display:flex;justify-content:space-between;font:12px system-ui;color:#9fb0c8;margin-bottom:4px">
+  <span><b style="color:#f7931a">━ BTC live</b> · <b style="color:#ffffff">━ 11-exchange index</b> · <span style="color:#8a94a8">┅ target</span></span><span id="ovInfo"></span><span id="ovLag" style="color:#ffd166"></span><span><b style="color:#4da3ff">━ Kalshi Up ¢</b></span></div>
+ <canvas id="ovC" style="width:100%;height:200px;display:block"></canvas>
+</div>
 <div id="one"><div class="ob wt" id="ob1" onclick="armBox(event)">
  <div class="oa" id="oa">•</div><div class="oc" id="oc">…</div>
  <div class="of" id="of">Getting data</div><div class="ot" id="ot"></div>
@@ -122,7 +127,7 @@ function saveLog(){try{localStorage.setItem('btcLog',JSON.stringify(LOG.slice(-3
 
 // ---------- feeds ----------
 function addTrade(name,price,sz,buy,isTrade){
- const now=Date.now();lastT=now;ex[name]={p:price,t:now};
+ const now=Date.now();lastT=now;ex[name]={p:price,t:now};if(isTrade&&sz>0){const e=idxEx[name]||(idxEx[name]={p:price,t:now,v:[]});e.p=price;e.t=now;e.v.push({t:now,sz});while(e.v.length&&now-e.v[0].t>60000)e.v.shift()}
  if(isTrade){szs.push(sz);if(szs.length>400)szs.shift()}if(isTrade)trades.push({t:now,sz,buy,ex:name});
  const c=composite();if(c!=null&&now-lastPush>200){hist.push({t:now,p:c});lastPush=now}
 }
@@ -150,10 +155,57 @@ function startFeeds(){
   m.events.forEach(e=>{if(e.type==='trade')addTrade('Gemini',+e.price,+e.amount,e.makerSide==='ask',true)})});
 }
 let perp=[],perpOk=false;
+// Nov 27 (Landan): MONEY FLOW FROM EVERY BIG EXCHANGE. Flow-only feeds: they add to buy/sell pressure but not to
+// the BTC price the page compares with the strike (USDT prices differ slightly from USD).
+const flowLive={};
+const idxEx={};
+function addFlow(name,sz,buy,px){if(!(sz>0))return;const now=Date.now();flowLive[name]=now;trades.push({t:now,sz,buy,ex:name,flow:1});
+ if(px>0){const e=idxEx[name]||(idxEx[name]={p:px,t:now,v:[]});e.p=px;e.t=now;e.v.push({t:now,sz});while(e.v.length&&now-e.v[0].t>60000)e.v.shift()}}
+// Nov 27 (Landan): OUR OWN COINDESK-STYLE INDEX. Volume-weighted price across every exchange the page reads (spot + futures),
+// using each one's latest trade. It reacts to whichever big exchange moves first.
+function tradeIdx(){const now=Date.now();let w=0,sum=0;for(const k in idxEx){const e=idxEx[k];if(now-e.t>5000)continue;const v=e.v.reduce((a,b)=>a+b.sz,0);if(v>0){w+=v;sum+=v*e.p}}return w?sum/w:null}
+// Nov 27 (Landan): FAST LIVE CHART. Trades only print after the order book moves, so read each exchange's best bid/ask
+// (the quote) as it changes, tick by tick. Each exchange's mid is shifted by its slow average gap to the normal price
+// (USDT vs USD etc.), then the fast price is the median across the exchanges updating right now.
+const qEx={};
+function qMid(name,bid,ask){bid=+bid;ask=+ask;if(!(bid>0&&ask>0&&ask>=bid))return;const m=(bid+ask)/2,now=Date.now();
+ const ref=hist.length?hist[hist.length-1].p:null;const e=qEx[name]||(qEx[name]={off:ref?m-ref:0,n:0});
+ if(ref){const a=e.n<50?0.2:0.002;e.off+=a*((m-ref)-e.off);e.n++}e.m=m;e.t=now}
+function quoteIdx(){const now=Date.now(),a=[];for(const k in qEx){const e=qEx[k];if(e.n>=50&&now-e.t<3000)a.push(e.m-e.off)}
+ if(a.length<2)return null;a.sort((x,y)=>x-y);const h=a.length>>1;return a.length%2?a[h]:(a[h-1]+a[h])/2}
+function idxPrice(){return quoteIdx()??tradeIdx()}
+function qFeed(name,url,sub,onMsg){let ws;try{ws=new WebSocket(url)}catch(e){return}
+ ws.onopen=()=>{if(sub)ws.send(JSON.stringify(sub))};
+ ws.onmessage=e=>{try{onMsg(JSON.parse(e.data),ws)}catch(x){}};
+ ws.onclose=()=>setTimeout(()=>qFeed(name,url,sub,onMsg),5000);ws.onerror=()=>{try{ws.close()}catch(e){}}}
+function quoteFeeds(){
+ qFeed('Binance.US','wss://stream.binance.us:9443/ws/btcusdt@bookTicker',null,m=>{if(m.b&&m.a)qMid('Binance.US',m.b,m.a)});
+ qFeed('OKX','wss://ws.okx.com:8443/ws/v5/public',{op:'subscribe',args:[{channel:'bbo-tbt',instId:'BTC-USDT'}]},m=>{const d=m.data&&m.data[0];if(d&&d.bids&&d.asks&&d.bids[0]&&d.asks[0])qMid('OKX',d.bids[0][0],d.asks[0][0])});
+ qFeed('Bybit','wss://stream.bybit.com/v5/public/spot',{op:'subscribe',args:['orderbook.1.BTCUSDT']},m=>{const d=m.data;if(d&&d.b&&d.a&&d.b[0]&&d.a[0])qMid('Bybit',d.b[0][0],d.a[0][0])});
+ qFeed('Kraken','wss://ws.kraken.com/v2',{method:'subscribe',params:{channel:'ticker',symbol:['BTC/USD'],event_trigger:'bbo'}},m=>{const d=m.channel==='ticker'&&m.data&&m.data[0];if(d)qMid('Kraken',d.bid,d.ask)});
+ qFeed('Bitstamp','wss://ws.bitstamp.net',{event:'bts:subscribe',data:{channel:'order_book_btcusd'}},m=>{const d=m.data;if(d&&d.bids&&d.asks&&d.bids[0]&&d.asks[0])qMid('Bitstamp',d.bids[0][0],d.asks[0][0])});
+ qFeed('Coinbase','wss://ws-feed.exchange.coinbase.com',{type:'subscribe',product_ids:['BTC-USD'],channels:['ticker']},m=>{if(m.type==='ticker'&&m.best_bid)qMid('Coinbase',m.best_bid,m.best_ask)});
+}
+const idxHist=[];setInterval(()=>{const p=idxPrice();if(p){idxHist.push({t:Date.now(),p,q:quoteIdx()!=null});while(idxHist.length&&Date.now()-idxHist[0].t>1200000)idxHist.shift()}},100);
+function flowFeed(name,url,sub,onmsg){let ws;try{ws=new WebSocket(url)}catch(e){return}
+ ws.onopen=()=>{if(sub)ws.send(JSON.stringify(sub))};ws.onmessage=e=>{try{onmsg(JSON.parse(e.data),ws)}catch(x){}};
+ ws.onclose=()=>{setTimeout(()=>flowFeed(name,url,sub,onmsg),10000)};ws.onerror=()=>{try{ws.close()}catch(e){}}}
+function startFlowFeeds(){
+ flowFeed('Binance','wss://stream.binance.com:9443/ws/btcusdt@aggTrade',null,m=>{if(m.e==='aggTrade')addFlow('Binance',+m.q,!m.m,+m.p)});
+ flowFeed('Binance futures','wss://fstream.binance.com/ws/btcusdt@aggTrade',null,m=>{if(m.e==='aggTrade')addFlow('Binance futures',+m.q,!m.m,+m.p)});
+ flowFeed('Binance.US','wss://stream.binance.us:9443/stream?streams=btcusdt@aggTrade/btcusd@aggTrade/btcusdc@aggTrade',null,m=>{const d=m.data||m;if(d&&d.e==='aggTrade')addFlow('Binance.US',+d.q,!d.m,+d.p)});
+ flowFeed('Bybit','wss://stream.bybit.com/v5/public/spot',{op:'subscribe',args:['publicTrade.BTCUSDT']},m=>{if(m.data&&String(m.topic).startsWith('publicTrade'))m.data.forEach(d=>addFlow('Bybit',+d.v,d.S==='Buy',+d.p))});
+ flowFeed('Bybit futures','wss://stream.bybit.com/v5/public/linear',{op:'subscribe',args:['publicTrade.BTCUSDT']},m=>{if(m.data&&String(m.topic).startsWith('publicTrade'))m.data.forEach(d=>addFlow('Bybit futures',+d.v,d.S==='Buy',+d.p))});
+ flowFeed('OKX','wss://ws.okx.com:8443/ws/v5/public',{op:'subscribe',args:[{channel:'trades',instId:'BTC-USDT'}]},m=>{if(m.data&&m.arg&&m.arg.channel==='trades')m.data.forEach(d=>addFlow('OKX',+d.sz,d.side==='buy',+d.px))});
+ flowFeed('Bitfinex','wss://api-pub.bitfinex.com/ws/2',{event:'subscribe',channel:'trades',symbol:'tBTCUSD'},m=>{if(Array.isArray(m)&&m[1]==='te'&&Array.isArray(m[2])){const a=+m[2][2];addFlow('Bitfinex',Math.abs(a),a>0,+m[2][3])}});
+ flowFeed('Crypto.com','wss://stream.crypto.com/exchange/v1/market',{id:1,method:'subscribe',params:{channels:['trade.BTC_USD']}},(m,ws)=>{
+  if(m.method==='public/heartbeat'){ws.send(JSON.stringify({id:m.id,method:'public/respond-heartbeat'}));return}
+  const d=m.result&&m.result.data;if(Array.isArray(d))d.forEach(x=>addFlow('Crypto.com',+(x.q||x.qty),(x.s||x.side)==='BUY',+(x.p||x.price)))});
+}
 function perpFeed(){
  let ws;try{ws=new WebSocket('wss://ws.okx.com:8443/ws/v5/public')}catch(e){return}
  ws.onopen=()=>ws.send(JSON.stringify({op:'subscribe',args:[{channel:'trades',instId:'BTC-USDT-SWAP'}]}));
- ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m.data&&m.arg&&m.arg.channel==='trades'){perpOk=true;m.data.forEach(d=>perp.push({t:Date.now(),p:+d.px}));if(perp.length>3000)perp.splice(0,1000)}}catch(x){}};
+ ws.onmessage=e=>{try{const m=JSON.parse(e.data);if(m.data&&m.arg&&m.arg.channel==='trades'){perpOk=true;m.data.forEach(d=>{perp.push({t:Date.now(),p:+d.px});addFlow('OKX futures',(+d.sz)*0.01,d.side==='buy',+d.px)});if(perp.length>3000)perp.splice(0,1000)}}catch(x){}};
  ws.onclose=()=>{perpOk=false;setTimeout(perpFeed,5000)};ws.onerror=()=>{try{ws.close()}catch(e){}};
 }
 // futures lead: how far the perp has moved vs spot over the last 10s (dollars). Futures often move first.
@@ -208,7 +260,7 @@ async function pollK(){
  }
 }
 try{$('relay').value=localStorage.getItem('btcRelay')||''}catch(e){}
-if(!$('relay').value&&(/(workers|pages)\.dev$/.test(location.hostname)||/^(localhost|127\.0\.0\.1)$/.test(location.hostname)))$('relay').value=location.origin+'/k';
+if(!$('relay').value&&(/(workers|pages)\.dev$/.test(location.hostname)||true))$('relay').value=location.origin+'/k';
 // ---------- math ----------
 function avg60(now){
  const a=new Array(60).fill(null);
@@ -943,7 +995,7 @@ const PA0={frac:0.25,hold85:true,bank:30,start:30,goal:500,floor:15,n:0,w:0,lotN
 let PA=JSON.parse(JSON.stringify(PA0));try{const q=JSON.parse(localStorage.getItem('btcPA')||'null');if(q&&q.bank!=null)PA=Object.assign(JSON.parse(JSON.stringify(PA0)),q)}catch(e){}
 function paSave(){try{localStorage.setItem('btcPA',JSON.stringify(PA))}catch(e){}}
 function paReset(){PA=JSON.parse(JSON.stringify(PA0));paSave()}
-function paOpen(){return PA.bank>PA.floor&&PA.bank<PA.goal}
+function paOpen(){if(BOT.on)return false;return PA.bank>PA.floor&&PA.bank<PA.goal} // Nov 26 (Landan): paper account OFF while the real bot is connected
 function paFracNow(){const f=PA.frac||0.25;return PA.safe!==false&&PA.bank>=2*PA.start?Math.min(f,0.25):f} // once the account has doubled, bets drop to 25% max to protect the gains
 function paCount(ask){return Math.max(1,Math.floor(PA.bank*paFracNow()/(ask/100)))} // risks this share of the account per trade (you pick it on the card)
 function paFrac(v){PA.frac=+v;paSave()}
@@ -958,6 +1010,7 @@ function flipGate(side,now){
 // v47.4 brakes: stop new bets for the day after losing 10% (Chicago day), and sit out 30 min after 3 losses in a row.
 // Applies to paper AND real-money box trades. Selling an open bet is never blocked.
 function paBrake(now){
+ return ''; // Nov 26 (Landan): brakes OFF (the real bot still stops itself after 5 losses in a row)
  const day=new Date(now).toLocaleDateString('en-US',{timeZone:'America/Chicago'});
  if(!PA.day||PA.day.key!==day){PA.day={key:day,start:PA.bank};paSave()}
  if(PA.bank<PA.day.start*0.9)return `down 10% today ($${PA.day.start.toFixed(2)} → $${PA.bank.toFixed(2)}), done until tomorrow`;
@@ -976,12 +1029,261 @@ function paWhyNot(now){const w=[];
 function paMode(v){PA.mode=v;paSave()}
 // ---------- 💵 real-money bot (only when this page is opened from the bot on your Mac: http://localhost:8787) ----------
 let BOT={on:false,st:null,sent:{},res:null};
-async function botPoll(){if(!/^(localhost|127\.0\.0\.1)$/.test(location.hostname))return;try{const r=await fetch('/bot/status',{cache:'no-store'});BOT.st=await r.json();BOT.on=!!BOT.st.on}catch(e){BOT.on=false}}
+// ===== Nov 27 (Landan): PRACTICE BOT. On the Cloudflare site (not on the Mac), every /bot/* call the page makes is
+// answered right here by a fake-money copy of the Mac bot's rules, so the practice site bets exactly the same way.
+// Same rules as the Mac config: $3 max per bet (holds $2), 10-40c buys, one bet at a time, sell at 90c, take profit at
+// +30%, double-up exit (2x then 8c back from the top), wait 60s after a cash-out, $1 last-minute penny bets that ride
+// to the close, stop after 5 losses in a row. Buys fill at the live ask, sells at the live bid, Kalshi fees included.
+const PRACTICE=!/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+const PCFG={start:20,maxFrac:.25,maxContracts:200,maxRisk:3,holdMax:2,minBuy:10,maxBuy:40,sellAt:90,tp:30,dbl:2,give:8,wait:60,stopAfter:5,penny:1,
+ block:['flip','ai','dip','futures','swing','against']};
+const PRULES={box:{minEdge:-1,minPrice:10,maxPrice:85,minLeft:60},hold:{minEdge:.08,minPrice:20,maxPrice:50,minLeft:120},
+ penny:{minEdge:-1,minPrice:1,maxPrice:3,minLeft:4},lottery:{minEdge:-1,minPrice:3,maxPrice:8,minLeft:300}};
+function pFee(c,px){return Math.ceil(0.07*c*(px/100)*(1-px/100)*100-1e-9)/100}
+function pNew(){return{bank:PCFG.start,open:null,pen:null,streak:0,stopped:null,lastExit:0,trades:[],win:{},settle:[],started:Date.now()}}
+let PB=null;try{PB=JSON.parse(localStorage.getItem('practiceBot')||'null')}catch(e){}if(!PB||typeof PB.bank!=='number')PB=pNew();
+function pSave(){try{localStorage.setItem('practiceBot',JSON.stringify(PB))}catch(e){}}
+function pRecord(t){PB.trades.unshift(t);if(PB.trades.length>300)PB.trades.length=300;
+ if(t.pnl>0)PB.streak=0;else{PB.streak++;if(PB.streak>=PCFG.stopAfter)PB.stopped=PCFG.stopAfter+' losses in a row'}pSave()}
+function pBet(req){
+ const side=req.side==='up'?'yes':req.side==='down'?'no':null;if(!side)return{ok:false,why:'bad side'};
+ const kind=req.kind==='penny'?'penny':req.kind==='lottery'?'lottery':(req.kind==='box'||req.kind==='rocket')?'box':'hold',R=PRULES[kind],SIDE=kind==='lottery'||kind==='penny';
+ if(kind==='box'&&PCFG.block.includes(req.setup))return{ok:false,why:`${req.setup} trades are off (same as the Mac bot)`};
+ if(PB.stopped)return{ok:false,why:'stopped: '+PB.stopped};
+ if(kind==='lottery')return{ok:false,why:'long shots are off'};
+ if(!SIDE&&Date.now()-PB.lastExit<PCFG.wait*1000)return{ok:false,why:'waiting after a cash-out (chop filter)'};
+ if(!(Number(req.edge)>=R.minEdge))return{ok:false,why:`edge under ${R.minEdge*100} cents`};
+ if(!K||!K.tk||!K.close)return{ok:false,why:'no open market'};
+ if(!SIDE&&PB.open)return{ok:false,why:'already holding a position'};
+ const W=PB.win[K.tk]||(PB.win[K.tk]={buys:0});
+ if(kind==='penny'&&W.pen)return{ok:false,why:'already took the penny bet this window'};
+ if(kind==='penny'&&PB.pen)return{ok:false,why:'penny bet already riding'};
+ const left=(K.close-Date.now())/1000;if(left<R.minLeft)return{ok:false,why:`only ${Math.round(left)}s left`};
+ const ask=side==='yes'?K.ya:K.na;if(ask==null)return{ok:false,why:'no sellers right now'};
+ if(ask<R.minPrice||ask>R.maxPrice)return{ok:false,why:`price ${ask}c outside ${R.minPrice}-${R.maxPrice}c`};
+ if(!SIDE&&ask>PCFG.maxBuy)return{ok:false,why:`price ${ask}c is over the ${PCFG.maxBuy}c limit`};
+ if(!SIDE&&ask<PCFG.minBuy)return{ok:false,why:`price ${ask}c is under the ${PCFG.minBuy}c minimum`};
+ let count=Math.min(PCFG.maxContracts,Math.floor(PB.bank*PCFG.maxFrac/(ask/100)));
+ if(kind==='penny')count=Math.max(1,Math.floor(PCFG.penny*100/ask));
+ else count=Math.min(count,Math.floor(PCFG.maxRisk*100/ask));
+ if(kind==='hold')count=Math.min(count,Math.floor(PCFG.holdMax*100/ask));
+ while(count>0&&count*ask/100+pFee(count,ask)>PB.bank)count--;
+ if(count<1)return{ok:false,why:'practice bank too low'};
+ const cost=count*ask/100+pFee(count,ask);PB.bank-=cost;
+ const P={ticker:K.tk,side,count,entry:ask,cost,t:Date.now(),kind,setup:req.setup||kind,close:K.close,peak:0};
+ if(kind==='penny'){PB.pen=P;W.pen=true}else{PB.open=P;W.buys++}
+ pSave();return{ok:true,filled:count,count,ask,side:req.side,kind:req.setup||kind,practice:true}}
+function pClose(P,px,how){const proceeds=P.count*px/100-(px>0&&px<100?pFee(P.count,px):0);PB.bank+=proceeds;
+ pRecord({t:Date.now(),ticker:P.ticker,setup:P.setup,side:P.side==='yes'?'Up':'Down',count:P.count,entry:P.entry,exit:px,pnl:+(proceeds-P.cost).toFixed(2),how})}
+function pSell(why){const P=PB.open;if(!P)return{ok:false,why:'no open position'};
+ const bid=P.side==='yes'?K.yb:K.nb;if(bid==null||!K||K.tk!==P.ticker)return{ok:false,why:'no buyers right now'};
+ PB.open=null;PB.lastExit=Date.now();pClose(P,bid,why||'sold');return{ok:true,sold:P.count,price:bid,remaining:0,practice:true}}
+function pStatus(){return{on:true,practice:true,open:PB.open,stopped:PB.stopped,balance:PB.bank,streak:PB.streak}}
+async function pSettle(){for(const s of PB.settle.slice()){if(Date.now()<s.close+20000)continue;
+  try{const j=await (await fetch('/kr?ticker='+encodeURIComponent(s.P.ticker),{cache:'no-store'})).json();
+   if(j.result==='yes'||j.result==='no'){PB.settle=PB.settle.filter(x=>x!==s);const won=j.result===s.P.side;
+    pClose(s.P,won?100:0,(s.P.kind==='penny'?'penny bet ':'')+(won?'rode to the end: won':'rode to the end: lost'))}}catch(e){}}}
+setInterval(()=>{if(!PRACTICE||!K||!K.tk)return;
+ for(const k of ['open','pen']){const P=PB[k];if(P&&P.ticker!==K.tk){PB[k]=null;PB.settle.push({P,close:P.close});pSave()}}
+ const P=PB.open;if(P&&P.ticker===K.tk){const bid=P.side==='yes'?K.yb:K.nb;if(bid!=null){
+  if(bid>(P.peak||0))P.peak=bid;const doubled=(P.peak||0)>=Math.min(89,P.entry*PCFG.dbl),px=Math.max(1,bid-1);
+  const tpHit=px*P.count/100-pFee(P.count,px)>=P.cost*(1+PCFG.tp/100);
+  const why=bid>=PCFG.sellAt?'sold at 90c+':tpHit?`took profit (+${PCFG.tp}%)`:(doubled&&bid<=P.peak-PCFG.give)?`cashed out at 2x+ (top ${P.peak}c)`:null;
+  if(why)pSell(why)}}
+ pSettle();pDraw()},2000);
+function pDraw(){if(!PRACTICE)return;let el=document.getElementById('pracBox');
+ if(!el){el=document.createElement('div');el.id='pracBox';el.style.cssText='margin:6px;padding:8px 10px;border:1px solid #3a3;border-radius:10px;background:#0d1a0d;color:#cfe;font:13px/1.4 -apple-system,system-ui,sans-serif';document.body.prepend(el)}
+ const T=PB.trades,w=T.filter(t=>t.pnl>0).length,l=T.length-w,net=T.reduce((a,t)=>a+t.pnl,0),by={};
+ T.forEach(t=>{const s=by[t.setup]||(by[t.setup]={n:0,w:0,p:0});s.n++;if(t.pnl>0)s.w++;s.p+=t.pnl});
+ const O=PB.open,pen=PB.pen,bid=O&&K&&K.tk===O.ticker?(O.side==='yes'?K.yb:K.nb):null;
+ el.innerHTML=`<b>🧪 Practice bot</b> (fake money, same rules as the Mac bot) · bank <b>$${PB.bank.toFixed(2)}</b> · ${w}W ${l}L · net <b style="color:${net>=0?'#5d5':'#e55'}">${net>=0?'+':''}$${net.toFixed(2)}</b>`+
+  (PB.stopped?` · <b style="color:#e55">stopped: ${PB.stopped}</b> <button onclick="pUnstop()">restart</button>`:'')+
+  `<br>${O?`Holding ${O.count} ${O.side==='yes'?'Up':'Down'} @ ${O.entry}¢ (${O.setup})${bid!=null?` · now ${bid}¢`:''}`:'No open bet'}${pen?` · penny: ${pen.count} ${pen.side==='yes'?'Up':'Down'} @ ${pen.entry}¢`:''}${PB.settle.length?` · ${PB.settle.length} waiting on Kalshi's result`:''}`+
+  `<br><small>${Object.entries(by).map(([k,s])=>`${k}: ${s.w}/${s.n} won, ${s.p>=0?'+':''}$${s.p.toFixed(2)}`).join(' · ')||'no trades yet'}</small>`+
+  `<details><summary>Last trades</summary><small>${T.slice(0,25).map(t=>`${new Date(t.t).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})} ${t.setup} ${t.side} ${t.count}@${t.entry}¢→${t.exit}¢ <b style="color:${t.pnl>0?'#5d5':'#e55'}">${t.pnl>0?'+':''}$${t.pnl.toFixed(2)}</b> ${t.how}`).join('<br>')}</small></details>`+
+  `<small>Only bets while this page is open. </small><button onclick="pReset()">reset to $${PCFG.start}</button>`}
+function pReset(){if(confirm('Reset the practice bot to $'+PCFG.start+' and clear its trades?')){PB=pNew();pSave();pDraw()}}
+function pUnstop(){PB.stopped=null;PB.streak=0;pSave();pDraw()}
+if(PRACTICE){const _f=window.fetch.bind(window);
+ window.fetch=(u,o)=>{if(typeof u==='string'&&u.startsWith('/bot/')){const path=u.split('?')[0];let b={};try{b=o&&o.body?JSON.parse(o.body):{}}catch(e){}
+  const res=path==='/bot/bet'?pBet(b):path==='/bot/sell'?pSell(b.why):path==='/bot/status'?pStatus():{ok:true,practice:true};
+  return Promise.resolve(new Response(JSON.stringify(res),{headers:{'Content-Type':'application/json'}}))}
+  return _f(u,o)}}
+// ===== end practice bot =====
+
+async function botPoll(){if(!true)return;try{const r=await fetch('/bot/status',{cache:'no-store'});BOT.st=await r.json();BOT.on=!!BOT.st.on;if(BOT.st.pageVer){if(BOT.pv&&BOT.st.pageVer!==BOT.pv)setTimeout(()=>location.reload(),1500);BOT.pv=BOT.st.pageVer}}catch(e){BOT.on=false}}
 setInterval(botPoll,5000);botPoll();
 async function botBet(side,ask,edge){const w=curWin();if(BOT.sent[w])return;BOT.sent[w]=1;
- try{const r=await fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge})});BOT.res=Object.assign(await r.json(),{t:Date.now(),side,ask});if(!(BOT.res.ok&&BOT.res.filled>0))setTimeout(()=>{delete BOT.sent[w]},30000)}
+ try{const r=await fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge})});BOT.res=Object.assign(await r.json(),{t:Date.now(),side,ask});setTimeout(()=>{delete BOT.sent[w]},20000)} // Nov 26: no one-per-window cap; bot sells green and can buy again
  catch(e){BOT.res={ok:false,why:String(e),t:Date.now(),side,ask}}
  if(armed){beep(BOT.res.ok?1200:400);if(BOT.res.ok)setTimeout(()=>beep(1500),200)}botPoll()}
+// Nov 26: tells the bot (trades.log) why the page isn't sending real bets, so it can be checked remotely
+setInterval(()=>{if(!true)return;try{const now=Date.now(),w=[];
+ if(!BOT.on)w.push('bot not connected');if(!window.KfNow)w.push('no live Kalshi prices');if(AT)w.push('paper/box position open: '+AT.kind+' '+AT.side+' @'+AT.entry);
+ if(pos)w.push('manual position set: '+pos);if(PA.gate)w.push('flip gate ON');const b=paBrake(now);if(b)w.push('brake: '+b);
+ w.push('paper bank $'+(+PA.bank).toFixed(2));fetch('/bot/why',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({why:w.join(' | ')})}).catch(()=>{})}catch(e){}},20000);
+// Nov 26 (Landan): every 45s (and right at ~4:00 left) send ALL readings + alerts to the bot's 4-minute learner
+let snapLast=0,snapAt4=null;
+setInterval(()=>{if(!true||!K||!K.tk||!K.close||!hist.length)return;
+ const now=Date.now(),left=Math.round((K.close-now)/1000);if(left<0||left>900)return;
+ const at4=left<=245&&left>=235&&snapAt4!==K.tk;if(!at4&&now-snapLast<45000)return;if(at4)snapAt4=K.tk;snapLast=now;
+ try{const btc=hist[hist.length-1].p,ago=s=>{const h=hist.find(x=>x.t>=now-s*1000);return h?btc-h.p:null};
+  const fw=fwPct&&now-fwPct.t<5000?{tp:fwPct.tp,side:fwPct.side}:null,fl=flNow&&now-flNow.t<5000?{pl:flNow.pl,dir:flNow.dir}:null;
+  const ai=aiNow?{up:aiNow.up?aiNow.up.p:0,down:aiNow.down?aiNow.down.p:0}:null;let v=null;try{v=vol()}catch(e){}let im=null;try{im=imbW(now,60000)}catch(e){}
+  fetch('/bot/snap',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tk:K.tk,close:K.close,left,btc,strike:K.strike||strike,
+   ya:K.ya,yb:K.yb,na:K.na,nb:K.nb,oneP,fw,fl,ai,vol:v,imb:im,mv60:ago(60),mv180:ago(180),mv600:ago(600),lead:(()=>{try{return perpLead(now,btc)}catch(e){return null}})(),mom:(()=>{const h=hist.find(x=>x.t>=now-60000);return h?(btc/h.p-1)*100:null})()})}).catch(()=>{})}catch(e){}},1000);
+// Nov 27 (Landan): FUTURES bets. When the BTC perpetual future (OKX) jumps ahead of spot by $10+ over 10s,
+// buy that direction right away, before spot and Kalshi catch up. Untested signal: every trigger is logged.
+let futLast=0;
+setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840||now-futLast<20000)return;
+ let pl=null;try{pl=perpLead(now,hist[hist.length-1].p)}catch(e){}if(pl==null||Math.abs(pl)<10)return;
+ const side=pl>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;futLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'futures',lead:+pl.toFixed(1)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'futures'})}).catch(()=>{});
+},1000);
+// Nov 27 (Landan): AGAINST-THE-CHART bets. When 1-min momentum AND the futures lead both point the opposite way
+// from the chart's call (the big UP/DOWN) and keep holding that way for 10s, buy that opposite side (it's the cheap one).
+let revSince=0,revSide=null,revLast=0;
+setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length||oneP==null)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840){revSince=0;return}
+ const price=hist[hist.length-1].p,p1=hist.find(h=>h.t>=now-60000),mom=p1?(price/p1.p-1)*100:0;
+ let pl=null;try{pl=perpLead(now,price)}catch(e){}
+ const chart=oneP>=0.5?'up':'down',against=chart==='up'?'down':'up',dir=s=>s==='up'?1:-1;
+ let im=null;try{im=imbW(now,60000)}catch(e){} // buy vs sell pressure, last 60s (+ = buyers)
+ const holds=pl!=null&&im!=null&&Math.sign(mom)===dir(against)&&Math.abs(mom)>=0.01&&Math.sign(pl)===dir(against)&&Math.abs(pl)>=2&&Math.sign(im)===dir(against)&&Math.abs(im)>=0.1;
+ if(!holds){revSince=0;revSide=null;return}
+ if(revSide!==against){revSide=against;revSince=now;return}
+ if(now-revSince<10000||now-revLast<30000)return;
+ const ask=against==='up'?K.ya:K.na;if(ask==null)return;revLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:against,ask,edge:0,kind:'box',setup:'against',lead:+pl.toFixed(1),mom:+mom.toFixed(3),flow:+im.toFixed(2)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side:against,ask,kind:'against'})}).catch(()=>{});
+},1000);
+// Nov 27 (Landan's own method): SWING bets. When the futures lead and 1-min momentum both point the same way and
+// hold for 5s, buy that way early; the bot cashes out at a profit and can do it again several times a round.
+let swSince=0,swSide=null,swLast=0;
+setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840){swSince=0;return}
+ const price=hist[hist.length-1].p,p1=hist.find(h=>h.t>=now-60000),mom=p1?(price/p1.p-1)*100:0;
+ let pl=null;try{pl=perpLead(now,price)}catch(e){}
+ const side=pl!=null&&Math.abs(pl)>=5&&Math.abs(mom)>=0.02&&Math.sign(pl)===Math.sign(mom)?(pl>0?'up':'down'):null; // stronger: wait for the real takeoff
+ if(!side){swSince=0;swSide=null;return}
+ if(swSide!==side){swSide=side;swSince=now;return}
+ if(now-swSince<10000||now-swLast<20000)return;
+ const ask=side==='up'?K.ya:K.na;if(ask==null)return;swLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'swing',lead:+pl.toFixed(1),mom:+mom.toFixed(3)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'swing'})}).catch(()=>{});
+},1000);
+// Nov 27 (Landan): MONEY-FLOW RECORDER. Every 2s save dollars bought vs sold on the exchanges, BTC spot, the futures
+// price and Kalshi's prices, so we can work out "this much money flow = this much chart move". Recording only.
+setInterval(()=>{if(!true||!K||!K.tk||!hist.length)return;
+ try{const now=Date.now(),btc=hist[hist.length-1].p,w=trades.filter(x=>x.t>now-2000);let b=0,sl=0;const by={};w.forEach(x=>{if(x.buy)b+=x.sz;else sl+=x.sz;by[x.ex]=(by[x.ex]||0)+Math.round(x.sz*btc)*(x.buy?1:-1)});
+  fetch('/bot/flow',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:now,tk:K.tk,left:Math.round((K.close-now)/1000),btc,
+   perp:perp.length?perp[perp.length-1].p:null,idx:idxPrice(),buyUsd:Math.round(b*btc),sellUsd:Math.round(sl*btc),n:w.length,net:by,lagSec:lagNow?lagNow.lag:null,lagMatch:lagNow?+lagNow.r.toFixed(2):null,live:Object.keys(flowLive).filter(k=>now-flowLive[k]<30000),qLive:Object.keys(qEx).filter(k=>qEx[k].n>=50&&now-qEx[k].t<3000),fast:quoteIdx(),strike:K.strike||strike,ya:K.ya,yb:K.yb,na:K.na,nb:K.nb})}).catch(()=>{})}catch(e){}},2000);
+// Nov 27 (Landan): LIVE OVERLAY CHART. BTC from the exchange feeds (orange, left scale) on top of Kalshi's Up price
+// (blue, right scale 0-100c) for the current 15-minute window, with the target price dashed. Redraws every second.
+const ovK=[];
+setInterval(()=>{try{
+ const cv=document.getElementById('ovC');if(!cv||!K||!K.close||!hist.length)return;const now=Date.now();
+ if(K.ya!=null&&K.yb!=null){ovK.push({t:now,v:(K.ya+K.yb)/2,tk:K.tk});while(ovK.length&&(ovK[0].tk!==K.tk||now-ovK[0].t>900000))ovK.shift()}
+ const dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;if(cv.width!==W*dpr){cv.width=W*dpr;cv.height=H*dpr}
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+ const t1=K.close,t0=t1-900000,L=46,R=34,T=6,B=16,x=t=>L+(t-t0)/(t1-t0)*(W-L-R);
+ const tgt=K.strike||strike,pts=hist.filter(h=>h.t>=t0);if(!pts.length)return;
+ let lo=Math.min(tgt||Infinity,...pts.map(p=>p.p)),hi=Math.max(tgt||-Infinity,...pts.map(p=>p.p));const pad=Math.max(10,(hi-lo)*0.1);lo-=pad;hi+=pad;
+ const yb=v=>T+(hi-v)/(hi-lo)*(H-T-B),yk=v=>T+(100-v)/100*(H-T-B);
+ g.strokeStyle='#1e2840';g.lineWidth=1;g.font='10px system-ui';g.fillStyle='#6b7a93';
+ for(let i=0;i<=4;i++){const y=T+i*(H-T-B)/4;g.beginPath();g.moveTo(L,y);g.lineTo(W-R,y);g.stroke();
+  g.fillText(Math.round(hi-(hi-lo)*i/4).toLocaleString(),2,y+3);g.fillText(Math.round(100-25*i)+'¢',W-R+4,y+3)}
+ for(let m=0;m<=15;m+=5){const xx=x(t0+m*60000);g.fillText(m===15?'end':(15-m)+'m',xx-8,H-3)}
+ if(tgt){g.setLineDash([5,4]);g.strokeStyle='#8a94a8';g.beginPath();g.moveTo(L,yb(tgt));g.lineTo(W-R,yb(tgt));g.stroke();g.setLineDash([])}
+ g.strokeStyle='#4da3ff';g.lineWidth=2;g.beginPath();ovK.forEach((p,i)=>{const X=x(p.t),Y=yk(p.v);i?g.lineTo(X,Y):g.moveTo(X,Y)});g.stroke();
+ g.strokeStyle='#f7931a';g.lineWidth=2;g.beginPath();pts.forEach((p,i)=>{const X=x(p.t),Y=yb(p.p);i?g.lineTo(X,Y):g.moveTo(X,Y)});g.stroke();
+ {const ip=idxHist.filter(h=>h.t>=t0&&h.p>lo&&h.p<hi);g.strokeStyle='#ffffff';g.lineWidth=1.5;g.beginPath();ip.forEach((p,i)=>{const X=x(p.t),Y=yb(p.p);i?g.lineTo(X,Y):g.moveTo(X,Y)});g.stroke()}
+ const last=pts[pts.length-1].p,d=tgt?last-tgt:0,info=document.getElementById('ovInfo');
+ if(info)info.innerHTML=`BTC <b style="color:#f7931a">$${Math.round(last).toLocaleString()}</b> (${d>=0?'+':''}${Math.round(d)} vs target) · Up <b style="color:#4da3ff">${K.ya??'?'}¢</b>`;
+}catch(e){}},1000);
+// Nov 27 (Landan): HOW FAR AHEAD IS THE LIVE CHART? Every 5s, line up the last 10 minutes of 1-second BTC moves against
+// Kalshi's Up-price moves and find the delay (0-30s) where they match best. That delay = how far Kalshi trails the live feed.
+const lagK=[],lagB=[];let lagNow=null;
+setInterval(()=>{try{if(!K||!hist.length||K.ya==null||K.yb==null)return;const now=Date.now();
+ lagB.push({t:now,v:hist[hist.length-1].p});lagK.push({t:now,v:(K.ya+K.yb)/2,tk:K.tk});
+ while(lagB.length>660)lagB.shift();while(lagK.length>660)lagK.shift()}catch(e){}},1000);
+setInterval(()=>{try{const n=Math.min(lagB.length,lagK.length);if(n<120)return;
+ const dB=[],dK=[];for(let i=1;i<n;i++){const same=lagK[i].tk===lagK[i-1].tk;dB.push(lagB[i].v-lagB[i-1].v);dK.push(same?lagK[i].v-lagK[i-1].v:0)}
+ let best=null;for(let lag=0;lag<=30;lag++){let sxy=0,sxx=0,syy=0;for(let i=0;i+lag<dB.length;i++){const a=dB[i],b=dK[i+lag];sxy+=a*b;sxx+=a*a;syy+=b*b}
+  const r=sxx&&syy?sxy/Math.sqrt(sxx*syy):0;if(!best||r>best.r)best={lag,r}}
+ lagNow=best;const el=document.getElementById('ovLag');
+ if(el)el.textContent=best.r>0.15?` · Kalshi trails live by ~${best.lag}s (match ${Math.round(best.r*100)}%)`:' · lag: not enough movement yet';
+}catch(e){}},5000);
+// Nov 27 (Landan): BIG-MOVE bets. When live BTC jumps $40+ within 10s, buy that direction right away while that side is
+// still cheap (the bot only buys 10-40c): Kalshi has to catch up, so we get in at the 3x-5x prices.
+let bigLast=0;
+let bigPend=null;
+setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840||now-bigLast<20000)return;
+ const src=idxHist.length>40?idxHist:hist,p=src[src.length-1].p;
+ // Nov 27 (Landan): HOLD CHECK. A jump has to stay up for 2.5s (keep 70%+ of the move) before betting; fake-outs that snap back are dropped.
+ if(bigPend){const sg=bigPend.side==='up'?1:-1,cur=(p-bigPend.base)*sg,el=now-bigPend.t;
+  if(cur<0.5*bigPend.mv||el>6000){bigPend=null;return}
+  if(el<2500||cur<0.7*bigPend.mv)return;
+  const side=bigPend.side,ask=side==='up'?K.ya:K.na,mv=cur*sg;bigPend=null;if(ask==null)return;bigLast=now;
+  fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
+   .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});return}
+ const a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=p-a.p;if(Math.abs(mv)<40)return; // reads the 11-exchange index
+ bigPend={side:mv>0?'up':'down',t:now,base:a.p,mv:Math.abs(mv)};return;
+ const side=mv>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;bigLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});
+},200);
+// Nov 27 (Landan): FAST CASH-OUT. While the bot holds a bet, if the live chart swings hard against it ($30+ in 10s, or the
+// futures run $10+ ahead the other way), sell right away, before Kalshi's price catches up.
+let exLast=0;
+setInterval(()=>{if(!true||!BOT.on||!BOT.st||!BOT.st.open||!hist.length)return;
+ const now=Date.now();if(now-exLast<5000)return;const P=BOT.st.open,dir=P.side==='yes'?1:-1;
+ const src=idxHist.length>40?idxHist:hist,p=src[src.length-1].p,a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=(p-a.p)*dir; // Nov 27: reads the new 11-exchange chart only
+ const fl=0;
+ if(mv>-40)return;exLast=now; // Nov 27: only bail on a real move against ($40 live / $20 futures), not chop
+ fetch('/bot/sell',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({why:mv<=-40?`live chart swung $${Math.round(-mv)} against`:`futures ran $${Math.round(-fl)} against`})}).then(()=>botPoll()).catch(()=>{});
+},200);
+// Nov 27 (Landan): LAST-MINUTE PENNY BETS. In the final 60s, if one side sells for 1-3c (33-100x) but the fast chart says
+// that side is winning: Kalshi settles on the average of the last 60s, so add the seconds already locked in plus the
+// fast price for the seconds still to come. If that average is $5+ past the target for 2s straight, bet $1 and ride it.
+let penPend=null,penLast=0;
+setInterval(()=>{try{if(!true||!BOT.on||!K||!K.tk||!K.close||!hist.length||idxHist.length<40)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left>60||left<5){penPend=null;return}if(now-penLast<60000)return;
+ const tgt=K.strike||strike;if(!tgt)return;const fp=idxHist[idxHist.length-1].p;
+ const t0=K.close-60000,known=hist.filter(h=>h.t>=t0);const ks=Math.max(0,Math.min(60,(now-t0)/1000));
+ const kAvg=known.length?known.reduce((a,b)=>a+b.p,0)/known.length:fp,avg=(kAvg*ks+fp*(60-ks))/60;
+ let pick=null;
+ if(K.ya!=null&&K.ya<=3&&avg-tgt>=5&&fp>tgt)pick={side:'up',ask:K.ya};
+ else if(K.na!=null&&K.na<=3&&tgt-avg>=5&&fp<tgt)pick={side:'down',ask:K.na};
+ if(!pick){penPend=null;return}
+ if(!penPend||penPend.side!==pick.side){penPend={side:pick.side,t:now};return}
+ if(now-penPend.t<2000)return;penPend=null;penLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:pick.side,ask:pick.ask,edge:0,kind:'penny',setup:'penny',lead:Math.round(avg-tgt)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side:pick.side,ask:pick.ask,kind:'penny'})}).catch(()=>{});
+}catch(e){}},200);
+// Nov 27 (Landan): CHART-vs-KALSHI bets. Every half second: take the 11-exchange index's last-10s move beyond what the
+// regular price has done yet, project where BTC is about to be, turn that into a fair Up/Down price, and buy any side
+// Kalshi is still selling 8c+ under fair (it hasn't caught up to the chart yet).
+let lagTradeLast=0,clPend=null;
+setInterval(()=>{try{if(!true||!BOT.on||!K||!K.tk||!hist.length||idxHist.length<40)return;
+ const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840||now-lagTradeLast<15000)return;
+ const tgt=K.strike||strike;if(!tgt)return;
+ const sp=hist[hist.length-1].p,sp0=hist.find(h=>h.t>=now-10000),ix=idxHist[idxHist.length-1].p,ix0=idxHist.find(h=>h.t>=now-10000);if(!sp0||!ix0)return;
+ const ahead=(ix-ix0.p)-(sp-sp0.p),proj=sp+ahead;            // index moved this much more than spot has so far
+ let v=null;try{v=vol()}catch(e){}if(!v)return;
+ const sd=sp*v*Math.sqrt(Math.max(left,10)),fairUp=tcdf4((proj-tgt)/sd)*100;
+ let best=null;for(const sd2 of ['up','down']){const ask=sd2==='up'?K.ya:K.na;if(ask==null)continue;const fair=sd2==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
+  if(edge>=8&&(!best||edge>best.edge))best={side:sd2,ask,edge,fair}}
+ // Nov 27: HOLD CHECK. Same side must keep qualifying for 2.5s straight (gaps under 0.8s allowed) before betting.
+ if(!best){if(clPend&&now-clPend.last>800)clPend=null;return}
+ if(!clPend||clPend.side!==best.side||now-clPend.last>800){clPend={side:best.side,t:now,last:now};return}
+ clPend.last=now;if(now-clPend.t<2500)return;clPend=null;lagTradeLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:best.side,ask:best.ask,edge:+(best.edge/100).toFixed(4),kind:'box',setup:'chartlag',lead:+ahead.toFixed(1),fair:Math.round(best.fair)})})
+  .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side:best.side,ask:best.ask,kind:'chartlag'})}).catch(()=>{});
+}catch(e){}},200);
 // the real-money rule: 8 cent edge, 20-50 cent price, 4-9 min left, AND both flip readings 70%+ pointing the same way (always on for real money)
 function botTick(now,left,Kf,useS,pm){
  if(!BOT.on||!Kf||useS==null||pm==null||left<240||left>540||BOT.sent[curWin()])return;
@@ -991,8 +1293,13 @@ function botTick(now,left,Kf,useS,pm){
   const ps=sd==='up'?pm:1-pm,edge=ps-ask/100-kfee(ask/100)/100;if(edge>=0.08&&(!best||edge>best.edge))best={sd,ask,edge}}
  if(best)botBet(best.sd,best.ask,+best.edge.toFixed(4));
 }
+// 🎟️ Nov 26: long shots go real: 40c ticket on the same cheap side the paper account buys (rides to the close)
+async function botLottery(side,ask){const w=curWin();BOT.lot=BOT.lot||{};if(BOT.lot[w])return;BOT.lot[w]=1;
+ try{const r=await fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'lottery',setup:'lottery'})});BOT.res=Object.assign(await r.json(),{t:Date.now(),side,ask,kind:'lottery'})}
+ catch(e){BOT.res={ok:false,why:String(e),t:Date.now(),side,ask,kind:'lottery'}}
+ botPoll()}
 // 🚀 takeoffs go real: the bot buys when the box buys a takeoff, and sells when the box says SELL
-async function botRocket(at,edge){const w=curWin();BOT.rk=BOT.rk||{};if((BOT.rk[w]||0)>=2)return;BOT.rk[w]=(BOT.rk[w]||0)+1;
+async function botRocket(at,edge){const w=curWin();BOT.rk=BOT.rk||{};if((BOT.rk[w]||0)>=20)return;BOT.rk[w]=(BOT.rk[w]||0)+1;
  try{const r=await fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:at.side,ask:at.entry,edge:+(+edge||0).toFixed(4),kind:'box',setup:at.kind})});
   const j=await r.json();BOT.res=Object.assign(j,{t:Date.now(),side:at.side,ask:at.entry,kind:at.kind});if(j.ok&&j.filled>0){at.real={filled:j.filled,ask:j.ask};if(AT===at)saveAT()}else BOT.rk[w]--}
  catch(e){BOT.res={ok:false,why:String(e),t:Date.now(),side:at.side,ask:at.entry,kind:at.kind};BOT.rk[w]--}
@@ -1005,10 +1312,10 @@ async function botSell(at){const n=Date.now();if(at.sellBusy||n-(at.lastSellTry|
 async function botTest(){if(!confirm('Test real trade: buys 1 contract (under $1) on Kalshi and sells it right back. Go?'))return;
  try{const r=await fetch('/bot/test',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});const j=await r.json();alert(j.ok?'✅ '+j.msg:'Test: '+j.why)}catch(e){alert('Test error: '+e)}botPoll()}
 function botLine(){
- if(!/^(localhost|127\.0\.0\.1)$/.test(location.hostname))return '';
+ if(!true)return '';
  if(!BOT.on)return '💵 <b style="color:var(--r)">Real-money bot not reachable</b> (is it running in Terminal?)<br>';
- const st=BOT.st||{},b=st.balance!=null?` · Kalshi $${Number(st.balance).toFixed(2)}`:'';
- const head=st.kill?'💵 <b style="color:var(--r)">Bot: KILL SWITCH ON</b>':st.stopped?`💵 <b style="color:var(--r)">Bot stopped: ${st.stopped}</b>`:'💵 <b style="color:var(--g)">Real money ON</b>';
+ const st=BOT.st||{},b=st.balance!=null?` · ${PRACTICE?'practice':'Kalshi'} $${Number(st.balance).toFixed(2)}`:'';
+ const head=st.kill?'💵 <b style="color:var(--r)">Bot: KILL SWITCH ON</b>':st.stopped?`💵 <b style="color:var(--r)">Bot stopped: ${st.stopped}</b>`:(PRACTICE?'🧪 <b style="color:var(--g)">Practice bot ON (fake money)</b>':'💵 <b style="color:var(--g)">Real money ON</b>');
  const r=BOT.res&&Date.now()-BOT.res.t<20*60000?BOT.res:null;
  const KI={rocket:'🚀 ',dip:'dip ',ai:'🧠 ',flip:'🔄 '};const last=r?(r.ok?` · ${KI[r.kind]||''}bought ${r.side==='up'?'Up':'Down'} ${r.filled}/${r.count} @ ${r.ask}¢`:` · last call skipped: ${r.why}`):'';
  const sl=BOT.sell&&Date.now()-BOT.sell.t<20*60000?BOT.sell:null;
@@ -1048,10 +1355,10 @@ function paTick(now,left,Kf,useS,avg,pm){
    if(edge>=(PA.minEdge||0.03)&&(!best||edge>best.edge))best={sd,ask,edge}}
   if(best){PA.hcur={win:curWin(),side:best.sd,ask:best.ask,cnt:paCount(best.ask),s:useS};paSave()}}
  // buy the daily lottery ticket: a cheap contract (3-8 cents), NOT picked for edge
- if(Kf&&useS!=null&&paOpen()&&!PA.cur&&PA.lotSold!==curWin()&&left>=480&&left<=840){
+ if(Kf&&useS!=null&&(paOpen()||BOT.on)&&!PA.cur&&PA.lotSold!==curWin()&&left>=480&&left<=840){
   for(const sd of ['up','down']){const ask=sd==='up'?K.ya:K.na;
-   if(ask!=null&&ask>=3&&ask<=8){const cnt=Math.floor(Math.min(3,PA.bank*0.10)/(ask/100));
-    if(cnt>=1){PA.cur={win:curWin(),side:sd,ask,cnt,s:useS};PA.lotToday=(PA.lotToday||0)+1;paSave()}break}}}
+   if(ask!=null&&ask>=3&&ask<=8){if(!paOpen()){PA.lotSold=curWin();paSave();botLottery(sd,ask);break}const cnt=Math.floor(Math.min(3,PA.bank*0.10)/(ask/100));
+    if(cnt>=1){PA.cur={win:curWin(),side:sd,ask,cnt,s:useS};PA.lotToday=(PA.lotToday||0)+1;paSave();if(BOT.on)botLottery(sd,ask)}break}}}
  const el=$('pa');if(!el)return;const hc=$('pah85');if(hc&&document.activeElement!==hc)hc.checked=PA.hold85!==false;const sc=$('pasafe');if(sc&&document.activeElement!==sc)sc.checked=PA.safe!==false;const gc=$('pagate');if(gc&&document.activeElement!==gc)gc.checked=!!PA.gate;{const g=$('pagst');if(g){const why=paWhyNot(now);const fw=fwPct&&now-fwPct.t<3000?fwPct:null,fl=flNow&&now-flNow.t<3000?flNow:null;g.textContent=PA.gate?`Flip gate ON · flip watch ${fw?fw.tp+'% '+fw.side:'—'} · flip learner ${fl?Math.round(fl.pl*100)+'% '+(fl.dir>0?'up':'down'):'—'} · ${fw&&fl&&fw.tp>=70&&fl.pl*100>=70&&fw.side===(fl.dir>0?'up':'down')?'OPEN: trades allowed':'closed: no new trades'} (lottery tickets are not gated)`:'';if(why)g.innerHTML='<b style="color:var(--r)">Paper not trading: '+why+'</b><br>'+g.textContent}}const ms=$('pamode');if(ms&&document.activeElement!==ms)ms.value=PA.mode||'scalp';const sel=$('pafrac');if(sel&&document.activeElement!==sel)sel.value=String(PA.frac||0.25);
  const pct=Math.max(0,Math.min(100,(PA.bank-PA.floor)/(PA.goal-PA.floor)*100));
  const st=PA.bank>=PA.goal?' 🎉 GOAL REACHED':PA.bank<=PA.floor?' 🛑 FLOOR HIT (stopped)':'';
@@ -1295,13 +1602,16 @@ function oneBox(now,left,Kf,price,useS,p,avg){
  }
  if(!setup&&Kf&&!AT&&!pos&&left>=3&&left<=840&&skH.length>=8&&!(lastRes1&&now-lastRes1.t<15000)){
   const p5=hist.find(h=>h.t>=now-5000),mv=p5?price-p5.p:0,th=price*0.00002;
+  // Nov 26 (Landan): dips now GO WITH the move. When one side just dropped 6c+ (~20s) and BTC is still
+  // moving that way, buy the OTHER side (the one the move favors) instead of betting on a bounce.
   for(const sd of ['up','down']){
-   const a1=sd==='up'?K.ya:K.na,b1=sd==='up'?K.yb:K.nb,key=sd==='up'?'y':'n';
+   const key=sd==='up'?'y':'n',a0=sd==='up'?K.ya:K.na;if(a0==null)continue;
+   const hi=Math.max(...skH.map(x=>x[key])),dip=hi-a0;           // how far this side just dropped (last ~20s)
+   const go=sd==='up'?'down':'up',a1=go==='up'?K.ya:K.na,b1=go==='up'?K.yb:K.nb;
    if(a1==null||b1==null||a1<15||a1>80||a1-b1>3)continue;
-   const hi=Math.max(...skH.map(x=>x[key])),dip=hi-a1;          // how far this side just dropped (last ~20s)
-   const fair=(sd==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100); // model thinks it's worth more than the ask
-   const turn=(sd==='up'?mv:-mv)>=th;                            // BTC already moving back this side's way
-   if(dip>=RD&&edge>=5&&turn&&(!setup||edge>setup.edge))setup={side:sd,ask:a1,dip,edge,kind:'dip',benched:benched('dip')};
+   const fair=(go==='up'?oneP:1-oneP)*100,edge=fair-a1-kfee(a1/100); // model must not be against the trade
+   const cont=(go==='up'?mv:-mv)>=th;                            // BTC still moving the trade's way
+   if(dip>=Math.min(RD,4)&&edge>=0&&cont&&(!setup||edge>setup.edge))setup={side:go,ask:a1,dip,edge,kind:'dip',benched:benched('dip')};
   }
   // takeoff: BTC ripping one way (big 10s move, still going, buyers/sellers piling in) and Kalshi hasn't caught up
   const p10=hist.find(h=>h.t>=now-10000),p3=hist.find(h=>h.t>=now-3000);
@@ -1323,7 +1633,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
   if(setup.kind==='flip'){$('oa').textContent='🔄';$('of').textContent=`at ${setup.ask}¢ · ${setup.why}`;t=`✅ Sells when BTC crosses $${Math.round(useS).toLocaleString()} · stop ${Math.floor(setup.ask-Math.max(4,Math.min(8,setup.ask*0.35)))}¢`}
   else if(setup.kind==='ai'){$('oa').textContent='🧠';$('of').textContent=`at ${setup.ask}¢ · AI: ${Math.round(setup.p*100)}% it swings +${AIT}¢ first`;t=`✅ Target ${Math.ceil(setup.ask+AIT+kfee(setup.ask/100)*2)}¢ · stop ${Math.floor(setup.ask-AIS)}¢`}
   else if(setup.kind==='rocket'){$('oa').textContent='🚀';$('of').textContent=`at ${setup.ask}¢ · BTC ${setup.side==='up'?'+':'-'}$${setup.move.toFixed(0)} in 10s, Kalshi lagging`;t=`✅ Riding it — sells when it tops out · stop ${Math.floor(setup.ask-RS)}¢`}
-  else{$('of').textContent=`at ${setup.ask}¢ · dipped ${setup.dip.toFixed(0)}¢, bouncing`;
+  else{$('of').textContent=`at ${setup.ask}¢ · other side fell ${setup.dip.toFixed(0)}¢, riding the move`;
   t=`✅ Target ${Math.ceil(setup.ask+RT+kfee(setup.ask/100)*2)}¢ · stop ${Math.floor(setup.ask-RS)}¢`}
  }
  else if(!Kf)t='Needs Kalshi live prices to find swings';
@@ -1338,7 +1648,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
   if(PA.hold85!==false)AT.tgt=Math.min(98,Math.max(85,setup.ask+4)); // hold until the contract is worth 85 cents or the window settles
   setPos(AT.side);entry=setup.ask;try{$('entryP').value=setup.ask}catch(e){}saveAT();
   lastRes1=null;goodSince=0;
-  if(BOT.on&&!setup.benched)botRocket(AT,setup.edge); // v47.3: a benched rule still paper-trades (so it can earn its way back) but never goes real
+  if(BOT.on)botRocket(AT,setup.edge); // Nov 26: benched rules go real too (Landan asked) // v47.3: a benched rule still paper-trades (so it can earn its way back) but never goes real
  }
  $('oundo').style.display=AT&&AT.sellAt==null?'':'none';
  if(AT){
@@ -1385,7 +1695,7 @@ function oneBox(now,left,Kf,price,useS,p,avg){
    else if(!hit&&age>(AT.kind==='ai'?AIH:120))why=bid>AT.entry?'profit':'stale';
   }
   if(AT.sellAt==null&&why&&left>1){AT.sellAt=now;AT.sellPx=bid;AT.why=why;saveAT();if(armed){beep(1100);setTimeout(()=>beep(880),200);setTimeout(()=>beep(1100),400)}}
-  if(AT.sellAt!=null&&AT.real&&!AT.realSold&&BOT.on)botSell(AT);
+  // Nov 26 (Landan): the bot itself now sells real positions (90c+ or stop-loss, else hold to the end), so the page no longer sells them.
   if(AT.sellAt!=null){
    const g=AT.why==='profit'||(AT.sellPx-AT.entry)>0;
    box.className='ob '+(g?'up':'dn');$('oa').textContent=g?'💰':'✂️';
@@ -1524,5 +1834,5 @@ function pmWatch(p,now,Kf){
   if(seg.length>=300){const m=seg.map(x=>x.m),k=seg.map(x=>x.k),q=seg.map(x=>x.p),a=xlag(m,k,8),b=xlag(m,q,8);
    pmEst.push({k:a&&a.c>=0.15?a.L*2:null,p:b&&b.c>=0.15?b.L*2:null,t:now});pmEst=pmEst.slice(-60);try{localStorage.setItem('btcPM',JSON.stringify(pmEst))}catch(e){}}}
 }
-setFW(5);setPos(null);try{startFeeds()}catch(e){}try{perpFeed()}catch(e){}try{bookFeed()}catch(e){}try{optFeed()}catch(e){}backfill();setInterval(backfill,60e3);setInterval(update,500);setInterval(pollK,1000);
+setFW(5);setPos(null);try{startFeeds()}catch(e){}try{startFlowFeeds()}catch(e){}try{quoteFeeds()}catch(e){}try{perpFeed()}catch(e){}try{bookFeed()}catch(e){}try{optFeed()}catch(e){}backfill();setInterval(backfill,60e3);setInterval(update,500);setInterval(pollK,1000);
 </script></body></html>

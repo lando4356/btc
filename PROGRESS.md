@@ -45,3 +45,8 @@ Find out honestly whether any strategy beats Kalshi's BTC 15-minute markets afte
 ## Never
 - Put keys or `config.json` in the repo.
 - Go live because paper "looks great": run the checks first.
+
+## Nov 27: practice bot on the Cloudflare site
+- radar-v47/index.html is now the Mac radar page (fast quote chart, 11-exchange flow, overlay, chart-vs-Kalshi, big-move with 2.5s hold check, fast cash-out, last-minute penny bets).
+- On the hosted site every /bot/* call is answered in the page by a fake-money copy of the Mac bot's rules ($20 start, $3 bets, 10-40c, sell 90c, +30% take profit, double-up exit, 60s wait, $1 penny bets, stop after 5 losses). Trades are saved in the phone's browser (localStorage). It only trades while the page is open.
+- Not proven: it is for studying the Mac bot's choices, not evidence on its own (see "Done when").
