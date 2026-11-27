@@ -1,15 +1,15 @@
 # 📄 Paper bot results (fake money)
 
-_Updated Fri, 27 Nov 2026 08:54:31 GMT_
+_Updated Fri, 27 Nov 2026 14:39:51 GMT_
 
 ## 🔍 Evidence checks: NOT PROVEN yet
 
 - ✅ **Live prices**
   - expected: prices change on 8%+ of seconds
-  - saw: Kalshi prices changed on 45% of seconds
+  - saw: Kalshi prices changed on 46% of seconds
 - ✅ **Data coverage**
   - expected: 80%+ of seconds recorded, 5 or fewer gaps
-  - saw: 93% of seconds recorded, 0 gap(s) over 30s
+  - saw: 94% of seconds recorded, 0 gap(s) over 30s
 - ⚠️ **Fills were real**
   - expected: the buy price still there 1-2s later on 85%+ of buys
   - saw: 2 buys checked so far
