@@ -1276,12 +1276,14 @@ let lagTradeLast=0,clPend=null;
 setInterval(()=>{try{if(!true||!BOT.on||!K||!K.tk||!hist.length||idxHist.length<40)return;
  const now=Date.now(),left=(K.close-now)/1000;if(left<90||left>840||now-lagTradeLast<15000)return;
  const tgt=K.strike||strike;if(!tgt)return;
- const sp=hist[hist.length-1].p,sp0=hist.find(h=>h.t>=now-10000),ix=idxHist[idxHist.length-1].p,ix0=idxHist.find(h=>h.t>=now-10000);if(!sp0||!ix0)return;
- const ahead=(ix-ix0.p)-(sp-sp0.p),proj=sp+ahead;            // index moved this much more than spot has so far
+ const sp=hist[hist.length-1].p,ix=idxHist[idxHist.length-1].p,i3=idxHist.find(h=>h.t>=now-3000);if(!i3)return;
+ // Nov 27 (Landan): CATCH IT EARLY. Use the fast chart's price, and if it is moving $10+ in the last 3s, project that
+ // speed 3s further ahead (where BTC is about to be), then price the round off that before Kalshi moves.
+ const vel=ix-i3.p,ahead=Math.abs(vel)>=10?vel:0,proj=ix+ahead;
  let v=null;try{v=vol()}catch(e){}if(!v)return;
  const sd=sp*v*Math.sqrt(Math.max(left,10)),fairUp=tcdf4((proj-tgt)/sd)*100;
  let best=null;for(const sd2 of ['up','down']){const ask=sd2==='up'?K.ya:K.na;if(ask==null)continue;const fair=sd2==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
-  if(edge>=8&&(!best||edge>best.edge))best={side:sd2,ask,edge,fair}}
+  if(edge>=6&&(!best||edge>best.edge))best={side:sd2,ask,edge,fair}} // Nov 27: 6c gap (was 8c) so it gets in sooner
  // Nov 27: HOLD CHECK. Same side must keep qualifying for 2.5s straight (gaps under 0.8s allowed) before betting.
  if(!best)return;lagTradeLast=now; // Nov 27 (Landan): hold check OFF, bet the instant Kalshi is behind
  fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:best.side,ask:best.ask,edge:+(best.edge/100).toFixed(4),kind:'box',setup:'chartlag',lead:+ahead.toFixed(1),fair:Math.round(best.fair)})})
