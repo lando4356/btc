@@ -186,6 +186,14 @@ function quoteFeeds(){
  qFeed('Bitstamp','wss://ws.bitstamp.net',{event:'bts:subscribe',data:{channel:'order_book_btcusd'}},m=>{const d=m.data;if(d&&d.bids&&d.asks&&d.bids[0]&&d.asks[0])qMid('Bitstamp',d.bids[0][0],d.asks[0][0])});
  qFeed('Coinbase','wss://ws-feed.exchange.coinbase.com',{type:'subscribe',product_ids:['BTC-USD'],channels:['ticker']},m=>{if(m.type==='ticker'&&m.best_bid)qMid('Coinbase',m.best_bid,m.best_ask)});
 }
+// Nov 27 (Landan): BRTI = the exact index Kalshi settles on (streamed by the Mac bot from Kalshi's own feed, 5x/sec).
+// On the practice site there is no BRTI feed, so lvl() just uses the fast chart.
+const BRT={v:null,t:0,fin15:null,off:null,hist:[]};
+setInterval(()=>{if(PRACTICE_SITE())return;fetch('/bot/brti',{cache:'no-store'}).then(r=>r.json()).then(j=>{if(!(j.v>0)||j.age>5000)return;
+ BRT.v=j.v;BRT.t=Date.now();BRT.fin15=j.fin15;BRT.hist.push({t:BRT.t,p:j.v});while(BRT.hist.length&&BRT.t-BRT.hist[0].t>1200000)BRT.hist.shift();
+ const ix=quoteIdx()??tradeIdx();if(ix){const d=ix-j.v;BRT.off=BRT.off==null?d:BRT.off+0.02*(d-BRT.off)}}).catch(()=>{})},250);
+function PRACTICE_SITE(){return !/^(localhost|127\.0\.0\.1)$/.test(location.hostname)}
+function lvl(ix){return (BRT.off!=null&&Date.now()-BRT.t<5000)?ix-BRT.off:ix}
 const idxHist=[];setInterval(()=>{const p=idxPrice();if(p){idxHist.push({t:Date.now(),p,q:quoteIdx()!=null});while(idxHist.length&&Date.now()-idxHist[0].t>1200000)idxHist.shift()}},100);
 function flowFeed(name,url,sub,onmsg){let ws;try{ws=new WebSocket(url)}catch(e){return}
  ws.onopen=()=>{if(sub)ws.send(JSON.stringify(sub))};ws.onmessage=e=>{try{onmsg(JSON.parse(e.data),ws)}catch(x){}};
@@ -1236,7 +1244,7 @@ setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
  // Nov 27 (Landan): FAIR CHECK. Where is the fast chart vs the target, with this much time left? Only buy if the side
  // is really worth 8c+ more than Kalshi's price (a $15 dip while BTC sits $46 above the target is not a Down bet).
  const tgt=K.strike||strike;if(!tgt)return;let v=null;try{v=vol()}catch(e){}if(!v)return;
- const fairUp=tcdf4((p-tgt)/(p*v*Math.sqrt(Math.max(left,10))))*100,fair=side==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
+ const fairUp=tcdf4((lvl(p)-tgt)/(p*v*Math.sqrt(Math.max(left,10))))*100,fair=side==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
  if(edge<8)return;bigLast=now;
  fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:+(edge/100).toFixed(4),kind:'box',setup:'bigmove',lead:+mv.toFixed(0),fair:Math.round(fair)})})
   .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});
@@ -1279,7 +1287,7 @@ setInterval(()=>{try{if(!true||!BOT.on||!K||!K.tk||!hist.length||idxHist.length<
  const sp=hist[hist.length-1].p,ix=idxHist[idxHist.length-1].p,i3=idxHist.find(h=>h.t>=now-3000);if(!i3)return;
  // Nov 27 (Landan): CATCH IT EARLY. Use the fast chart's price, and if it is moving $10+ in the last 3s, project that
  // speed 3s further ahead (where BTC is about to be), then price the round off that before Kalshi moves.
- const vel=ix-i3.p,ahead=Math.abs(vel)>=10?vel:0,proj=ix+ahead;
+ const vel=ix-i3.p,ahead=Math.abs(vel)>=10?vel:0,proj=lvl(ix)+ahead;
  let v=null;try{v=vol()}catch(e){}if(!v)return;
  const sd=sp*v*Math.sqrt(Math.max(left,10)),fairUp=tcdf4((proj-tgt)/sd)*100;
  let best=null;for(const sd2 of ['up','down']){const ask=sd2==='up'?K.ya:K.na;if(ask==null)continue;const fair=sd2==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
