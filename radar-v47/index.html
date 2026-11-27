@@ -1232,8 +1232,13 @@ setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
    .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});return}
  const a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=p-a.p;if(Math.abs(mv)<15)return; // Nov 27 (Landan): any $15+ jump in 10s on the fast chart
  // Nov 27 (Landan): hold check OFF, bet the instant the jump shows
- const side=mv>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;bigLast=now;
- fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
+ const side=mv>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;
+ // Nov 27 (Landan): FAIR CHECK. Where is the fast chart vs the target, with this much time left? Only buy if the side
+ // is really worth 8c+ more than Kalshi's price (a $15 dip while BTC sits $46 above the target is not a Down bet).
+ const tgt=K.strike||strike;if(!tgt)return;let v=null;try{v=vol()}catch(e){}if(!v)return;
+ const fairUp=tcdf4((p-tgt)/(p*v*Math.sqrt(Math.max(left,10))))*100,fair=side==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
+ if(edge<8)return;bigLast=now;
+ fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:+(edge/100).toFixed(4),kind:'box',setup:'bigmove',lead:+mv.toFixed(0),fair:Math.round(fair)})})
   .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});
 },200);
 // Nov 27 (Landan): FAST CASH-OUT. While the bot holds a bet, if the live chart swings hard against it ($30+ in 10s, or the
