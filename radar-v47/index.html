@@ -1051,7 +1051,7 @@ function pBet(req){
  if(kind==='box'&&PCFG.block.includes(req.setup))return{ok:false,why:`${req.setup} trades are off (same as the Mac bot)`};
  if(PB.stopped)return{ok:false,why:'stopped: '+PB.stopped};
  if(kind==='lottery')return{ok:false,why:'long shots are off'};
- if(!SIDE&&Date.now()-PB.lastExit<PCFG.wait*1000)return{ok:false,why:'waiting after a cash-out (chop filter)'};
+ if(!SIDE&&PB.streak>=2&&Date.now()-PB.lastExit<PCFG.wait*1000)return{ok:false,why:'2+ losses in a row: waiting 60s after a cash-out (chop filter)'};
  if(!(Number(req.edge)>=R.minEdge))return{ok:false,why:`edge under ${R.minEdge*100} cents`};
  if(!K||!K.tk||!K.close)return{ok:false,why:'no open market'};
  if(!SIDE&&PB.open)return{ok:false,why:'already holding a position'};
