@@ -1231,7 +1231,7 @@ setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
   fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
    .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});return}
  const a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=p-a.p;if(Math.abs(mv)<40)return; // reads the 11-exchange index
- bigPend={side:mv>0?'up':'down',t:now,base:a.p,mv:Math.abs(mv)};return;
+ // Nov 27 (Landan): hold check OFF, bet the instant the jump shows
  const side=mv>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;bigLast=now;
  fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
   .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});
@@ -1278,9 +1278,7 @@ setInterval(()=>{try{if(!true||!BOT.on||!K||!K.tk||!hist.length||idxHist.length<
  let best=null;for(const sd2 of ['up','down']){const ask=sd2==='up'?K.ya:K.na;if(ask==null)continue;const fair=sd2==='up'?fairUp:100-fairUp,edge=fair-ask-kfee(ask/100);
   if(edge>=8&&(!best||edge>best.edge))best={side:sd2,ask,edge,fair}}
  // Nov 27: HOLD CHECK. Same side must keep qualifying for 2.5s straight (gaps under 0.8s allowed) before betting.
- if(!best){if(clPend&&now-clPend.last>800)clPend=null;return}
- if(!clPend||clPend.side!==best.side||now-clPend.last>800){clPend={side:best.side,t:now,last:now};return}
- clPend.last=now;if(now-clPend.t<2500)return;clPend=null;lagTradeLast=now;
+ if(!best)return;lagTradeLast=now; // Nov 27 (Landan): hold check OFF, bet the instant Kalshi is behind
  fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side:best.side,ask:best.ask,edge:+(best.edge/100).toFixed(4),kind:'box',setup:'chartlag',lead:+ahead.toFixed(1),fair:Math.round(best.fair)})})
   .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side:best.side,ask:best.ask,kind:'chartlag'})}).catch(()=>{});
 }catch(e){}},200);
