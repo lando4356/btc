@@ -1230,7 +1230,7 @@ setInterval(()=>{if(!true||!BOT.on||!K||!K.tk||!hist.length)return;
   const side=bigPend.side,ask=side==='up'?K.ya:K.na,mv=cur*sg;bigPend=null;if(ask==null)return;bigLast=now;
   fetch('/bot/bet',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({side,ask,edge:0,kind:'box',setup:'bigmove',lead:+mv.toFixed(0)})})
    .then(r=>r.json()).then(j=>{BOT.res=Object.assign(j,{t:Date.now(),side,ask,kind:'bigmove'})}).catch(()=>{});return}
- const a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=p-a.p;if(Math.abs(mv)<15)return; // Nov 27 (Landan): any $15+ jump in 10s on the fast chart
+ const a=src.find(h=>h.t>=now-10000);if(!a)return;const mv=p-a.p;if(Math.abs(mv)<40)return; // Nov 27 (Landan): back to $40+ jumps in 10s on the fast chart
  // Nov 27 (Landan): hold check OFF, bet the instant the jump shows
  const side=mv>0?'up':'down',ask=side==='up'?K.ya:K.na;if(ask==null)return;
  // Nov 27 (Landan): FAIR CHECK. Where is the fast chart vs the target, with this much time left? Only buy if the side
