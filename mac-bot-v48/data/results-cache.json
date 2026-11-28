@@ -970,5 +970,389 @@
   "expirationValue": 58984.68,
   "strike": 59168.07,
   "closeMs": 1795873500000
+ },
+ "KXBTC15M-26NOV250400-00": {
+  "result": "yes",
+  "expirationValue": 59347.42,
+  "strike": 59192.02,
+  "closeMs": 1795597200000
+ },
+ "KXBTC15M-26NOV250415-15": {
+  "result": "no",
+  "expirationValue": 58997.5,
+  "strike": 59347.42,
+  "closeMs": 1795598100000
+ },
+ "KXBTC15M-26NOV250430-30": {
+  "result": "no",
+  "expirationValue": 58873.28,
+  "strike": 58997.5,
+  "closeMs": 1795599000000
+ },
+ "KXBTC15M-26NOV250445-45": {
+  "result": "no",
+  "expirationValue": 58812.01,
+  "strike": 58873.28,
+  "closeMs": 1795599900000
+ },
+ "KXBTC15M-26NOV250500-00": {
+  "result": "yes",
+  "expirationValue": 58958.49,
+  "strike": 58812.01,
+  "closeMs": 1795600800000
+ },
+ "KXBTC15M-26NOV250515-15": {
+  "result": "no",
+  "expirationValue": 58915.97,
+  "strike": 58958.49,
+  "closeMs": 1795601700000
+ },
+ "KXBTC15M-26NOV250530-30": {
+  "result": "no",
+  "expirationValue": 58864.34,
+  "strike": 58915.97,
+  "closeMs": 1795602600000
+ },
+ "KXBTC15M-26NOV250545-45": {
+  "result": "yes",
+  "expirationValue": 58866.57,
+  "strike": 58864.34,
+  "closeMs": 1795603500000
+ },
+ "KXBTC15M-26NOV250600-00": {
+  "result": "no",
+  "expirationValue": 58795.99,
+  "strike": 58866.57,
+  "closeMs": 1795604400000
+ },
+ "KXBTC15M-26NOV250615-15": {
+  "result": "no",
+  "expirationValue": 58697.01,
+  "strike": 58795.99,
+  "closeMs": 1795605300000
+ },
+ "KXBTC15M-26NOV250630-30": {
+  "result": "no",
+  "expirationValue": 58559.58,
+  "strike": 58697.01,
+  "closeMs": 1795606200000
+ },
+ "KXBTC15M-26NOV250645-45": {
+  "result": "no",
+  "expirationValue": 58474.39,
+  "strike": 58559.58,
+  "closeMs": 1795607100000
+ },
+ "KXBTC15M-26NOV250700-00": {
+  "result": "yes",
+  "expirationValue": 58563.59,
+  "strike": 58474.39,
+  "closeMs": 1795608000000
+ },
+ "KXBTC15M-26NOV250715-15": {
+  "result": "no",
+  "expirationValue": 58501.21,
+  "strike": 58563.59,
+  "closeMs": 1795608900000
+ },
+ "KXBTC15M-26NOV250730-30": {
+  "result": "yes",
+  "expirationValue": 58590.61,
+  "strike": 58501.21,
+  "closeMs": 1795609800000
+ },
+ "KXBTC15M-26NOV250745-45": {
+  "result": "yes",
+  "expirationValue": 58623.0,
+  "strike": 58590.61,
+  "closeMs": 1795610700000
+ },
+ "KXBTC15M-26NOV250800-00": {
+  "result": "yes",
+  "expirationValue": 58651.92,
+  "strike": 58623.0,
+  "closeMs": 1795611600000
+ },
+ "KXBTC15M-26NOV250815-15": {
+  "result": "yes",
+  "expirationValue": 58715.05,
+  "strike": 58651.92,
+  "closeMs": 1795612500000
+ },
+ "KXBTC15M-26NOV250830-30": {
+  "result": "yes",
+  "expirationValue": 58797.13,
+  "strike": 58715.05,
+  "closeMs": 1795613400000
+ },
+ "KXBTC15M-26NOV250845-45": {
+  "result": "no",
+  "expirationValue": 58248.46,
+  "strike": 58797.13,
+  "closeMs": 1795614300000
+ },
+ "KXBTC15M-26NOV250900-00": {
+  "result": "no",
+  "expirationValue": 57999.29,
+  "strike": 58248.46,
+  "closeMs": 1795615200000
+ },
+ "KXBTC15M-26NOV250915-15": {
+  "result": "yes",
+  "expirationValue": 58243.21,
+  "strike": 57999.29,
+  "closeMs": 1795616100000
+ },
+ "KXBTC15M-26NOV250930-30": {
+  "result": "no",
+  "expirationValue": 58143.38,
+  "strike": 58243.21,
+  "closeMs": 1795617000000
+ },
+ "KXBTC15M-26NOV250945-45": {
+  "result": "no",
+  "expirationValue": 57329.22,
+  "strike": 58143.38,
+  "closeMs": 1795617900000
+ },
+ "KXBTC15M-26NOV251145-45": {
+  "result": "no",
+  "expirationValue": 58077.55,
+  "strike": 58606.49,
+  "closeMs": 1795625100000
+ },
+ "KXBTC15M-26NOV251200-00": {
+  "result": "yes",
+  "expirationValue": 58504.2,
+  "strike": 58077.55,
+  "closeMs": 1795626000000
+ },
+ "KXBTC15M-26NOV251215-15": {
+  "result": "yes",
+  "expirationValue": 59158.11,
+  "strike": 58504.2,
+  "closeMs": 1795626900000
+ },
+ "KXBTC15M-26NOV251230-30": {
+  "result": "no",
+  "expirationValue": 59086.4,
+  "strike": 59158.11,
+  "closeMs": 1795627800000
+ },
+ "KXBTC15M-26NOV251245-45": {
+  "result": "yes",
+  "expirationValue": 59662.33,
+  "strike": 59086.4,
+  "closeMs": 1795628700000
+ },
+ "KXBTC15M-26NOV251300-00": {
+  "result": "no",
+  "expirationValue": 59514.75,
+  "strike": 59662.33,
+  "closeMs": 1795629600000
+ },
+ "KXBTC15M-26NOV251315-15": {
+  "result": "yes",
+  "expirationValue": 59650.88,
+  "strike": 59514.75,
+  "closeMs": 1795630500000
+ },
+ "KXBTC15M-26NOV251330-30": {
+  "result": "no",
+  "expirationValue": 59636.43,
+  "strike": 59650.88,
+  "closeMs": 1795631400000
+ },
+ "KXBTC15M-26NOV251345-45": {
+  "result": "no",
+  "expirationValue": 59592.92,
+  "strike": 59636.43,
+  "closeMs": 1795632300000
+ },
+ "KXBTC15M-26NOV251400-00": {
+  "result": "yes",
+  "expirationValue": 59685.92,
+  "strike": 59592.92,
+  "closeMs": 1795633200000
+ },
+ "KXBTC15M-26NOV251415-15": {
+  "result": "yes",
+  "expirationValue": 59829.48,
+  "strike": 59685.92,
+  "closeMs": 1795634100000
+ },
+ "KXBTC15M-26NOV251430-30": {
+  "result": "yes",
+  "expirationValue": 60134.42,
+  "strike": 59829.48,
+  "closeMs": 1795635000000
+ },
+ "KXBTC15M-26NOV251445-45": {
+  "result": "no",
+  "expirationValue": 59877.77,
+  "strike": 60134.42,
+  "closeMs": 1795635900000
+ },
+ "KXBTC15M-26NOV251500-00": {
+  "result": "no",
+  "expirationValue": 59828.29,
+  "strike": 59877.77,
+  "closeMs": 1795636800000
+ },
+ "KXBTC15M-26NOV251515-15": {
+  "result": "yes",
+  "expirationValue": 59971.17,
+  "strike": 59828.29,
+  "closeMs": 1795637700000
+ },
+ "KXBTC15M-26NOV251530-30": {
+  "result": "no",
+  "expirationValue": 59875.01,
+  "strike": 59971.17,
+  "closeMs": 1795638600000
+ },
+ "KXBTC15M-26NOV251545-45": {
+  "result": "no",
+  "expirationValue": 59872.21,
+  "strike": 59875.01,
+  "closeMs": 1795639500000
+ },
+ "KXBTC15M-26NOV251600-00": {
+  "result": "yes",
+  "expirationValue": 60201.89,
+  "strike": 59872.21,
+  "closeMs": 1795640400000
+ },
+ "KXBTC15M-26NOV251615-15": {
+  "result": "no",
+  "expirationValue": 60148.14,
+  "strike": 60201.89,
+  "closeMs": 1795641300000
+ },
+ "KXBTC15M-26NOV251630-30": {
+  "result": "yes",
+  "expirationValue": 60289.58,
+  "strike": 60148.14,
+  "closeMs": 1795642200000
+ },
+ "KXBTC15M-26NOV251645-45": {
+  "result": "no",
+  "expirationValue": 60258.04,
+  "strike": 60289.58,
+  "closeMs": 1795643100000
+ },
+ "KXBTC15M-26NOV251700-00": {
+  "result": "no",
+  "expirationValue": 60187.06,
+  "strike": 60258.04,
+  "closeMs": 1795644000000
+ },
+ "KXBTC15M-26NOV251715-15": {
+  "result": "no",
+  "expirationValue": 60016.11,
+  "strike": 60187.06,
+  "closeMs": 1795644900000
+ },
+ "KXBTC15M-26NOV251730-30": {
+  "result": "no",
+  "expirationValue": 60004.4,
+  "strike": 60016.11,
+  "closeMs": 1795645800000
+ },
+ "KXBTC15M-26NOV260515-15": {
+  "result": "yes",
+  "expirationValue": 60872.29,
+  "strike": 60852.27,
+  "closeMs": 1795688100000
+ },
+ "KXBTC15M-26NOV260530-30": {
+  "result": "no",
+  "expirationValue": 60742.49,
+  "strike": 60872.29,
+  "closeMs": 1795689000000
+ },
+ "KXBTC15M-26NOV260545-45": {
+  "result": "no",
+  "expirationValue": 60458.72,
+  "strike": 60742.49,
+  "closeMs": 1795689900000
+ },
+ "KXBTC15M-26NOV260600-00": {
+  "result": "no",
+  "expirationValue": 60450.02,
+  "strike": 60458.72,
+  "closeMs": 1795690800000
+ },
+ "KXBTC15M-26NOV260615-15": {
+  "result": "yes",
+  "expirationValue": 60544.73,
+  "strike": 60450.02,
+  "closeMs": 1795691700000
+ },
+ "KXBTC15M-26NOV260630-30": {
+  "result": "yes",
+  "expirationValue": 60587.87,
+  "strike": 60544.73,
+  "closeMs": 1795692600000
+ },
+ "KXBTC15M-26NOV260645-45": {
+  "result": "yes",
+  "expirationValue": 60675.83,
+  "strike": 60587.87,
+  "closeMs": 1795693500000
+ },
+ "KXBTC15M-26NOV260700-00": {
+  "result": "no",
+  "expirationValue": 60640.21,
+  "strike": 60675.83,
+  "closeMs": 1795694400000
+ },
+ "KXBTC15M-26NOV260715-15": {
+  "result": "no",
+  "expirationValue": 60582.44,
+  "strike": 60640.21,
+  "closeMs": 1795695300000
+ },
+ "KXBTC15M-26NOV260730-30": {
+  "result": "no",
+  "expirationValue": 60556.74,
+  "strike": 60582.44,
+  "closeMs": 1795696200000
+ },
+ "KXBTC15M-26NOV260745-45": {
+  "result": "yes",
+  "expirationValue": 60846.78,
+  "strike": 60556.74,
+  "closeMs": 1795697100000
+ },
+ "KXBTC15M-26NOV260800-00": {
+  "result": "no",
+  "expirationValue": 60786.81,
+  "strike": 60846.78,
+  "closeMs": 1795698000000
+ },
+ "KXBTC15M-26NOV260815-15": {
+  "result": "no",
+  "expirationValue": 60757.51,
+  "strike": 60786.81,
+  "closeMs": 1795698900000
+ },
+ "KXBTC15M-26NOV260830-30": {
+  "result": "yes",
+  "expirationValue": 60781.43,
+  "strike": 60757.51,
+  "closeMs": 1795699800000
+ },
+ "KXBTC15M-26NOV260845-45": {
+  "result": "yes",
+  "expirationValue": 60823.43,
+  "strike": 60781.43,
+  "closeMs": 1795700700000
+ },
+ "KXBTC15M-26NOV260900-00": {
+  "result": "no",
+  "expirationValue": 60796.97,
+  "strike": 60823.43,
+  "closeMs": 1795701600000
  }
 }
