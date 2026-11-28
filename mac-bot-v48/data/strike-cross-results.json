@@ -1,0 +1,4439 @@
+{
+ "generated": "2026-11-28T11:08:30-0600",
+ "live_windows": 162,
+ "archive_windows": 62,
+ "gap_close": {
+  "n": 160,
+  "mean": 4.704705049436507,
+  "sd": 4.003769064757804,
+  "se": 0.3165257367489212
+ },
+ "false_cross_raw_vs_corr": {
+  "windows_with_any": 139,
+  "both_same_side": 118,
+  "both_same_won": 66,
+  "both_opposite_side": 14,
+  "raw_only": 3,
+  "raw_only_won": 2,
+  "corr_only": 4,
+  "corr_only_won": 3,
+  "neither": 0
+ },
+ "raw_first": {
+  "settle": {
+   "n": 263,
+   "wins": 135,
+   "win_rate": 0.5133079847908745
+  },
+  "hold": {
+   "n": 261,
+   "wins": 135,
+   "win_rate": 0.5172413793103449,
+   "pnl": -8.1016,
+   "per_trade": -0.031040613026819923,
+   "t": -1.0107634002884254,
+   "already50": 191,
+   "already50_frac": 0.7318007662835249
+  },
+  "lead": {
+   "n": 263,
+   "already50": 191,
+   "already50_frac": 0.7262357414448669,
+   "already10": 17,
+   "median_lead50_s_if_not_already": 13.718,
+   "n_lead50": 63,
+   "never_reached_50": 9,
+   "median_lead10_s": 72.903,
+   "n_lead10": 215,
+   "never_moved_10c": 48
+  },
+  "hold_h1": {
+   "n": 132,
+   "wins": 67,
+   "win_rate": 0.5075757575757576,
+   "pnl": -4.6729,
+   "per_trade": -0.03540075757575758,
+   "t": -0.8122581421857976,
+   "already50": 96,
+   "already50_frac": 0.7272727272727273
+  },
+  "hold_h2": {
+   "n": 129,
+   "wins": 68,
+   "win_rate": 0.5271317829457365,
+   "pnl": -3.4286999999999996,
+   "per_trade": -0.026579069767441857,
+   "t": -0.6119594196680621,
+   "already50": 95,
+   "already50_frac": 0.7364341085271318
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 162,
+     "wins": 85,
+     "win_rate": 0.5246913580246914
+    },
+    "hold": {
+     "n": 162,
+     "wins": 85,
+     "win_rate": 0.5246913580246914,
+     "pnl": -3.6944,
+     "per_trade": -0.022804938271604937,
+     "t": -0.5853528655460541,
+     "already50": 119,
+     "already50_frac": 0.7345679012345679
+    },
+    "lead": {
+     "n": 162,
+     "already50": 119,
+     "already50_frac": 0.7345679012345679,
+     "already10": 9,
+     "median_lead50_s_if_not_already": 9.401499999999999,
+     "n_lead50": 38,
+     "never_reached_50": 5,
+     "median_lead10_s": 74.518,
+     "n_lead10": 131,
+     "never_moved_10c": 31
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 58,
+     "wins": 28,
+     "win_rate": 0.4827586206896552
+    },
+    "hold": {
+     "n": 58,
+     "wins": 28,
+     "win_rate": 0.4827586206896552,
+     "pnl": -3.4573,
+     "per_trade": -0.059608620689655174,
+     "t": -0.9191592237901045,
+     "already50": 40,
+     "already50_frac": 0.6896551724137931
+    },
+    "lead": {
+     "n": 58,
+     "already50": 40,
+     "already50_frac": 0.6896551724137931,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 15.623,
+     "n_lead50": 17,
+     "never_reached_50": 1,
+     "median_lead10_s": 99.78,
+     "n_lead10": 47,
+     "never_moved_10c": 11
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 21,
+     "wins": 10,
+     "win_rate": 0.47619047619047616
+    },
+    "hold": {
+     "n": 21,
+     "wins": 10,
+     "win_rate": 0.47619047619047616,
+     "pnl": -1.4845000000000002,
+     "per_trade": -0.07069047619047619,
+     "t": -0.6317503025017773,
+     "already50": 18,
+     "already50_frac": 0.8571428571428571
+    },
+    "lead": {
+     "n": 21,
+     "already50": 18,
+     "already50_frac": 0.8571428571428571,
+     "already10": 1,
+     "median_lead50_s_if_not_already": 44.614,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 83.237,
+     "n_lead10": 19,
+     "never_moved_10c": 2
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 8,
+     "wins": 3,
+     "win_rate": 0.375
+    },
+    "hold": {
+     "n": 8,
+     "wins": 3,
+     "win_rate": 0.375,
+     "pnl": -1.5752,
+     "per_trade": -0.1969,
+     "t": -1.094157244805931,
+     "already50": 5,
+     "already50_frac": 0.625
+    },
+    "lead": {
+     "n": 8,
+     "already50": 5,
+     "already50_frac": 0.625,
+     "already10": 2,
+     "median_lead50_s_if_not_already": 19.1125,
+     "n_lead50": 2,
+     "never_reached_50": 1,
+     "median_lead10_s": 48.692,
+     "n_lead10": 7,
+     "never_moved_10c": 1
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 12,
+     "wins": 9,
+     "win_rate": 0.75
+    },
+    "hold": {
+     "n": 12,
+     "wins": 9,
+     "win_rate": 0.75,
+     "pnl": 2.1098,
+     "per_trade": 0.17581666666666665,
+     "t": 1.2502768652479876,
+     "already50": 9,
+     "already50_frac": 0.75
+    },
+    "lead": {
+     "n": 12,
+     "already50": 9,
+     "already50_frac": 0.75,
+     "already10": 5,
+     "median_lead50_s_if_not_already": 9.803,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 16.713,
+     "n_lead10": 11,
+     "never_moved_10c": 1
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 2,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 2,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 2
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 261,
+     "wins": 16,
+     "win_rate": 0.06130268199233716,
+     "pnl": -12.0083,
+     "per_trade": -0.0460088122605364,
+     "t": -23.063477441208047,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 3.212
+    },
+    "h1": {
+     "n": 132,
+     "wins": 12,
+     "win_rate": 0.09090909090909091,
+     "pnl": -6.219200000000001,
+     "per_trade": -0.04711515151515152,
+     "t": -15.182163562233466,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 3.1555
+    },
+    "h2": {
+     "n": 129,
+     "wins": 4,
+     "win_rate": 0.031007751937984496,
+     "pnl": -5.7891,
+     "per_trade": -0.044876744186046515,
+     "t": -17.95140128637474,
+     "statuses": {
+      "exit": 129
+     },
+     "median_hold_s": 3.231
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 261,
+     "wins": 32,
+     "win_rate": 0.12260536398467432,
+     "pnl": -11.9481,
+     "per_trade": -0.045778160919540234,
+     "t": -17.457695141601434,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 5.357
+    },
+    "h1": {
+     "n": 132,
+     "wins": 18,
+     "win_rate": 0.13636363636363635,
+     "pnl": -6.053900000000001,
+     "per_trade": -0.0458628787878788,
+     "t": -12.483780036892155,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 5.265499999999999
+    },
+    "h2": {
+     "n": 129,
+     "wins": 14,
+     "win_rate": 0.10852713178294573,
+     "pnl": -5.8942000000000005,
+     "per_trade": -0.04569147286821706,
+     "t": -12.15760119731498,
+     "statuses": {
+      "exit": 129
+     },
+     "median_hold_s": 5.404
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 261,
+     "wins": 52,
+     "win_rate": 0.19923371647509577,
+     "pnl": -11.614300000000002,
+     "per_trade": -0.0444992337164751,
+     "t": -12.62042800101705,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 10.556
+    },
+    "h1": {
+     "n": 132,
+     "wins": 29,
+     "win_rate": 0.2196969696969697,
+     "pnl": -6.283200000000001,
+     "per_trade": -0.0476,
+     "t": -9.307832024273852,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 10.516
+    },
+    "h2": {
+     "n": 129,
+     "wins": 23,
+     "win_rate": 0.17829457364341086,
+     "pnl": -5.331100000000001,
+     "per_trade": -0.041326356589147295,
+     "t": -8.515832083122126,
+     "statuses": {
+      "exit": 129
+     },
+     "median_hold_s": 10.713
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 261,
+     "wins": 74,
+     "win_rate": 0.2835249042145594,
+     "pnl": -11.518300000000002,
+     "per_trade": -0.04413141762452108,
+     "t": -8.302740683025839,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 20.627
+    },
+    "h1": {
+     "n": 132,
+     "wins": 45,
+     "win_rate": 0.3409090909090909,
+     "pnl": -6.261400000000002,
+     "per_trade": -0.047434848484848496,
+     "t": -6.173542442595862,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 20.654
+    },
+    "h2": {
+     "n": 129,
+     "wins": 29,
+     "win_rate": 0.2248062015503876,
+     "pnl": -5.2569,
+     "per_trade": -0.040751162790697674,
+     "t": -5.540059641660379,
+     "statuses": {
+      "exit": 129
+     },
+     "median_hold_s": 20.587
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 261,
+     "wins": 71,
+     "win_rate": 0.2720306513409962,
+     "pnl": -12.645600000000002,
+     "per_trade": -0.04845057471264368,
+     "t": -7.540392778104463,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 30.505
+    },
+    "h1": {
+     "n": 132,
+     "wins": 37,
+     "win_rate": 0.2803030303030303,
+     "pnl": -6.370600000000001,
+     "per_trade": -0.04826212121212122,
+     "t": -5.340460223133868,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 30.5885
+    },
+    "h2": {
+     "n": 129,
+     "wins": 34,
+     "win_rate": 0.26356589147286824,
+     "pnl": -6.275,
+     "per_trade": -0.04864341085271318,
+     "t": -5.3026890786952885,
+     "statuses": {
+      "exit": 129
+     },
+     "median_hold_s": 30.416
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 261,
+     "wins": 170,
+     "win_rate": 0.6513409961685823,
+     "pnl": -8.678500000000001,
+     "per_trade": -0.033250957854406134,
+     "t": -3.2202778935658283,
+     "statuses": {
+      "exit": 236,
+      "settled": 24,
+      "eod_bid": 1
+     },
+     "median_hold_s": 28.191
+    },
+    "h1": {
+     "n": 132,
+     "wins": 88,
+     "win_rate": 0.6666666666666666,
+     "pnl": -4.299500000000001,
+     "per_trade": -0.0325719696969697,
+     "t": -2.176414774982485,
+     "statuses": {
+      "exit": 119,
+      "settled": 12,
+      "eod_bid": 1
+     },
+     "median_hold_s": 23.749000000000002
+    },
+    "h2": {
+     "n": 129,
+     "wins": 82,
+     "win_rate": 0.6356589147286822,
+     "pnl": -4.3790000000000004,
+     "per_trade": -0.03394573643410853,
+     "t": -2.379024275567785,
+     "statuses": {
+      "exit": 117,
+      "settled": 12
+     },
+     "median_hold_s": 32.806
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 261,
+     "wins": 209,
+     "win_rate": 0.8007662835249042,
+     "pnl": -9.216600000000001,
+     "per_trade": -0.03531264367816093,
+     "t": -2.4287890413982307,
+     "statuses": {
+      "exit": 215,
+      "settled": 44,
+      "eod_bid": 2
+     },
+     "median_hold_s": 107.407
+    },
+    "h1": {
+     "n": 132,
+     "wins": 106,
+     "win_rate": 0.803030303030303,
+     "pnl": -3.4698000000000015,
+     "per_trade": -0.02628636363636365,
+     "t": -1.3092908426040615,
+     "statuses": {
+      "exit": 110,
+      "settled": 21,
+      "eod_bid": 1
+     },
+     "median_hold_s": 88.45500000000001
+    },
+    "h2": {
+     "n": 129,
+     "wins": 103,
+     "win_rate": 0.7984496124031008,
+     "pnl": -5.7467999999999995,
+     "per_trade": -0.04454883720930232,
+     "t": -2.111072123297441,
+     "statuses": {
+      "settled": 23,
+      "exit": 105,
+      "eod_bid": 1
+     },
+     "median_hold_s": 112.884
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 261,
+     "wins": 202,
+     "win_rate": 0.7739463601532567,
+     "pnl": -5.259700000000002,
+     "per_trade": -0.020152107279693496,
+     "t": -1.1854871042317685,
+     "statuses": {
+      "exit": 205,
+      "settled": 52,
+      "eod_bid": 4
+     },
+     "median_hold_s": 192.742
+    },
+    "h1": {
+     "n": 132,
+     "wins": 102,
+     "win_rate": 0.7727272727272727,
+     "pnl": -1.3265000000000011,
+     "per_trade": -0.010049242424242433,
+     "t": -0.4286948754944801,
+     "statuses": {
+      "exit": 105,
+      "settled": 26,
+      "eod_bid": 1
+     },
+     "median_hold_s": 161.69299999999998
+    },
+    "h2": {
+     "n": 129,
+     "wins": 100,
+     "win_rate": 0.7751937984496124,
+     "pnl": -3.9332000000000007,
+     "per_trade": -0.03048992248062016,
+     "t": -1.2340310411076152,
+     "statuses": {
+      "settled": 26,
+      "exit": 100,
+      "eod_bid": 3
+     },
+     "median_hold_s": 235.398
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 70,
+     "wins": 21,
+     "win_rate": 0.3,
+     "pnl": -3.8044999999999995,
+     "per_trade": -0.054349999999999996,
+     "t": -2.8814948769620186,
+     "statuses": {
+      "already_priced": 191,
+      "exit": 63,
+      "settled": 7
+     },
+     "median_hold_s": 19.6805
+    },
+    "h1": {
+     "n": 36,
+     "wins": 9,
+     "win_rate": 0.25,
+     "pnl": -0.8633,
+     "per_trade": -0.023980555555555554,
+     "t": -1.4574164485337548,
+     "statuses": {
+      "already_priced": 96,
+      "exit": 35,
+      "settled": 1
+     },
+     "median_hold_s": 7.6335
+    },
+    "h2": {
+     "n": 34,
+     "wins": 12,
+     "win_rate": 0.35294117647058826,
+     "pnl": -2.9412,
+     "per_trade": -0.08650588235294117,
+     "t": -2.532772901364553,
+     "statuses": {
+      "already_priced": 95,
+      "exit": 28,
+      "settled": 6
+     },
+     "median_hold_s": 31.6935
+    }
+   }
+  }
+ },
+ "corr_first": {
+  "settle": {
+   "n": 265,
+   "wins": 136,
+   "win_rate": 0.5132075471698113
+  },
+  "hold": {
+   "n": 263,
+   "wins": 136,
+   "win_rate": 0.5171102661596958,
+   "pnl": -8.6388,
+   "per_trade": -0.032847148288973387,
+   "t": -1.0777329475199722,
+   "already50": 208,
+   "already50_frac": 0.7908745247148289
+  },
+  "lead": {
+   "n": 265,
+   "already50": 208,
+   "already50_frac": 0.7849056603773585,
+   "already10": 14,
+   "median_lead50_s_if_not_already": 9.437,
+   "n_lead50": 53,
+   "never_reached_50": 4,
+   "median_lead10_s": 76.282,
+   "n_lead10": 216,
+   "never_moved_10c": 49
+  },
+  "hold_h1": {
+   "n": 132,
+   "wins": 67,
+   "win_rate": 0.5075757575757576,
+   "pnl": -4.7453,
+   "per_trade": -0.035949242424242425,
+   "t": -0.8269586107837401,
+   "already50": 99,
+   "already50_frac": 0.75
+  },
+  "hold_h2": {
+   "n": 131,
+   "wins": 69,
+   "win_rate": 0.5267175572519084,
+   "pnl": -3.8934999999999995,
+   "per_trade": -0.029721374045801524,
+   "t": -0.6929770572238153,
+   "already50": 109,
+   "already50_frac": 0.8320610687022901
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 166,
+     "wins": 87,
+     "win_rate": 0.5240963855421686
+    },
+    "hold": {
+     "n": 166,
+     "wins": 87,
+     "win_rate": 0.5240963855421686,
+     "pnl": -4.4078,
+     "per_trade": -0.02655301204819277,
+     "t": -0.6892178142485668,
+     "already50": 135,
+     "already50_frac": 0.8132530120481928
+    },
+    "lead": {
+     "n": 166,
+     "already50": 135,
+     "already50_frac": 0.8132530120481928,
+     "already10": 10,
+     "median_lead50_s_if_not_already": 7.3375,
+     "n_lead50": 30,
+     "never_reached_50": 1,
+     "median_lead10_s": 77.7585,
+     "n_lead10": 138,
+     "never_moved_10c": 28
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 58,
+     "wins": 28,
+     "win_rate": 0.4827586206896552
+    },
+    "hold": {
+     "n": 58,
+     "wins": 28,
+     "win_rate": 0.4827586206896552,
+     "pnl": -3.5675999999999997,
+     "per_trade": -0.0615103448275862,
+     "t": -0.9485588611284915,
+     "already50": 42,
+     "already50_frac": 0.7241379310344828
+    },
+    "lead": {
+     "n": 58,
+     "already50": 42,
+     "already50_frac": 0.7241379310344828,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 11.344000000000001,
+     "n_lead50": 16,
+     "never_reached_50": 0,
+     "median_lead10_s": 83.417,
+     "n_lead10": 46,
+     "never_moved_10c": 12
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 22,
+     "wins": 11,
+     "win_rate": 0.5
+    },
+    "hold": {
+     "n": 22,
+     "wins": 11,
+     "win_rate": 0.5,
+     "pnl": -0.9129000000000002,
+     "per_trade": -0.04149545454545455,
+     "t": -0.38469242241153334,
+     "already50": 18,
+     "already50_frac": 0.8181818181818182
+    },
+    "lead": {
+     "n": 22,
+     "already50": 18,
+     "already50_frac": 0.8181818181818182,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 38.577,
+     "n_lead50": 4,
+     "never_reached_50": 0,
+     "median_lead10_s": 89.768,
+     "n_lead10": 19,
+     "never_moved_10c": 3
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 6,
+     "wins": 2,
+     "win_rate": 0.3333333333333333
+    },
+    "hold": {
+     "n": 6,
+     "wins": 2,
+     "win_rate": 0.3333333333333333,
+     "pnl": -1.3043,
+     "per_trade": -0.21738333333333335,
+     "t": -1.0238133367713642,
+     "already50": 5,
+     "already50_frac": 0.8333333333333334
+    },
+    "lead": {
+     "n": 6,
+     "already50": 5,
+     "already50_frac": 0.8333333333333334,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 1,
+     "median_lead10_s": 13.703,
+     "n_lead10": 3,
+     "never_moved_10c": 3
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 10,
+     "wins": 8,
+     "win_rate": 0.8
+    },
+    "hold": {
+     "n": 10,
+     "wins": 8,
+     "win_rate": 0.8,
+     "pnl": 2.0312,
+     "per_trade": 0.20312000000000002,
+     "t": 1.4741437094922025,
+     "already50": 8,
+     "already50_frac": 0.8
+    },
+    "lead": {
+     "n": 10,
+     "already50": 8,
+     "already50_frac": 0.8,
+     "already10": 4,
+     "median_lead50_s_if_not_already": 12.638000000000002,
+     "n_lead50": 2,
+     "never_reached_50": 0,
+     "median_lead10_s": 19.873,
+     "n_lead10": 9,
+     "never_moved_10c": 1
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -0.47740000000000005,
+     "per_trade": -0.47740000000000005,
+     "t": null,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 1,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 14.468,
+     "n_lead50": 1,
+     "never_reached_50": 0,
+     "median_lead10_s": 15.544,
+     "n_lead10": 1,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 2,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 2,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 2
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 263,
+     "wins": 20,
+     "win_rate": 0.07604562737642585,
+     "pnl": -11.818200000000003,
+     "per_trade": -0.044936121673003815,
+     "t": -22.185457393747438,
+     "statuses": {
+      "exit": 263
+     },
+     "median_hold_s": 3.215
+    },
+    "h1": {
+     "n": 132,
+     "wins": 14,
+     "win_rate": 0.10606060606060606,
+     "pnl": -6.150600000000002,
+     "per_trade": -0.04659545454545456,
+     "t": -14.08859634717637,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 3.154
+    },
+    "h2": {
+     "n": 131,
+     "wins": 6,
+     "win_rate": 0.04580152671755725,
+     "pnl": -5.6676,
+     "per_trade": -0.04326412213740458,
+     "t": -18.532153905812137,
+     "statuses": {
+      "exit": 131
+     },
+     "median_hold_s": 3.231
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 263,
+     "wins": 29,
+     "win_rate": 0.11026615969581749,
+     "pnl": -12.403200000000002,
+     "per_trade": -0.047160456273764265,
+     "t": -18.161329080029816,
+     "statuses": {
+      "exit": 263
+     },
+     "median_hold_s": 5.36
+    },
+    "h1": {
+     "n": 132,
+     "wins": 18,
+     "win_rate": 0.13636363636363635,
+     "pnl": -6.378900000000002,
+     "per_trade": -0.048325000000000014,
+     "t": -13.61491670734101,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 5.263999999999999
+    },
+    "h2": {
+     "n": 131,
+     "wins": 11,
+     "win_rate": 0.08396946564885496,
+     "pnl": -6.0243,
+     "per_trade": -0.04598702290076336,
+     "t": -12.089123145148431,
+     "statuses": {
+      "exit": 131
+     },
+     "median_hold_s": 5.389
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 263,
+     "wins": 48,
+     "win_rate": 0.18250950570342206,
+     "pnl": -11.698600000000003,
+     "per_trade": -0.044481368821292784,
+     "t": -11.843612320876359,
+     "statuses": {
+      "exit": 263
+     },
+     "median_hold_s": 10.548
+    },
+    "h1": {
+     "n": 132,
+     "wins": 27,
+     "win_rate": 0.20454545454545456,
+     "pnl": -6.134000000000001,
+     "per_trade": -0.04646969696969698,
+     "t": -8.680803457875134,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 10.5095
+    },
+    "h2": {
+     "n": 131,
+     "wins": 21,
+     "win_rate": 0.16030534351145037,
+     "pnl": -5.5646,
+     "per_trade": -0.04247786259541985,
+     "t": -8.03987751717129,
+     "statuses": {
+      "exit": 131
+     },
+     "median_hold_s": 10.661
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 263,
+     "wins": 81,
+     "win_rate": 0.30798479087452474,
+     "pnl": -10.075500000000002,
+     "per_trade": -0.03830988593155894,
+     "t": -6.878461870489382,
+     "statuses": {
+      "exit": 263
+     },
+     "median_hold_s": 20.606
+    },
+    "h1": {
+     "n": 132,
+     "wins": 48,
+     "win_rate": 0.36363636363636365,
+     "pnl": -5.3553000000000015,
+     "per_trade": -0.040570454545454555,
+     "t": -4.603310074887997,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 20.6515
+    },
+    "h2": {
+     "n": 131,
+     "wins": 33,
+     "win_rate": 0.25190839694656486,
+     "pnl": -4.720200000000001,
+     "per_trade": -0.0360320610687023,
+     "t": -5.280493556600851,
+     "statuses": {
+      "exit": 131
+     },
+     "median_hold_s": 20.561
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 263,
+     "wins": 85,
+     "win_rate": 0.3231939163498099,
+     "pnl": -10.093100000000003,
+     "per_trade": -0.038376806083650204,
+     "t": -5.666291033791952,
+     "statuses": {
+      "exit": 263
+     },
+     "median_hold_s": 30.504
+    },
+    "h1": {
+     "n": 132,
+     "wins": 45,
+     "win_rate": 0.3409090909090909,
+     "pnl": -5.363800000000001,
+     "per_trade": -0.040634848484848496,
+     "t": -3.7907550795273712,
+     "statuses": {
+      "exit": 132
+     },
+     "median_hold_s": 30.5885
+    },
+    "h2": {
+     "n": 131,
+     "wins": 40,
+     "win_rate": 0.3053435114503817,
+     "pnl": -4.729300000000001,
+     "per_trade": -0.03610152671755726,
+     "t": -4.3509118981092465,
+     "statuses": {
+      "exit": 131
+     },
+     "median_hold_s": 30.392
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 263,
+     "wins": 172,
+     "win_rate": 0.6539923954372624,
+     "pnl": -8.944900000000002,
+     "per_trade": -0.03401102661596959,
+     "t": -3.2404471071701955,
+     "statuses": {
+      "exit": 237,
+      "settled": 24,
+      "eod_bid": 2
+     },
+     "median_hold_s": 32.716
+    },
+    "h1": {
+     "n": 132,
+     "wins": 91,
+     "win_rate": 0.6893939393939394,
+     "pnl": -4.747700000000001,
+     "per_trade": -0.03596742424242425,
+     "t": -2.311476181593663,
+     "statuses": {
+      "exit": 118,
+      "settled": 13,
+      "eod_bid": 1
+     },
+     "median_hold_s": 32.108000000000004
+    },
+    "h2": {
+     "n": 131,
+     "wins": 81,
+     "win_rate": 0.6183206106870229,
+     "pnl": -4.1972000000000005,
+     "per_trade": -0.03203969465648855,
+     "t": -2.266566072602481,
+     "statuses": {
+      "exit": 119,
+      "settled": 11,
+      "eod_bid": 1
+     },
+     "median_hold_s": 33.185
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 263,
+     "wins": 211,
+     "win_rate": 0.8022813688212928,
+     "pnl": -9.8663,
+     "per_trade": -0.037514448669201526,
+     "t": -2.5511679364858617,
+     "statuses": {
+      "exit": 216,
+      "settled": 45,
+      "eod_bid": 2
+     },
+     "median_hold_s": 106.557
+    },
+    "h1": {
+     "n": 132,
+     "wins": 106,
+     "win_rate": 0.803030303030303,
+     "pnl": -4.240500000000002,
+     "per_trade": -0.032125000000000015,
+     "t": -1.5496091886795893,
+     "statuses": {
+      "exit": 109,
+      "settled": 22,
+      "eod_bid": 1
+     },
+     "median_hold_s": 91.84800000000001
+    },
+    "h2": {
+     "n": 131,
+     "wins": 105,
+     "win_rate": 0.8015267175572519,
+     "pnl": -5.6258,
+     "per_trade": -0.04294503816793893,
+     "t": -2.0518377821482434,
+     "statuses": {
+      "settled": 23,
+      "exit": 107,
+      "eod_bid": 1
+     },
+     "median_hold_s": 111.02
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 263,
+     "wins": 204,
+     "win_rate": 0.7756653992395437,
+     "pnl": -5.569900000000002,
+     "per_trade": -0.021178326996197726,
+     "t": -1.2530310431651677,
+     "statuses": {
+      "exit": 206,
+      "settled": 53,
+      "eod_bid": 4
+     },
+     "median_hold_s": 188.087
+    },
+    "h1": {
+     "n": 132,
+     "wins": 101,
+     "win_rate": 0.7651515151515151,
+     "pnl": -2.5035000000000016,
+     "per_trade": -0.018965909090909103,
+     "t": -0.7904687848355891,
+     "statuses": {
+      "exit": 103,
+      "settled": 27,
+      "eod_bid": 2
+     },
+     "median_hold_s": 176.152
+    },
+    "h2": {
+     "n": 131,
+     "wins": 103,
+     "win_rate": 0.7862595419847328,
+     "pnl": -3.066400000000001,
+     "per_trade": -0.023407633587786268,
+     "t": -0.9793705395914971,
+     "statuses": {
+      "settled": 26,
+      "exit": 103,
+      "eod_bid": 2
+     },
+     "median_hold_s": 199.429
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 55,
+     "wins": 16,
+     "win_rate": 0.2909090909090909,
+     "pnl": -1.6239999999999999,
+     "per_trade": -0.029527272727272725,
+     "t": -2.166162067573429,
+     "statuses": {
+      "already_priced": 208,
+      "exit": 53,
+      "settled": 2
+     },
+     "median_hold_s": 14.706
+    },
+    "h1": {
+     "n": 33,
+     "wins": 10,
+     "win_rate": 0.30303030303030304,
+     "pnl": -0.28959999999999997,
+     "per_trade": -0.008775757575757576,
+     "t": -1.192281426932828,
+     "statuses": {
+      "already_priced": 99,
+      "exit": 33
+     },
+     "median_hold_s": 7.386
+    },
+    "h2": {
+     "n": 22,
+     "wins": 6,
+     "win_rate": 0.2727272727272727,
+     "pnl": -1.3343999999999998,
+     "per_trade": -0.06065454545454545,
+     "t": -1.9240859665889745,
+     "statuses": {
+      "already_priced": 109,
+      "exit": 20,
+      "settled": 2
+     },
+     "median_hold_s": 25.208
+    }
+   }
+  }
+ },
+ "raw_surprise_first": {
+  "settle": {
+   "n": 72,
+   "wins": 34,
+   "win_rate": 0.4722222222222222
+  },
+  "hold": {
+   "n": 70,
+   "wins": 34,
+   "win_rate": 0.4857142857142857,
+   "pnl": -0.8904999999999994,
+   "per_trade": -0.012721428571428562,
+   "t": -0.21207709224496477,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "lead": {
+   "n": 72,
+   "already50": 0,
+   "already50_frac": 0.0,
+   "already10": 0,
+   "median_lead50_s_if_not_already": 13.718,
+   "n_lead50": 63,
+   "never_reached_50": 9,
+   "median_lead10_s": 61.80500000000001,
+   "n_lead10": 56,
+   "never_moved_10c": 16
+  },
+  "hold_h1": {
+   "n": 36,
+   "wins": 20,
+   "win_rate": 0.5555555555555556,
+   "pnl": 1.7013000000000003,
+   "per_trade": 0.04725833333333334,
+   "t": 0.5690317048943803,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "hold_h2": {
+   "n": 34,
+   "wins": 14,
+   "win_rate": 0.4117647058823529,
+   "pnl": -2.5918,
+   "per_trade": -0.07622941176470588,
+   "t": -0.8798593564844605,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 43,
+     "wins": 25,
+     "win_rate": 0.5813953488372093
+    },
+    "hold": {
+     "n": 43,
+     "wins": 25,
+     "win_rate": 0.5813953488372093,
+     "pnl": 3.4494000000000007,
+     "per_trade": 0.0802186046511628,
+     "t": 1.0673464988726078,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 43,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 9.401499999999999,
+     "n_lead50": 38,
+     "never_reached_50": 5,
+     "median_lead10_s": 58.7905,
+     "n_lead10": 34,
+     "never_moved_10c": 9
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 18,
+     "wins": 6,
+     "win_rate": 0.3333333333333333
+    },
+    "hold": {
+     "n": 18,
+     "wins": 6,
+     "win_rate": 0.3333333333333333,
+     "pnl": -3.0046,
+     "per_trade": -0.16692222222222222,
+     "t": -1.4598545578963715,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 18,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 15.623,
+     "n_lead50": 17,
+     "never_reached_50": 1,
+     "median_lead10_s": 70.832,
+     "n_lead10": 15,
+     "never_moved_10c": 3
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.4723000000000002,
+     "per_trade": -0.49076666666666674,
+     "t": -36.7157107231921,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 44.614,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 125.198,
+     "n_lead10": 2,
+     "never_moved_10c": 1
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.5119,
+     "per_trade": -0.5039666666666667,
+     "t": -12.41260394407198,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 19.1125,
+     "n_lead50": 2,
+     "never_reached_50": 1,
+     "median_lead10_s": 42.917,
+     "n_lead10": 2,
+     "never_moved_10c": 1
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 3,
+     "wins": 3,
+     "win_rate": 1.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 3,
+     "win_rate": 1.0,
+     "pnl": 1.6488999999999998,
+     "per_trade": 0.5496333333333333,
+     "t": 14.510462226443579,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 9.803,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 13.718,
+     "n_lead10": 3,
+     "never_moved_10c": 0
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 2,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 2,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 2
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 70,
+     "wins": 4,
+     "win_rate": 0.05714285714285714,
+     "pnl": -3.3546,
+     "per_trade": -0.04792285714285714,
+     "t": -11.714969045302002,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 3.216
+    },
+    "h1": {
+     "n": 36,
+     "wins": 3,
+     "win_rate": 0.08333333333333333,
+     "pnl": -1.7743000000000002,
+     "per_trade": -0.049286111111111114,
+     "t": -8.097445149979073,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 3.167
+    },
+    "h2": {
+     "n": 34,
+     "wins": 1,
+     "win_rate": 0.029411764705882353,
+     "pnl": -1.5802999999999998,
+     "per_trade": -0.04647941176470588,
+     "t": -8.442302603491342,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 3.22
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 70,
+     "wins": 7,
+     "win_rate": 0.1,
+     "pnl": -3.3625000000000007,
+     "per_trade": -0.04803571428571429,
+     "t": -9.732100860708261,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 5.356
+    },
+    "h1": {
+     "n": 36,
+     "wins": 5,
+     "win_rate": 0.1388888888888889,
+     "pnl": -1.6337000000000002,
+     "per_trade": -0.04538055555555556,
+     "t": -6.266639793514196,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 5.2785
+    },
+    "h2": {
+     "n": 34,
+     "wins": 2,
+     "win_rate": 0.058823529411764705,
+     "pnl": -1.7288000000000001,
+     "per_trade": -0.05084705882352941,
+     "t": -7.536590080232767,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 5.373
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 70,
+     "wins": 16,
+     "win_rate": 0.22857142857142856,
+     "pnl": -3.4260999999999995,
+     "per_trade": -0.048944285714285704,
+     "t": -7.046391062576736,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 10.555499999999999
+    },
+    "h1": {
+     "n": 36,
+     "wins": 12,
+     "win_rate": 0.3333333333333333,
+     "pnl": -1.8193,
+     "per_trade": -0.05053611111111111,
+     "t": -5.125353957040972,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 10.530000000000001
+    },
+    "h2": {
+     "n": 34,
+     "wins": 4,
+     "win_rate": 0.11764705882352941,
+     "pnl": -1.6067999999999998,
+     "per_trade": -0.047258823529411756,
+     "t": -4.765374728783531,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 10.675
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 70,
+     "wins": 19,
+     "win_rate": 0.2714285714285714,
+     "pnl": -3.735,
+     "per_trade": -0.05335714285714285,
+     "t": -5.118559992637139,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 20.5995
+    },
+    "h1": {
+     "n": 36,
+     "wins": 13,
+     "win_rate": 0.3611111111111111,
+     "pnl": -1.9538000000000002,
+     "per_trade": -0.05427222222222223,
+     "t": -4.2372111242293595,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 20.5745
+    },
+    "h2": {
+     "n": 34,
+     "wins": 6,
+     "win_rate": 0.17647058823529413,
+     "pnl": -1.7812,
+     "per_trade": -0.052388235294117645,
+     "t": -3.1114550787215824,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 20.602
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 70,
+     "wins": 17,
+     "win_rate": 0.24285714285714285,
+     "pnl": -3.447,
+     "per_trade": -0.049242857142857144,
+     "t": -3.8761069673464226,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 30.4865
+    },
+    "h1": {
+     "n": 36,
+     "wins": 9,
+     "win_rate": 0.25,
+     "pnl": -1.5296000000000003,
+     "per_trade": -0.042488888888888895,
+     "t": -2.843399110936716,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 30.522
+    },
+    "h2": {
+     "n": 34,
+     "wins": 8,
+     "win_rate": 0.23529411764705882,
+     "pnl": -1.9174,
+     "per_trade": -0.056394117647058824,
+     "t": -2.685394775600292,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 30.426000000000002
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 70,
+     "wins": 43,
+     "win_rate": 0.6142857142857143,
+     "pnl": -3.2617999999999987,
+     "per_trade": -0.04659714285714284,
+     "t": -2.2665010344797776,
+     "statuses": {
+      "exit": 62,
+      "settled": 8
+     },
+     "median_hold_s": 30.043
+    },
+    "h1": {
+     "n": 36,
+     "wins": 23,
+     "win_rate": 0.6388888888888888,
+     "pnl": -0.5640999999999994,
+     "per_trade": -0.015669444444444427,
+     "t": -0.708837649698384,
+     "statuses": {
+      "exit": 34,
+      "settled": 2
+     },
+     "median_hold_s": 20.846
+    },
+    "h2": {
+     "n": 34,
+     "wins": 20,
+     "win_rate": 0.5882352941176471,
+     "pnl": -2.6976999999999993,
+     "per_trade": -0.0793441176470588,
+     "t": -2.2832675987155358,
+     "statuses": {
+      "exit": 28,
+      "settled": 6
+     },
+     "median_hold_s": 32.672
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 70,
+     "wins": 55,
+     "win_rate": 0.7857142857142857,
+     "pnl": -2.8615000000000004,
+     "per_trade": -0.04087857142857143,
+     "t": -1.4501671895239252,
+     "statuses": {
+      "exit": 56,
+      "settled": 13,
+      "eod_bid": 1
+     },
+     "median_hold_s": 125.2465
+    },
+    "h1": {
+     "n": 36,
+     "wins": 30,
+     "win_rate": 0.8333333333333334,
+     "pnl": -0.19390000000000063,
+     "per_trade": -0.005386111111111129,
+     "t": -0.1550502301654846,
+     "statuses": {
+      "exit": 31,
+      "settled": 5
+     },
+     "median_hold_s": 72.018
+    },
+    "h2": {
+     "n": 34,
+     "wins": 25,
+     "win_rate": 0.7352941176470589,
+     "pnl": -2.6675999999999997,
+     "per_trade": -0.07845882352941176,
+     "t": -1.7622057690546755,
+     "statuses": {
+      "exit": 25,
+      "settled": 8,
+      "eod_bid": 1
+     },
+     "median_hold_s": 155.2015
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 70,
+     "wins": 52,
+     "win_rate": 0.7428571428571429,
+     "pnl": -2.7099999999999995,
+     "per_trade": -0.03871428571428571,
+     "t": -1.16640067451797,
+     "statuses": {
+      "exit": 52,
+      "settled": 17,
+      "eod_bid": 1
+     },
+     "median_hold_s": 203.736
+    },
+    "h1": {
+     "n": 36,
+     "wins": 28,
+     "win_rate": 0.7777777777777778,
+     "pnl": -0.6845999999999999,
+     "per_trade": -0.019016666666666664,
+     "t": -0.42731871716942327,
+     "statuses": {
+      "exit": 28,
+      "settled": 8
+     },
+     "median_hold_s": 195.301
+    },
+    "h2": {
+     "n": 34,
+     "wins": 24,
+     "win_rate": 0.7058823529411765,
+     "pnl": -2.0254,
+     "per_trade": -0.05957058823529411,
+     "t": -1.1931400130477638,
+     "statuses": {
+      "exit": 24,
+      "settled": 9,
+      "eod_bid": 1
+     },
+     "median_hold_s": 220.232
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 70,
+     "wins": 21,
+     "win_rate": 0.3,
+     "pnl": -3.8044999999999995,
+     "per_trade": -0.054349999999999996,
+     "t": -2.8814948769620186,
+     "statuses": {
+      "exit": 63,
+      "settled": 7
+     },
+     "median_hold_s": 19.6805
+    },
+    "h1": {
+     "n": 36,
+     "wins": 9,
+     "win_rate": 0.25,
+     "pnl": -0.8633,
+     "per_trade": -0.023980555555555554,
+     "t": -1.4574164485337548,
+     "statuses": {
+      "exit": 35,
+      "settled": 1
+     },
+     "median_hold_s": 7.6335
+    },
+    "h2": {
+     "n": 34,
+     "wins": 12,
+     "win_rate": 0.35294117647058826,
+     "pnl": -2.9412,
+     "per_trade": -0.08650588235294117,
+     "t": -2.532772901364553,
+     "statuses": {
+      "exit": 28,
+      "settled": 6
+     },
+     "median_hold_s": 31.6935
+    }
+   }
+  }
+ },
+ "corr_surprise_first": {
+  "settle": {
+   "n": 57,
+   "wins": 25,
+   "win_rate": 0.43859649122807015
+  },
+  "hold": {
+   "n": 55,
+   "wins": 25,
+   "win_rate": 0.45454545454545453,
+   "pnl": -2.9508999999999994,
+   "per_trade": -0.05365272727272726,
+   "t": -0.802060102271856,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "lead": {
+   "n": 57,
+   "already50": 0,
+   "already50_frac": 0.0,
+   "already10": 0,
+   "median_lead50_s_if_not_already": 9.437,
+   "n_lead50": 53,
+   "never_reached_50": 4,
+   "median_lead10_s": 71.2575,
+   "n_lead10": 46,
+   "never_moved_10c": 11
+  },
+  "hold_h1": {
+   "n": 33,
+   "wins": 16,
+   "win_rate": 0.48484848484848486,
+   "pnl": -0.9462999999999999,
+   "per_trade": -0.028675757575757573,
+   "t": -0.32979840181208864,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "hold_h2": {
+   "n": 22,
+   "wins": 9,
+   "win_rate": 0.4090909090909091,
+   "pnl": -2.0045999999999995,
+   "per_trade": -0.09111818181818179,
+   "t": -0.8543567547090412,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 31,
+     "wins": 17,
+     "win_rate": 0.5483870967741935
+    },
+    "hold": {
+     "n": 31,
+     "wins": 17,
+     "win_rate": 0.5483870967741935,
+     "pnl": 1.1782000000000004,
+     "per_trade": 0.03800645161290324,
+     "t": 0.4205666663608258,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 31,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 7.3375,
+     "n_lead50": 30,
+     "never_reached_50": 1,
+     "median_lead10_s": 60.6515,
+     "n_lead10": 26,
+     "never_moved_10c": 5
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 16,
+     "wins": 6,
+     "win_rate": 0.375
+    },
+    "hold": {
+     "n": 16,
+     "wins": 6,
+     "win_rate": 0.375,
+     "pnl": -2.1094,
+     "per_trade": -0.1318375,
+     "t": -1.0739280417167862,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 16,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 11.344000000000001,
+     "n_lead50": 16,
+     "never_reached_50": 0,
+     "median_lead10_s": 87.4585,
+     "n_lead10": 14,
+     "never_moved_10c": 2
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 4,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 4,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.9898,
+     "per_trade": -0.49745,
+     "t": -42.973001208236404,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 4,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 38.577,
+     "n_lead50": 4,
+     "never_reached_50": 0,
+     "median_lead10_s": 112.886,
+     "n_lead10": 3,
+     "never_moved_10c": 1
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -0.4975,
+     "per_trade": -0.4975,
+     "t": null,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 1,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 1,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 1
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 2,
+     "wins": 2,
+     "win_rate": 1.0
+    },
+    "hold": {
+     "n": 2,
+     "wins": 2,
+     "win_rate": 1.0,
+     "pnl": 0.945,
+     "per_trade": 0.4725,
+     "t": 47.24999999999996,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 12.638000000000002,
+     "n_lead50": 2,
+     "never_reached_50": 0,
+     "median_lead10_s": 26.5285,
+     "n_lead10": 2,
+     "never_moved_10c": 0
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -0.47740000000000005,
+     "per_trade": -0.47740000000000005,
+     "t": null,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 1,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 14.468,
+     "n_lead50": 1,
+     "never_reached_50": 0,
+     "median_lead10_s": 15.544,
+     "n_lead10": 1,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 2,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 2,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 2
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 55,
+     "wins": 3,
+     "win_rate": 0.05454545454545454,
+     "pnl": -2.7572,
+     "per_trade": -0.050130909090909094,
+     "t": -12.034457672669085,
+     "statuses": {
+      "exit": 55
+     },
+     "median_hold_s": 3.194
+    },
+    "h1": {
+     "n": 33,
+     "wins": 3,
+     "win_rate": 0.09090909090909091,
+     "pnl": -1.6499000000000004,
+     "per_trade": -0.049996969696969706,
+     "t": -8.110257148565948,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 3.161
+    },
+    "h2": {
+     "n": 22,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.1073,
+     "per_trade": -0.05033181818181818,
+     "t": -10.130690430011754,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 3.221
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 55,
+     "wins": 6,
+     "win_rate": 0.10909090909090909,
+     "pnl": -2.8937,
+     "per_trade": -0.05261272727272727,
+     "t": -9.46148579058163,
+     "statuses": {
+      "exit": 55
+     },
+     "median_hold_s": 5.313
+    },
+    "h1": {
+     "n": 33,
+     "wins": 5,
+     "win_rate": 0.15151515151515152,
+     "pnl": -1.7173000000000003,
+     "per_trade": -0.05203939393939395,
+     "t": -6.260954263767821,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 5.279
+    },
+    "h2": {
+     "n": 22,
+     "wins": 1,
+     "win_rate": 0.045454545454545456,
+     "pnl": -1.1764,
+     "per_trade": -0.05347272727272727,
+     "t": -8.36993870492838,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 5.3685
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 55,
+     "wins": 11,
+     "win_rate": 0.2,
+     "pnl": -2.8564,
+     "per_trade": -0.05193454545454545,
+     "t": -6.409813297823839,
+     "statuses": {
+      "exit": 55
+     },
+     "median_hold_s": 10.544
+    },
+    "h1": {
+     "n": 33,
+     "wins": 9,
+     "win_rate": 0.2727272727272727,
+     "pnl": -1.7313,
+     "per_trade": -0.052463636363636365,
+     "t": -4.413214217081394,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 10.498
+    },
+    "h2": {
+     "n": 22,
+     "wins": 2,
+     "win_rate": 0.09090909090909091,
+     "pnl": -1.1250999999999998,
+     "per_trade": -0.05114090909090908,
+     "t": -5.141054609638512,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 10.7425
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 55,
+     "wins": 19,
+     "win_rate": 0.34545454545454546,
+     "pnl": -1.6987,
+     "per_trade": -0.030885454545454546,
+     "t": -2.319228561198201,
+     "statuses": {
+      "exit": 55
+     },
+     "median_hold_s": 20.601
+    },
+    "h1": {
+     "n": 33,
+     "wins": 14,
+     "win_rate": 0.42424242424242425,
+     "pnl": -0.7374,
+     "per_trade": -0.022345454545454547,
+     "t": -1.1259631974684297,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 20.6
+    },
+    "h2": {
+     "n": 22,
+     "wins": 5,
+     "win_rate": 0.22727272727272727,
+     "pnl": -0.9612999999999999,
+     "per_trade": -0.043695454545454544,
+     "t": -2.9012570081653446,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 20.6435
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 55,
+     "wins": 19,
+     "win_rate": 0.34545454545454546,
+     "pnl": -1.4365999999999997,
+     "per_trade": -0.026119999999999994,
+     "t": -1.6892156665917124,
+     "statuses": {
+      "exit": 55
+     },
+     "median_hold_s": 30.504
+    },
+    "h1": {
+     "n": 33,
+     "wins": 13,
+     "win_rate": 0.3939393939393939,
+     "pnl": -0.5383999999999999,
+     "per_trade": -0.01631515151515151,
+     "t": -0.712569480523234,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 30.51
+    },
+    "h2": {
+     "n": 22,
+     "wins": 6,
+     "win_rate": 0.2727272727272727,
+     "pnl": -0.8981999999999998,
+     "per_trade": -0.04082727272727272,
+     "t": -2.276502103431466,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 30.4395
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 55,
+     "wins": 34,
+     "win_rate": 0.6181818181818182,
+     "pnl": -1.153599999999999,
+     "per_trade": -0.020974545454545437,
+     "t": -1.0929664352134427,
+     "statuses": {
+      "exit": 51,
+      "settled": 4
+     },
+     "median_hold_s": 31.5
+    },
+    "h1": {
+     "n": 33,
+     "wins": 22,
+     "win_rate": 0.6666666666666666,
+     "pnl": -0.03049999999999961,
+     "per_trade": -0.0009242424242424125,
+     "t": -0.054479855349281965,
+     "statuses": {
+      "exit": 32,
+      "settled": 1
+     },
+     "median_hold_s": 23.252
+    },
+    "h2": {
+     "n": 22,
+     "wins": 12,
+     "win_rate": 0.5454545454545454,
+     "pnl": -1.1230999999999995,
+     "per_trade": -0.05104999999999998,
+     "t": -1.261418083429278,
+     "statuses": {
+      "exit": 19,
+      "settled": 3
+     },
+     "median_hold_s": 32.8615
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 55,
+     "wins": 45,
+     "win_rate": 0.8181818181818182,
+     "pnl": -1.0909000000000004,
+     "per_trade": -0.019834545454545462,
+     "t": -0.664588002697055,
+     "statuses": {
+      "exit": 46,
+      "settled": 9
+     },
+     "median_hold_s": 109.598
+    },
+    "h1": {
+     "n": 33,
+     "wins": 27,
+     "win_rate": 0.8181818181818182,
+     "pnl": -0.5133000000000006,
+     "per_trade": -0.015554545454545474,
+     "t": -0.4118496464376837,
+     "statuses": {
+      "exit": 28,
+      "settled": 5
+     },
+     "median_hold_s": 77.914
+    },
+    "h2": {
+     "n": 22,
+     "wins": 18,
+     "win_rate": 0.8181818181818182,
+     "pnl": -0.5775999999999999,
+     "per_trade": -0.02625454545454545,
+     "t": -0.5290791758183431,
+     "statuses": {
+      "exit": 18,
+      "settled": 4
+     },
+     "median_hold_s": 111.952
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 55,
+     "wins": 43,
+     "win_rate": 0.7818181818181819,
+     "pnl": -1.3270999999999997,
+     "per_trade": -0.024129090909090906,
+     "t": -0.6895850293117995,
+     "statuses": {
+      "exit": 43,
+      "settled": 12
+     },
+     "median_hold_s": 178.714
+    },
+    "h1": {
+     "n": 33,
+     "wins": 26,
+     "win_rate": 0.7878787878787878,
+     "pnl": -0.7650999999999999,
+     "per_trade": -0.023184848484848482,
+     "t": -0.51433425550287,
+     "statuses": {
+      "exit": 26,
+      "settled": 7
+     },
+     "median_hold_s": 178.714
+    },
+    "h2": {
+     "n": 22,
+     "wins": 17,
+     "win_rate": 0.7727272727272727,
+     "pnl": -0.5619999999999999,
+     "per_trade": -0.02554545454545454,
+     "t": -0.4497489217375837,
+     "statuses": {
+      "exit": 17,
+      "settled": 5
+     },
+     "median_hold_s": 173.74349999999998
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 55,
+     "wins": 16,
+     "win_rate": 0.2909090909090909,
+     "pnl": -1.6239999999999999,
+     "per_trade": -0.029527272727272725,
+     "t": -2.166162067573429,
+     "statuses": {
+      "exit": 53,
+      "settled": 2
+     },
+     "median_hold_s": 14.706
+    },
+    "h1": {
+     "n": 33,
+     "wins": 10,
+     "win_rate": 0.30303030303030304,
+     "pnl": -0.28959999999999997,
+     "per_trade": -0.008775757575757576,
+     "t": -1.192281426932828,
+     "statuses": {
+      "exit": 33
+     },
+     "median_hold_s": 7.386
+    },
+    "h2": {
+     "n": 22,
+     "wins": 6,
+     "win_rate": 0.2727272727272727,
+     "pnl": -1.3343999999999998,
+     "per_trade": -0.06065454545454545,
+     "t": -1.9240859665889745,
+     "statuses": {
+      "exit": 20,
+      "settled": 2
+     },
+     "median_hold_s": 25.208
+    }
+   }
+  }
+ },
+ "raw_surprise_first_60s": {
+  "settle": {
+   "n": 70,
+   "wins": 34,
+   "win_rate": 0.4857142857142857
+  },
+  "hold": {
+   "n": 70,
+   "wins": 34,
+   "win_rate": 0.4857142857142857,
+   "pnl": -0.8904999999999994,
+   "per_trade": -0.012721428571428562,
+   "t": -0.21207709224496477,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "lead": {
+   "n": 70,
+   "already50": 0,
+   "already50_frac": 0.0,
+   "already10": 0,
+   "median_lead50_s_if_not_already": 13.718,
+   "n_lead50": 63,
+   "never_reached_50": 7,
+   "median_lead10_s": 61.80500000000001,
+   "n_lead10": 56,
+   "never_moved_10c": 14
+  },
+  "hold_h1": {
+   "n": 36,
+   "wins": 20,
+   "win_rate": 0.5555555555555556,
+   "pnl": 1.7013000000000003,
+   "per_trade": 0.04725833333333334,
+   "t": 0.5690317048943803,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "hold_h2": {
+   "n": 34,
+   "wins": 14,
+   "win_rate": 0.4117647058823529,
+   "pnl": -2.5918,
+   "per_trade": -0.07622941176470588,
+   "t": -0.8798593564844605,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 43,
+     "wins": 25,
+     "win_rate": 0.5813953488372093
+    },
+    "hold": {
+     "n": 43,
+     "wins": 25,
+     "win_rate": 0.5813953488372093,
+     "pnl": 3.4494000000000007,
+     "per_trade": 0.0802186046511628,
+     "t": 1.0673464988726078,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 43,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 9.401499999999999,
+     "n_lead50": 38,
+     "never_reached_50": 5,
+     "median_lead10_s": 58.7905,
+     "n_lead10": 34,
+     "never_moved_10c": 9
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 18,
+     "wins": 6,
+     "win_rate": 0.3333333333333333
+    },
+    "hold": {
+     "n": 18,
+     "wins": 6,
+     "win_rate": 0.3333333333333333,
+     "pnl": -3.0046,
+     "per_trade": -0.16692222222222222,
+     "t": -1.4598545578963715,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 18,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 15.623,
+     "n_lead50": 17,
+     "never_reached_50": 1,
+     "median_lead10_s": 70.832,
+     "n_lead10": 15,
+     "never_moved_10c": 3
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.4723000000000002,
+     "per_trade": -0.49076666666666674,
+     "t": -36.7157107231921,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 44.614,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 125.198,
+     "n_lead10": 2,
+     "never_moved_10c": 1
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.5119,
+     "per_trade": -0.5039666666666667,
+     "t": -12.41260394407198,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 19.1125,
+     "n_lead50": 2,
+     "never_reached_50": 1,
+     "median_lead10_s": 42.917,
+     "n_lead10": 2,
+     "never_moved_10c": 1
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 3,
+     "wins": 3,
+     "win_rate": 1.0
+    },
+    "hold": {
+     "n": 3,
+     "wins": 3,
+     "win_rate": 1.0,
+     "pnl": 1.6488999999999998,
+     "per_trade": 0.5496333333333333,
+     "t": 14.510462226443579,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 3,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 9.803,
+     "n_lead50": 3,
+     "never_reached_50": 0,
+     "median_lead10_s": 13.718,
+     "n_lead10": 3,
+     "never_moved_10c": 0
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 70,
+     "wins": 4,
+     "win_rate": 0.05714285714285714,
+     "pnl": -3.3546,
+     "per_trade": -0.04792285714285714,
+     "t": -11.714969045302002,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 3.216
+    },
+    "h1": {
+     "n": 36,
+     "wins": 3,
+     "win_rate": 0.08333333333333333,
+     "pnl": -1.7743000000000002,
+     "per_trade": -0.049286111111111114,
+     "t": -8.097445149979073,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 3.167
+    },
+    "h2": {
+     "n": 34,
+     "wins": 1,
+     "win_rate": 0.029411764705882353,
+     "pnl": -1.5802999999999998,
+     "per_trade": -0.04647941176470588,
+     "t": -8.442302603491342,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 3.22
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 70,
+     "wins": 7,
+     "win_rate": 0.1,
+     "pnl": -3.3625000000000007,
+     "per_trade": -0.04803571428571429,
+     "t": -9.732100860708261,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 5.356
+    },
+    "h1": {
+     "n": 36,
+     "wins": 5,
+     "win_rate": 0.1388888888888889,
+     "pnl": -1.6337000000000002,
+     "per_trade": -0.04538055555555556,
+     "t": -6.266639793514196,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 5.2785
+    },
+    "h2": {
+     "n": 34,
+     "wins": 2,
+     "win_rate": 0.058823529411764705,
+     "pnl": -1.7288000000000001,
+     "per_trade": -0.05084705882352941,
+     "t": -7.536590080232767,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 5.373
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 70,
+     "wins": 16,
+     "win_rate": 0.22857142857142856,
+     "pnl": -3.4260999999999995,
+     "per_trade": -0.048944285714285704,
+     "t": -7.046391062576736,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 10.555499999999999
+    },
+    "h1": {
+     "n": 36,
+     "wins": 12,
+     "win_rate": 0.3333333333333333,
+     "pnl": -1.8193,
+     "per_trade": -0.05053611111111111,
+     "t": -5.125353957040972,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 10.530000000000001
+    },
+    "h2": {
+     "n": 34,
+     "wins": 4,
+     "win_rate": 0.11764705882352941,
+     "pnl": -1.6067999999999998,
+     "per_trade": -0.047258823529411756,
+     "t": -4.765374728783531,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 10.675
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 70,
+     "wins": 19,
+     "win_rate": 0.2714285714285714,
+     "pnl": -3.735,
+     "per_trade": -0.05335714285714285,
+     "t": -5.118559992637139,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 20.5995
+    },
+    "h1": {
+     "n": 36,
+     "wins": 13,
+     "win_rate": 0.3611111111111111,
+     "pnl": -1.9538000000000002,
+     "per_trade": -0.05427222222222223,
+     "t": -4.2372111242293595,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 20.5745
+    },
+    "h2": {
+     "n": 34,
+     "wins": 6,
+     "win_rate": 0.17647058823529413,
+     "pnl": -1.7812,
+     "per_trade": -0.052388235294117645,
+     "t": -3.1114550787215824,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 20.602
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 70,
+     "wins": 17,
+     "win_rate": 0.24285714285714285,
+     "pnl": -3.447,
+     "per_trade": -0.049242857142857144,
+     "t": -3.8761069673464226,
+     "statuses": {
+      "exit": 70
+     },
+     "median_hold_s": 30.4865
+    },
+    "h1": {
+     "n": 36,
+     "wins": 9,
+     "win_rate": 0.25,
+     "pnl": -1.5296000000000003,
+     "per_trade": -0.042488888888888895,
+     "t": -2.843399110936716,
+     "statuses": {
+      "exit": 36
+     },
+     "median_hold_s": 30.522
+    },
+    "h2": {
+     "n": 34,
+     "wins": 8,
+     "win_rate": 0.23529411764705882,
+     "pnl": -1.9174,
+     "per_trade": -0.056394117647058824,
+     "t": -2.685394775600292,
+     "statuses": {
+      "exit": 34
+     },
+     "median_hold_s": 30.426000000000002
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 70,
+     "wins": 43,
+     "win_rate": 0.6142857142857143,
+     "pnl": -3.2617999999999987,
+     "per_trade": -0.04659714285714284,
+     "t": -2.2665010344797776,
+     "statuses": {
+      "exit": 62,
+      "settled": 8
+     },
+     "median_hold_s": 30.043
+    },
+    "h1": {
+     "n": 36,
+     "wins": 23,
+     "win_rate": 0.6388888888888888,
+     "pnl": -0.5640999999999994,
+     "per_trade": -0.015669444444444427,
+     "t": -0.708837649698384,
+     "statuses": {
+      "exit": 34,
+      "settled": 2
+     },
+     "median_hold_s": 20.846
+    },
+    "h2": {
+     "n": 34,
+     "wins": 20,
+     "win_rate": 0.5882352941176471,
+     "pnl": -2.6976999999999993,
+     "per_trade": -0.0793441176470588,
+     "t": -2.2832675987155358,
+     "statuses": {
+      "exit": 28,
+      "settled": 6
+     },
+     "median_hold_s": 32.672
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 70,
+     "wins": 55,
+     "win_rate": 0.7857142857142857,
+     "pnl": -2.8615000000000004,
+     "per_trade": -0.04087857142857143,
+     "t": -1.4501671895239252,
+     "statuses": {
+      "exit": 56,
+      "settled": 13,
+      "eod_bid": 1
+     },
+     "median_hold_s": 125.2465
+    },
+    "h1": {
+     "n": 36,
+     "wins": 30,
+     "win_rate": 0.8333333333333334,
+     "pnl": -0.19390000000000063,
+     "per_trade": -0.005386111111111129,
+     "t": -0.1550502301654846,
+     "statuses": {
+      "exit": 31,
+      "settled": 5
+     },
+     "median_hold_s": 72.018
+    },
+    "h2": {
+     "n": 34,
+     "wins": 25,
+     "win_rate": 0.7352941176470589,
+     "pnl": -2.6675999999999997,
+     "per_trade": -0.07845882352941176,
+     "t": -1.7622057690546755,
+     "statuses": {
+      "exit": 25,
+      "settled": 8,
+      "eod_bid": 1
+     },
+     "median_hold_s": 155.2015
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 70,
+     "wins": 52,
+     "win_rate": 0.7428571428571429,
+     "pnl": -2.7099999999999995,
+     "per_trade": -0.03871428571428571,
+     "t": -1.16640067451797,
+     "statuses": {
+      "exit": 52,
+      "settled": 17,
+      "eod_bid": 1
+     },
+     "median_hold_s": 203.736
+    },
+    "h1": {
+     "n": 36,
+     "wins": 28,
+     "win_rate": 0.7777777777777778,
+     "pnl": -0.6845999999999999,
+     "per_trade": -0.019016666666666664,
+     "t": -0.42731871716942327,
+     "statuses": {
+      "exit": 28,
+      "settled": 8
+     },
+     "median_hold_s": 195.301
+    },
+    "h2": {
+     "n": 34,
+     "wins": 24,
+     "win_rate": 0.7058823529411765,
+     "pnl": -2.0254,
+     "per_trade": -0.05957058823529411,
+     "t": -1.1931400130477638,
+     "statuses": {
+      "exit": 24,
+      "settled": 9,
+      "eod_bid": 1
+     },
+     "median_hold_s": 220.232
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 70,
+     "wins": 21,
+     "win_rate": 0.3,
+     "pnl": -3.8044999999999995,
+     "per_trade": -0.054349999999999996,
+     "t": -2.8814948769620186,
+     "statuses": {
+      "exit": 63,
+      "settled": 7
+     },
+     "median_hold_s": 19.6805
+    },
+    "h1": {
+     "n": 36,
+     "wins": 9,
+     "win_rate": 0.25,
+     "pnl": -0.8633,
+     "per_trade": -0.023980555555555554,
+     "t": -1.4574164485337548,
+     "statuses": {
+      "exit": 35,
+      "settled": 1
+     },
+     "median_hold_s": 7.6335
+    },
+    "h2": {
+     "n": 34,
+     "wins": 12,
+     "win_rate": 0.35294117647058826,
+     "pnl": -2.9412,
+     "per_trade": -0.08650588235294117,
+     "t": -2.532772901364553,
+     "statuses": {
+      "exit": 28,
+      "settled": 6
+     },
+     "median_hold_s": 31.6935
+    }
+   }
+  }
+ },
+ "corr_surprise_first_60s": {
+  "settle": {
+   "n": 54,
+   "wins": 25,
+   "win_rate": 0.46296296296296297
+  },
+  "hold": {
+   "n": 54,
+   "wins": 25,
+   "win_rate": 0.46296296296296297,
+   "pnl": -2.4734999999999996,
+   "per_trade": -0.04580555555555555,
+   "t": -0.6768599457179946,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "lead": {
+   "n": 54,
+   "already50": 0,
+   "already50_frac": 0.0,
+   "already10": 0,
+   "median_lead50_s_if_not_already": 8.742,
+   "n_lead50": 52,
+   "never_reached_50": 2,
+   "median_lead10_s": 77.913,
+   "n_lead10": 45,
+   "never_moved_10c": 9
+  },
+  "hold_h1": {
+   "n": 32,
+   "wins": 16,
+   "win_rate": 0.5,
+   "pnl": -0.4688999999999998,
+   "per_trade": -0.014653124999999994,
+   "t": -0.16550470430757186,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "hold_h2": {
+   "n": 22,
+   "wins": 9,
+   "win_rate": 0.4090909090909091,
+   "pnl": -2.0045999999999995,
+   "per_trade": -0.09111818181818179,
+   "t": -0.8543567547090412,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 31,
+     "wins": 17,
+     "win_rate": 0.5483870967741935
+    },
+    "hold": {
+     "n": 31,
+     "wins": 17,
+     "win_rate": 0.5483870967741935,
+     "pnl": 1.1782000000000004,
+     "per_trade": 0.03800645161290324,
+     "t": 0.4205666663608258,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 31,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 7.3375,
+     "n_lead50": 30,
+     "never_reached_50": 1,
+     "median_lead10_s": 60.6515,
+     "n_lead10": 26,
+     "never_moved_10c": 5
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 16,
+     "wins": 6,
+     "win_rate": 0.375
+    },
+    "hold": {
+     "n": 16,
+     "wins": 6,
+     "win_rate": 0.375,
+     "pnl": -2.1094,
+     "per_trade": -0.1318375,
+     "t": -1.0739280417167862,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 16,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 11.344000000000001,
+     "n_lead50": 16,
+     "never_reached_50": 0,
+     "median_lead10_s": 87.4585,
+     "n_lead10": 14,
+     "never_moved_10c": 2
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 4,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 4,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.9898,
+     "per_trade": -0.49745,
+     "t": -42.973001208236404,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 4,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 38.577,
+     "n_lead50": 4,
+     "never_reached_50": 0,
+     "median_lead10_s": 112.886,
+     "n_lead10": 3,
+     "never_moved_10c": 1
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0
+    },
+    "hold": {
+     "n": 1,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -0.4975,
+     "per_trade": -0.4975,
+     "t": null,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 1,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 1,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 1
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 2,
+     "wins": 2,
+     "win_rate": 1.0
+    },
+    "hold": {
+     "n": 2,
+     "wins": 2,
+     "win_rate": 1.0,
+     "pnl": 0.945,
+     "per_trade": 0.4725,
+     "t": 47.24999999999996,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 2,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 12.638000000000002,
+     "n_lead50": 2,
+     "never_reached_50": 0,
+     "median_lead10_s": 26.5285,
+     "n_lead10": 2,
+     "never_moved_10c": 0
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 54,
+     "wins": 3,
+     "win_rate": 0.05555555555555555,
+     "pnl": -2.6334,
+     "per_trade": -0.048766666666666666,
+     "t": -12.162905672272792,
+     "statuses": {
+      "exit": 54
+     },
+     "median_hold_s": 3.1915
+    },
+    "h1": {
+     "n": 32,
+     "wins": 3,
+     "win_rate": 0.09375,
+     "pnl": -1.5261000000000002,
+     "per_trade": -0.04769062500000001,
+     "t": -8.085197893581407,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 3.1574999999999998
+    },
+    "h2": {
+     "n": 22,
+     "wins": 0,
+     "win_rate": 0.0,
+     "pnl": -1.1073,
+     "per_trade": -0.05033181818181818,
+     "t": -10.130690430011754,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 3.221
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 54,
+     "wins": 6,
+     "win_rate": 0.1111111111111111,
+     "pnl": -2.7308,
+     "per_trade": -0.05057037037037037,
+     "t": -9.598142401583008,
+     "statuses": {
+      "exit": 54
+     },
+     "median_hold_s": 5.3055
+    },
+    "h1": {
+     "n": 32,
+     "wins": 5,
+     "win_rate": 0.15625,
+     "pnl": -1.5544000000000002,
+     "per_trade": -0.04857500000000001,
+     "t": -6.231370996197848,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 5.2780000000000005
+    },
+    "h2": {
+     "n": 22,
+     "wins": 1,
+     "win_rate": 0.045454545454545456,
+     "pnl": -1.1764,
+     "per_trade": -0.05347272727272727,
+     "t": -8.36993870492838,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 5.3685
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 54,
+     "wins": 11,
+     "win_rate": 0.2037037037037037,
+     "pnl": -2.674,
+     "per_trade": -0.04951851851851852,
+     "t": -6.285417810656405,
+     "statuses": {
+      "exit": 54
+     },
+     "median_hold_s": 10.545
+    },
+    "h1": {
+     "n": 32,
+     "wins": 9,
+     "win_rate": 0.28125,
+     "pnl": -1.5489,
+     "per_trade": -0.048403125,
+     "t": -4.1988669236534735,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 10.500499999999999
+    },
+    "h2": {
+     "n": 22,
+     "wins": 2,
+     "win_rate": 0.09090909090909091,
+     "pnl": -1.1250999999999998,
+     "per_trade": -0.05114090909090908,
+     "t": -5.141054609638512,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 10.7425
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 54,
+     "wins": 18,
+     "win_rate": 0.3333333333333333,
+     "pnl": -2.1361,
+     "per_trade": -0.0395574074074074,
+     "t": -3.842200701261259,
+     "statuses": {
+      "exit": 54
+     },
+     "median_hold_s": 20.603
+    },
+    "h1": {
+     "n": 32,
+     "wins": 13,
+     "win_rate": 0.40625,
+     "pnl": -1.1748,
+     "per_trade": -0.0367125,
+     "t": -2.599021712286321,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 20.6025
+    },
+    "h2": {
+     "n": 22,
+     "wins": 5,
+     "win_rate": 0.22727272727272727,
+     "pnl": -0.9612999999999999,
+     "per_trade": -0.043695454545454544,
+     "t": -2.9012570081653446,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 20.6435
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 54,
+     "wins": 18,
+     "win_rate": 0.3333333333333333,
+     "pnl": -1.9484999999999997,
+     "per_trade": -0.03608333333333333,
+     "t": -2.9954557422250967,
+     "statuses": {
+      "exit": 54
+     },
+     "median_hold_s": 30.494500000000002
+    },
+    "h1": {
+     "n": 32,
+     "wins": 12,
+     "win_rate": 0.375,
+     "pnl": -1.0503,
+     "per_trade": -0.032821875,
+     "t": -2.0048846693823896,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 30.507
+    },
+    "h2": {
+     "n": 22,
+     "wins": 6,
+     "win_rate": 0.2727272727272727,
+     "pnl": -0.8981999999999998,
+     "per_trade": -0.04082727272727272,
+     "t": -2.276502103431466,
+     "statuses": {
+      "exit": 22
+     },
+     "median_hold_s": 30.4395
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 54,
+     "wins": 33,
+     "win_rate": 0.6111111111111112,
+     "pnl": -1.178699999999999,
+     "per_trade": -0.02182777777777776,
+     "t": -1.117660912612771,
+     "statuses": {
+      "exit": 50,
+      "settled": 4
+     },
+     "median_hold_s": 32.019
+    },
+    "h1": {
+     "n": 32,
+     "wins": 21,
+     "win_rate": 0.65625,
+     "pnl": -0.05559999999999961,
+     "per_trade": -0.0017374999999999878,
+     "t": -0.09937984668751258,
+     "statuses": {
+      "exit": 31,
+      "settled": 1
+     },
+     "median_hold_s": 27.375999999999998
+    },
+    "h2": {
+     "n": 22,
+     "wins": 12,
+     "win_rate": 0.5454545454545454,
+     "pnl": -1.1230999999999995,
+     "per_trade": -0.05104999999999998,
+     "t": -1.261418083429278,
+     "statuses": {
+      "exit": 19,
+      "settled": 3
+     },
+     "median_hold_s": 32.8615
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 54,
+     "wins": 44,
+     "win_rate": 0.8148148148148148,
+     "pnl": -1.1967000000000005,
+     "per_trade": -0.02216111111111112,
+     "t": -0.731142453016103,
+     "statuses": {
+      "exit": 45,
+      "settled": 9
+     },
+     "median_hold_s": 110.309
+    },
+    "h1": {
+     "n": 32,
+     "wins": 26,
+     "win_rate": 0.8125,
+     "pnl": -0.6191000000000006,
+     "per_trade": -0.01934687500000002,
+     "t": -0.499018456685156,
+     "statuses": {
+      "exit": 27,
+      "settled": 5
+     },
+     "median_hold_s": 88.035
+    },
+    "h2": {
+     "n": 22,
+     "wins": 18,
+     "win_rate": 0.8181818181818182,
+     "pnl": -0.5775999999999999,
+     "per_trade": -0.02625454545454545,
+     "t": -0.5290791758183431,
+     "statuses": {
+      "exit": 18,
+      "settled": 4
+     },
+     "median_hold_s": 111.952
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 54,
+     "wins": 42,
+     "win_rate": 0.7777777777777778,
+     "pnl": -1.4328999999999998,
+     "per_trade": -0.026535185185185182,
+     "t": -0.746199207224639,
+     "statuses": {
+      "exit": 42,
+      "settled": 12
+     },
+     "median_hold_s": 182.4645
+    },
+    "h1": {
+     "n": 32,
+     "wins": 25,
+     "win_rate": 0.78125,
+     "pnl": -0.8708999999999998,
+     "per_trade": -0.027215624999999993,
+     "t": -0.5875253544698313,
+     "statuses": {
+      "exit": 25,
+      "settled": 7
+     },
+     "median_hold_s": 183.4005
+    },
+    "h2": {
+     "n": 22,
+     "wins": 17,
+     "win_rate": 0.7727272727272727,
+     "pnl": -0.5619999999999999,
+     "per_trade": -0.02554545454545454,
+     "t": -0.4497489217375837,
+     "statuses": {
+      "exit": 17,
+      "settled": 5
+     },
+     "median_hold_s": 173.74349999999998
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 54,
+     "wins": 15,
+     "win_rate": 0.2777777777777778,
+     "pnl": -1.7195999999999998,
+     "per_trade": -0.03184444444444444,
+     "t": -2.327154480859886,
+     "statuses": {
+      "exit": 52,
+      "settled": 2
+     },
+     "median_hold_s": 16.735
+    },
+    "h1": {
+     "n": 32,
+     "wins": 9,
+     "win_rate": 0.28125,
+     "pnl": -0.3852,
+     "per_trade": -0.0120375,
+     "t": -1.7681853816968518,
+     "statuses": {
+      "exit": 32
+     },
+     "median_hold_s": 7.35
+    },
+    "h2": {
+     "n": 22,
+     "wins": 6,
+     "win_rate": 0.2727272727272727,
+     "pnl": -1.3343999999999998,
+     "per_trade": -0.06065454545454545,
+     "t": -1.9240859665889745,
+     "statuses": {
+      "exit": 20,
+      "settled": 2
+     },
+     "median_hold_s": 25.208
+    }
+   }
+  }
+ },
+ "corr_surprise_every_60s": {
+  "settle": {
+   "n": 261,
+   "wins": 121,
+   "win_rate": 0.46360153256704983
+  },
+  "hold": {
+   "n": 261,
+   "wins": 121,
+   "win_rate": 0.46360153256704983,
+   "pnl": -8.885799999999996,
+   "per_trade": -0.03404521072796934,
+   "t": -1.1034264895705408,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "lead": {
+   "n": 261,
+   "already50": 0,
+   "already50_frac": 0.0,
+   "already10": 0,
+   "median_lead50_s_if_not_already": 6.4445,
+   "n_lead50": 242,
+   "never_reached_50": 19,
+   "median_lead10_s": 46.503,
+   "n_lead10": 221,
+   "never_moved_10c": 40
+  },
+  "hold_h1": {
+   "n": 158,
+   "wins": 75,
+   "win_rate": 0.47468354430379744,
+   "pnl": -4.053899999999998,
+   "per_trade": -0.025657594936708848,
+   "t": -0.647463905790617,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "hold_h2": {
+   "n": 103,
+   "wins": 46,
+   "win_rate": 0.44660194174757284,
+   "pnl": -4.831899999999998,
+   "per_trade": -0.04691165048543688,
+   "t": -0.9500009885083677,
+   "already50": 0,
+   "already50_frac": 0.0
+  },
+  "buckets": {
+   "13\u201315 min": {
+    "settle": {
+     "n": 64,
+     "wins": 31,
+     "win_rate": 0.484375
+    },
+    "hold": {
+     "n": 64,
+     "wins": 31,
+     "win_rate": 0.484375,
+     "pnl": -1.5677999999999994,
+     "per_trade": -0.02449687499999999,
+     "t": -0.39235133256518206,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 64,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 6.3045,
+     "n_lead50": 60,
+     "never_reached_50": 4,
+     "median_lead10_s": 67.257,
+     "n_lead10": 50,
+     "never_moved_10c": 14
+    }
+   },
+   "10\u201313 min": {
+    "settle": {
+     "n": 63,
+     "wins": 25,
+     "win_rate": 0.3968253968253968
+    },
+    "hold": {
+     "n": 63,
+     "wins": 25,
+     "win_rate": 0.3968253968253968,
+     "pnl": -6.720599999999999,
+     "per_trade": -0.10667619047619047,
+     "t": -1.728281228824425,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 63,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 7.286,
+     "n_lead50": 58,
+     "never_reached_50": 5,
+     "median_lead10_s": 74.0985,
+     "n_lead10": 54,
+     "never_moved_10c": 9
+    }
+   },
+   "6\u201310 min": {
+    "settle": {
+     "n": 61,
+     "wins": 30,
+     "win_rate": 0.4918032786885246
+    },
+    "hold": {
+     "n": 61,
+     "wins": 30,
+     "win_rate": 0.4918032786885246,
+     "pnl": -0.44409999999999866,
+     "per_trade": -0.007280327868852437,
+     "t": -0.11292696697908135,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 61,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 7.274,
+     "n_lead50": 61,
+     "never_reached_50": 0,
+     "median_lead10_s": 64.385,
+     "n_lead10": 57,
+     "never_moved_10c": 4
+    }
+   },
+   "3\u20136 min": {
+    "settle": {
+     "n": 31,
+     "wins": 13,
+     "win_rate": 0.41935483870967744
+    },
+    "hold": {
+     "n": 31,
+     "wins": 13,
+     "win_rate": 0.41935483870967744,
+     "pnl": -2.1586999999999996,
+     "per_trade": -0.06963548387096773,
+     "t": -0.7842736844687036,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 31,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 6.314,
+     "n_lead50": 25,
+     "never_reached_50": 6,
+     "median_lead10_s": 43.194,
+     "n_lead10": 23,
+     "never_moved_10c": 8
+    }
+   },
+   "1\u20133 min": {
+    "settle": {
+     "n": 42,
+     "wins": 22,
+     "win_rate": 0.5238095238095238
+    },
+    "hold": {
+     "n": 42,
+     "wins": 22,
+     "win_rate": 0.5238095238095238,
+     "pnl": 2.0054000000000003,
+     "per_trade": 0.04774761904761905,
+     "t": 0.6041466117103157,
+     "already50": 0,
+     "already50_frac": 0.0
+    },
+    "lead": {
+     "n": 42,
+     "already50": 0,
+     "already50_frac": 0.0,
+     "already10": 0,
+     "median_lead50_s_if_not_already": 3.336,
+     "n_lead50": 38,
+     "never_reached_50": 4,
+     "median_lead10_s": 7.733,
+     "n_lead10": 37,
+     "never_moved_10c": 5
+    }
+   },
+   "30\u201360 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   },
+   "0\u201330 s": {
+    "settle": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null
+    },
+    "hold": {
+     "n": 0,
+     "wins": 0,
+     "win_rate": null,
+     "pnl": 0.0,
+     "per_trade": null,
+     "t": null,
+     "already50": 0,
+     "already50_frac": null
+    },
+    "lead": {
+     "n": 0,
+     "already50": 0,
+     "already50_frac": null,
+     "already10": 0,
+     "median_lead50_s_if_not_already": null,
+     "n_lead50": 0,
+     "never_reached_50": 0,
+     "median_lead10_s": null,
+     "n_lead10": 0,
+     "never_moved_10c": 0
+    }
+   }
+  },
+  "swings": {
+   "time_3s": {
+    "all": {
+     "n": 261,
+     "wins": 24,
+     "win_rate": 0.09195402298850575,
+     "pnl": -11.8332,
+     "per_trade": -0.045337931034482755,
+     "t": -15.087196761380813,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 3.162
+    },
+    "h1": {
+     "n": 158,
+     "wins": 15,
+     "win_rate": 0.0949367088607595,
+     "pnl": -7.610599999999999,
+     "per_trade": -0.04816835443037974,
+     "t": -12.004903974906458,
+     "statuses": {
+      "exit": 158
+     },
+     "median_hold_s": 3.1494999999999997
+    },
+    "h2": {
+     "n": 103,
+     "wins": 9,
+     "win_rate": 0.08737864077669903,
+     "pnl": -4.2226,
+     "per_trade": -0.040996116504854366,
+     "t": -9.164482325652406,
+     "statuses": {
+      "exit": 103
+     },
+     "median_hold_s": 3.216
+    }
+   },
+   "time_5s": {
+    "all": {
+     "n": 261,
+     "wins": 40,
+     "win_rate": 0.1532567049808429,
+     "pnl": -10.919799999999999,
+     "per_trade": -0.04183831417624521,
+     "t": -10.343074357727682,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 5.273
+    },
+    "h1": {
+     "n": 158,
+     "wins": 27,
+     "win_rate": 0.17088607594936708,
+     "pnl": -7.0085999999999995,
+     "per_trade": -0.04435822784810126,
+     "t": -7.619540791566693,
+     "statuses": {
+      "exit": 158
+     },
+     "median_hold_s": 5.2535
+    },
+    "h2": {
+     "n": 103,
+     "wins": 13,
+     "win_rate": 0.1262135922330097,
+     "pnl": -3.911199999999999,
+     "per_trade": -0.037972815533980575,
+     "t": -7.530992680492401,
+     "statuses": {
+      "exit": 103
+     },
+     "median_hold_s": 5.365
+    }
+   },
+   "time_10s": {
+    "all": {
+     "n": 261,
+     "wins": 63,
+     "win_rate": 0.2413793103448276,
+     "pnl": -10.0816,
+     "per_trade": -0.03862681992337165,
+     "t": -6.099420790020912,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 10.526
+    },
+    "h1": {
+     "n": 158,
+     "wins": 43,
+     "win_rate": 0.2721518987341772,
+     "pnl": -6.272699999999999,
+     "per_trade": -0.0397006329113924,
+     "t": -4.20997915423745,
+     "statuses": {
+      "exit": 158
+     },
+     "median_hold_s": 10.475000000000001
+    },
+    "h2": {
+     "n": 103,
+     "wins": 20,
+     "win_rate": 0.1941747572815534,
+     "pnl": -3.8088999999999995,
+     "per_trade": -0.03697961165048543,
+     "t": -5.28098875755731,
+     "statuses": {
+      "exit": 103
+     },
+     "median_hold_s": 10.728
+    }
+   },
+   "time_20s": {
+    "all": {
+     "n": 261,
+     "wins": 73,
+     "win_rate": 0.2796934865900383,
+     "pnl": -9.2711,
+     "per_trade": -0.03552145593869732,
+     "t": -4.487851095490355,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 20.699
+    },
+    "h1": {
+     "n": 158,
+     "wins": 54,
+     "win_rate": 0.34177215189873417,
+     "pnl": -5.545400000000002,
+     "per_trade": -0.03509746835443039,
+     "t": -3.120288571586504,
+     "statuses": {
+      "exit": 158
+     },
+     "median_hold_s": 20.680999999999997
+    },
+    "h2": {
+     "n": 103,
+     "wins": 19,
+     "win_rate": 0.18446601941747573,
+     "pnl": -3.7257,
+     "per_trade": -0.03617184466019417,
+     "t": -3.5147656034485424,
+     "statuses": {
+      "exit": 103
+     },
+     "median_hold_s": 20.762
+    }
+   },
+   "time_30s": {
+    "all": {
+     "n": 261,
+     "wins": 85,
+     "win_rate": 0.32567049808429116,
+     "pnl": -9.4434,
+     "per_trade": -0.0361816091954023,
+     "t": -3.9740766694628413,
+     "statuses": {
+      "exit": 261
+     },
+     "median_hold_s": 30.527
+    },
+    "h1": {
+     "n": 158,
+     "wins": 58,
+     "win_rate": 0.3670886075949367,
+     "pnl": -5.6519,
+     "per_trade": -0.03577151898734177,
+     "t": -2.942404616321534,
+     "statuses": {
+      "exit": 158
+     },
+     "median_hold_s": 30.567500000000003
+    },
+    "h2": {
+     "n": 103,
+     "wins": 27,
+     "win_rate": 0.2621359223300971,
+     "pnl": -3.7915,
+     "per_trade": -0.036810679611650486,
+     "t": -2.696016762671935,
+     "statuses": {
+      "exit": 103
+     },
+     "median_hold_s": 30.455
+    }
+   },
+   "mid_5c": {
+    "all": {
+     "n": 261,
+     "wins": 161,
+     "win_rate": 0.6168582375478927,
+     "pnl": -6.867199999999996,
+     "per_trade": -0.026311111111111094,
+     "t": -2.608056704767603,
+     "statuses": {
+      "exit": 234,
+      "settled": 23,
+      "eod_bid": 4
+     },
+     "median_hold_s": 23.216
+    },
+    "h1": {
+     "n": 158,
+     "wins": 97,
+     "win_rate": 0.6139240506329114,
+     "pnl": -1.7595999999999983,
+     "per_trade": -0.011136708860759483,
+     "t": -0.9503365242464951,
+     "statuses": {
+      "exit": 146,
+      "settled": 11,
+      "eod_bid": 1
+     },
+     "median_hold_s": 17.0225
+    },
+    "h2": {
+     "n": 103,
+     "wins": 64,
+     "win_rate": 0.6213592233009708,
+     "pnl": -5.107599999999998,
+     "per_trade": -0.04958834951456308,
+     "t": -2.753367107433606,
+     "statuses": {
+      "exit": 88,
+      "settled": 12,
+      "eod_bid": 3
+     },
+     "median_hold_s": 28.191
+    }
+   },
+   "mid_10c": {
+    "all": {
+     "n": 261,
+     "wins": 211,
+     "win_rate": 0.8084291187739464,
+     "pnl": -2.5376000000000016,
+     "per_trade": -0.009722605363984681,
+     "t": -0.744211929841371,
+     "statuses": {
+      "exit": 221,
+      "settled": 36,
+      "eod_bid": 4
+     },
+     "median_hold_s": 67.672
+    },
+    "h1": {
+     "n": 158,
+     "wins": 129,
+     "win_rate": 0.8164556962025317,
+     "pnl": 0.14409999999999867,
+     "per_trade": 0.0009120253164556878,
+     "t": 0.05817380115983479,
+     "statuses": {
+      "exit": 138,
+      "settled": 19,
+      "eod_bid": 1
+     },
+     "median_hold_s": 58.1535
+    },
+    "h2": {
+     "n": 103,
+     "wins": 82,
+     "win_rate": 0.7961165048543689,
+     "pnl": -2.6817,
+     "per_trade": -0.026035922330097088,
+     "t": -1.1441963808470241,
+     "statuses": {
+      "exit": 83,
+      "settled": 17,
+      "eod_bid": 3
+     },
+     "median_hold_s": 85.581
+    }
+   },
+   "mid_15c": {
+    "all": {
+     "n": 261,
+     "wins": 201,
+     "win_rate": 0.7701149425287356,
+     "pnl": -1.3980999999999992,
+     "per_trade": -0.005356704980842909,
+     "t": -0.3331745550546521,
+     "statuses": {
+      "exit": 205,
+      "settled": 51,
+      "eod_bid": 5
+     },
+     "median_hold_s": 117.177
+    },
+    "h1": {
+     "n": 158,
+     "wins": 128,
+     "win_rate": 0.810126582278481,
+     "pnl": 4.0655,
+     "per_trade": 0.025731012658227848,
+     "t": 1.3555362538420057,
+     "statuses": {
+      "exit": 132,
+      "settled": 25,
+      "eod_bid": 1
+     },
+     "median_hold_s": 111.4185
+    },
+    "h2": {
+     "n": 103,
+     "wins": 73,
+     "win_rate": 0.7087378640776699,
+     "pnl": -5.4636,
+     "per_trade": -0.05304466019417475,
+     "t": -1.8967960866875713,
+     "statuses": {
+      "exit": 73,
+      "settled": 26,
+      "eod_bid": 4
+     },
+     "median_hold_s": 143.016
+    }
+   },
+   "mid_cross_50": {
+    "all": {
+     "n": 261,
+     "wins": 89,
+     "win_rate": 0.34099616858237547,
+     "pnl": -9.2641,
+     "per_trade": -0.03549463601532567,
+     "t": -4.034679355830623,
+     "statuses": {
+      "exit": 240,
+      "settled": 18,
+      "eod_bid": 3
+     },
+     "median_hold_s": 7.856
+    },
+    "h1": {
+     "n": 158,
+     "wins": 56,
+     "win_rate": 0.35443037974683544,
+     "pnl": -3.6210999999999998,
+     "per_trade": -0.022918354430379744,
+     "t": -2.307236724742672,
+     "statuses": {
+      "exit": 149,
+      "settled": 8,
+      "eod_bid": 1
+     },
+     "median_hold_s": 7.259
+    },
+    "h2": {
+     "n": 103,
+     "wins": 33,
+     "win_rate": 0.32038834951456313,
+     "pnl": -5.643,
+     "per_trade": -0.054786407766990286,
+     "t": -3.3918274078810766,
+     "statuses": {
+      "exit": 91,
+      "settled": 10,
+      "eod_bid": 2
+     },
+     "median_hold_s": 12.864
+    }
+   }
+  }
+ },
+ "notes": [
+  "Live ticks only for P&L and lead time; archive Kalshi books were stale (~28s list prices).",
+  "Logs are Coinbase-only, not the live multi-exchange v48 BRTI approximation.",
+  "Gap correction is walk-forward (mean of earlier windows' official-BRTI minus Coinbase 60s close average).",
+  "Fills are one tick late (~1.06s) at that tick's ask (entry) or bid (swing exit). Taker fees on every leg.",
+  "First cross = first time that series crosses the strike in a given direction in the window.",
+  "Surprise = Kalshi YES mid was not yet on the crossed side of 50\u00a2."
+ ],
+ "one_earliest_per_window": {
+  "raw_all": {
+   "n": 135,
+   "settle": 74,
+   "win_rate": 0.5481481481481482,
+   "hold_pnl": -1.93,
+   "per_trade_cents": -1.4,
+   "t": -0.34,
+   "already50": "119/135",
+   "h1": "+0.30 on 67",
+   "h2": "-2.22 on 68",
+   "median_lead50_if_not_already_s": 3.17,
+   "n_surprise_lead50": 14
+  },
+  "raw_surprise": {
+   "n": 16,
+   "settle": 11,
+   "win_rate": 0.6875,
+   "hold_pnl": 2.81,
+   "per_trade_cents": 17.6,
+   "t": 1.48,
+   "h1": "+3.84 on 12 (10/12)",
+   "h2": "-1.03 on 4 (1/4)",
+   "median_lead50_s": 3.17
+  },
+  "corr_all": {
+   "n": 136,
+   "settle": 77,
+   "win_rate": 0.5661764705882353,
+   "hold_pnl": 1.77,
+   "per_trade_cents": 1.3,
+   "t": 0.31,
+   "already50": "113/136",
+   "h1": "+0.83 on 67",
+   "h2": "+0.94 on 69",
+   "median_lead50_if_not_already_s": 3.17,
+   "n_surprise_lead50": 22
+  },
+  "corr_surprise": {
+   "n": 23,
+   "settle": 13,
+   "win_rate": 0.5652173913043478,
+   "hold_pnl": 1.27,
+   "per_trade_cents": 5.5,
+   "t": 0.52,
+   "h1": "+0.86 on 16",
+   "h2": "+0.41 on 7",
+   "median_lead50_s": 3.17,
+   "note": "both halves slightly positive but n=23, t=0.52 \u2014 not significant"
+  }
+ },
+ "last_cross_LOOKAHEAD_ONLY": {
+  "note": "Last cross is not tradeable: you only know it was last after the window ends. If price never recrosses, settlement matching that side is almost tautological until the last 60s average can still flip.",
+  "raw_ge_60s": {
+   "n": 104,
+   "settle": 104,
+   "hold_pnl": 41.34,
+   "already50": "93/104"
+  },
+  "corr_ge_60s": {
+   "n": 107,
+   "settle": 107
+  },
+  "raw_last_30s": {
+   "settle": "8/18 = 44%"
+  }
+ },
+ "opening_disagreement": {
+  "raw": {
+   "agree_settle": "70/125 = 56.0%",
+   "disagree_settle": "18/37 = 48.6%",
+   "disagree_hold_pnl": -0.94,
+   "median_lead50_s": 5.38,
+   "h1": -0.17,
+   "h2": -0.76
+  },
+  "corr": {
+   "agree_settle": "71/130 = 54.6%",
+   "disagree_settle": "14/32 = 43.8%",
+   "disagree_hold_pnl": -2.38,
+   "median_lead50_s": 4.28,
+   "h1": -0.14,
+   "h2": -2.24
+  }
+ },
+ "open_distance": {
+  "raw_btc_minus_strike_mean": -6.74,
+  "raw_median": -6.16,
+  "corr_mean": -3.53,
+  "corr_median": -2.47,
+  "opposite_sides_at_open": "19/162 = 11.7%"
+ },
+ "archive_gap": {
+  "mean": 0.71,
+  "sd": 3.51,
+  "n": 60,
+  "note": "offset is not stable: live days mean $4.70, archive days mean $0.71"
+ },
+ "verdict": "No tradeable after-fee edge. A real but short lead (~3\u201314s until Kalshi mid crosses 50 when it was not already there) is eaten by the spread plus two taker fees on swings. Did not add a v48 signal."
+}

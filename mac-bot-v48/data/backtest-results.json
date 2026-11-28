@@ -1,0 +1,378 @@
+{
+ "generated": "2026-11-28T16:56:52.498Z",
+ "ticks": 133963,
+ "windows": 162,
+ "gapOpen": {
+  "mean": 4.700572916668216,
+  "sd": 4.013047202302034,
+  "n": 160,
+  "se": 0.3172592379260234
+ },
+ "gapClose": {
+  "mean": 4.700572916668216,
+  "sd": 4.013047202302034,
+  "n": 160,
+  "se": 0.3172592379260234
+ },
+ "brain": {
+  "windows": 162,
+  "evaluated": 162,
+  "lastFitMs": 55.5,
+  "accepted": [],
+  "trusted": false,
+  "groups": {
+   "model": {
+    "windows": 142,
+    "gain": -0.001417347426856926,
+    "t": -0.8223186978437937,
+    "accepted": false,
+    "trade": {
+     "trades": 14,
+     "avgCents": -14.297142857142857,
+     "t": -1.0786868643560839,
+     "totalCents": -200.16
+    }
+   },
+   "flow": {
+    "windows": 142,
+    "gain": -0.0010908959676374907,
+    "t": -0.6041153507710528,
+    "accepted": false,
+    "trade": {
+     "trades": 0,
+     "avgCents": 0,
+     "t": 0,
+     "totalCents": 0
+    }
+   },
+   "momentum": {
+    "windows": 142,
+    "gain": -0.000783838231926458,
+    "t": -0.4689195368299875,
+    "accepted": false,
+    "trade": {
+     "trades": 0,
+     "avgCents": 0,
+     "t": 0,
+     "totalCents": 0
+    }
+   },
+   "lead": {
+    "windows": 142,
+    "gain": -0.0007299787054803174,
+    "t": -0.4361380244509042,
+    "accepted": false,
+    "trade": {
+     "trades": 0,
+     "avgCents": 0,
+     "t": 0,
+     "totalCents": 0
+    }
+   },
+   "book": {
+    "windows": 142,
+    "gain": -0.0007299787054803174,
+    "t": -0.4361380244509042,
+    "accepted": false,
+    "trade": {
+     "trades": 0,
+     "avgCents": 0,
+     "t": 0,
+     "totalCents": 0
+    }
+   },
+   "kbook": {
+    "windows": 142,
+    "gain": -0.0007299787054803174,
+    "t": -0.4361380244509042,
+    "accepted": false,
+    "trade": {
+     "trades": 0,
+     "avgCents": 0,
+     "t": 0,
+     "totalCents": 0
+    }
+   },
+   "vol": {
+    "windows": 142,
+    "gain": -0.002754258694436863,
+    "t": -1.073725871745524,
+    "accepted": false,
+    "trade": {
+     "trades": 10,
+     "avgCents": -43.336,
+     "t": -14.29521145432761,
+     "totalCents": -433.36
+    }
+   }
+  },
+  "active": null,
+  "explore": {
+   "ll": {
+    "windows": 162,
+    "gainVsKalshi": -0.0072113916105082014,
+    "t": -1.95587557613256
+   },
+   "trade": {
+    "trades": 91,
+    "avgCents": -8.432087912087914,
+    "t": -1.819468837588585,
+    "totalCents": -767.3200000000002
+   }
+  }
+ },
+ "strategies": [
+  {
+   "name": "brain: hold to settlement",
+   "trades": 104,
+   "wins": 51,
+   "pnl": -30.62629999999999,
+   "fees": 4.2562999999999995,
+   "endBalance": 69.3737,
+   "halves": [
+    -20.2292,
+    -10.397100000000002
+   ],
+   "byExit": [
+    [
+     "settled lost",
+     {
+      "n": 53,
+      "pnl": -78.29320000000003
+     }
+    ],
+    [
+     "settled won",
+     {
+      "n": 51,
+      "pnl": 47.66690000000001
+     }
+    ]
+   ]
+  },
+  {
+   "name": "brain: edge exit (v48 default)",
+   "trades": 133,
+   "wins": 59,
+   "pnl": -15.3466,
+   "fees": 10.5866,
+   "endBalance": 84.65340000000016,
+   "halves": [
+    -8.9203,
+    -6.4262999999999995
+   ],
+   "byExit": [
+    [
+     "edge: cut",
+     {
+      "n": 52,
+      "pnl": -38.5657
+     }
+    ],
+    [
+     "edge: profit",
+     {
+      "n": 38,
+      "pnl": 25.4197
+     }
+    ],
+    [
+     "settled won",
+     {
+      "n": 25,
+      "pnl": 25.014499999999998
+     }
+    ],
+    [
+     "settled lost",
+     {
+      "n": 18,
+      "pnl": -27.215100000000003
+     }
+    ]
+   ]
+  },
+  {
+   "name": "brain: edge exit + 15c stop",
+   "trades": 160,
+   "wins": 43,
+   "pnl": -29.570500000000028,
+   "fees": 12.640500000000005,
+   "endBalance": 70.42949999999998,
+   "halves": [
+    -19.259100000000007,
+    -10.311399999999999
+   ],
+   "byExit": [
+    [
+     "stop",
+     {
+      "n": 103,
+      "pnl": -55.42340000000001
+     }
+    ],
+    [
+     "edge: profit",
+     {
+      "n": 25,
+      "pnl": 13.808400000000002
+     }
+    ],
+    [
+     "edge: cut",
+     {
+      "n": 12,
+      "pnl": -2.3438000000000003
+     }
+    ],
+    [
+     "settled won",
+     {
+      "n": 19,
+      "pnl": 15.1305
+     }
+    ],
+    [
+     "settled lost",
+     {
+      "n": 1,
+      "pnl": -0.7422
+     }
+    ]
+   ]
+  },
+  {
+   "name": "brain: 15c stop only",
+   "trades": 155,
+   "wins": 34,
+   "pnl": -35.40479999999999,
+   "fees": 10.704800000000006,
+   "endBalance": 64.59519999999996,
+   "halves": [
+    -23.681299999999986,
+    -11.7235
+   ],
+   "byExit": [
+    [
+     "stop",
+     {
+      "n": 119,
+      "pnl": -62.73070000000001
+     }
+    ],
+    [
+     "settled won",
+     {
+      "n": 33,
+      "pnl": 29.673000000000005
+     }
+    ],
+    [
+     "settled lost",
+     {
+      "n": 3,
+      "pnl": -2.3471
+     }
+    ]
+   ]
+  },
+  {
+   "name": "v32 setups, NO edge check, v32 exits, fixed 3% (repo rule)",
+   "trades": 30,
+   "wins": 12,
+   "pnl": -5.046499999999999,
+   "fees": 3.8864999999999994,
+   "endBalance": 94.95350000000002,
+   "halves": [
+    -3.386099999999999,
+    -1.6604000000000005
+   ],
+   "byExit": [
+    [
+     "profit",
+     {
+      "n": 12,
+      "pnl": 6.2883000000000004
+     }
+    ],
+    [
+     "cut",
+     {
+      "n": 16,
+      "pnl": -11.030900000000003
+     }
+    ],
+    [
+     "stale",
+     {
+      "n": 2,
+      "pnl": -0.3038999999999999
+     }
+    ]
+   ]
+  },
+  {
+   "name": "v32 setups + after-fee edge check, v32 exits",
+   "trades": 4,
+   "wins": 1,
+   "pnl": -1.7816999999999996,
+   "fees": 0.4617,
+   "endBalance": 98.21830000000001,
+   "halves": [
+    -0.9802000000000002,
+    -0.8014999999999993
+   ],
+   "byExit": [
+    [
+     "profit",
+     {
+      "n": 1,
+      "pnl": 0.32289999999999974
+     }
+    ],
+    [
+     "cut",
+     {
+      "n": 2,
+      "pnl": -2.0685999999999996
+     }
+    ],
+    [
+     "stale",
+     {
+      "n": 1,
+      "pnl": -0.035999999999999734
+     }
+    ]
+   ]
+  },
+  {
+   "name": "v32 setups + after-fee edge check, edge exit + stop",
+   "trades": 4,
+   "wins": 1,
+   "pnl": -2.4815,
+   "fees": 0.41150000000000003,
+   "endBalance": 97.5185,
+   "halves": [
+    -2.4737,
+    -0.00780000000000014
+   ],
+   "byExit": [
+    [
+     "stop",
+     {
+      "n": 3,
+      "pnl": -3.0479000000000003
+     }
+    ],
+    [
+     "settled won",
+     {
+      "n": 1,
+      "pnl": 0.5664000000000001
+     }
+    ]
+   ]
+  }
+ ]
+}
