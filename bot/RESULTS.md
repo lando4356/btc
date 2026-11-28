@@ -1,6 +1,6 @@
 # 📄 Paper bot results (fake money)
 
-_Updated Fri, 27 Nov 2026 20:25:05 GMT_
+_Updated Sat, 28 Nov 2026 02:10:21 GMT_
 
 ## 🔍 Evidence checks: NOT PROVEN yet
 
@@ -9,7 +9,7 @@ _Updated Fri, 27 Nov 2026 20:25:05 GMT_
   - saw: Kalshi prices changed on 44% of seconds
 - ✅ **Data coverage**
   - expected: 80%+ of seconds recorded, 5 or fewer gaps
-  - saw: 94% of seconds recorded, 0 gap(s) over 30s
+  - saw: 93% of seconds recorded, 0 gap(s) over 30s
 - ⚠️ **Fills were real**
   - expected: the buy price still there 1-2s later on 85%+ of buys
   - saw: 2 buys checked so far
@@ -60,4 +60,4 @@ _Updated Fri, 27 Nov 2026 20:25:05 GMT_
 | 11-26 22:28 | Bounce rule | Down | 30¢ → 13¢ | loser exit | $-1.78 |
 | 11-26 21:50 | Dip buys | Up | 63¢ → 73¢ | profit (rode to 78c, came off the top) | $0.27 |
 
-**Patterns the finder has proven:** none yet · days of data recorded: 2
+**Patterns the finder has proven:** none yet · days of data recorded: 3
