@@ -1,12 +1,12 @@
 # 📄 Paper bot results (fake money)
 
-_Updated Sat, 28 Nov 2026 07:55:38 GMT_
+_Updated Sat, 28 Nov 2026 13:40:56 GMT_
 
 ## 🔍 Evidence checks: NOT PROVEN yet
 
 - ✅ **Live prices**
   - expected: prices change on 8%+ of seconds
-  - saw: Kalshi prices changed on 44% of seconds
+  - saw: Kalshi prices changed on 43% of seconds
 - ✅ **Data coverage**
   - expected: 80%+ of seconds recorded, 5 or fewer gaps
   - saw: 92% of seconds recorded, 0 gap(s) over 30s
@@ -16,24 +16,24 @@ _Updated Sat, 28 Nov 2026 07:55:38 GMT_
   - look at: bot/v32.mjs entries: buying moves that are already gone; add a delay or a resting order
 - ⚠️ **Believable win rate**
   - expected: under 80% (real edges here are small)
-  - saw: 9 trades so far
+  - saw: 10 trades so far
 - ⚠️ **Both halves profitable**
   - expected: profit in both the first and second half of trades
-  - saw: needs 30+ trades (9 so far)
+  - saw: needs 30+ trades (10 so far)
   - look at: trades by rule in RESULTS.md: which rule loses in which half
 - ⚠️ **Enough trades**
   - expected: 100+ trades
-  - saw: 9 of 100
+  - saw: 10 of 100
 
 
-## NOT PROVEN — 9/100 paper trades
+## NOT PROVEN — 10/100 paper trades
 
-**Paper balance:** $20.12 (started $30) · **P&L:** $-9.88 · **1/9 won (11.1%)** · break-even 39%
+**Paper balance:** $18.37 (started $30) · **P&L:** $-11.63 · **1/10 won (10%)** · break-even 38.1%
 
 | Rule | Trades | Won | P&L |
 |---|---|---|---|
 | Dip buys | 3 | 1 | $-1.61 |
-| Bounce rule | 6 | 0 | $-8.27 |
+| Bounce rule | 7 | 0 | $-10.02 |
 
 **Wins by hour (Chicago time)**: which hours the rules actually work in (needs lots of trades to mean anything)
 
@@ -41,17 +41,19 @@ _Updated Sat, 28 Nov 2026 07:55:38 GMT_
 |---|---|---|---|
 | 12 am | 2 | 0 | $-2.83 |
 | 1 am | 2 | 0 | $-3.05 |
+| 2 am | 1 | 0 | $-1.75 |
 | 3 pm | 1 | 1 | $0.27 |
 | 4 pm | 1 | 0 | $-1.78 |
 | 5 pm | 1 | 0 | $-0.31 |
 | 6 pm | 2 | 0 | $-2.18 |
 
-**Brakes:** stop for the day after losing 10%; sit out 30 min after 3 losses in a row. **Now:** 3 losses in a row: pausing 30 min
+**Brakes:** stop for the day after losing 10%; sit out 30 min after 3 losses in a row. **Now:** daily stop: down 10% today, done until tomorrow
 
 **Last 15 trades**
 
 | Closed (UTC) | Rule | Side | Buy → Sell | Why | P&L |
 |---|---|---|---|---|---|
+| 11-28 08:13 | Bounce rule | Up | 30¢ → 1¢ | loser exit | $-1.75 |
 | 11-28 07:28 | Bounce rule | Down | 30¢ → 17¢ | loser exit | $-0.84 |
 | 11-28 06:11 | Dip buys | Down | 72¢ → 54¢ | cut (stop) | $-0.43 |
 | 11-27 07:58 | Bounce rule | Down | 21¢ → 1¢ | loser exit | $-2.21 |
