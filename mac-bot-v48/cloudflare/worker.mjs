@@ -24,9 +24,9 @@ export class KalshiBot extends DurableObject {
     if (!this.starting) this.starting = (async () => {
       const env = this.env;
       // Cloudflare only gets a few feeds by default: each outbound socket is a connection (6 at a time per invocation)
-      // and CPU is metered. Coinbase + Kraken + Bitstamp + OKX perp give a 3-exchange BRTI approximation.
+      // and CPU is metered. Coinbase + Bitstamp + Gemini (+ OKX perp for the lead signal) = 3-exchange BRTI approximation. Kraken is unreachable from Cloudflare (HTTP 526/400) and Crypto.com is left off to stay at 5 sockets (Kalshi + 4), so REST calls are never starved by the 6-connection limit.
       const user = { mode: env.MODE || "paper", confirmRealMoney: env.CONFIRM_REAL_MONEY || "", notify: !!env.NTFY_TOPIC,
-        feeds: { coinbase: true, kraken: true, bitstamp: true, gemini: false, cryptocom: false, okxPerp: true }, ...(this.platform.get("configOverride") || {}) };
+        feeds: { coinbase: true, kraken: false, bitstamp: true, gemini: true, cryptocom: false, okxPerp: true }, ...(this.platform.get("configOverride") || {}) };
       const cfg = buildConfig(example, user, (m) => this.logger.write("events", { event: "CONFIG_WARNING", msg: m }));
       const signer = await cfSigner(env);
       const bot = createBot({ cfg, platform: this.platform, signer, socket: managedSocketCF, logger: this.logger, notifier: cfNotifier(env, cfg) });

@@ -27,8 +27,11 @@ export function createIndex({ enabled = {}, staleMs = 3000, outlierPct = 0.15, m
   if (on("coinbase")) sockets.coinbase = socket({
     name: "coinbase", url: "wss://ws-feed.exchange.coinbase.com", staleMs: 20000,
     onOpen: (ws) => ws.send({ type: "subscribe", product_ids: ["BTC-USD"], channels: ["ticker", "matches", "heartbeat"] }),
-    onMessage: (m) => { const d = JSON.parse(m);
-      if (d.type === "ticker") setTop("coinbase", +d.best_bid, +d.best_ask, +d.best_bid_size, +d.best_ask_size, Date.parse(d.time));
+    onMessage: (m, ws) => { const d = JSON.parse(m);
+      // Coinbase caps the real-time "ticker" channel per source IP; on shared cloud IPs (Cloudflare) it can refuse.
+      // Fall back to "ticker_batch" (same fields, one update per second) instead of running with no Coinbase price.
+      if (d.type === "error" && /subscription limit/i.test(d.reason || "")) ws.send({ type: "subscribe", product_ids: ["BTC-USD"], channels: ["ticker_batch", "matches", "heartbeat"] });
+      else if (d.type === "ticker") setTop("coinbase", +d.best_bid, +d.best_ask, +d.best_bid_size, +d.best_ask_size, Date.parse(d.time));
       else if (d.type === "match") addTrade(+d.size, d.side === "sell"); }, // match side = maker side; maker sold => taker bought
   });
   if (on("kraken")) sockets.kraken = socket({

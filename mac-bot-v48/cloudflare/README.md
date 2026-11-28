@@ -5,7 +5,7 @@ key from Cloudflare secrets (WebCrypto signing), sockets via `fetch()` upgrade, 
 SQLite storage, a Cron Trigger as watchdog. This folder has its **own** `wrangler.jsonc`; the repo-root one (radar page,
 auto-deployed on merge) is untouched.
 
-## Deploy (when you decide to; nothing has been deployed)
+## Deploy (deployed 28 Nov 2026 in paper mode: https://kalshi-bot-v48.landomando-2020.workers.dev)
 
 ```
 cd mac-bot-v48/cloudflare
@@ -48,3 +48,13 @@ tested edge on 15-minute BTC direction; it would only add latency and noise).
 - Timing inside Workers is coarse (clocks only move on I/O), so the dashboard's microsecond decision timings read 0 there.
 - Tested locally with `wrangler dev` (Cloudflare's runtime on this computer, not deployed): 4 exchange streams + Kalshi
   connected, decisions running, cron wake-up OK, STOP refused without the token.
+
+## Findings from the first real deploy (28 Nov 2026)
+
+- **Kraken cannot be reached from Cloudflare** (HTTP 526/400: both sit behind Cloudflare), so it is off here. Feeds on Cloudflare:
+  Coinbase + Bitstamp + Gemini for the price index, OKX perp for the lead signal, plus Kalshi = 5 sockets. A 6th socket would
+  leave no free connection for REST calls (Workers allow 6 open outbound connections at once).
+- **Coinbase refuses the real-time `ticker` channel on shared cloud IPs** ("subscription limit reached"). The bot now falls back to
+  `ticker_batch` (same fields, one update per second) automatically.
+- Workers AI (`env.AI`) is bound for the dashboard's Explain button only. Verified working on the free allowance; it never feeds a trade decision.
+- The Durable Object restarts onto new code about a minute after `wrangler deploy`.

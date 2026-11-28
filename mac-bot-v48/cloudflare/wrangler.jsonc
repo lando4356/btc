@@ -17,7 +17,7 @@
   "vars": { "MODE": "paper", "CONFIRM_REAL_MONEY": "" },
   // Optional extras (uncomment to use):
   // "r2_buckets": [{ "binding": "LOGS", "bucket_name": "kalshi-bot-logs" }],   // per-second ticks in 10-minute files
-  // "ai": { "binding": "AI" },                                                   // plain-English /api/explain only
+  "ai": { "binding": "AI" },   // plain-English /api/explain only (free daily allowance; never used for trading decisions)
   "observability": { "enabled": true }
   // On Workers Paid you can raise the per-event CPU cap for the brain refit: "limits": { "cpu_ms": 300000 }
 }
