@@ -1,0 +1,23 @@
+// Cloudflare deploy for the v48 bot. SEPARATE from the repo-root wrangler.jsonc (which only publishes the radar page).
+// Deploy from this folder:  cd mac-bot-v48/cloudflare && npx wrangler deploy
+// Secrets (never in the repo):
+//   npx wrangler secret put KALSHI_KEY_ID
+//   npx wrangler secret put KALSHI_PRIVATE_KEY     (paste the PKCS#8 PEM, see cloudflare/README.md)
+//   npx wrangler secret put NTFY_TOPIC             (optional phone alerts)
+//   npx wrangler secret put DASHBOARD_TOKEN        (needed for the STOP / resume / explain buttons)
+{
+  "name": "kalshi-bot-v48",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "assets": { "directory": "../public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "durable_objects": { "bindings": [{ "name": "BOT", "class_name": "KalshiBot" }] },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["KalshiBot"] }],
+  "triggers": { "crons": ["* * * * *"] },   // watchdog: replaces the GitHub Actions schedule
+  "vars": { "MODE": "paper", "CONFIRM_REAL_MONEY": "" },
+  // Optional extras (uncomment to use):
+  // "r2_buckets": [{ "binding": "LOGS", "bucket_name": "kalshi-bot-logs" }],   // per-second ticks in 10-minute files
+  // "ai": { "binding": "AI" },                                                   // plain-English /api/explain only
+  "observability": { "enabled": true }
+  // On Workers Paid you can raise the per-event CPU cap for the brain refit: "limits": { "cpu_ms": 300000 }
+}

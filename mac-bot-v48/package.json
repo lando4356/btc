@@ -1,0 +1,13 @@
+{
+  "name": "kalshi-bot-v48",
+  "version": "48.0.0",
+  "description": "BTC 15-minute Kalshi bot: Node decision engine, streaming data, walk-forward brain, paper mode by default",
+  "type": "module",
+  "engines": { "node": ">=18.17" },
+  "scripts": {
+    "start": "node bot.mjs",
+    "check": "node bot.mjs check",
+    "test": "node --test test/*.test.mjs",
+    "evaluate": "node tools/evaluate.mjs"
+  }
+}

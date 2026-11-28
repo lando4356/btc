@@ -1,0 +1,62 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kalshi BTC bot v48</title>
+<style>
+body{font:14px/1.4 -apple-system,system-ui,sans-serif;background:#0d1117;color:#e6edf3;margin:0;padding:16px}
+h1{font-size:18px;margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px}.card h2{font-size:13px;color:#8b949e;margin:0 0 8px;text-transform:uppercase}
+.big{font-size:26px;font-weight:600}.ok{color:#3fb950}.bad{color:#f85149}.warn{color:#d29922}.mut{color:#8b949e}
+table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:2px 4px;text-align:left;border-bottom:1px solid #21262d}
+button{background:#da3633;color:#fff;border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+</style></head><body>
+<h1>Kalshi BTC bot v48 <span id="mode" class="pill"></span> <span id="age" class="mut"></span></h1>
+<div class="grid">
+ <div class="card"><h2>Market</h2><div id="mkt"></div></div>
+ <div class="card"><h2>Chance of Up</h2><div id="prob"></div></div>
+ <div class="card"><h2>Position & decision</h2><div id="pos"></div></div>
+ <div class="card"><h2>Results (after fees)</h2><div id="res"></div></div>
+ <div class="card"><h2>Brain (out-of-sample vs Kalshi)</h2><div id="brain"></div></div>
+ <div class="card"><h2>Feeds & speed</h2><div id="feeds"></div></div>
+ <div class="card"><h2>Kill switch</h2><p class="mut">Creates the STOP file: no new buys until you delete it.</p><button id="stop">STOP new buys</button> <button id="resume" style="background:#238636">Resume</button> <span id="stopst"></span></div>
+ <div class="card"><h2>Explain (Cloudflare only, optional)</h2><p class="mut">Plain-English summary of the numbers above. Not used for trading.</p><button id="explain" style="background:#1f6feb">Explain</button><p id="exp"></p></div>
+</div>
+<script>
+const $=id=>document.getElementById(id), f=(x,d=2)=>x==null||!isFinite(x)?"–":(+x).toFixed(d), pc=x=>x==null?"–":(x*100).toFixed(1)+"%";
+const cls=x=>x>0?"ok":x<0?"bad":"";
+async function tick(){
+ let s; try{ s=await (await fetch("/api/state",{cache:"no-store"})).json(); }catch(e){ $("age").textContent="bot not reachable"; return; }
+ $("mode").textContent=s.mode==="real"?"REAL MONEY":"PAPER"; $("mode").style.background=s.mode==="real"?"#da3633":"#1f6feb";
+ $("age").textContent=new Date(s.now).toLocaleTimeString();
+ const m=s.market||{}, t=s.top||{};
+ $("mkt").innerHTML=`<div>${m.ticker||"–"}</div><div class="big">$${f(s.price,2)}</div><div>strike $${f(m.strike,2)} · ${s.left!=null?Math.floor(s.left/60)+"m "+Math.round(s.left%60)+"s left":"–"}</div>
+  <div>Up ${f(t.yesBid,0)}/${f(t.yesAsk,0)}¢ · Down ${f(t.noBid,0)}/${f(t.noAsk,0)}¢ · spread ${f(s.spread,0)}¢ · book age ${f(s.bookAgeMs,0)}ms</div>`;
+ const e=s.edges||{};
+ $("prob").innerHTML=`<table><tr><td>Kalshi price</td><td>${pc(s.pK)}</td></tr><tr><td>Our fair value (BRTI approx.)</td><td>${pc(s.p0)}</td></tr>
+  <tr><td><b>Used (${s.pSource||"–"})</b></td><td><b>${pc(s.p)}</b></td></tr><tr><td>After-fee edge Up / Down</td><td class="${cls(e.up)}">${f(e.up,1)}¢</td></tr><tr><td></td><td class="${cls(e.down)}">${f(e.down,1)}¢</td></tr>
+  <tr><td>Gap BRTI − ours</td><td>$${f(s.gap?.mean,2)} ± ${f(s.gap?.sd,2)} (n ${s.gap?.n??0})</td></tr></table>`;
+ const p=s.position;
+ $("pos").innerHTML=(p?`<div class="big">${p.side.toUpperCase()} ×${p.count} @ ${f(p.entry,1)}¢</div><div>${p.kind||""} · ${p.ticker}</div>`:`<div class="big mut">flat</div>`)+
+  `<div>Last: ${s.why||s.lastDecision?.why||"–"}</div>${s.stopped?`<div class="bad">Stopped: ${s.stopped}</div>`:""}${s.stopFile?`<div class="bad">STOP file present</div>`:""}`;
+ const st=s.stats||{};
+ $("res").innerHTML=`<div class="big">$${f(s.balance,2)}</div><div class="${cls(st.totalPnl)}">P&L $${f(st.totalPnl,2)} · ${st.trades||0} trades, ${st.wins||0} won · fees $${f(st.fees,2)}</div>
+  <div class="mut">95% range of total: ${st.ci95?"$"+f(st.ci95[0])+" … $"+f(st.ci95[1]):"–"}</div>
+  <table>${(st.recent||[]).map(r=>`<tr><td>${new Date(r.closeTs||r.t||0).toLocaleTimeString()}</td><td>${r.side}</td><td>${f(r.entry,0)}→${f(r.exit,0)}</td><td class="${cls(r.pnl)}">$${f(r.pnl,2)}</td><td class="mut">${r.why||""}</td></tr>`).join("")}</table>`;
+ const b=s.brain||{};
+ $("brain").innerHTML=`<div>${b.windows||0} settled windows · accepted: <b>${(b.accepted||[]).join(", ")||"none"}</b> · <span class="${b.trusted?"ok":"warn"}">${b.trusted?"trusted":"not proven: real money stays on Kalshi's price"}</span></div>
+  <table><tr><th>signal</th><th>windows</th><th>gain</th><th>t</th></tr>${Object.entries(b.groups||{}).map(([g,x])=>`<tr><td>${g}${x.accepted?" ✓":""}</td><td>${x.windows}</td><td class="${cls(x.gain)}">${f(x.gain,4)}</td><td>${f(x.t,2)}</td></tr>`).join("")}</table>`;
+ const L=s.latency||{};
+ $("feeds").innerHTML=`<table>${Object.entries(s.feeds||{}).map(([n,x])=>`<tr><td>${n}</td><td class="${x.connected?"ok":"bad"}">${x.connected?"up":"down"}</td><td>${f(x.mid,2)}</td><td>${f(x.ageMs,0)}ms</td></tr>`).join("")}
+  <tr><td>Kalshi book</td><td>${s.kalshiFeed?.source||"–"}</td><td colspan=2>${f(s.kalshiFeed?.lastBookMsgAgo,0)}ms ago</td></tr></table>
+  <div class="mut">decide p50 ${f(L.decideUsP50,0)}µs · event→decision p50 ${f(L.eventToDecisionMsP50,2)}ms · order p50 ${f(L.orderMsP50,0)}ms</div>`;
+ $("stopst").textContent=s.stopFile?"STOP is on":"";
+}
+// On the Mac the buttons just work (localhost). On Cloudflare they need your DASHBOARD_TOKEN (asked once, kept in this browser).
+async function post(path){ const h={}; const t=localStorage.getItem("v48token"); if(t) h.Authorization="Bearer "+t;
+ let r=await fetch(path,{method:path.endsWith("explain")?"GET":"POST",headers:h});
+ if(r.status===401){ const n=prompt("Dashboard token"); if(!n) return null; localStorage.setItem("v48token",n); h.Authorization="Bearer "+n; r=await fetch(path,{method:path.endsWith("explain")?"GET":"POST",headers:h}); }
+ return r.ok?r.json():{error:"HTTP "+r.status}; }
+$("stop").onclick=async()=>{ if(confirm("Block all new buys?")){ await post("/api/stop"); tick(); } };
+$("resume").onclick=async()=>{ if(confirm("Allow new buys again?")){ const r=await post("/api/resume"); if(r?.error) alert("On the Mac, delete the STOP file to resume."); tick(); } };
+$("explain").onclick=async()=>{ $("exp").textContent="…"; const r=await post("/api/explain"); $("exp").textContent=r?.text||r?.why||r?.error||"not available"; };
+tick(); setInterval(tick,1000);
+</script></body></html>

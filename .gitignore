@@ -7,3 +7,13 @@ bot/test/fake/
 *.key
 config.json
 kalshi-key*
+
+# v48 Mac bot: private/local files
+notify.txt
+bot-state.json
+trades.log
+mac-bot-v48/logs/
+mac-bot-v48/STOP
+mac-bot-v48/cloudflare/.wrangler/
+.dev.vars
+mac-bot-v48/node_modules/
